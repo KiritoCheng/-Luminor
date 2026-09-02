@@ -20,7 +20,12 @@
         {%- for block in logo_blocks -%}
           <div class="press__logo" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+              {{
+                block.settings.image
+                | image_url: width: 200
+                | image_tag: loading: 'lazy', alt: block.settings.name
+                | escape
+              }}
             {%- elsif block.settings.name != blank -%}
               <span class="press__logo-text">{{ block.settings.name | escape }}</span>
             {%- endif -%}
@@ -32,7 +37,12 @@
         {%- for block in logo_blocks -%}
           <div class="press__logo">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+              {{
+                block.settings.image
+                | image_url: width: 200
+                | image_tag: loading: 'lazy', alt: block.settings.name
+                | escape
+              }}
             {%- elsif block.settings.name != blank -%}
               <span class="press__logo-text">{{ block.settings.name | escape }}</span>
             {%- endif -%}
@@ -57,166 +67,170 @@
 </section>
 
 <style>
-.press {
-  text-align: center;
-  overflow: hidden;
-}
-
-.press__title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-text-muted);
-  margin-bottom: 32px;
-}
-
-/* ---- Marquee scrolling band ---- */
-.press__marquee {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  margin-bottom: 48px;
-}
-
-.press__marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 64px;
-  padding-right: 64px;
-  flex-shrink: 0;
-  animation: press-marquee 30s linear infinite;
-}
-
-.press__marquee:hover .press__marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes press-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-
-.press__logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  opacity: 0.45;
-  transition: opacity 0.3s ease;
-  flex-shrink: 0;
-}
-
-.press__logo:hover {
-  opacity: 0.85;
-}
-
-.press__logo img {
-  max-height: 36px;
-  width: auto;
-  filter: grayscale(1);
-}
-
-.press__logo-text {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .press__marquee-track {
-    animation: none;
+  .press {
+    text-align: center;
+    overflow: hidden;
   }
+
+  .press__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+  }
+
+  /* ---- Marquee scrolling band ---- */
   .press__marquee {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    margin-bottom: 48px;
   }
-  .press__marquee-track + .press__marquee-track {
-    display: none;
-  }
-}
 
-/* ---- Quotes ---- */
-.press__quotes {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.press__quote {
-  display: none;
-  margin: 0;
-}
-
-.press__quote:first-child {
-  display: block;
-}
-
-.press__quote-text {
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
-  line-height: 1.5;
-  font-weight: 400;
-  color: var(--color-text);
-  margin-bottom: 12px;
-}
-
-.press__quote-source {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  font-style: normal;
-}
-
-@media (max-width: 749px) {
   .press__marquee-track {
-    gap: 40px;
-    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding-right: 64px;
+    flex-shrink: 0;
+    animation: press-marquee 30s linear infinite;
   }
+
+  .press__marquee:hover .press__marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes press-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
   .press__logo {
-    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    opacity: 0.45;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
   }
+
+  .press__logo:hover {
+    opacity: 0.85;
+  }
+
   .press__logo img {
-    max-height: 30px;
+    max-height: 36px;
+    width: auto;
+    filter: grayscale(1);
   }
+
   .press__logo-text {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
   }
-}
+
+  @media (prefers-reduced-motion: reduce) {
+    .press__marquee-track {
+      animation: none;
+    }
+    .press__marquee {
+      justify-content: center;
+    }
+    .press__marquee-track + .press__marquee-track {
+      display: none;
+    }
+  }
+
+  /* ---- Quotes ---- */
+  .press__quotes {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .press__quote {
+    display: none;
+    margin: 0;
+  }
+
+  .press__quote:first-child {
+    display: block;
+  }
+
+  .press__quote-text {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+
+  .press__quote-source {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-style: normal;
+  }
+
+  @media (max-width: 749px) {
+    .press__marquee-track {
+      gap: 40px;
+      padding-right: 40px;
+    }
+    .press__logo {
+      height: 30px;
+    }
+    .press__logo img {
+      max-height: 30px;
+    }
+    .press__logo-text {
+      font-size: 1.1rem;
+    }
+  }
 </style>
 
 <script>
-(function() {
-  function initPress() {
-    document.querySelectorAll('[data-press-quotes]').forEach(function(container) {
-      var quotes = container.querySelectorAll('.press__quote');
-      if (quotes.length <= 1) return;
-      var idx = 0;
-      setInterval(function() {
-        quotes[idx].style.display = 'none';
-        idx = (idx + 1) % quotes.length;
-        quotes[idx].style.display = 'block';
-      }, 5000);
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPress);
-  } else {
-    initPress();
-  }
-  document.addEventListener('shopify:section:load', initPress);
-})();
+  (function () {
+    function initPress() {
+      document.querySelectorAll('[data-press-quotes]').forEach(function (container) {
+        var quotes = container.querySelectorAll('.press__quote');
+        if (quotes.length <= 1) return;
+        var idx = 0;
+        setInterval(function () {
+          quotes[idx].style.display = 'none';
+          idx = (idx + 1) % quotes.length;
+          quotes[idx].style.display = 'block';
+        }, 5000);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPress);
+    } else {
+      initPress();
+    }
+    document.addEventListener('shopify:section:load', initPress);
+  })();
 </script>
 
 {% schema %}
 {
   "name": "Press",
   "tag": "section",
-  "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Featured on" }
-  ],
+  "settings": [{ "type": "text", "id": "title", "label": "Title", "default": "Featured on" }],
   "max_blocks": 12,
   "blocks": [
     {
@@ -231,7 +245,12 @@
       "type": "quote",
       "name": "Review quote",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "I've gone on to basically replace all of my functional battery banks in my life with these." },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I've gone on to basically replace all of my functional battery banks in my life with these."
+        },
         { "type": "text", "id": "source", "label": "Source", "default": "MKBHD" }
       ]
     }
@@ -244,9 +263,27 @@
         { "type": "logo", "settings": { "name": "TechSource" } },
         { "type": "logo", "settings": { "name": "Austin Evans" } },
         { "type": "logo", "settings": { "name": "Linus Tech Tips" } },
-        { "type": "quote", "settings": { "quote": "I've gone on to basically replace all of my functional battery banks in my life with these.", "source": "MKBHD" } },
-        { "type": "quote", "settings": { "quote": "SHARGE is a company who tend to do batteries in a more interesting way.", "source": "Austin Evans" } },
-        { "type": "quote", "settings": { "quote": "If you don't have a dedicated spot in your setup to charge your devices, then you're gonna love SHARGE.", "source": "Linus Tech Tips" } }
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "I've gone on to basically replace all of my functional battery banks in my life with these.",
+            "source": "MKBHD"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "SHARGE is a company who tend to do batteries in a more interesting way.",
+            "source": "Austin Evans"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "If you don't have a dedicated spot in your setup to charge your devices, then you're gonna love SHARGE.",
+            "source": "Linus Tech Tips"
+          }
+        }
       ]
     }
   ]

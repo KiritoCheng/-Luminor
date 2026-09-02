@@ -36,17 +36,32 @@
 
 /* -------------------- Header -------------------- */
 .header-wrapper {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 160;
   background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
   transition: background-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              border-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              -webkit-backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+    border-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+    backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+    -webkit-backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+}
+
+/* Offset main content below fixed header */
+#MainContent {
+  padding-top: 60px;
+}
+
+/* When mega menu is open: header background goes 100% opaque to prevent scrim from "bleeding through" its transparency */
+body.is-mega-open .header-wrapper,
+body.is-mega-open .header-wrapper.is-scrolled {
+  background-color: var(--color-bg);
+  backdrop-filter: saturate(180%) blur(32px);
+  -webkit-backdrop-filter: saturate(180%) blur(32px);
 }
 
 .header-wrapper.is-scrolled {
@@ -55,7 +70,7 @@
   -webkit-backdrop-filter: saturate(180%) blur(30px);
   border-bottom-color: color-mix(in srgb, var(--color-text) 9%, transparent);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 4%, transparent),
-              0 4px 24px color-mix(in srgb, var(--color-text) 5%, transparent);
+    0 4px 24px color-mix(in srgb, var(--color-text) 5%, transparent);
 }
 
 .header {
@@ -67,7 +82,7 @@
   max-width: var(--page-width);
   margin-inline: auto;
   transition: min-height 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              padding-block 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+    padding-block 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 .header-wrapper.is-scrolled .header {
@@ -156,7 +171,7 @@
   background-color: var(--color-text);
   transform: translateX(-50%);
   transition: width 0.28s cubic-bezier(0.28, 0.11, 0.32, 1),
-              background-color 0.25s ease;
+    background-color 0.25s ease;
   opacity: 0.85;
 }
 
@@ -190,17 +205,17 @@
   border: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
   backdrop-filter: saturate(180%) blur(28px);
   -webkit-backdrop-filter: saturate(180%) blur(28px);
-  border-radius: 18px;
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 4%, transparent) inset,
-              0 12px 40px color-mix(in srgb, var(--color-text) 10%, transparent),
-              0 2px 12px color-mix(in srgb, var(--color-text) 6%, transparent);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 4%, transparent)
+      inset,
+    0 12px 40px color-mix(in srgb, var(--color-text) 10%, transparent),
+    0 2px 12px color-mix(in srgb, var(--color-text) 6%, transparent);
   padding: 10px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s cubic-bezier(0.28, 0.11, 0.32, 1),
-              transform 0.3s cubic-bezier(0.28, 0.11, 0.32, 1),
-              visibility 0.3s ease;
+    transform 0.3s cubic-bezier(0.28, 0.11, 0.32, 1), visibility 0.3s ease;
 }
 
 .header__nav-item:hover .header__dropdown,
@@ -219,8 +234,8 @@
   color: color-mix(in srgb, var(--color-text) 86%, transparent);
   text-decoration: none;
   transition: background-color 0.2s cubic-bezier(0.28, 0.11, 0.32, 1),
-              color 0.2s cubic-bezier(0.28, 0.11, 0.32, 1),
-              transform 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
+    color 0.2s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transform 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 .header__dropdown a:hover {
@@ -246,8 +261,8 @@
   border-radius: 980px;
   color: color-mix(in srgb, var(--color-text) 82%, transparent);
   transition: background-color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-              color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-              transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1);
+    color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 .header__icon-btn:hover {
@@ -264,10 +279,10 @@
   width: 36px;
   height: 36px;
   transition: width 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              height 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              background-color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-              color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-              transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1);
+    height 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+    background-color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
+    color 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 .header-wrapper.is-scrolled .header__icon-btn svg {
@@ -664,7 +679,12 @@
 
 /* Placeholder + decorative watermark when no image is set */
 .hero__media--placeholder {
-  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 45%, var(--color-bg-alt) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-alt) 0%,
+    var(--color-bg) 45%,
+    var(--color-bg-alt) 100%
+  );
 }
 .hero__placeholder-img {
   width: 100%;
@@ -689,13 +709,19 @@
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero__watermark { display: none; }
+  .hero__watermark {
+    display: none;
+  }
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
 }
 
 .hero__content {
@@ -866,7 +892,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.28, 0.11, 0.32, 1), opacity 0.4s ease;
+  transition: transform 0.6s cubic-bezier(0.28, 0.11, 0.32, 1),
+    opacity 0.4s ease;
 }
 
 .product-card__media--secondary img:nth-child(2) {
@@ -1033,7 +1060,8 @@
   gap: 8px;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+  transition: opacity 0.3s var(--ease-out-expo),
+    transform 0.3s var(--ease-out-expo);
 }
 
 .product-card:hover .product-card__actions {
@@ -1164,10 +1192,8 @@
   max-width: 360px;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.28s cubic-bezier(0.28, 0.11, 0.32, 1),
-    transform 0.32s cubic-bezier(0.28, 0.11, 0.32, 1),
-    visibility 0.28s ease;
+  transition: opacity 0.28s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transform 0.32s cubic-bezier(0.28, 0.11, 0.32, 1), visibility 0.28s ease;
   z-index: 100;
   pointer-events: none;
 }
@@ -1185,8 +1211,7 @@
   -webkit-backdrop-filter: saturate(180%) blur(24px);
   border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
   border-radius: 18px;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
     0 20px 56px -8px color-mix(in srgb, var(--color-text) 16%, transparent),
     0 6px 18px -4px color-mix(in srgb, var(--color-text) 9%, transparent);
   padding: 22px;
@@ -1294,20 +1319,37 @@
   grid-column: span 2;
   grid-row: span 2;
 }
-.featured-collection__grid--bento .featured-collection__item--feature .product-card__media {
+.featured-collection__grid--bento
+  .featured-collection__item--feature
+  .product-card__media {
   aspect-ratio: 4 / 3;
 }
-.featured-collection__grid--bento .featured-collection__item--feature .product-card__title {
+.featured-collection__grid--bento
+  .featured-collection__item--feature
+  .product-card__title {
   font-size: 1.125rem;
 }
 @media (max-width: 990px) {
-  .featured-collection__grid--bento { grid-template-columns: repeat(2, 1fr); }
-  .featured-collection__grid--bento .featured-collection__item--feature { grid-column: span 2; grid-row: auto; }
+  .featured-collection__grid--bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .featured-collection__grid--bento .featured-collection__item--feature {
+    grid-column: span 2;
+    grid-row: auto;
+  }
 }
 @media (max-width: 749px) {
-  .featured-collection__grid--bento { grid-template-columns: 1fr; }
-  .featured-collection__grid--bento .featured-collection__item--feature { grid-column: auto; }
-  .featured-collection__grid--bento .featured-collection__item--feature .product-card__media { aspect-ratio: 1 / 1; }
+  .featured-collection__grid--bento {
+    grid-template-columns: 1fr;
+  }
+  .featured-collection__grid--bento .featured-collection__item--feature {
+    grid-column: auto;
+  }
+  .featured-collection__grid--bento
+    .featured-collection__item--feature
+    .product-card__media {
+    aspect-ratio: 1 / 1;
+  }
 }
 
 /* scroll-snap row variant */
@@ -1483,7 +1525,8 @@
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease, transform 0.15s ease;
 }
 
 .product__option-value:hover {
@@ -1870,8 +1913,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1),
-              filter 0.5s ease;
+  transition: transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1), filter 0.5s ease;
   will-change: transform;
 }
 
@@ -1885,7 +1927,8 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.7;
-  transition: transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1), opacity 0.4s ease;
+  transition: transform 0.9s cubic-bezier(0.28, 0.11, 0.32, 1),
+    opacity 0.4s ease;
 }
 .collection-card:hover .collection-card__placeholder {
   transform: scale(1.05);
@@ -1900,13 +1943,23 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 18px 20px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, transparent 28%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    transparent 28%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
   z-index: 1;
   transition: background 0.4s ease;
 }
 
 .collection-card:hover .collection-card__overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, rgba(0,0,0,0.72) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.72) 100%
+  );
 }
 
 .collection-card__top {
@@ -1920,13 +1973,13 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.88);
+  color: rgba(255, 255, 255, 0.88);
   padding: 4px 10px;
   border-radius: 980px;
-  background-color: rgba(255,255,255,0.14);
+  background-color: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .collection-card__bottom {
@@ -1952,10 +2005,10 @@
   flex-shrink: 0;
   padding: 6px 12px;
   border-radius: 980px;
-  background-color: rgba(255,255,255,0.18);
+  background-color: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.24);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   color: #fff;
   font-size: 0.6875rem;
   font-weight: 600;
@@ -1964,14 +2017,13 @@
   transform: translateY(2px);
   opacity: 0;
   transition: transform 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-              opacity 0.3s ease,
-              background-color 0.3s ease;
+    opacity 0.3s ease, background-color 0.3s ease;
 }
 
 .collection-card:hover .collection-card__cta {
   transform: translateY(0);
   opacity: 1;
-  background-color: rgba(255,255,255,0.28);
+  background-color: rgba(255, 255, 255, 0.28);
 }
 
 .collection-card__cta svg {
@@ -2008,7 +2060,8 @@
 }
 
 /* Cards 3+: standard 4:3 cards (one full row of 3) */
-.collection-list__grid--bento .collection-card:nth-child(n+3):nth-child(-n+5) {
+.collection-list__grid--bento
+  .collection-card:nth-child(n + 3):nth-child(-n + 5) {
   grid-column: span 1;
   grid-row: span 1;
   aspect-ratio: 4 / 3;
@@ -2021,24 +2074,36 @@
 }
 
 /* Large card typography boost */
-.collection-list__grid--bento .collection-card:nth-child(1) .collection-card__title,
-.collection-list__grid--bento .collection-card:nth-child(3):last-child .collection-card__title {
+.collection-list__grid--bento
+  .collection-card:nth-child(1)
+  .collection-card__title,
+.collection-list__grid--bento
+  .collection-card:nth-child(3):last-child
+  .collection-card__title {
   font-size: 1.6rem;
   letter-spacing: -0.02em;
   font-weight: 600;
   max-width: 78%;
 }
 
-.collection-list__grid--bento .collection-card:nth-child(1) .collection-card__overlay,
-.collection-list__grid--bento .collection-card:nth-child(3):last-child .collection-card__overlay {
+.collection-list__grid--bento
+  .collection-card:nth-child(1)
+  .collection-card__overlay,
+.collection-list__grid--bento
+  .collection-card:nth-child(3):last-child
+  .collection-card__overlay {
   padding: 24px 28px;
 }
 
 /* Portrait (card 2) typography stay compact */
-.collection-list__grid--bento .collection-card:nth-child(2) .collection-card__overlay {
+.collection-list__grid--bento
+  .collection-card:nth-child(2)
+  .collection-card__overlay {
   padding: 16px 16px;
 }
-.collection-list__grid--bento .collection-card:nth-child(2) .collection-card__title {
+.collection-list__grid--bento
+  .collection-card:nth-child(2)
+  .collection-card__title {
   font-size: 1rem;
 }
 
@@ -2070,8 +2135,12 @@
     grid-column: 1 / -1;
     aspect-ratio: 16 / 10;
   }
-  .collection-list__grid--bento .collection-card:nth-child(1) .collection-card__title,
-  .collection-list__grid--bento .collection-card:nth-child(3):last-child .collection-card__title {
+  .collection-list__grid--bento
+    .collection-card:nth-child(1)
+    .collection-card__title,
+  .collection-list__grid--bento
+    .collection-card:nth-child(3):last-child
+    .collection-card__title {
     font-size: 1.25rem;
     max-width: 100%;
   }
@@ -2722,7 +2791,11 @@
 .newsletter {
   text-align: center;
   padding-block: 80px;
-  background: radial-gradient(ellipse at center, var(--color-bg-alt) 0%, var(--color-bg) 70%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-bg-alt) 0%,
+    var(--color-bg) 70%
+  );
 }
 
 .newsletter__form {
@@ -2989,7 +3062,8 @@
 
 .modal__dialog {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--color-text) 20%, transparent) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-text) 20%, transparent)
+    transparent;
 }
 
 .modal__content {

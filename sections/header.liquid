@@ -144,7 +144,9 @@
                             {%- endif -%}
                             <span class="header__dropdown-feature-cta">
                               {{ block.settings.feature_link_label | default: 'Shop now' | escape }}
-                              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                              <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
                             </span>
                           </a>
                         </div>
@@ -355,17 +357,14 @@
     -webkit-backdrop-filter: saturate(180%) blur(32px);
     border-top: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
-    box-shadow:
-      0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
+    box-shadow: 0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
       0 28px 64px -16px color-mix(in srgb, var(--color-text) 20%, transparent),
       0 8px 24px -8px color-mix(in srgb, var(--color-text) 10%, transparent);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     overflow: hidden;
-    transition:
-      opacity 0.32s cubic-bezier(0.28, 0.11, 0.32, 1),
-      transform 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transition: opacity 0.32s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
       visibility 0.32s ease;
     z-index: 100;
   }
@@ -402,29 +401,16 @@
     padding: 40px;
   }
 
-  /* Separator line inside content wrapper (top) — spans within page-width bounds */
-  .header__dropdown-cols::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent,
-      color-mix(in srgb, var(--color-text) 10%, transparent) 15%,
-      color-mix(in srgb, var(--color-text) 10%, transparent) 85%,
-      transparent);
-    pointer-events: none;
-  }
-
   /* Subtle ambient gradient sheen for depth */
   .header__dropdown-inner::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(900px 220px at 50% -80%, color-mix(in srgb, var(--color-primary, #06c) 4%, transparent), transparent 65%);
+    background: radial-gradient(
+      900px 220px at 50% -80%,
+      color-mix(in srgb, var(--color-primary, #06c) 4%, transparent),
+      transparent 65%
+    );
     pointer-events: none;
     opacity: 1;
   }
@@ -476,16 +462,13 @@
     text-decoration: none;
     font-weight: 400;
     letter-spacing: -0.01em;
-    transition:
-      background-color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
-      color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
-      padding-left 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
-      transform 0.22s cubic-bezier(0.28, 0.11, 0.32, 1);
+    transition: background-color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
+      padding-left 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.22s cubic-bezier(0.28, 0.11, 0.32, 1);
   }
 
   /* Pill highlight + text-lift on hover (Apple menu style) */
   .header__dropdown-sub a::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 50%;
@@ -494,9 +477,7 @@
     height: 0;
     border-radius: 2px;
     background-color: var(--color-primary, var(--color-text));
-    transition:
-      height 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-      transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
+    transition: height 0.25s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
       opacity 0.25s ease;
     opacity: 0;
   }
@@ -524,17 +505,13 @@
     border-radius: 18px;
     background-color: color-mix(in srgb, var(--color-bg-alt) 70%, transparent);
     border: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
-    transition:
-      transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1),
-      box-shadow 0.4s cubic-bezier(0.28, 0.11, 0.32, 1),
-      border-color 0.3s ease,
-      background-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1), box-shadow 0.4s cubic-bezier(0.28, 0.11, 0.32, 1),
+      border-color 0.3s ease, background-color 0.3s ease;
   }
 
   .header__dropdown-feature-card:hover {
     transform: translateY(-3px);
-    box-shadow:
-      0 16px 36px color-mix(in srgb, var(--color-text) 10%, transparent),
+    box-shadow: 0 16px 36px color-mix(in srgb, var(--color-text) 10%, transparent),
       0 4px 12px color-mix(in srgb, var(--color-text) 5%, transparent);
     border-color: color-mix(in srgb, var(--color-text) 10%, transparent);
     background-color: color-mix(in srgb, var(--color-bg-alt) 90%, transparent);
@@ -597,7 +574,9 @@
   }
 
   @media (max-width: 990px) {
-    .header__dropdown--mega { display: none; }
+    .header__dropdown--mega {
+      display: none;
+    }
   }
 
   /* Mobile menu feature link */
@@ -615,7 +594,7 @@
 
   /* ============ Global page scrim blur on mega menu open (Apple.com style) ============ */
   body.is-mega-open::after {
-    content: "";
+    content: '';
     position: fixed;
     inset: 0;
     z-index: 49; /* one below header-wrapper (z-50) */
@@ -641,8 +620,13 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    body.is-mega-open::after { animation: none; opacity: 1; }
-    .header__dropdown--mega { transition: none; }
+    body.is-mega-open::after {
+      animation: none;
+      opacity: 1;
+    }
+    .header__dropdown--mega {
+      transition: none;
+    }
   }
 </style>
 
