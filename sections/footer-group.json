@@ -22,11 +22,11 @@
                         "label_1": "All products",
                         "link_1": "/collections/all",
                         "label_2": "Audio",
-                        "link_2": "/collections/all",
+                        "link_2": "/collections/all?view=audio",
                         "label_3": "Desk",
-                        "link_3": "/collections/all",
+                        "link_3": "/collections/all?view=desk",
                         "label_4": "Everyday",
-                        "link_4": "/collections/all"
+                        "link_4": "/collections/all?view=everyday"
                     }
                 },
                 "support_col": {
@@ -34,13 +34,13 @@
                     "settings": {
                         "heading": "Support",
                         "label_1": "FAQs",
-                        "link_1": "/pages/contact",
+                        "link_1": "/collections/all?view=faq",
                         "label_2": "Shipping \u0026 Returns",
-                        "link_2": "/pages/contact",
+                        "link_2": "/collections/all?view=shipping-returns",
                         "label_3": "Warranty",
-                        "link_3": "/pages/contact",
+                        "link_3": "/collections/all?view=warranty",
                         "label_4": "Track Order",
-                        "link_4": "/pages/contact"
+                        "link_4": "/collections/all?view=track-order"
                     }
                 },
                 "company_col": {
@@ -48,11 +48,11 @@
                     "settings": {
                         "heading": "Company",
                         "label_1": "Our Story",
-                        "link_1": "/blogs/news",
+                        "link_1": "/collections/all?view=about",
                         "label_2": "Contact Us",
                         "link_2": "/pages/contact",
                         "label_3": "Our Blog",
-                        "link_3": "/blogs/news"
+                        "link_3": "/collections/all?view=about"
                     }
                 },
                 "contact_col": {
