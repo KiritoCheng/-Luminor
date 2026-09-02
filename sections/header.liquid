@@ -1,4 +1,4 @@
-﻿{%- comment -%}
+{%- comment -%}
   Header — Apple-style navigation with self-contained mega menu blocks.
   Each "mega_menu" block holds its own columns + featured card in settings,
   so there is no fragile parent/child block ID matching.
@@ -7,7 +7,11 @@
 <header class="header-wrapper" data-header>
   <div class="page-width">
     <div class="header header--{{ settings.header_layout | default: 'centered' }}">
-      <button class="header__icon-btn header__menu-toggle" data-mobile-menu-open aria-label="{{ 'accessibility.menu' | t }}">
+      <button
+        class="header__icon-btn header__menu-toggle"
+        data-mobile-menu-open
+        aria-label="{{ 'accessibility.menu' | t }}"
+      >
         {% render 'icon-menu' %}
       </button>
 
@@ -42,7 +46,14 @@
             <div class="header__nav-item header__nav-item--mega" data-header-nav-item {{ block.shopify_attributes }}>
               <a href="{{ block.settings.url | default: '#' }}" class="header__nav-link" data-mega-trigger>
                 {{ block.settings.title | escape }}
-                <svg class="header__nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <svg
+                  class="header__nav-chevron"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  fill="none"
+                  aria-hidden="true"
+                >
                   <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
@@ -68,16 +79,32 @@
                             <h4 class="header__dropdown-title">{{ block.settings[col_title] | escape }}</h4>
                             <ul class="header__dropdown-sub">
                               {%- if block.settings[col_label_1] != blank -%}
-                                <li><a href="{{ block.settings[col_link_1] | default: '#' }}">{{ block.settings[col_label_1] | escape }}</a></li>
+                                <li>
+                                  <a href="{{ block.settings[col_link_1] | default: '#' }}">
+                                    {{- block.settings[col_label_1] | escape -}}
+                                  </a>
+                                </li>
                               {%- endif -%}
                               {%- if block.settings[col_label_2] != blank -%}
-                                <li><a href="{{ block.settings[col_link_2] | default: '#' }}">{{ block.settings[col_label_2] | escape }}</a></li>
+                                <li>
+                                  <a href="{{ block.settings[col_link_2] | default: '#' }}">
+                                    {{- block.settings[col_label_2] | escape -}}
+                                  </a>
+                                </li>
                               {%- endif -%}
                               {%- if block.settings[col_label_3] != blank -%}
-                                <li><a href="{{ block.settings[col_link_3] | default: '#' }}">{{ block.settings[col_label_3] | escape }}</a></li>
+                                <li>
+                                  <a href="{{ block.settings[col_link_3] | default: '#' }}">
+                                    {{- block.settings[col_label_3] | escape -}}
+                                  </a>
+                                </li>
                               {%- endif -%}
                               {%- if block.settings[col_label_4] != blank -%}
-                                <li><a href="{{ block.settings[col_link_4] | default: '#' }}">{{ block.settings[col_label_4] | escape }}</a></li>
+                                <li>
+                                  <a href="{{ block.settings[col_link_4] | default: '#' }}">
+                                    {{- block.settings[col_label_4] | escape -}}
+                                  </a>
+                                </li>
                               {%- endif -%}
                             </ul>
                           </div>
@@ -86,23 +113,33 @@
 
                       {%- if block.settings.feature_title != blank or block.settings.feature_image != blank -%}
                         <div class="header__dropdown-col header__dropdown-col--feature">
-                          <a href="{{ block.settings.feature_link | default: '#' }}" class="header__dropdown-feature-card">
+                          <a
+                            href="{{ block.settings.feature_link | default: '#' }}"
+                            class="header__dropdown-feature-card"
+                          >
                             {%- if block.settings.feature_image != blank -%}
-                              {{ block.settings.feature_image | image_url: width: 600 | image_tag:
-                                loading: 'lazy',
-                                widths: '300, 400, 600',
-                                sizes: '300px',
-                                class: 'header__dropdown-feature-img',
-                                alt: block.settings.feature_title | escape }}
+                              {{
+                                block.settings.feature_image
+                                | image_url: width: 600
+                                | image_tag:
+                                  loading: 'lazy',
+                                  widths: '300, 400, 600',
+                                  sizes: '300px',
+                                  class: 'header__dropdown-feature-img',
+                                  alt: block.settings.feature_title
+                                | escape
+                              }}
                             {%- endif -%}
                             {%- if block.settings.feature_title != blank -%}
-              <h4 class="header__dropdown-feature-title">{{ block.settings.feature_title | escape }}</h4>
+                              <h4 class="header__dropdown-feature-title">
+                                {{ block.settings.feature_title | escape }}
+                              </h4>
                             {%- endif -%}
                             {%- if block.settings.feature_text != blank -%}
-              <p class="header__dropdown-feature-text">{{ block.settings.feature_text | escape }}</p>
+                              <p class="header__dropdown-feature-text">{{ block.settings.feature_text | escape }}</p>
                             {%- endif -%}
                             {%- if block.settings.feature_link_label != blank -%}
-              <span class="link-arrow">{{ block.settings.feature_link_label | escape }}</span>
+                              <span class="link-arrow">{{ block.settings.feature_link_label | escape }}</span>
                             {%- endif -%}
                           </a>
                         </div>
@@ -145,9 +182,15 @@
           </a>
         {%- endif -%}
 
-        <a class="header__icon-btn header__cart-count"
-          {% if settings.cart_type == 'drawer' %}data-cart-drawer-open href="#"{% else %}href="{{ routes.cart_url }}"{% endif %}
-          aria-label="{{ 'sections.cart.title' | t }}">
+        <a
+          class="header__icon-btn header__cart-count"
+          {% if settings.cart_type == 'drawer' %}
+            data-cart-drawer-open href="#"
+          {% else %}
+            href="{{ routes.cart_url }}"
+          {% endif %}
+          aria-label="{{ 'sections.cart.title' | t }}"
+        >
           {% render 'icon-cart' %}
           <span class="cart-count-bubble" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
         </a>
@@ -211,16 +254,24 @@
                   <div class="mobile-menu__sub-group">
                     <span class="mobile-menu__sub-title">{{ block.settings[col_title] | escape }}</span>
                     {%- if block.settings[col_label_1] != blank -%}
-                      <a href="{{ block.settings[col_link_1] | default: '#' }}">{{ block.settings[col_label_1] | escape }}</a>
+                      <a href="{{ block.settings[col_link_1] | default: '#' }}">
+                        {{- block.settings[col_label_1] | escape -}}
+                      </a>
                     {%- endif -%}
                     {%- if block.settings[col_label_2] != blank -%}
-                      <a href="{{ block.settings[col_link_2] | default: '#' }}">{{ block.settings[col_label_2] | escape }}</a>
+                      <a href="{{ block.settings[col_link_2] | default: '#' }}">
+                        {{- block.settings[col_label_2] | escape -}}
+                      </a>
                     {%- endif -%}
                     {%- if block.settings[col_label_3] != blank -%}
-                      <a href="{{ block.settings[col_link_3] | default: '#' }}">{{ block.settings[col_label_3] | escape }}</a>
+                      <a href="{{ block.settings[col_link_3] | default: '#' }}">
+                        {{- block.settings[col_label_3] | escape -}}
+                      </a>
                     {%- endif -%}
                     {%- if block.settings[col_label_4] != blank -%}
-                      <a href="{{ block.settings[col_link_4] | default: '#' }}">{{ block.settings[col_label_4] | escape }}</a>
+                      <a href="{{ block.settings[col_link_4] | default: '#' }}">
+                        {{- block.settings[col_label_4] | escape -}}
+                      </a>
                     {%- endif -%}
                   </div>
                 {%- endif -%}
@@ -230,9 +281,12 @@
                 <div class="mobile-menu__sub-group">
                   <a href="{{ block.settings.feature_link | default: '#' }}" class="mobile-menu__feature-link">
                     {%- if block.settings.feature_image != blank -%}
-                      {{ block.settings.feature_image | image_url: width: 400 | image_tag:
-                        loading: 'lazy',
-                        alt: block.settings.feature_title | escape }}
+                      {{
+                        block.settings.feature_image
+                        | image_url: width: 400
+                        | image_tag: loading: 'lazy', alt: block.settings.feature_title
+                        | escape
+                      }}
                     {%- endif -%}
                     <span>{{ block.settings.feature_title | escape }}</span>
                   </a>
@@ -251,11 +305,15 @@
   <div class="mobile-menu__footer">
     <div class="mobile-menu__actions">
       <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         {{ 'customer.account.title' | t }}
       </a>
       <a href="{{ routes.search_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--ghost">
-        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
         {{ 'general.search.search' | t }}
       </a>
     </div>
@@ -382,7 +440,9 @@
   }
 
   @media (max-width: 990px) {
-    .header__dropdown--mega { display: none; }
+    .header__dropdown--mega {
+      display: none;
+    }
   }
 
   .mobile-menu__feature-link {
@@ -393,7 +453,9 @@
     color: inherit;
     font-weight: 500;
   }
-  .mobile-menu__feature-link img { border-radius: 12px; }
+  .mobile-menu__feature-link img {
+    border-radius: 12px;
+  }
 </style>
 
 {% schema %}

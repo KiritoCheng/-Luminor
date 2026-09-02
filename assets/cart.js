@@ -121,6 +121,7 @@
       const countEl = doc.querySelector('[data-cart-count]');
       const count = countEl ? countEl.dataset.cartCount : '0';
       document.querySelectorAll('[data-cart-count]').forEach((el) => {
+        if (el.hasAttribute('data-cart-drawer')) return;
         el.textContent = count;
         el.setAttribute('data-count', count);
       });
@@ -133,9 +134,12 @@
         this.open();
       }));
       if (this.drawer) {
-        this.drawer.querySelectorAll('[data-cart-drawer-close]').forEach((b) =>
-          b.addEventListener('click', () => this.close())
-        );
+        this.drawer.addEventListener('click', (e) => {
+          if (e.target.closest('[data-cart-drawer-close]')) {
+            e.preventDefault();
+            this.close();
+          }
+        });
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape' && this.drawer.classList.contains('is-open')) this.close();
         });

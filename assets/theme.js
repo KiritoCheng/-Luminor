@@ -174,7 +174,10 @@
     refreshCartDrawer() {
       const drawer = this.cartDrawer;
       if (!drawer) return;
-      return fetch('/?view=cart-drawer')
+      const cartUrl = (window.Shopify && window.Shopify.routes && window.Shopify.routes.cart_url)
+        ? window.Shopify.routes.cart_url + '?view=drawer'
+        : '/cart?view=drawer';
+      return fetch(cartUrl)
         .then((r) => r.text())
         .then((html) => {
           const parser = new DOMParser();
@@ -196,11 +199,10 @@
         .then((r) => r.json())
         .then((cart) => {
           document.querySelectorAll('[data-cart-count]').forEach((el) => {
+            if (el.hasAttribute('data-cart-drawer')) return;
             el.textContent = cart.item_count;
             el.style.display = cart.item_count > 0 ? '' : 'none';
           });
-          const drawer = this.cartDrawer;
-          if (drawer) drawer.setAttribute('data-cart-count', cart.item_count);
         })
         .catch(() => {});
     },

@@ -2,7 +2,7 @@
   Alternate cart template rendered for AJAX refresh (?view=drawer).
   Outputs only the cart drawer markup for in-place replacement.
 {%- endcomment -%}
-<div class="cart-drawer" data-cart-drawer data-cart-count="{{ cart.item_count }}">
+<div class="cart-drawer" data-cart-drawer>
   <div class="cart-drawer__header">
     <p class="cart-drawer__title">{{ 'sections.cart.title' | t }} ({{ cart.item_count }})</p>
     <button class="cart-drawer__close" data-cart-drawer-close aria-label="{{ 'accessibility.close' | t }}">
@@ -51,7 +51,7 @@
     <div class="cart-drawer__footer">
       <div class="cart-drawer__subtotal">
         <span>{{ 'sections.cart.subtotal' | t }}</span>
-        <span class="cart-drawer__subtotal-value" data-cart-count="{{ cart.item_count }}">{{ cart.total_price | money }}</span>
+        <span class="cart-drawer__subtotal-value" data-cart-subtotal>{{ cart.total_price | money }}</span>
       </div>
       <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
       <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
