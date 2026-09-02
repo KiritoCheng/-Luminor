@@ -12,7 +12,7 @@
             "button_label": "Shop now",
             "button_link": "/collections/all",
             "button_label_2": "Discover Luminor",
-            "button_link_2": "/pages/about"
+            "button_link_2": "/blogs/news"
           }
         }
       },
@@ -145,7 +145,7 @@
         "title": "Crafted to the last detail.",
         "text": "<p>Every Luminor product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
         "button_label": "Read our story",
-        "button_link": "/pages/about",
+        "button_link": "/blogs/news",
         "color_scheme": "alt",
         "layout": "text_first"
       }

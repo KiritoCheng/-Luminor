@@ -10,6 +10,13 @@
       "type": "header",
       "settings": {},
       "blocks": {
+        "home": {
+          "type": "link",
+          "settings": {
+            "title": "Home",
+            "url": "/"
+          }
+        },
         "shop": {
           "type": "mega_menu",
           "settings": {
@@ -46,24 +53,24 @@
           "type": "mega_menu",
           "settings": {
             "title": "Explore",
-            "url": "/pages/about",
+            "url": "/blogs/news",
             "column_1_title": "Company",
             "column_1_label_1": "Our Story",
-            "column_1_link_1": "/pages/about",
+            "column_1_link_1": "/blogs/news",
             "column_1_label_2": "Contact Us",
             "column_1_link_2": "/pages/contact",
             "column_1_label_3": "FAQs",
-            "column_1_link_3": "/pages/faq",
+            "column_1_link_3": "/pages/contact",
             "column_2_title": "Journal",
             "column_2_label_1": "Our Blog",
             "column_2_link_1": "/blogs/news",
             "column_2_label_2": "Design Philosophy",
-            "column_2_link_2": "/pages/about",
+            "column_2_link_2": "/blogs/news",
             "column_3_title": "Support",
             "column_3_label_1": "Shipping & Returns",
-            "column_3_link_1": "/pages/faq",
+            "column_3_link_1": "/pages/contact",
             "column_3_label_2": "Warranty",
-            "column_3_link_2": "/pages/faq",
+            "column_3_link_2": "/pages/contact",
             "column_3_label_3": "Track Order",
             "column_3_link_3": "/pages/contact"
           }
@@ -72,11 +79,11 @@
           "type": "link",
           "settings": {
             "title": "About",
-            "url": "/pages/about"
+            "url": "/blogs/news"
           }
         }
       },
-      "block_order": ["shop", "explore", "about_link"]
+      "block_order": ["home", "shop", "explore", "about_link"]
     }
   },
   "order": ["announcement-bar", "header"]

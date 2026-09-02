@@ -27,12 +27,21 @@
           {%- if coll != blank -%}
             <a href="{{ coll.url }}" class="collection-card" {{ block.shopify_attributes }}>
               {%- if coll.featured_image -%}
-                {{ coll.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: coll.title | escape }}
+                {{ coll.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: coll.title | escape }}
               {%- else -%}
                 {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'collection-card__placeholder' }}
               {%- endif -%}
               <div class="collection-card__overlay">
-                <h3 class="collection-card__title">{{ coll.title | escape }}</h3>
+                <div class="collection-card__top">
+                  <span class="collection-card__count">{{ coll.products_count }} Products</span>
+                </div>
+                <div class="collection-card__bottom">
+                  <h3 class="collection-card__title">{{ coll.title | escape }}</h3>
+                  <span class="collection-card__cta">
+                    Explore
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
               </div>
             </a>
           {%- endif -%}
@@ -44,12 +53,21 @@
           {%- if counter > 3 -%}{%- break -%}{%- endif -%}
           <a href="{{ coll.url }}" class="collection-card">
             {%- if coll.featured_image -%}
-              {{ coll.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: coll.title | escape }}
+              {{ coll.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: coll.title | escape }}
             {%- else -%}
               {{ 'collection-' | append: counter | placeholder_svg_tag: 'collection-card__placeholder' }}
             {%- endif -%}
             <div class="collection-card__overlay">
-              <h3 class="collection-card__title">{{ coll.title | escape }}</h3>
+              <div class="collection-card__top">
+                <span class="collection-card__count">{{ coll.products_count }} Products</span>
+              </div>
+              <div class="collection-card__bottom">
+                <h3 class="collection-card__title">{{ coll.title | escape }}</h3>
+                <span class="collection-card__cta">
+                  Explore
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
             </div>
           </a>
         {%- endfor -%}
@@ -68,7 +86,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Shop by category" },
     { "type": "select", "id": "layout", "label": "Layout",
-      "options": [ { "value": "grid", "label": "Uniform grid" }, { "value": "bento", "label": "Bento (asymmetric)" } ], "default": "bento" },
+      "options": [ { "value": "grid", "label": "Uniform grid" }, { "value": "bento", "label": "Bento (compact asymmetric)" } ], "default": "bento" },
     { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns (grid mode)", "default": 3 }
   ],
   "max_blocks": 8,
@@ -82,7 +100,7 @@
   "presets": [
     {
       "name": "Collection list",
-      "blocks": [ { "type": "collection" }, { "type": "collection" }, { "type": "collection" } ]
+      "blocks": [ { "type": "collection" }, { "type": "collection" }, { "type": "collection" }, { "type": "collection" } ]
     }
   ]
 }

@@ -25,11 +25,11 @@
           "settings": {
             "heading": "Support",
             "label_1": "FAQs",
-            "link_1": "/pages/faq",
+            "link_1": "/pages/contact",
             "label_2": "Shipping & Returns",
-            "link_2": "/pages/faq",
+            "link_2": "/pages/contact",
             "label_3": "Warranty",
-            "link_3": "/pages/faq",
+            "link_3": "/pages/contact",
             "label_4": "Track Order",
             "link_4": "/pages/contact"
           }
@@ -39,7 +39,7 @@
           "settings": {
             "heading": "Company",
             "label_1": "Our Story",
-            "link_1": "/pages/about",
+            "link_1": "/blogs/news",
             "label_2": "Contact Us",
             "link_2": "/pages/contact",
             "label_3": "Our Blog",

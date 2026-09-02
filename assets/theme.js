@@ -26,6 +26,7 @@
       this.bindQuickAdd();
       this.bindFacetsToggle();
       this.bindSmoothScroll();
+      this.initHeaderScroll();
       this.markLoaded();
       this.bindSectionReload();
     },
@@ -43,6 +44,7 @@
         this.bindQuickView();
         this.bindQuickAdd();
         this.bindCartDrawerClose();
+        this.initHeaderScroll();
       });
       document.addEventListener('shopify:section:select', () => {
         this.initReveal();
@@ -464,8 +466,15 @@
       const items = document.querySelectorAll('.header__nav-item--mega');
       if (!items.length) return;
       let closeTimer = null;
+
+      const updateScrim = () => {
+        const anyOpen = Array.from(items).some((it) => it.classList.contains('is-open'));
+        document.body.classList.toggle('is-mega-open', anyOpen);
+      };
+
       const closeAll = (except) => {
         items.forEach((it) => { if (it !== except) it.classList.remove('is-open'); });
+        updateScrim();
       };
       items.forEach((item) => {
         const trigger = item.querySelector('[data-mega-trigger]');
@@ -475,25 +484,36 @@
           clearTimeout(closeTimer);
           closeAll(item);
           item.classList.add('is-open');
+          updateScrim();
         });
         item.addEventListener('mouseleave', () => {
-          closeTimer = setTimeout(() => item.classList.remove('is-open'), 200);
+          closeTimer = setTimeout(() => {
+            item.classList.remove('is-open');
+            updateScrim();
+          }, 200);
         });
         if (panel) {
           panel.addEventListener('mouseenter', () => clearTimeout(closeTimer));
           panel.addEventListener('mouseleave', () => {
-            closeTimer = setTimeout(() => item.classList.remove('is-open'), 200);
+            closeTimer = setTimeout(() => {
+              item.classList.remove('is-open');
+              updateScrim();
+            }, 200);
           });
         }
-        trigger.addEventListener('click', (e) => {
-          e.preventDefault();
+        trigger.addEventListener('click', () => {
           const wasOpen = item.classList.contains('is-open');
           closeAll(null);
-          if (!wasOpen) item.classList.add('is-open');
+          if (!wasOpen) {
+            item.classList.add('is-open');
+          }
+          updateScrim();
         });
       });
       document.addEventListener('click', (e) => {
-        if (!e.target.closest('.header__nav-item--mega')) closeAll(null);
+        if (!e.target.closest('.header__nav-item--mega')) {
+          closeAll(null);
+        }
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAll(null);
@@ -748,6 +768,33 @@
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    },
+
+    /* ---------- Header scroll contraction (Apple-style) ---------- */
+    initHeaderScroll() {
+      const wrappers = document.querySelectorAll('.header-wrapper');
+      if (!wrappers.length) return;
+      let lastY = window.scrollY || window.pageYOffset || 0;
+      let ticking = false;
+
+      const apply = (y) => {
+        const scrolled = y > 10;
+        wrappers.forEach((w) => {
+          if (scrolled) w.classList.add('is-scrolled');
+          else w.classList.remove('is-scrolled');
+        });
+        ticking = false;
+      };
+
+      apply(lastY);
+
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY || window.pageYOffset || 0;
+        if (!ticking) {
+          window.requestAnimationFrame(() => apply(y));
+          ticking = true;
+        }
+      }, { passive: true });
     },
 
     /* ---------- Toast ---------- */

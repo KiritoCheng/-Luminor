@@ -1,30 +1,9 @@
 {
   "sections": {
-    "intro": {
-      "type": "rich-text",
-      "settings": {
-        "eyebrow": "Luminor",
-        "title": "Accessories, engineered to last.",
-        "text": "<p>Precision-cut from Grade 5 titanium and tuned for the Apple ecosystem — every Luminor piece is built to outlast the device it protects.</p>",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all"
-      }
-    },
     "main": {
       "type": "page-details",
       "settings": {}
-    },
-    "feature": {
-      "type": "image-with-text",
-      "settings": {
-        "eyebrow": "Crafted, not assembled",
-        "title": "Grade 5 titanium. MagSafe-ready.",
-        "text": "<p>From bead-blasted titanium shells to perfectly aligned MagSafe magnets, every detail is engineered to feel inevitable in your hand — and to age beautifully over years of daily use.</p>",
-        "button_label": "Explore accessories",
-        "button_link": "/collections/all",
-        "layout": "image_first"
-      }
     }
   },
-  "order": ["intro", "main", "feature"]
+  "order": ["main"]
 }
