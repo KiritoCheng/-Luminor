@@ -131,7 +131,7 @@
                                   | escape
                                 }}
                               {%- else -%}
-                                {{ 'lifestyle-3' | placeholder_svg_tag: 'header__dropdown-feature-img' }}
+                                {{ 'lifestyle-1' | placeholder_svg_tag: 'header__dropdown-feature-img' }}
                               {%- endif -%}
                             </div>
                             {%- if block.settings.feature_title != blank -%}
@@ -355,18 +355,17 @@
     background-color: var(--color-bg);
     backdrop-filter: saturate(180%) blur(32px);
     -webkit-backdrop-filter: saturate(180%) blur(32px);
-    border-top: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
+    border-top: none;
     border-bottom: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
-    box-shadow: 0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
-      0 28px 64px -16px color-mix(in srgb, var(--color-text) 20%, transparent),
-      0 8px 24px -8px color-mix(in srgb, var(--color-text) 10%, transparent);
+    box-shadow: 0 28px 64px -20px color-mix(in srgb, var(--color-text) 24%, transparent),
+      0 12px 32px -12px color-mix(in srgb, var(--color-text) 12%, transparent);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     overflow: hidden;
     transition: opacity 0.32s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
       visibility 0.32s ease;
-    z-index: 100;
+    z-index: 20;  /* inside header context, above header content only — global baseline is header-wrapper z-100 */
   }
 
   .header__nav-item--mega:hover .header__dropdown--mega,
@@ -597,7 +596,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    z-index: 49; /* one below header-wrapper (z-50) */
+    z-index: 99;  /* one below header-wrapper (z-100) so it sits between page content and the header bar */
     background: color-mix(in srgb, var(--color-text) 24%, transparent);
     backdrop-filter: saturate(180%) blur(18px);
     -webkit-backdrop-filter: saturate(180%) blur(18px);

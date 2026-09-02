@@ -40,7 +40,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 160;
+  z-index: 100;  /* BASELINE: drawers / modals / search MUST be above this */
   background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -365,7 +365,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
   background-color: color-mix(in srgb, var(--color-bg) 82%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(28px);
   backdrop-filter: saturate(180%) blur(28px);
-  z-index: 100;
+  z-index: 140;  /* side drawer: above header (z-100) */
   transform: translateX(-100%);
   transition: transform 0.42s cubic-bezier(0.28, 0.11, 0.32, 1);
   display: flex;
@@ -1210,10 +1210,14 @@ body.is-mega-open .header-wrapper.is-scrolled {
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
   border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-  border-radius: 18px;
-  box-shadow: 0 1px 0 color-mix(in srgb, #fff 20%, transparent) inset,
-    0 20px 56px -8px color-mix(in srgb, var(--color-text) 16%, transparent),
-    0 6px 18px -4px color-mix(in srgb, var(--color-text) 9%, transparent);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top: none;
+  box-shadow:
+    0 20px 56px -12px color-mix(in srgb, var(--color-text) 20%, transparent),
+    0 6px 18px -6px color-mix(in srgb, var(--color-text) 10%, transparent);
   padding: 22px;
 }
 
@@ -2307,7 +2311,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
     width: min(100%, 360px);
     height: 100%;
     background: var(--color-bg);
-    z-index: 100;
+    z-index: 140;  /* side drawer: above header (z-100) */
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     overflow-y: auto;
@@ -2356,7 +2360,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
   width: min(100%, 440px);
   height: 100%;
   background-color: var(--color-bg);
-  z-index: 100;
+  z-index: 140;  /* side drawer: MUST be above header (z-100), this was the bug */
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1);
   display: flex;
@@ -2585,7 +2589,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
   width: 100%;
   height: 100%;
   background-color: var(--color-bg);
-  z-index: 100;
+  z-index: 150;  /* full-screen top overlay, above side drawers (z-140) */
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1);
   display: flex;
@@ -3012,7 +3016,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
 .modal {
   position: fixed;
   inset: 0;
-  z-index: 110;
+  z-index: 160;  /* modal dialog, above everything except toast */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3116,7 +3120,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
   border-radius: 980px;
   font-size: 0.9375rem;
   font-weight: 500;
-  z-index: 120;
+  z-index: 200;  /* ephemeral: highest UI layer above modals */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
