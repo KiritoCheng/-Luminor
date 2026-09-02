@@ -1,79 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": {
-    "hero": {
-      "type": "image-with-text",
-      "settings": {
-        "eyebrow": "Our story",
-        "title": "Designed with intention. Built to last.",
-        "text": "<p>Luminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.</p><p>Our mission is to elevate the everyday through thoughtful design.</p>",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all"
-      }
-    },
-    "editorial_1": {
-      "type": "editorial",
-      "settings": {
-        "eyebrow": "Philosophy",
-        "heading": "Less, but better.",
-        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
-        "button_label": "",
-        "button_link": ""
-      }
-    },
-    "values": {
-      "type": "multicolumn",
-      "settings": {
-        "eyebrow": "What we stand for",
-        "title": "Our values",
-        "subtitle": "Three principles that guide every decision we make.",
-        "columns": 3
-      },
-      "blocks": {
-        "v1": {
-          "type": "column",
-          "settings": {
-            "title": "Quality first",
-            "text": "We never compromise on materials or craftsmanship. Every product is built to last."
-          }
-        },
-        "v2": {
-          "type": "column",
-          "settings": {
-            "title": "Sustainable by design",
-            "text": "Minimal packaging, recyclable materials, and products designed to replace disposables."
-          }
-        },
-        "v3": {
-          "type": "column",
-          "settings": {
-            "title": "Customer obsessed",
-            "text": "From unboxing to everyday use, every touchpoint should feel effortless and delightful."
-          }
-        }
-      },
-      "block_order": ["v1", "v2", "v3"]
-    },
-    "editorial_2": {
-      "type": "editorial",
-      "settings": {
-        "eyebrow": "Promise",
-        "heading": "Built for life. Backed for years.",
-        "text": "<p>Every Luminor product comes with our promise: if it doesn't meet your expectations, return it within 30 days for a full refund. No questions asked.</p>",
-        "button_label": "Shop now",
-        "button_link": "/collections/all"
-      }
-    },
-    "manifesto": {
-      "type": "statement",
-      "settings": {
-        "watermark": "LUMINOR",
-        "eyebrow": "Our promise",
-        "heading": "Grade 5 titanium. Backed for life.",
-        "text": "<p>From MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.</p>",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all"
-      }
-    }
-  },
-  "order": ["hero", "editorial_1", "values", "editorial_2", "manifesto"]
+    "sections":  {
+                     "hero":  {
+                                  "type":  "image-with-text",
+                                  "settings":  {
+                                                   "eyebrow":  "Our story",
+                                                   "title":  "Designed with intention. Built to last.",
+                                                   "text":  "\u003cp\u003eLuminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.\u003c/p\u003e\u003cp\u003eOur mission is to elevate the everyday through thoughtful design.\u003c/p\u003e",
+                                                   "button_label":  "Shop the collection",
+                                                   "button_link":  "/collections/all"
+                                               }
+                              },
+                     "editorial_1":  {
+                                         "type":  "editorial",
+                                         "settings":  {
+                                                          "eyebrow":  "Philosophy",
+                                                          "heading":  "Less, but better.",
+                                                          "text":  "\u003cp\u003eWe believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.\u003c/p\u003e\u003cp\u003eFrom premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?\u003c/p\u003e",
+                                                          "button_label":  "",
+                                                          "button_link":  ""
+                                                      }
+                                     },
+                     "values":  {
+                                    "type":  "multicolumn",
+                                    "settings":  {
+                                                     "eyebrow":  "What we stand for",
+                                                     "title":  "Our values",
+                                                     "subtitle":  "Three principles that guide every decision we make.",
+                                                     "columns":  3
+                                                 },
+                                    "blocks":  {
+                                                   "v1":  {
+                                                              "type":  "column",
+                                                              "settings":  {
+                                                                               "title":  "Quality first",
+                                                                               "text":  "We never compromise on materials or craftsmanship. Every product is built to last."
+                                                                           }
+                                                          },
+                                                   "v2":  {
+                                                              "type":  "column",
+                                                              "settings":  {
+                                                                               "title":  "Sustainable by design",
+                                                                               "text":  "Minimal packaging, recyclable materials, and products designed to replace disposables."
+                                                                           }
+                                                          },
+                                                   "v3":  {
+                                                              "type":  "column",
+                                                              "settings":  {
+                                                                               "title":  "Customer obsessed",
+                                                                               "text":  "From unboxing to everyday use, every touchpoint should feel effortless and delightful."
+                                                                           }
+                                                          }
+                                               },
+                                    "block_order":  [
+                                                        "v1",
+                                                        "v2",
+                                                        "v3"
+                                                    ]
+                                },
+                     "editorial_2":  {
+                                         "type":  "editorial",
+                                         "settings":  {
+                                                          "eyebrow":  "Promise",
+                                                          "heading":  "Built for life. Backed for years.",
+                                                          "text":  "\u003cp\u003eEvery Luminor product comes with our promise: if it doesn\u0027t meet your expectations, return it within 30 days for a full refund. No questions asked.\u003c/p\u003e",
+                                                          "button_label":  "Shop now",
+                                                          "button_link":  "/collections/all"
+                                                      }
+                                     },
+                     "manifesto":  {
+                                       "type":  "statement",
+                                       "settings":  {
+                                                        "watermark":  "LUMINOR",
+                                                        "eyebrow":  "Our promise",
+                                                        "heading":  "Grade 5 titanium. Backed for life.",
+                                                        "text":  "\u003cp\u003eFrom MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.\u003c/p\u003e",
+                                                        "button_label":  "Shop the collection",
+                                                        "button_link":  "/collections/all"
+                                                    }
+                                   }
+                 },
+    "order":  [
+                  "hero",
+                  "editorial_1",
+                  "values",
+                  "editorial_2",
+                  "manifesto"
+              ]
 }

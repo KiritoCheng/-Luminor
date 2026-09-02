@@ -10,6 +10,31 @@
   </div>
 </section>
 
+<script>
+  // Virtual Page Router: redirect legacy /pages/<handle> URLs to their
+  // collection view equivalents so links work immediately without requiring
+  // Page resources to be created in Shopify Admin.
+  (function () {
+    var map = {
+      'faq':                '/collections/all?view=faq',
+      'about':              '/collections/all?view=about',
+      'shipping-returns':   '/collections/all?view=shipping-returns',
+      'warranty':           '/collections/all?view=warranty',
+      'track-order':        '/collections/all?view=track-order',
+      'contact':            '/contact'
+    };
+    try {
+      var path = (location.pathname || '').replace(/\/+$/, '');
+      var m = path.match(/^\/pages\/(.+)$/i);
+      if (m && map[m[1]]) {
+        var dest = map[m[1]] + (location.hash || '');
+        // replace so browser back button skips the 404 hop
+        location.replace(dest);
+      }
+    } catch (e) {}
+  })();
+</script>
+
 {% schema %}
 {
   "name": "404",

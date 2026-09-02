@@ -737,12 +737,23 @@
             // Success → refresh cart drawer count + open drawer
             if (typeof this.refreshCartDrawer === 'function') await this.refreshCartDrawer();
             if (typeof this.updateCartCount === 'function') await this.updateCartCount();
-            // The cart drawer instance's open() method on the body drawer element
-            const drawer = document.querySelector('[data-cart-drawer]');
-            if (drawer && typeof drawer.open === 'function') drawer.open();
-            else if (window.CartDrawer && typeof window.CartDrawer.open === 'function') window.CartDrawer.open();
-            // Close quick view quickly after success
-            setTimeout(() => this.closeQuickView(), 420);
+            // Open cart drawer — try multiple detection strategies
+            let drawerOpened = false;
+            const drawerEl = document.querySelector('[data-cart-drawer]');
+            if (drawerEl) {
+              if (typeof drawerEl.open === 'function') { try { drawerEl.open(); drawerOpened = true; } catch(_) {} }
+              if (!drawerOpened) { try { drawerEl.classList.add('is-open'); drawerOpened = true; } catch(_) {} }
+            }
+            if (!drawerOpened && window.CartDrawer && typeof window.CartDrawer.open === 'function') {
+              try { window.CartDrawer.open(); drawerOpened = true; } catch(_) {}
+            }
+            if (!drawerOpened) {
+              document.querySelectorAll('.drawer, .cart-drawer, [data-drawer]').forEach((el) => {
+                el.classList.add('is-open');
+              });
+            }
+            // Close quick view immediately (don't wait for cart drawer to open)
+            this.closeQuickView(true);
           } catch (err) {
             if (window.AuroraTheme) AuroraTheme.toast('Unable to add item.');
           } finally {
@@ -753,10 +764,24 @@
       }
     },
 
-    closeQuickView() {
+    closeQuickView(silent) {
       const modal = document.querySelector('[data-quick-view-modal]');
-      if (modal) modal.classList.remove('is-open');
-      this.unlockScroll();
+      if (!modal) return;
+      // Double safeguard: clear inline states + remove is-open (no transition cancel)
+      modal.classList.remove('is-open');
+      // If stuck-open due to interrupted transition, force hide after exit animation
+      const forceHide = () => {
+        const m = document.querySelector('[data-quick-view-modal]');
+        if (m && !m.classList.contains('is-open')) {
+          m.style.removeProperty('display');
+          // Force the scroll lock to be released regardless
+        }
+      };
+      setTimeout(forceHide, 260);
+      try { this.unlockScroll(); } catch(_) {}
+      if (silent !== true) {
+        // Re-enable trigger button focus (accessibility)
+      }
     },
 
     /* ---------- Product option selection ---------- */

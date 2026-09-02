@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -16,25 +25,25 @@
           }
         }
       },
-      "block_order": ["slide_1"]
+      "block_order": [
+        "slide_1"
+      ],
+      "settings": {}
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "all",
         "eyebrow": "Top picks",
         "title": "Best sellers",
-        "view_all_label": "View all products",
-        "view_all_link": "/collections/all",
+        "collection": "all",
         "products_to_show": 8,
-        "columns_desktop": 4
+        "columns_desktop": 4,
+        "view_all_label": "View all products",
+        "view_all_link": "/collections/all"
       }
     },
     "category_pills": {
       "type": "category-pills",
-      "settings": {
-        "title": "Shop by category"
-      },
       "blocks": {
         "cat_1": {
           "type": "category",
@@ -70,15 +79,18 @@
           }
         }
       },
-      "block_order": ["cat_1", "cat_2", "cat_3", "cat_4"]
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ],
+      "settings": {
+        "title": "Shop by category"
+      }
     },
     "lookbook": {
       "type": "lookbook",
-      "settings": {
-        "eyebrow": "Shop the look",
-        "title": "Curated for modern living",
-        "subtitle": "Tap the dots to explore products from this scene."
-      },
       "blocks": {
         "hot_1": {
           "type": "product",
@@ -102,18 +114,44 @@
           }
         }
       },
-      "block_order": ["hot_1", "hot_2", "hot_3"]
+      "block_order": [
+        "hot_1",
+        "hot_2",
+        "hot_3"
+      ],
+      "settings": {
+        "eyebrow": "Shop the look",
+        "title": "Curated for modern living",
+        "subtitle": "Tap the dots to explore products from this scene."
+      }
     },
     "press": {
       "type": "press",
-      "settings": {
-        "title": "Featured on"
-      },
       "blocks": {
-        "logo_1": { "type": "logo", "settings": { "name": "TechCrunch" } },
-        "logo_2": { "type": "logo", "settings": { "name": "The Verge" } },
-        "logo_3": { "type": "logo", "settings": { "name": "Wired" } },
-        "logo_4": { "type": "logo", "settings": { "name": "Engadget" } },
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "TechCrunch"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "The Verge"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Wired"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Engadget"
+          }
+        },
         "quote_1": {
           "type": "quote",
           "settings": {
@@ -136,18 +174,29 @@
           }
         }
       },
-      "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "quote_1", "quote_2", "quote_3"]
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ],
+      "settings": {
+        "title": "Featured on"
+      }
     },
     "image_with_text": {
       "type": "image-with-text",
       "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
         "eyebrow": "Craftsmanship",
         "title": "Crafted to the last detail.",
         "text": "<p>Every Luminor product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
         "button_label": "Read our story",
-        "button_link": "/blogs/news",
-        "color_scheme": "alt",
-        "layout": "text_first"
+        "button_link": "/blogs/news"
       }
     },
     "editorial": {
@@ -162,35 +211,40 @@
     },
     "collection_list": {
       "type": "collection-list",
-      "settings": {
-        "title": "Shop by category",
-        "eyebrow": "Browse collections",
-        "layout": "bento",
-        "columns": 3
-      },
       "blocks": {
         "coll_1": {
           "type": "collection",
-          "settings": { "collection": "accessories" }
+          "settings": {
+            "collection": "accessories"
+          }
         },
         "coll_2": {
           "type": "collection",
-          "settings": { "collection": "accessories-featured" }
+          "settings": {
+            "collection": "accessories-featured"
+          }
         },
         "coll_3": {
           "type": "collection",
-          "settings": { "collection": "automated-collection" }
+          "settings": {
+            "collection": "automated-collection"
+          }
         }
       },
-      "block_order": ["coll_1", "coll_2", "coll_3"]
+      "block_order": [
+        "coll_1",
+        "coll_2",
+        "coll_3"
+      ],
+      "settings": {
+        "eyebrow": "Browse collections",
+        "title": "Shop by category",
+        "layout": "bento",
+        "columns": 3
+      }
     },
     "multicolumn": {
       "type": "multicolumn",
-      "settings": {
-        "title": "Why you'll love it",
-        "subtitle": "Designed to make every interaction effortless.",
-        "columns": 3
-      },
       "blocks": {
         "col_1": {
           "type": "column",
@@ -214,7 +268,16 @@
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3"]
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
+      "settings": {
+        "title": "Why you'll love it",
+        "subtitle": "Designed to make every interaction effortless.",
+        "columns": 3
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -225,17 +288,41 @@
     },
     "stats": {
       "type": "stats",
-      "settings": {
-        "eyebrow": "By the numbers",
-        "heading": "Trusted worldwide",
-        "watermark": "LUMINOR"
-      },
       "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "120", "suffix": "K+", "label": "Creators equipped" } },
-        "stat_2": { "type": "stat", "settings": { "number": "48", "label": "Countries shipped" } },
-        "stat_3": { "type": "stat", "settings": { "number": "4.9", "suffix": "★", "label": "Average rating" } }
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "120",
+            "suffix": "K+",
+            "label": "Creators equipped"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "48",
+            "label": "Countries shipped"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "4.9",
+            "suffix": "★",
+            "label": "Average rating"
+          }
+        }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3"]
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "By the numbers",
+        "heading": "Trusted worldwide"
+      }
     },
     "statement": {
       "type": "statement",

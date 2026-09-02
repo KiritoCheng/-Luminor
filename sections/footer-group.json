@@ -1,61 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "type": "footer",
-  "name": "Footer group",
-  "sections": {
-    "footer": {
-      "type": "footer",
-      "settings": {},
-      "blocks": {
-        "shop_col": {
-          "type": "link_column",
-          "settings": {
-            "heading": "Shop",
-            "label_1": "All products",
-            "link_1": "/collections/all",
-            "label_2": "Audio",
-            "link_2": "/collections/all",
-            "label_3": "Desk",
-            "link_3": "/collections/all",
-            "label_4": "Everyday",
-            "link_4": "/collections/all"
-          }
-        },
-        "support_col": {
-          "type": "link_column",
-          "settings": {
-            "heading": "Support",
-            "label_1": "FAQs",
-            "link_1": "/pages/contact",
-            "label_2": "Shipping & Returns",
-            "link_2": "/pages/contact",
-            "label_3": "Warranty",
-            "link_3": "/pages/contact",
-            "label_4": "Track Order",
-            "link_4": "/pages/contact"
-          }
-        },
-        "company_col": {
-          "type": "link_column",
-          "settings": {
-            "heading": "Company",
-            "label_1": "Our Story",
-            "link_1": "/blogs/news",
-            "label_2": "Contact Us",
-            "link_2": "/pages/contact",
-            "label_3": "Our Blog",
-            "link_3": "/blogs/news"
-          }
-        },
-        "contact_col": {
-          "type": "contact",
-          "settings": {
-            "heading": "Contact",
-            "email": "hello@luminor.com"
-          }
+    "type": "footer",
+    "name": "Footer group",
+    "sections": {
+        "footer": {
+            "type": "footer",
+            "settings": {},
+            "blocks": {
+                "shop_col": {
+                    "type": "link_column",
+                    "settings": {
+                        "heading": "Shop",
+                        "label_1": "All products",
+                        "link_1": "/collections/all",
+                        "label_2": "Audio",
+                        "link_2": "/collections/all",
+                        "label_3": "Desk",
+                        "link_3": "/collections/all",
+                        "label_4": "Everyday",
+                        "link_4": "/collections/all"
+                    }
+                },
+                "support_col": {
+                    "type": "link_column",
+                    "settings": {
+                        "heading": "Support",
+                        "label_1": "FAQs",
+                        "link_1": "/pages/contact",
+                        "label_2": "Shipping \u0026 Returns",
+                        "link_2": "/pages/contact",
+                        "label_3": "Warranty",
+                        "link_3": "/pages/contact",
+                        "label_4": "Track Order",
+                        "link_4": "/pages/contact"
+                    }
+                },
+                "company_col": {
+                    "type": "link_column",
+                    "settings": {
+                        "heading": "Company",
+                        "label_1": "Our Story",
+                        "link_1": "/blogs/news",
+                        "label_2": "Contact Us",
+                        "link_2": "/pages/contact",
+                        "label_3": "Our Blog",
+                        "link_3": "/blogs/news"
+                    }
+                },
+                "contact_col": {
+                    "type": "contact",
+                    "settings": {
+                        "heading": "Contact",
+                        "email": "hello@luminor.com"
+                    }
+                }
+            },
+            "block_order": [
+                "shop_col",
+                "support_col",
+                "company_col",
+                "contact_col"
+            ]
         }
-      },
-      "block_order": ["shop_col", "support_col", "company_col", "contact_col"]
-    }
-  },
-  "order": ["footer"]
+    },
+    "order": [
+        "footer"
+    ]
 }

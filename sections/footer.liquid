@@ -1,4 +1,4 @@
-{%- comment -%}
+﻿{%- comment -%}
   Footer — multi-column footer with newsletter, navigation links, and payment.
   Link columns use self-contained link blocks so the demo works without menu setup.
 {%- endcomment -%}
@@ -7,15 +7,32 @@
     <div class="page-width">
       <div class="footer__newsletter-inner">
         <div class="footer__newsletter-text">
-          <h3 class="footer__newsletter-title">{{ section.settings.newsletter_title | default: 'Join the Luminor circle' | escape }}</h3>
-          <p class="footer__newsletter-sub">{{ section.settings.newsletter_text | default: 'Get early access to new drops, exclusive offers, and stories from the studio.' | escape }}</p>
+          <h3 class="footer__newsletter-title">
+            {{ section.settings.newsletter_title | default: 'Join the Luminor circle' | escape }}
+          </h3>
+          <p class="footer__newsletter-sub">
+            {{
+              section.settings.newsletter_text
+              | default: 'Get early access to new drops, exclusive offers, and stories from the studio.'
+              | escape
+            }}
+          </p>
         </div>
         <div class="footer__newsletter-form">
           {%- form 'customer', class: 'footer__newsletter-form-inner' -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
             <div class="footer__newsletter-field">
-              <input type="email" name="contact[email]" placeholder="Enter your email" class="footer__newsletter-input" aria-label="Email address" required>
-              <button type="submit" class="footer__newsletter-btn">{{ section.settings.newsletter_btn | default: 'Subscribe' | escape }}</button>
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="Enter your email"
+                class="footer__newsletter-input"
+                aria-label="Email address"
+                required
+              >
+              <button type="submit" class="footer__newsletter-btn">
+                {{ section.settings.newsletter_btn | default: 'Subscribe' | escape }}
+              </button>
             </div>
             {%- if form.posted_successfully? -%}
               <p class="footer__newsletter-success">Thanks for subscribing!</p>
@@ -46,17 +63,23 @@
               <div class="footer__social-icons">
                 {%- if settings.social_twitter_link != blank -%}
                   <a href="{{ settings.social_twitter_link }}" aria-label="X / Twitter" rel="noopener" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.83l4.713 6.231 5.447-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.83l4.713 6.231 5.447-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/>
+                    </svg>
                   </a>
                 {%- endif -%}
                 {%- if settings.social_instagram_link != blank -%}
                   <a href="{{ settings.social_instagram_link }}" aria-label="Instagram" rel="noopener" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
                   </a>
                 {%- endif -%}
                 {%- if settings.social_facebook_link != blank -%}
                   <a href="{{ settings.social_facebook_link }}" aria-label="Facebook" rel="noopener" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/>
+                    </svg>
                   </a>
                 {%- endif -%}
               </div>
@@ -71,19 +94,29 @@
                 <p class="footer__col-title">{{ block.settings.heading | escape }}</p>
                 <ul class="footer__col-links">
                   {%- if block.settings.label_1 != blank -%}
-                    <li><a href="{{ block.settings.link_1 | default: '#' }}">{{ block.settings.label_1 | escape }}</a></li>
+                    <li>
+                      <a href="{{ block.settings.link_1 | default: '#' }}">{{ block.settings.label_1 | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.label_2 != blank -%}
-                    <li><a href="{{ block.settings.link_2 | default: '#' }}">{{ block.settings.label_2 | escape }}</a></li>
+                    <li>
+                      <a href="{{ block.settings.link_2 | default: '#' }}">{{ block.settings.label_2 | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.label_3 != blank -%}
-                    <li><a href="{{ block.settings.link_3 | default: '#' }}">{{ block.settings.label_3 | escape }}</a></li>
+                    <li>
+                      <a href="{{ block.settings.link_3 | default: '#' }}">{{ block.settings.label_3 | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.label_4 != blank -%}
-                    <li><a href="{{ block.settings.link_4 | default: '#' }}">{{ block.settings.label_4 | escape }}</a></li>
+                    <li>
+                      <a href="{{ block.settings.link_4 | default: '#' }}">{{ block.settings.label_4 | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.label_5 != blank -%}
-                    <li><a href="{{ block.settings.link_5 | default: '#' }}">{{ block.settings.label_5 | escape }}</a></li>
+                    <li>
+                      <a href="{{ block.settings.link_5 | default: '#' }}">{{ block.settings.label_5 | escape }}</a>
+                    </li>
                   {%- endif -%}
                 </ul>
               </div>
@@ -92,10 +125,14 @@
                 <p class="footer__col-title">{{ block.settings.heading | escape }}</p>
                 <ul class="footer__col-links">
                   {%- if block.settings.email != blank -%}
-                    <li><a href="mailto:{{ block.settings.email }}">{{ block.settings.email | escape }}</a></li>
+                    <li>
+                      <a href="mailto:{{ block.settings.email }}">{{ block.settings.email | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.phone != blank -%}
-                    <li><a href="tel:{{ block.settings.phone | remove: ' ' }}">{{ block.settings.phone | escape }}</a></li>
+                    <li>
+                      <a href="tel:{{ block.settings.phone | remove: ' ' }}">{{ block.settings.phone | escape }}</a>
+                    </li>
                   {%- endif -%}
                   {%- if block.settings.address != blank -%}
                     <li class="footer__col-address">{{ block.settings.address | escape }}</li>
@@ -111,7 +148,10 @@
   <div class="footer__bottom">
     <div class="page-width">
       <div class="footer__bottom-inner">
-        <p class="footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+        <p class="footer__copyright">
+          &copy; {{ 'now' | date: '%Y' }}
+          {{ shop.name }}. All rights reserved.
+        </p>
         <div class="footer__bottom-right">
           {%- if section.settings.show_payment -%}
             <div class="footer__payment">
@@ -127,38 +167,208 @@
 </footer>
 
 <style>
-  .footer__newsletter-bar { background-color: var(--color-bg-alt); padding: 48px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); }
-  .footer__newsletter-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  .footer__newsletter-title { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.025em; margin-bottom: 4px; }
-  .footer__newsletter-sub { font-size: 0.875rem; color: var(--color-text-muted); }
-  .footer__newsletter-field { display: flex; gap: 8px; }
-  .footer__newsletter-input { min-width: 280px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent); border-radius: 100px; background-color: var(--color-bg); color: var(--color-text); font-size: 0.875rem; outline: none; transition: border-color 0.2s ease; }
-  .footer__newsletter-input:focus { border-color: var(--color-primary); }
-  .footer__newsletter-btn { padding: 12px 28px; border-radius: 100px; background-color: var(--color-primary); color: #fff; font-size: 0.875rem; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.2s ease; }
-  .footer__newsletter-btn:hover { background-color: var(--color-primary-hover); }
-  .footer__newsletter-success { color: var(--color-primary); font-size: 0.8125rem; margin-top: 8px; }
-  .footer__main { padding: 56px 0 40px; }
-  .footer__cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 40px; }
-  .footer__logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; color: var(--color-text); text-decoration: none; display: block; margin-bottom: 12px; }
-  .footer__brand-text { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 20px; max-width: 280px; }
-  .footer__social-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 12px; }
-  .footer__social-icons { display: flex; gap: 12px; }
-  .footer__social-icons a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background-color: color-mix(in srgb, var(--color-text) 6%, transparent); color: var(--color-text); transition: background-color 0.2s ease, transform 0.2s var(--ease-spring); }
-  .footer__social-icons a:hover { background-color: var(--color-primary); color: #fff; transform: translateY(-2px); }
-  .footer__social-icons svg { width: 18px; height: 18px; }
-  .footer__col-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text); margin-bottom: 16px; }
-  .footer__col-links { display: flex; flex-direction: column; gap: 10px; list-style: none; padding: 0; margin: 0; }
-  .footer__col-links a { font-size: 0.8125rem; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s ease; }
-  .footer__col-links a:hover { color: var(--color-text); }
-  .footer__col-address { font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.5; white-space: pre-line; }
-  .footer__bottom { border-top: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); padding: 24px 0; }
-  .footer__bottom-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .footer__copyright { font-size: 0.8125rem; color: var(--color-text-muted); }
-  .footer__bottom-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .footer__payment { display: flex; align-items: center; gap: 8px; }
-  .footer__payment-icon { height: 24px; width: auto; }
-  @media (max-width: 990px) { .footer__cols { grid-template-columns: 1fr 1fr 1fr; } .footer__col--brand { grid-column: 1 / -1; } }
-  @media (max-width: 749px) { .footer__newsletter-inner { flex-direction: column; text-align: center; } .footer__newsletter-input { min-width: 0; flex: 1; } .footer__cols { grid-template-columns: 1fr 1fr; gap: 32px; } .footer__bottom-inner { flex-direction: column; text-align: center; } }
+  .footer__newsletter-bar {
+    background-color: var(--color-bg-alt);
+    padding: 48px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  }
+  .footer__newsletter-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .footer__newsletter-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+  }
+  .footer__newsletter-sub {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+  .footer__newsletter-field {
+    display: flex;
+    gap: 8px;
+  }
+  .footer__newsletter-input {
+    min-width: 280px;
+    padding: 12px 16px;
+    border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    border-radius: 100px;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .footer__newsletter-input:focus {
+    border-color: var(--color-primary);
+  }
+  .footer__newsletter-btn {
+    padding: 12px 28px;
+    border-radius: 100px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .footer__newsletter-btn:hover {
+    background-color: var(--color-primary-hover);
+  }
+  .footer__newsletter-success {
+    color: var(--color-primary);
+    font-size: 0.8125rem;
+    margin-top: 8px;
+  }
+  .footer__main {
+    padding: 56px 0 40px;
+  }
+  .footer__cols {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+    gap: 40px;
+  }
+  .footer__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .footer__brand-text {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 280px;
+  }
+  .footer__social-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+  .footer__social-icons {
+    display: flex;
+    gap: 12px;
+  }
+  .footer__social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
+    color: var(--color-text);
+    transition: background-color 0.2s ease, transform 0.2s var(--ease-spring);
+  }
+  .footer__social-icons a:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .footer__social-icons svg {
+    width: 18px;
+    height: 18px;
+  }
+  .footer__col-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+  .footer__col-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer__col-links a {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer__col-links a:hover {
+    color: var(--color-text);
+  }
+  .footer__col-address {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+  .footer__bottom {
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    padding: 24px 0;
+  }
+  .footer__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer__copyright {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+  .footer__bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer__payment {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer__payment-icon {
+    height: 24px;
+    width: auto;
+  }
+  @media (max-width: 990px) {
+    .footer__cols {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .footer__col--brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 749px) {
+    .footer__newsletter-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer__newsletter-input {
+      min-width: 0;
+      flex: 1;
+    }
+    .footer__cols {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .footer__bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 </style>
 
 {% schema %}
@@ -167,10 +377,20 @@
   "settings": [
     { "type": "header", "content": "Newsletter" },
     { "type": "text", "id": "newsletter_title", "label": "Newsletter title", "default": "Join the Luminor circle" },
-    { "type": "text", "id": "newsletter_text", "label": "Newsletter subtitle", "default": "Get early access to new drops, exclusive offers, and stories from the studio." },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter subtitle",
+      "default": "Get early access to new drops, exclusive offers, and stories from the studio."
+    },
     { "type": "text", "id": "newsletter_btn", "label": "Button text", "default": "Subscribe" },
     { "type": "header", "content": "Brand" },
-    { "type": "richtext", "id": "text", "label": "Brand text", "default": "<p>Premium accessories designed for the way you live. Minimalism, elevated.</p>" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Brand text",
+      "default": "<p>Premium accessories designed for the way you live. Minimalism, elevated.</p>"
+    },
     { "type": "header", "content": "Bottom bar" },
     { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
   ],
@@ -227,13 +447,13 @@
           "settings": {
             "heading": "Support",
             "label_1": "FAQs",
-            "link_1": "/pages/contact",
+            "link_1": "/collections/all?view=faq",
             "label_2": "Shipping & Returns",
-            "link_2": "/pages/contact",
+            "link_2": "/collections/all?view=shipping-returns",
             "label_3": "Warranty",
-            "link_3": "/pages/contact",
+            "link_3": "/collections/all?view=warranty",
             "label_4": "Track Order",
-            "link_4": "/pages/contact"
+            "link_4": "/collections/all?view=track-order"
           }
         },
         {
@@ -241,9 +461,9 @@
           "settings": {
             "heading": "Company",
             "label_1": "Our Story",
-            "link_1": "/blogs/news",
+            "link_1": "/collections/all?view=about",
             "label_2": "Contact Us",
-            "link_2": "/pages/contact",
+            "link_2": "/contact",
             "label_3": "Our Blog",
             "link_3": "/blogs/news"
           }

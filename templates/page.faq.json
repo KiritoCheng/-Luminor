@@ -1,80 +1,100 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": {
-    "intro": {
-      "type": "rich-text",
-      "settings": {
-        "eyebrow": "Luminor Support",
-        "title": "Questions, answered.",
-        "text": "<p>From MagSafe compatibility to titanium grades and Apple Watch band sizing — everything you need to know about your Luminor gear, in one place.</p>"
-      }
-    },
-    "faq": {
-      "type": "faq",
-      "settings": {
-        "eyebrow": "Help center",
-        "title": "Frequently asked questions",
-        "subtitle": "Everything you need to know about our products and policies.",
-        "button_label": "Contact support",
-        "button_link": "/pages/contact"
-      },
-      "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "How long does shipping take?",
-            "answer": "<p>Standard shipping takes 3-5 business days within the US. International orders may take 7-14 business days depending on the destination.</p>"
-          }
+    "sections": {
+        "intro": {
+            "type": "rich-text",
+            "settings": {
+                "eyebrow": "Luminor Support",
+                "title": "Questions, answered.",
+                "text": "\u003cp\u003eFrom MagSafe compatibility to titanium grades and Apple Watch band sizing — everything you need to know about your Luminor gear, in one place.\u003c/p\u003e"
+            }
         },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We offer a 30-day return policy. If you're not satisfied, return your item in original condition for a full refund.</p>"
-          }
+        "faq": {
+            "type": "faq",
+            "settings": {
+                "eyebrow": "Help center",
+                "title": "Frequently asked questions",
+                "subtitle": "Everything you need to know about our products and policies.",
+                "button_label": "Contact support",
+                "button_link": "/pages/contact"
+            },
+            "blocks": {
+                "q1": {
+                    "type": "question",
+                    "settings": {
+                        "question": "How long does shipping take?",
+                        "answer": "\u003cp\u003eStandard shipping takes 3-5 business days within the US. International orders may take 7-14 business days depending on the destination.\u003c/p\u003e"
+                    }
+                },
+                "q2": {
+                    "type": "question",
+                    "settings": {
+                        "question": "What is your return policy?",
+                        "answer": "\u003cp\u003eWe offer a 30-day return policy. If you\u0027re not satisfied, return your item in original condition for a full refund.\u003c/p\u003e"
+                    }
+                },
+                "q3": {
+                    "type": "question",
+                    "settings": {
+                        "question": "Are your products covered by warranty?",
+                        "answer": "\u003cp\u003eYes, all Luminor products come with a 1-year limited warranty covering manufacturing defects.\u003c/p\u003e"
+                    }
+                },
+                "q4": {
+                    "type": "question",
+                    "settings": {
+                        "question": "Do you ship internationally?",
+                        "answer": "\u003cp\u003eYes, we ship to over 40 countries worldwide. Shipping costs are calculated at checkout.\u003c/p\u003e"
+                    }
+                },
+                "q5": {
+                    "type": "question",
+                    "settings": {
+                        "question": "How do I track my order?",
+                        "answer": "\u003cp\u003eYou\u0027ll receive a tracking link via email once your order ships. You can also track it from your account page.\u003c/p\u003e"
+                    }
+                },
+                "q6": {
+                    "type": "question",
+                    "settings": {
+                        "question": "Can I change or cancel my order?",
+                        "answer": "\u003cp\u003eOrders can be modified within 2 hours of placing them. Contact us immediately and we\u0027ll do our best to help.\u003c/p\u003e"
+                    }
+                }
+            },
+            "block_order": [
+                "q1",
+                "q2",
+                "q3",
+                "q4",
+                "q5",
+                "q6"
+            ]
         },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "Are your products covered by warranty?",
-            "answer": "<p>Yes, all Luminor products come with a 1-year limited warranty covering manufacturing defects.</p>"
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "question": "Do you ship internationally?",
-            "answer": "<p>Yes, we ship to over 40 countries worldwide. Shipping costs are calculated at checkout.</p>"
-          }
-        },
-        "q5": {
-          "type": "question",
-          "settings": {
-            "question": "How do I track my order?",
-            "answer": "<p>You'll receive a tracking link via email once your order ships. You can also track it from your account page.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "Can I change or cancel my order?",
-            "answer": "<p>Orders can be modified within 2 hours of placing them. Contact us immediately and we'll do our best to help.</p>"
-          }
+        "contact_cta": {
+            "type": "image-with-text",
+            "settings": {
+                "eyebrow": "Still have questions?",
+                "title": "We\u0027re here to help.",
+                "text": "\u003cp\u003eOur support team is available Monday through Friday, 9am-6pm EST. Reach out and we\u0027ll get back to you within 24 hours.\u003c/p\u003e",
+                "button_label": "Contact us",
+                "button_link": "/pages/contact",
+                "color_scheme": "alt",
+                "layout": "text_first"
+            }
         }
-      },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
     },
-    "contact_cta": {
-      "type": "image-with-text",
-      "settings": {
-        "eyebrow": "Still have questions?",
-        "title": "We're here to help.",
-        "text": "<p>Our support team is available Monday through Friday, 9am-6pm EST. Reach out and we'll get back to you within 24 hours.</p>",
-        "button_label": "Contact us",
-        "button_link": "/pages/contact",
-        "color_scheme": "alt",
-        "layout": "text_first"
-      }
-    }
-  },
-  "order": ["intro", "faq", "contact_cta"]
+    "order": [
+        "intro",
+        "faq",
+        "contact_cta"
+    ]
 }
