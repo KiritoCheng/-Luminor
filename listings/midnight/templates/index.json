@@ -1,0 +1,72 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New",
+            "heading": "Think different.",
+            "subheading": "Discover products designed for the way you live.",
+            "button_label": "Shop now",
+            "button_label_2": "Learn more"
+          }
+        }
+      },
+      "block_order": ["slide_1"]
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "New arrivals",
+        "title": "Featured products",
+        "products_to_show": 4,
+        "columns_desktop": 4
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Craftsmanship",
+        "title": "Crafted to the last detail.",
+        "button_label": "Learn more"
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Shop by category",
+        "columns": 3
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Why you'll love it",
+        "columns": 3
+      },
+      "blocks": {
+        "col_1": { "type": "column", "settings": { "title": "Free shipping", "text": "On all orders over $50, delivered fast." } },
+        "col_2": { "type": "column", "settings": { "title": "30-day returns", "text": "Not in love? Return it within 30 days." } },
+        "col_3": { "type": "column", "settings": { "title": "Secure payments", "text": "Encrypted checkout you can trust." } }
+      },
+      "block_order": ["col_1", "col_2", "col_3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Stay in the loop.",
+        "text": "Get the latest news, product launches, and exclusive offers."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_collection",
+    "image_with_text",
+    "collection_list",
+    "multicolumn",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-details",
+      "settings": {
+        "show_dynamic_checkout": true,
+        "enable_sticky": true
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_recommendations": true,
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main", "recommendations"]
+}

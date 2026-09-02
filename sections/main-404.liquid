@@ -1,0 +1,18 @@
+<section class="section not-found">
+  <div class="page-width page-width--narrow text-center">
+    <p class="eyebrow">{{ 'sections.404.eyebrow' | t }}</p>
+    <h1 class="not-found__code">404</h1>
+    <p class="lead color-muted" style="margin-bottom:32px">{{ 'sections.404.text' | t }}</p>
+    <div class="hero__cta" style="justify-content:center">
+      <a href="{{ routes.root_url }}" class="button button--primary">{{ 'sections.404.link' | t }}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="link-arrow">{{ 'sections.404.browse' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "tag": "section"
+}
+{% endschema %}

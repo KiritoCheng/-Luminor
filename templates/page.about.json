@@ -1,0 +1,68 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Our story",
+        "title": "Designed with intention. Built to last.",
+        "text": "<p>Luminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.</p><p>Our mission is to elevate the everyday through thoughtful design.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "editorial_1": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Philosophy",
+        "heading": "Less, but better.",
+        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "values": {
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "What we stand for",
+        "title": "Our values",
+        "subtitle": "Three principles that guide every decision we make.",
+        "columns": 3
+      },
+      "blocks": {
+        "v1": {
+          "type": "column",
+          "settings": {
+            "title": "Quality first",
+            "text": "We never compromise on materials or craftsmanship. Every product is built to last."
+          }
+        },
+        "v2": {
+          "type": "column",
+          "settings": {
+            "title": "Sustainable by design",
+            "text": "Minimal packaging, recyclable materials, and products designed to replace disposables."
+          }
+        },
+        "v3": {
+          "type": "column",
+          "settings": {
+            "title": "Customer obsessed",
+            "text": "From unboxing to everyday use, every touchpoint should feel effortless and delightful."
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "editorial_2": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Promise",
+        "heading": "Built for life. Backed for years.",
+        "text": "<p>Every Luminor product comes with our promise: if it doesn't meet your expectations, return it within 30 days for a full refund. No questions asked.</p>",
+        "button_label": "Shop now",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "editorial_1", "values", "editorial_2"]
+}

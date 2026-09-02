@@ -1,0 +1,275 @@
+{%- comment -%}
+  Lookbook — interactive "Shop the Look" section with clickable hotspots.
+{%- endcomment -%}
+
+<section class="section section--wide lookbook reveal" data-lookbook>
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.eyebrow != blank -%}
+      <div class="lookbook__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="lookbook__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="lead">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="lookbook__stage">
+      {%- if section.settings.image != blank -%}
+        <div class="lookbook__image">
+          {{ section.settings.image | image_url: width: 2000 | image_tag:
+            loading: 'lazy',
+            widths: '375, 750, 1100, 1500, 2000',
+            sizes: '(max-width: 749px) 100vw, 100vw',
+            alt: section.settings.image.alt | default: section.settings.title | escape }}
+        </div>
+      {%- else -%}
+        <div class="lookbook__image lookbook__image--placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'lookbook__placeholder' }}
+        </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- assign product = block.settings.product -%}
+        {%- if product != blank -%}
+          <button class="lookbook__hotspot" data-lookbook-hotspot
+            style="--hotspot-x: {{ block.settings.position_x }}%; --hotspot-y: {{ block.settings.position_y }}%"
+            {{ block.shopify_attributes }}>
+            <span class="lookbook__hotspot-dot"></span>
+            <div class="lookbook__hotspot-card" data-lookbook-card>
+              {%- if product.featured_image -%}
+                <div class="lookbook__hotspot-image">
+                  {{ product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: product.title | escape }}
+                </div>
+              {%- endif -%}
+              <div class="lookbook__hotspot-info">
+                <h4 class="lookbook__hotspot-title">{{ product.title | escape }}</h4>
+                <div class="lookbook__hotspot-price">{{ product.price | money }}</div>
+                <a href="{{ product.url }}" class="lookbook__hotspot-link">View product</a>
+              </div>
+            </div>
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+.lookbook__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.lookbook__title {
+  margin-top: 8px;
+}
+
+.lookbook__stage {
+  position: relative;
+  border-radius: var(--image-radius);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+
+.lookbook__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.lookbook__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lookbook__image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.lookbook__hotspot {
+  position: absolute;
+  left: var(--hotspot-x, 50%);
+  top: var(--hotspot-y, 50%);
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lookbook__hotspot-dot {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px var(--color-primary), 0 2px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  position: relative;
+}
+
+.lookbook__hotspot-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  opacity: 0;
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.lookbook__hotspot:hover .lookbook__hotspot-dot,
+.lookbook__hotspot.is-active .lookbook__hotspot-dot {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+.lookbook__hotspot-card {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  display: flex;
+  gap: 12px;
+  background-color: color-mix(in srgb, var(--color-bg) 96%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  padding: 12px;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo), visibility 0.3s;
+  pointer-events: none;
+}
+
+.lookbook__hotspot:hover .lookbook__hotspot-card,
+.lookbook__hotspot.is-active .lookbook__hotspot-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.lookbook__hotspot-image {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.lookbook__hotspot-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lookbook__hotspot-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.lookbook__hotspot-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.lookbook__hotspot-price {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.lookbook__hotspot-link {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  margin-top: 2px;
+}
+
+@media (max-width: 749px) {
+  .lookbook__image {
+    aspect-ratio: 4 / 5;
+  }
+  .lookbook__hotspot-card {
+    min-width: 180px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  function initLookbook() {
+    document.querySelectorAll('[data-lookbook]').forEach(function(section) {
+      var hotspots = section.querySelectorAll('[data-lookbook-hotspot]');
+      hotspots.forEach(function(spot) {
+        spot.addEventListener('click', function() {
+          hotspots.forEach(function(s) { s.classList.remove('is-active'); });
+          spot.classList.add('is-active');
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLookbook);
+  } else {
+    initLookbook();
+  }
+  document.addEventListener('shopify:section:load', initLookbook);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Lookbook",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop the look" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Curated for modern living" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Tap the dots to explore products from this scene." },
+    { "type": "image_picker", "id": "image", "label": "Lifestyle image" }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product hotspot",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "position_x", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Horizontal position", "default": 50 },
+        { "type": "range", "id": "position_y", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Vertical position", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook",
+      "blocks": [
+        { "type": "product", "settings": { "position_x": 25, "position_y": 40 } },
+        { "type": "product", "settings": { "position_x": 65, "position_y": 55 } },
+        { "type": "product", "settings": { "position_x": 80, "position_y": 30 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

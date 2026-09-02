@@ -1,0 +1,128 @@
+<section class="section">
+  <div class="page-width">
+    <div class="page__hero">
+      <h1 class="section-heading__title">{{ page.title | escape }}</h1>
+    </div>
+    {%- if page.content != blank -%}
+      <div class="page__content rte">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- liquid
+  assign is_contact = false
+  assign page_title_downcase = page.title | downcase
+  if page_title_downcase contains 'contact' or page_title_downcase == 'get in touch'
+    assign is_contact = true
+  endif
+-%}
+
+{%- if is_contact or section.settings.show_contact_form -%}
+  {%- form 'contact', class: 'contact-form section' -%}
+    <div class="page-width page-width--narrow">
+      {%- if form.posted_successfully? -%}
+        <p class="form-success" role="status">
+          {{ 'sections.contact_form.success' | t }}
+        </p>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="form-errors" role="alert">
+          <p>{{ 'sections.contact_form.error_heading' | t }}</p>
+          <ul>
+            {%- if form.errors.translated_fields -%}
+              {%- assign error_fields = form.errors.translated_fields -%}
+              {%- assign error_messages = form.errors.messages -%}
+              {%- for i in (0..error_fields.size) -%}
+                {%- assign field = error_fields[i] -%}
+                {%- if field and field != 'form' -%}
+                  <li>{{ field | capitalize }} — {{ error_messages[i] | escape }}</li>
+                {%- elsif field == 'form' -%}
+                  <li>{{ error_messages[i] | escape }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="contact-form__grid">
+        <div class="field-group">
+          <label for="ContactName">{{ 'sections.contact_form.name' | t }}</label>
+          <input
+            type="text"
+            id="ContactName"
+            name="contact[name]"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="field-group">
+          <label for="ContactEmail">{{ 'sections.contact_form.email' | t }} *</label>
+          <input
+            type="email"
+            id="ContactEmail"
+            name="contact[email]"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            autocomplete="email"
+            required
+            {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactEmail-error"{% endif %}
+          >
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:16px">
+        <label for="ContactMessage">{{ 'sections.contact_form.message' | t }}</label>
+        <textarea
+          id="ContactMessage"
+          name="contact[body]"
+          rows="5"
+        >{{ form.body }}</textarea>
+      </div>
+
+      <button type="submit" class="button button--primary" style="margin-top:20px">
+        {{ 'sections.contact_form.submit' | t }}
+      </button>
+    </div>
+  {%- endform -%}
+
+  <section class="section">
+    <div class="page-width page-width--narrow">
+      <div style="text-align:center; margin-top: 48px;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 24px;">Other ways to reach us</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 16px;">
+          <div>
+            <p style="font-weight: 600; margin-bottom: 6px;">Email</p>
+            <p class="color-muted" style="margin: 0; font-size: 0.9375rem;">support@luminor-theme.com</p>
+          </div>
+          <div>
+            <p style="font-weight: 600; margin-bottom: 6px;">Business hours</p>
+            <p class="color-muted" style="margin: 0; font-size: 0.9375rem;">Mon–Fri<br>9:00 AM – 6:00 PM EST</p>
+          </div>
+          <div>
+            <p style="font-weight: 600; margin-bottom: 6px;">Location</p>
+            <p class="color-muted" style="margin: 0; font-size: 0.9375rem;">Remote<br>Serving worldwide</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_contact_form",
+      "label": "Show contact form on this page",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Luminor Journal",
+        "title": "Stories, ideas, and inspiration.",
+        "text": "<p>Explore the Luminor journal for design insights, product stories, and the philosophy behind everything we make.</p>",
+        "layout": "text_first",
+        "color_scheme": "alt"
+      }
+    },
+    "blog_posts": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "Latest articles",
+        "posts_to_show": 6
+      }
+    }
+  },
+  "order": ["banner", "blog_posts"]
+}

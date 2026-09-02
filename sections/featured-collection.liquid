@@ -1,0 +1,66 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign products_to_show = section.settings.products_to_show | default: 4
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+-%}
+
+<section class="section featured-collection reveal">
+  <div class="page-width">
+    <div class="featured-collection__header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
+      </div>
+      {%- if section.settings.view_all_link != blank and collection != blank -%}
+        <a href="{{ collection.url }}" class="link-arrow">{{ section.settings.view_all_label | default: 'View all' | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if collection != blank and collection.products.size > 0 -%}
+      <div class="featured-collection__grid product-grid stagger" style="grid-template-columns: repeat({{ columns_desktop }}, 1fr)">
+        {%- for product in collection.products limit: products_to_show -%}
+          <div class="reveal">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="featured-collection__grid product-grid stagger" style="grid-template-columns: repeat({{ columns_desktop }}, 1fr)">
+        {%- for i in (1..products_to_show) -%}
+          <div class="reveal">
+            <div class="product-card">
+              <div class="product-card__media">
+                {{ 'product-' | append: i | placeholder_svg_tag: 'product-card__placeholder' }}
+              </div>
+              <h3 class="product-card__title">{{ 'sections.featured_collection.example_title' | t }}</h3>
+              <div class="product-card__price">$99.00</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New arrivals" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Featured products" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 4 },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
+    { "type": "url", "id": "view_all_link", "label": "View all link" }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

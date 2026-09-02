@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "page-header": {
+      "type": "page-details",
+      "settings": {
+        "show_breadcrumb": true
+      }
+    },
+    "contact-form": {
+      "type": "contact-form",
+      "settings": {
+        "eyebrow": "Contact us",
+        "title": "Get in touch.",
+        "text": "We'd love to hear from you. Send us a message and we'll respond as soon as possible — usually within 24 hours.",
+        "narrow": true,
+        "color_scheme": "default"
+      }
+    },
+    "contact-info": {
+      "type": "page-details",
+      "settings": {
+        "title": "Other ways to reach us",
+        "description": "\n\n**Email**\nsupport@luminor-theme.com\n\n**Business hours**\nMon–Fri, 9:00 AM – 6:00 PM (EST)\n\n**Location**\nRemote · Serving customers worldwide",
+        "show_breadcrumb": false
+      }
+    }
+  },
+  "order": ["page-header", "contact-form", "contact-info"]
+}

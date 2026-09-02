@@ -1,0 +1,191 @@
+<header class="header-wrapper" data-header>
+  <div class="page-width">
+    <div class="header header--{{ settings.header_layout | default: 'centered' }}">
+      {%- comment -%} Left: menu toggle (mobile) + logo on left layout {%- endcomment -%}
+      <button class="header__icon-btn header__menu-toggle" data-mobile-menu-open aria-label="{{ 'accessibility.menu' | t }}">
+        {% render 'icon-menu' %}
+      </button>
+
+      {%- if settings.header_layout == 'left' -%}
+        <div class="header__logo">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {{ section.settings.logo | image_url: width: 240 | image_tag: alt: logo_alt, class: 'header__logo-img' }}
+          {%- else -%}
+            <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Center nav {%- endcomment -%}
+      <nav class="header__nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <div class="header__nav-item" data-header-nav-item>
+            <a href="{{ link.url }}" class="header__nav-link"
+              {% if link.current %}aria-current="page"{% endif %}>
+              {{ link.title | escape }}
+            </a>
+            {%- if link.links != blank -%}
+              <div class="header__dropdown" data-header-dropdown>
+                <div class="header__dropdown-inner page-width">
+                  <div class="header__dropdown-cols">
+                    {%- for child in link.links -%}
+                      <div class="header__dropdown-col">
+                        <a href="{{ child.url }}" class="header__dropdown-link">
+                          {%- if child.links != blank -%}
+                            <h4 class="header__dropdown-title">{{ child.title | escape }}</h4>
+                            <ul class="header__dropdown-sub">
+                              {%- for grandchild in child.links -%}
+                                <li><a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- else -%}
+                            <span class="header__dropdown-item">{{ child.title | escape }}</span>
+                          {%- endif -%}
+                        </a>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </nav>
+
+      {%- comment -%} Centered logo {%- endcomment -%}
+      {%- if settings.header_layout != 'left' -%}
+        <div class="header__logo">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {{ section.settings.logo | image_url: width: 240 | image_tag: alt: logo_alt, class: 'header__logo-img' }}
+          {%- else -%}
+            <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Right actions {%- endcomment -%}
+      <div class="header__actions">
+        {%- if settings.search_type == 'modal' -%}
+          <button class="header__icon-btn" data-search-open aria-label="{{ 'general.search.search' | t }}">
+            {% render 'icon-search' %}
+          </button>
+        {%- else -%}
+          <a class="header__icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
+            {% render 'icon-search' %}
+          </a>
+        {%- endif -%}
+
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            {% render 'icon-account' %}
+          </a>
+        {%- endif -%}
+
+        <a class="header__icon-btn header__cart-count"
+          {% if settings.cart_type == 'drawer' %}data-cart-drawer-open href="#"{% else %}href="{{ routes.cart_url }}"{% endif %}
+          aria-label="{{ 'sections.cart.title' | t }}">
+          {% render 'icon-cart' %}
+          <span class="cart-count-bubble" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+{%- comment -%} Mobile menu drawer (placed outside header-wrapper to escape backdrop-filter stacking context) {%- endcomment -%}
+<div class="mobile-menu" data-mobile-menu aria-hidden="true">
+  <div class="mobile-menu__header">
+    <div class="mobile-menu__brand">
+      <span class="mobile-menu__brand-name">{{ shop.name }}</span>
+      <span class="mobile-menu__brand-tagline">{{ 'sections.header.menu' | t }}</span>
+    </div>
+    <button class="mobile-menu__close" data-mobile-menu-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+  <nav class="mobile-menu__nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+    {%- for link in linklists[section.settings.menu].links -%}
+      {%- if link.links != blank -%}
+        <details class="mobile-menu__details">
+          <summary>
+            <span>{{ link.title | escape }}</span>
+            <span class="mobile-menu__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="mobile-menu__subnav">
+            {%- for child in link.links -%}
+              <a href="{{ child.url }}" {% if child.current %}aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- else -%}
+        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>
+          <span>{{ link.title | escape }}</span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+  <div class="mobile-menu__footer">
+    <div class="mobile-menu__actions">
+      <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {{ 'customer.account.title' | t }}
+      </a>
+      <a href="{{ routes.search_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--ghost">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        {{ 'general.search.search' | t }}
+      </a>
+    </div>
+    {%- if settings.social_facebook != blank or settings.social_instagram != blank or settings.social_twitter != blank -%}
+      <div class="mobile-menu__meta">
+        <span>{{ cart.currency.iso_code }} · {{ localization.available_languages.size }} lang</span>
+        <div class="mobile-menu__socials">
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" class="mobile-menu__social" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 9h3l.5-3H14V4.5c0-.9.3-1.5 1.5-1.5H18V.5C17.6.4 16.3.4 15 .4 12.4.4 11 1.9 11 4.4V6H8v3h3v9h3V9z" stroke="none" fill="currentColor"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" class="mobile-menu__social" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_twitter != blank -%}
+            <a href="{{ settings.social_twitter }}" class="mobile-menu__social" aria-label="Twitter" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M21 6.5c-.7.3-1.4.5-2.2.6.8-.5 1.4-1.2 1.7-2-.8.4-1.6.8-2.5 1-1.4-1.5-3.7-1.6-5.2-.2-1 1-1.4 2.4-1 3.8-3-.1-5.8-1.5-7.6-4-.3.6-.5 1.3-.5 2 0 1.4.7 2.7 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.7 3.3 4-.4.1-.8.1-1.2.1-.3 0-.6 0-.8-.1.6 1.7 2.1 2.8 3.9 2.9-1.5 1.2-3.4 1.8-5.3 1.8H3c1.9 1.2 4.1 1.8 6.4 1.8 7.7 0 11.9-6.4 11.9-11.9v-.5c.8-.6 1.5-1.3 2-2.1z" stroke="none" fill="currentColor"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

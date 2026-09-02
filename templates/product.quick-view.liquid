@@ -1,0 +1,45 @@
+{%- comment -%}
+  Alternate product template rendered for the quick-view modal (?view=quick-view).
+  Outputs compact product info for the modal.
+{%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+<div class="product" style="grid-template-columns: 1fr 1fr; gap:0;">
+  <div class="product__media-main">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 800 | image_tag:
+        loading: 'lazy',
+        widths: '375, 550, 750',
+        sizes: '50vw',
+        alt: product.title | escape }}
+    {%- endif -%}
+  </div>
+  <div class="product__info" style="padding:32px;">
+    {%- if product.vendor != blank -%}
+      <p class="product__vendor">{{ product.vendor | escape }}</p>
+    {%- endif -%}
+    <h2 class="product__title" style="font-size:1.75rem;">{{ product.title | escape }}</h2>
+    <div class="product__price" style="margin:12px 0 24px;">
+      {% render 'price', product: product, variant: current_variant %}
+    </div>
+
+    {%- if product.description != blank -%}
+      <div class="product__description rte" style="margin-bottom:24px;font-size:0.9375rem;">
+        {{ product.description | strip_html | truncatewords: 30 }}
+      </div>
+    {%- endif -%}
+
+    {%- form 'product', product, data-product-form: '', class: 'product__buy-buttons' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+      <button type="submit" name="add" class="button button--primary button--full button--lg"
+        {% unless current_variant.available %}disabled{% endunless %}>
+        {%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+      </button>
+    {%- endform -%}
+
+    <p style="margin-top:16px;text-align:center;">
+      <a href="{{ product.url }}" class="link-arrow">{{ 'products.product.view_full_details' | t }}</a>
+    </p>
+  </div>
+</div>

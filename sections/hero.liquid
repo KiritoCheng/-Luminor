@@ -1,0 +1,207 @@
+{%- comment -%}
+  Hero / Slideshow section
+  Supports a single slide or multiple rotating slides.
+{%- endcomment -%}
+{%- liquid
+  assign blocks = section.blocks
+  assign first_block = blocks | first
+-%}
+
+<style>
+  /* Asymmetric split layout: content sits left over the image */
+  .hero--split {
+    text-align: left;
+  }
+  .hero--split .hero__cta {
+    justify-content: flex-start;
+  }
+  @media screen and (min-width: 750px) {
+    .hero--split .hero__content {
+      max-width: 560px;
+    }
+  }
+</style>
+
+{%- if blocks.size > 0 -%}
+  <section class="section--flush hero-section reveal--clip" style="--reveal-delay:0ms">
+    {%- if blocks.size > 1 -%}
+      <div class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-rotation-speed="{{ section.settings.autorotate_speed }}">
+        <div class="slideshow__track" data-slideshow-track>
+          {%- for block in blocks -%}
+            <div class="slideshow__slide hero hero--{{ section.settings.height }}"
+              style="background-color: {{ block.settings.bg_color | default: '#f5f5f7' }}"
+              {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="hero__media">
+                  {{ block.settings.image | image_url: width: 2400 | image_tag:
+                    loading: 'eager',
+                    sizes: '100vw',
+                    widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+                    alt: block.settings.image.alt | escape }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.show_overlay -%}
+                <div class="hero__overlay"></div>
+              {%- endif -%}
+              <div class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
+                {%- if block.settings.eyebrow != blank -%}
+                  <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.heading != blank -%}
+                  <h1 class="hero__title">{{ block.settings.heading | escape }}</h1>
+                {%- endif -%}
+                {%- if block.settings.subheading != blank -%}
+                  <p class="hero__subtitle">{{ block.settings.subheading | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
+                  <div class="hero__cta">
+                    {%- if block.settings.button_label != blank -%}
+                      <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">{{ block.settings.button_label | escape }}</a>
+                    {%- endif -%}
+                    {%- if block.settings.button_label_2 != blank -%}
+                      <a href="{{ block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ block.settings.button_label_2 | escape }}</a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.show_arrows -%}
+          <button class="slideshow__nav slideshow__nav--prev" data-slideshow-prev aria-label="{{ 'general.slider.previous' | t }}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="slideshow__nav slideshow__nav--next" data-slideshow-next aria-label="{{ 'general.slider.next' | t }}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        {%- endif -%}
+
+        <div class="slideshow__dots">
+          {%- for block in blocks -%}
+            <button class="slideshow__dot {% if forloop.first %}is-active{% endif %}" data-slideshow-dot aria-label="{{ 'general.slider.go_to' | t: number: forloop.index }}"></button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
+        style="background-color: {{ first_block.settings.bg_color | default: '#f5f5f7' }}"
+        {{ first_block.shopify_attributes }}>
+        {%- if first_block.settings.image != blank -%}
+          <div class="hero__media" data-ken-burns data-parallax>
+            {{ first_block.settings.image | image_url: width: 2400 | image_tag:
+              loading: 'eager',
+              sizes: '100vw',
+              widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+              alt: first_block.settings.image.alt | escape }}
+          </div>
+        {%- endif -%}
+        {%- if first_block.settings.show_overlay -%}
+          <div class="hero__overlay"></div>
+        {%- endif -%}
+        <div class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
+          {%- if first_block.settings.eyebrow != blank -%}
+            <p class="eyebrow">{{ first_block.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if first_block.settings.heading != blank -%}
+            <h1 class="hero__title">{{ first_block.settings.heading | escape }}</h1>
+          {%- endif -%}
+          {%- if first_block.settings.subheading != blank -%}
+            <p class="hero__subtitle">{{ first_block.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if first_block.settings.button_label != blank or first_block.settings.button_label_2 != blank -%}
+            <div class="hero__cta">
+              {%- if first_block.settings.button_label != blank -%}
+                <a href="{{ first_block.settings.button_link }}" class="button button--primary button--lg">{{ first_block.settings.button_label | escape }}</a>
+              {%- endif -%}
+              {%- if first_block.settings.button_label_2 != blank -%}
+                <a href="{{ first_block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ first_block.settings.button_label_2 | escape }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero / Slideshow",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "centered", "label": "Centered" },
+        { "value": "split", "label": "Split (left-aligned)" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "medium", "label": "Medium (70vh)" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autorotate_speed",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#f5f5f7" },
+        { "type": "checkbox", "id": "show_overlay", "label": "Show dark overlay", "default": true },
+        { "type": "select", "id": "color_scheme", "label": "Text color",
+          "options": [ { "value": "light", "label": "Dark text" }, { "value": "dark", "label": "Light text" } ],
+          "default": "light"
+        },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Essentials, elevated." },
+        { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium accessories for the way you live, work, and play." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "Learn more" },
+        { "type": "url", "id": "button_link_2", "label": "Second button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero / Slideshow",
+      "blocks": [
+        { "type": "slide", "settings": { "heading": "Essentials, elevated.", "subheading": "Premium accessories for the way you live, work, and play." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

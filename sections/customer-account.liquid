@@ -1,0 +1,64 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
+
+      <div class="account__welcome">
+        <p class="color-muted">{{ 'customer.account.welcome' | t: name: customer.first_name }}</p>
+      </div>
+
+      <h2 style="font-size:1.25rem;margin-bottom:12px;">{{ 'customer.orders.title' | t }}</h2>
+
+      {%- if customer.orders.size > 0 -%}
+        <table class="account-orders">
+          <thead>
+            <tr>
+              <th>{{ 'customer.orders.order_number' | t }}</th>
+              <th>{{ 'customer.orders.date' | t }}</th>
+              <th>{{ 'customer.orders.payment_status' | t }}</th>
+              <th>{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                <td>{{ order.created_at | date: '%b %-d, %Y' }}</td>
+                <td>{{ order.financial_status_label }}</td>
+                <td>{{ order.total_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      {%- else -%}
+        <p class="color-muted">{{ 'customer.orders.none' | t }}</p>
+      {%- endif -%}
+
+      <h2 style="font-size:1.25rem;margin-top:32px;margin-bottom:12px;">{{ 'customer.addresses.title' | t }}</h2>
+      {%- if customer.addresses_count > 0 -%}
+        <div class="addresses__grid">
+          {%- for address in customer.addresses -%}
+            <div class="cart-summary" style="background:var(--color-bg-alt);">
+              <p>{{ address.name }}</p>
+              <p class="color-muted" style="font-size:0.9375rem;">{{ address | format_address }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="color-muted">{{ 'customer.addresses.none' | t }}</p>
+      {%- endif -%}
+
+      <div class="customer__actions" style="margin-top:32px;">
+        <a href="{{ routes.account_logout_url }}">{{ 'customer.account.log_out' | t }}</a>
+        <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.manage_addresses' | t }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Account",
+  "tag": "section"
+}
+{% endschema %}

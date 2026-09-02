@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection",
+      "settings": {
+        "show_collection_title": true,
+        "columns_desktop": 4
+      }
+    }
+  },
+  "order": ["main"]
+}

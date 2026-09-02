@@ -1,0 +1,147 @@
+{%- comment -%}
+  FAQ — accordion-style frequently asked questions section.
+{%- endcomment -%}
+<section class="section faq reveal">
+  <div class="page-width">
+    <div class="faq__layout">
+      <div class="faq__sidebar">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="faq__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="lead">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--secondary">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+      <div class="faq__items stagger">
+        {%- for block in section.blocks -%}
+          <details class="faq__item" {{ block.shopify_attributes }}>
+            <summary class="faq__question">
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer rte">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.faq__layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 64px;
+  align-items: start;
+}
+.faq__sidebar {
+  position: sticky;
+  top: 120px;
+}
+.faq__title {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.faq__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq__item {
+  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.faq__item[open] {
+  border-color: color-mix(in srgb, var(--color-text) 15%, transparent);
+}
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.faq__question::-webkit-details-marker { display: none; }
+.faq__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.faq__icon::before {
+  top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-50%);
+}
+.faq__icon::after {
+  left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%);
+}
+.faq__item[open] .faq__icon::after {
+  transform: translateX(-50%) rotate(90deg);
+}
+.faq__answer {
+  padding: 0 24px 20px;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+@media (max-width: 749px) {
+  .faq__layout { grid-template-columns: 1fr; gap: 32px; }
+  .faq__sidebar { position: static; }
+}
+</style>
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Help center" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Frequently asked questions" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Everything you need to know about our products and policies." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Contact support" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How long does shipping take?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Standard shipping takes 3-5 business days within the US. International orders may take 7-14 business days depending on the destination.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "How long does shipping take?", "answer": "<p>Standard shipping takes 3-5 business days within the US. International orders may take 7-14 business days.</p>" } },
+        { "type": "question", "settings": { "question": "What is your return policy?", "answer": "<p>We offer a 30-day return policy. If you're not satisfied, return your item in original condition for a full refund.</p>" } },
+        { "type": "question", "settings": { "question": "Are your products covered by warranty?", "answer": "<p>Yes, all Luminor products come with a 1-year limited warranty covering manufacturing defects.</p>" } },
+        { "type": "question", "settings": { "question": "Do you ship internationally?", "answer": "<p>Yes, we ship to over 40 countries worldwide. Shipping costs are calculated at checkout.</p>" } },
+        { "type": "question", "settings": { "question": "How do I track my order?", "answer": "<p>You'll receive a tracking link via email once your order ships. You can also track it from your account page.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

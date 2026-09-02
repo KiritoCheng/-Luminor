@@ -1,0 +1,132 @@
+{%- comment -%}
+  Category Pills — clean category navigation section.
+{%- endcomment -%}
+
+<section class="section section--tight category-pills reveal">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="category-pills__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    <div class="category-pills__list stagger">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" class="category-pill {% if block.settings.featured %}category-pill--featured{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <span class="category-pill__image">
+              {{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+            </span>
+          {%- endif -%}
+          <span class="category-pill__label">{{ block.settings.title | escape }}</span>
+          {%- if block.settings.count != blank -%}
+            <span class="category-pill__count">{{ block.settings.count | escape }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+.category-pills {
+  text-align: center;
+}
+
+.category-pills__title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+}
+
+.category-pills__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  background-color: var(--color-bg-alt);
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: transform 0.3s var(--ease-spring), background-color 0.2s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.category-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-text) 12%, transparent);
+  background-color: color-mix(in srgb, var(--color-bg-alt) 50%, var(--color-bg));
+}
+
+.category-pill--featured {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.category-pill--featured:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+}
+
+.category-pill__image {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.category-pill__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-pill__count {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Category pills",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Shop by category" }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Power Banks" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Icon image" },
+        { "type": "text", "id": "count", "label": "Product count", "default": "12" },
+        { "type": "checkbox", "id": "featured", "label": "Featured (highlighted)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category pills",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Power Banks", "count": "12" } },
+        { "type": "category", "settings": { "title": "Chargers", "count": "8" } },
+        { "type": "category", "settings": { "title": "Cables", "count": "6" } },
+        { "type": "category", "settings": { "title": "Bundles", "count": "4", "featured": true } },
+        { "type": "category", "settings": { "title": "Accessories", "count": "10" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

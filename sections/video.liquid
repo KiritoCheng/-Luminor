@@ -1,0 +1,32 @@
+<section class="section reveal">
+  <div class="page-width">
+    <div class="video-block media media--hover-zoom media--wide">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: image_size: '1600x', controls: true, autoplay: section.settings.autoplay, loop: section.settings.loop, muted: section.settings.autoplay }}
+      {%- elsif section.settings.video_url != blank -%}
+        {%- if section.settings.video_url.type == 'youtube' -%}
+          <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}" title="{{ section.settings.alt | escape }}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        {%- elsif section.settings.video_url.type == 'vimeo' -%}
+          <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" title="{{ section.settings.alt | escape }}" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        {%- endif -%}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'video-block__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video",
+  "tag": "section",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video" },
+    { "type": "video_url", "id": "video_url", "label": "External video", "accept": ["youtube", "vimeo"] },
+    { "type": "text", "id": "alt", "label": "Alt text" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "checkbox", "id": "loop", "label": "Loop", "default": false }
+  ],
+  "presets": [ { "name": "Video" } ]
+}
+{% endschema %}

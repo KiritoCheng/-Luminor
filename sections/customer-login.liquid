@@ -1,0 +1,43 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <h1 class="customer__title">{{ 'customer.login_page.title' | t }}</h1>
+
+      {%- form 'customer_login', class: 'customer__form' -%}
+        {%- if form.errors -%}
+          <p style="color:var(--color-text);background:var(--color-bg-alt);padding:12px;border-radius:12px;margin-bottom:16px;">
+            {{ form.errors | default_errors }}
+          </p>
+        {%- endif -%}
+
+        <div>
+          <label for="CustomerEmail" class="field-label">{{ 'customer.login_page.email' | t }}</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
+        </div>
+
+        {%- if form.password_needed -%}
+          <div>
+            <label for="CustomerPassword" class="field-label">{{ 'customer.login_page.password' | t }}</label>
+            <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
+          </div>
+        {%- endif -%}
+
+        <button type="submit" class="button button--primary button--full button--lg">{{ 'customer.login_page.sign_in' | t }}</button>
+
+        <div class="customer__actions">
+          <a href="{{ routes.account_register_url }}">{{ 'customer.login_page.create_account' | t }}</a>
+          {%- if form.password_needed -%}
+            <a href="{{ routes.account_recover_url }}">{{ 'customer.login_page.forgot_password' | t }}</a>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Login",
+  "tag": "section"
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+<section class="section rich-text reveal">
+  <div class="page-width">
+    <div class="rich-text">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="rich-text__title">{{ section.settings.title | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte lead color-muted">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <p style="margin-top:24px"><a href="{{ section.settings.button_link }}" class="button button--primary">{{ section.settings.button_label | escape }}</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [ { "name": "Rich text" } ]
+}
+{% endschema %}
