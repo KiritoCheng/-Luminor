@@ -620,7 +620,11 @@
         modal.className = 'modal';
         modal.innerHTML = `
           <div class="modal__dialog">
-            <button class="modal__close" data-quick-view-close aria-label="Close">&times;</button>
+            <button class="modal__close" data-quick-view-close aria-label="Close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+              </svg>
+            </button>
             <div class="modal__content" data-quick-view-content><div class="spinner"></div></div>
           </div>`;
         document.body.appendChild(modal);
@@ -637,14 +641,116 @@
       fetch(`${productUrl}?view=quick-view`)
         .then((r) => r.text())
         .then((html) => {
-          // Extract only the product content, not the full page with cart drawer
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
-          const productSection = doc.querySelector('.product') || doc.querySelector('[data-product-section]') || doc.querySelector('main') || doc.body;
-          contentEl.innerHTML = productSection.innerHTML || html;
-          this.bindProductOptions(contentEl);
+          // New template wraps output in .modal__content-inner; fall back to .product / main / body
+          const inner = doc.querySelector('.modal__content-inner')
+                     || doc.querySelector('.product')
+                     || doc.querySelector('[data-product-section]')
+                     || doc.querySelector('main');
+          contentEl.innerHTML = inner ? inner.innerHTML : (doc.body.innerHTML || html);
+          // Initialise interactivity within the injected fragment
+          this._initQuickViewFragment(contentEl);
         })
-        .catch(() => { contentEl.innerHTML = '<p>Unable to load product.</p>'; });
+        .catch(() => {
+          contentEl.innerHTML = '<p style="padding:48px;text-align:center;color:var(--color-text-muted);">Unable to load product.</p>';
+        });
+    },
+
+    /**
+     * Initialise all interactive bits inside a freshly-injected quick-view fragment:
+     *   - variant option swatches (pill selection + live option label update)
+     *   - quantity stepper +/- buttons & min/max clamp
+     *   - form submit → add to cart via JSON API (opens cart drawer on success)
+     */
+    _initQuickViewFragment(root) {
+      if (!root) return;
+      const form = root.querySelector('[data-quick-view-form]');
+      const idInput = root.querySelector('[data-quick-view-variant-id]');
+      const addBtn = root.querySelector('[data-add-to-cart]');
+      const priceWrap = root.querySelector('[data-quick-view-price]');
+
+      // ---- Option swatches ----
+      const optionGroups = root.querySelectorAll('[data-option-group]');
+      optionGroups.forEach((group) => {
+        const values = group.querySelectorAll('[data-option-value]');
+        const selectedLabel = group.querySelector('[data-option-selected]');
+        values.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            values.forEach((v) => v.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            if (selectedLabel) selectedLabel.textContent = btn.dataset.value;
+          });
+        });
+      });
+
+      // ---- Quantity stepper ----
+      const qtyInput = root.querySelector('[data-qty-input]');
+      const dec = root.querySelector('[data-qty-dec]');
+      const inc = root.querySelector('[data-qty-inc]');
+      if (qtyInput && dec && inc) {
+        const clamp = () => {
+          let v = parseInt(qtyInput.value || '1', 10);
+          if (Number.isNaN(v) || v < 1) v = 1;
+          const max = parseInt(qtyInput.max || '9999', 10);
+          if (v > max) v = max;
+          qtyInput.value = String(v);
+          dec.disabled = v <= 1;
+          inc.disabled = v >= max;
+        };
+        dec.addEventListener('click', () => { qtyInput.stepDown(); clamp(); });
+        inc.addEventListener('click', () => { qtyInput.stepUp(); clamp(); });
+        qtyInput.addEventListener('change', clamp);
+        qtyInput.addEventListener('input', () => {
+          // Re-evaluate disable state live (don't overwrite user's typing)
+          const v = parseInt(qtyInput.value || '1', 10);
+          dec.disabled = v <= 1;
+          inc.disabled = v >= parseInt(qtyInput.max || '9999', 10);
+        });
+        clamp();
+      }
+
+      // ---- Form submit: AJAX add-to-cart, open cart drawer ----
+      if (form && addBtn) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const id = idInput ? idInput.value : form.querySelector('[name="id"]')?.value;
+          const qty = qtyInput?.value || form.querySelector('[name="quantity"]')?.value || '1';
+          if (!id) return;
+
+          addBtn.classList.add('is-loading');
+          addBtn.disabled = true;
+
+          try {
+            const res = await fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ id, quantity: parseInt(qty, 10) || 1 })
+            });
+            const data = await res.json();
+            if (!res.ok || data.status) {
+              // Shopify returns { status, description, message } on error
+              const msg = (data && (data.description || data.message)) || 'Unable to add item.';
+              if (window.AuroraTheme) AuroraTheme.toast(msg); else alert(msg);
+              return;
+            }
+            // Success → refresh cart drawer count + open drawer
+            if (typeof this.refreshCartDrawer === 'function') await this.refreshCartDrawer();
+            if (typeof this.updateCartCount === 'function') await this.updateCartCount();
+            // The cart drawer instance's open() method on the body drawer element
+            const drawer = document.querySelector('[data-cart-drawer]');
+            if (drawer && typeof drawer.open === 'function') drawer.open();
+            else if (window.CartDrawer && typeof window.CartDrawer.open === 'function') window.CartDrawer.open();
+            // Close quick view quickly after success
+            setTimeout(() => this.closeQuickView(), 420);
+          } catch (err) {
+            if (window.AuroraTheme) AuroraTheme.toast('Unable to add item.');
+          } finally {
+            addBtn.classList.remove('is-loading');
+            addBtn.disabled = false;
+          }
+        });
+      }
     },
 
     closeQuickView() {

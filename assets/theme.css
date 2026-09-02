@@ -3012,7 +3012,7 @@ body.is-mega-open .header-wrapper.is-scrolled {
   padding: 22px;
 }
 
-/* -------------------- Quick view modal -------------------- */
+/* -------------------- Quick view modal (Apple/Awwwards minimalist) -------------------- */
 .modal {
   position: fixed;
   inset: 0;
@@ -3020,13 +3020,15 @@ body.is-mega-open .header-wrapper.is-scrolled {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px;
-  background-color: color-mix(in srgb, var(--color-text) 40%, transparent);
+  padding: 24px;
+  background-color: color-mix(in srgb, var(--color-text) 44%, transparent);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  transition:
+    opacity 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
+    visibility 0.38s ease;
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
 }
 
 .modal.is-open {
@@ -3035,77 +3037,576 @@ body.is-mega-open .header-wrapper.is-scrolled {
 }
 
 .modal__dialog {
-  background-color: var(--color-bg);
-  border-radius: 28px;
-  max-width: 800px;
-  width: 100%;
-  max-height: 88vh;
-  overflow-y: auto;
-  transform: scale(0.96);
-  transition: transform 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
   position: relative;
-  box-shadow: 0 20px 60px color-mix(in srgb, var(--color-text) 20%, transparent);
-}
-
-.modal__dialog::-webkit-scrollbar {
-  width: 8px;
-}
-
-.modal__dialog::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modal__dialog::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--color-text) 20%, transparent);
-  border-radius: 4px;
-}
-
-.modal__dialog::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--color-text) 35%, transparent);
-}
-
-.modal__dialog {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--color-text) 20%, transparent)
-    transparent;
-}
-
-.modal__content {
-  padding: 32px;
-}
-
-.modal__content .product {
-  gap: 32px;
-}
-
-.modal__content .product__media-main {
-  aspect-ratio: 1 / 1;
-  max-height: 360px;
-}
-
-.modal__content .product__media-main img {
+  background-color: var(--color-bg);
+  border-radius: 22px;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background-color: var(--color-bg-alt);
+  max-width: 880px;
+  max-height: min(86vh, 640px);
+  overflow: hidden;
+  transform: translateY(14px) scale(0.985);
+  opacity: 0;
+  transition:
+    transform 0.45s cubic-bezier(0.28, 0.11, 0.32, 1),
+    opacity 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
+    box-shadow 0.45s ease;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 18%, transparent) inset,
+    0 40px 96px -24px color-mix(in srgb, var(--color-text) 32%, transparent),
+    0 14px 40px -12px color-mix(in srgb, var(--color-text) 18%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-text) 5%, transparent);
+  will-change: transform, opacity;
 }
 
 .modal.is-open .modal__dialog {
-  transform: scale(1);
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 18%, transparent) inset,
+    0 56px 128px -28px color-mix(in srgb, var(--color-text) 36%, transparent),
+    0 20px 56px -16px color-mix(in srgb, var(--color-text) 22%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
+/* Exit animation: faster than enter (Apple rule — exit 30-40% faster) */
+.modal:not(.is-open) .modal__dialog {
+  transition-duration: 0.24s;
+}
+
+/* No scrollbar on outer dialog; content scrolls inside modal__content */
+.modal__dialog {
+  overflow: hidden;
+}
+.modal__dialog::-webkit-scrollbar { display: none; }
+
+/* ===== modal__content — APPLE STORE-STYLE 2-column card ===== */
+.modal__content {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  width: 100%;
+  max-height: min(86vh, 640px);
+  min-height: 480px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left: immersive media gallery panel */
+.modal__media {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-bg-alt) 85%, transparent) 0%,
+    color-mix(in srgb, var(--color-bg) 100%, transparent) 55%,
+    color-mix(in srgb, var(--color-bg-alt) 80%, transparent) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+/* Subtle ambient gradient halo behind product */
+.modal__media::before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--color-primary) 16%, transparent),
+    transparent 70%
+  );
+  filter: blur(30px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.modal__media img {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  height: 82%;
+  max-height: 520px;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+}
+
+.modal__media:hover img {
+  transform: scale(1.04);
+}
+
+/* Placeholder fallback */
+.modal__media .placeholder_svg_tag {
+  position: relative;
+  z-index: 1;
+  width: 80%;
+  opacity: 0.55;
+}
+
+/* Right: product information column */
+.modal__info {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 44px 44px;
+  gap: 0;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-text) 18%, transparent) transparent;
+}
+
+.modal__info::-webkit-scrollbar {
+  width: 6px;
+}
+.modal__info::-webkit-scrollbar-track { background: transparent; }
+.modal__info::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--color-text) 16%, transparent);
+  border-radius: 3px;
+}
+
+/* Vendor eyebrow */
+.modal__vendor {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  margin: 0 0 12px;
+  line-height: 1;
+}
+
+/* Title */
+.modal__title {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin: 0 0 14px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Price block */
+.modal__price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 0 20px;
+  margin: 0 0 22px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
+}
+
+.modal__price .price-item {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.modal__price .price-item--sale {
+  color: var(--color-primary);
+}
+
+.modal__price .price-item--regular {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+/* Description */
+.modal__description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0 0 28px;
+}
+
+/* Variant / option swatches */
+.modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0 0 28px;
+}
+
+.modal__option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal__option-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: none;
+}
+
+.modal__option-label span:last-child {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.modal__option-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal__option-value {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
+  background: transparent;
+  border-radius: 980px;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.12s ease;
+}
+
+.modal__option-value:hover:not([disabled]) {
+  border-color: color-mix(in srgb, var(--color-text) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-text) 4%, transparent);
+}
+
+.modal__option-value.is-active {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+.modal__option-value:active:not([disabled]) {
+  transform: scale(0.97);
+}
+
+/* Quantity stepper */
+.modal__qty {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 24px;
+}
+
+.modal__qty > span:first-child {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  min-width: 64px;
+}
+
+/* Quantity stepper - Apple capsule style */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
+  border-radius: 980px;
+  overflow: hidden;
+  background-color: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.qty-stepper:hover {
+  border-color: color-mix(in srgb, var(--color-text) 24%, transparent);
+}
+
+.qty-stepper button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.qty-stepper button:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+.qty-stepper button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.qty-stepper input {
+  width: 44px;
+  height: 40px;
+  border: none;
+  border-left: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background: transparent;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.qty-stepper input::-webkit-outer-spin-button,
+.qty-stepper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Add to cart — Apple-style filled pill button */
+.modal__add {
+  width: 100%;
+  border: none;
+  border-radius: 980px;
+  padding: 15px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--color-bg);
+  background-color: var(--color-primary, var(--color-text));
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.14s cubic-bezier(0.28, 0.11, 0.32, 1),
+    background-color 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow:
+    0 4px 14px color-mix(in srgb, var(--color-primary, var(--color-text)) 26%, transparent),
+    0 1px 3px color-mix(in srgb, var(--color-primary, var(--color-text)) 12%, transparent);
+}
+
+.modal__add:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-primary, var(--color-text)) 86%, black);
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 20px color-mix(in srgb, var(--color-primary, var(--color-text)) 32%, transparent),
+    0 2px 6px color-mix(in srgb, var(--color-primary, var(--color-text)) 16%, transparent);
+}
+
+.modal__add:active:not(:disabled) {
+  transform: translateY(0) scale(0.985);
+}
+
+.modal__add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading state spinner inside button */
+.modal__add.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.modal__add.is-loading::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: -2px;
+  border: 2px solid color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border-top-color: var(--color-bg);
+  border-radius: 50%;
+  animation: qv-spin 0.7s linear infinite;
+  z-index: 2;
+}
+
+@keyframes qv-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* View full details link */
+.modal__view-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-size: 0.875rem;
+  color: var(--color-primary, var(--color-text));
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: background-color 0.18s ease;
+}
+
+.modal__view-full:hover {
+  background-color: color-mix(in srgb, var(--color-primary, var(--color-text)) 7%, transparent);
+}
+
+.modal__view-full svg {
+  transition: transform 0.2s ease;
+}
+
+.modal__view-full:hover svg {
+  transform: translateX(2px);
+}
+
+/* Close button — Apple-style capsule × inside header-right corner */
 .modal__close {
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: var(--color-bg-alt);
+  border: none;
+  background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+.modal__close:hover {
+  background-color: color-mix(in srgb, var(--color-text) 14%, transparent);
+  transform: scale(1.08);
+}
+
+.modal__close:active {
+  transform: scale(0.93);
+}
+
+.modal__close svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Media loading placeholder spinner inside modal-content */
+.modal__content > .spinner {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  border: 3px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+  border-top-color: var(--color-primary, var(--color-text));
+  border-radius: 50%;
+  animation: qv-spin 0.7s linear infinite;
+}
+
+/* ===== RESPONSIVE (mobile) ===== */
+@media (max-width: 768px) {
+  .modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal__dialog {
+    max-height: 92vh;
+    min-height: unset;
+    border-radius: 22px 22px 0 0;
+    transform: translateY(100%) scale(1);
+    max-width: 100%;
+  }
+
+  .modal.is-open .modal__dialog {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    max-height: 92vh;
+    min-height: unset;
+    height: fit-content;
+  }
+
+  .modal__media {
+    min-height: 300px;
+    max-height: 44vh;
+  }
+
+  .modal__info {
+    padding: 28px 22px 28px;
+    max-height: calc(92vh - 44vh);
+  }
+
+  .modal__title {
+    font-size: 1.35rem;
+  }
+
+  .modal__close {
+    top: 12px;
+    right: 12px;
+    background-color: color-mix(in srgb, var(--color-bg) 78%, transparent);
+  }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .modal__info {
+    padding: 22px 18px;
+  }
+  .modal__media {
+    min-height: 260px;
+  }
+}
+
+/* Accessibility & reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal__dialog,
+  .modal.is-open .modal__dialog,
+  .modal__media img,
+  .modal__option-value,
+  .modal__add,
+  .modal__close {
+    transition: none !important;
+    animation: none !important;
+  }
+  .modal__dialog {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Fallback for old product quick-view that doesn't have new classes */
+.modal__content .product {
+  display: contents !important;
+}
+
+.modal__content .product__media-main {
+  width: 100%;
+  height: 100%;
+}
+
+.modal__content .product__media-main img {
+  width: 88%;
+  height: 82%;
+  max-height: 520px;
+  object-fit: contain;
 }
 
 /* -------------------- Toast / notification -------------------- */
