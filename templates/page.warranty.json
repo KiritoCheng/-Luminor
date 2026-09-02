@@ -1,0 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+    "sections":  {
+                     "intro":  {
+                                   "type":  "rich-text",
+                                   "settings":  {
+                                                    "eyebrow":  "Built for life",
+                                                    "title":  "The Luminor warranty.",
+                                                    "text":  "\u003cp\u003eTitanium-grade craftsmanship, backed for the long haul. Every Luminor product is covered by our warranty — because quality should mean something.\u003c/p\u003e"
+                                                }
+                               },
+                     "tiers":  {
+                                   "type":  "multicolumn",
+                                   "settings":  {
+                                                    "eyebrow":  "Coverage tiers",
+                                                    "title":  "Choose your level of certainty.",
+                                                    "subtitle":  "Standard coverage is always free. Upgrade to Luminor+ for white-glove treatment.",
+                                                    "columns":  2
+                                                },
+                                   "blocks":  {
+                                                  "t1":  {
+                                                             "type":  "column",
+                                                             "settings":  {
+                                                                              "title":  "Standard · 1 year · free",
+                                                                              "text":  "All manufacturing defects — cracked shells, broken hardware, adhesive failure, and finish delamination — repaired or replaced at our cost. Covers one replacement per product."
+                                                                          }
+                                                         },
+                                                  "t2":  {
+                                                             "type":  "column",
+                                                             "settings":  {
+                                                                              "title":  "Luminor+ · Lifetime · $19",
+                                                                              "text":  "Everything in Standard, plus lifetime coverage for accidental damage, lost items (one time per product), free expedited replacements, and a dedicated +support priority line."
+                                                                          }
+                                                         }
+                                              },
+                                   "block_order":  [
+                                                       "t1",
+                                                       "t2"
+                                                   ]
+                               },
+                     "scope":  {
+                                   "type":  "image-with-text",
+                                   "settings":  {
+                                                    "eyebrow":  "What\u0027s covered",
+                                                    "title":  "Craftsmanship. Materials. Function.",
+                                                    "text":  "\u003cp\u003eWe cover manufacturing defects in every Luminor product — from the first titanium billet to the last stitched seam.\u003c/p\u003e\u003cul\u003e\u003cli\u003eHinges, clasps and magnetic circuits\u003c/li\u003e\u003cli\u003eAdhesion on leather \u0026 fabric products\u003c/li\u003e\u003cli\u003eFinish (non-abusive wear only)\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eDoes not cover accidental drops, third-party modifications, cosmetic-only wear, or damage from misuse.\u003c/p\u003e",
+                                                    "button_label":  "See full terms",
+                                                    "button_link":  "/pages/contact",
+                                                    "color_scheme":  "alt"
+                                                }
+                               },
+                     "process":  {
+                                     "type":  "editorial",
+                                     "settings":  {
+                                                      "eyebrow":  "File a claim",
+                                                      "heading":  "Three simple steps.",
+                                                      "text":  "\u003cp\u003e\u003cstrong\u003e1. Photo it.\u003c/strong\u003e Take a clear photo of the defect next to a written note with your order number.\u003c/p\u003e\u003cp\u003e\u003cstrong\u003e2. Send it.\u003c/strong\u003e Email to \u003ca href=\"mailto:warranty@luminor-theme.com\"\u003ewarranty@luminor-theme.com\u003c/a\u003e or submit via the form below — 60-second process.\u003c/p\u003e\u003cp\u003e\u003cstrong\u003e3. We fix it.\u003c/strong\u003e Most claims approved within 24 hours. Replacement ships free the next business day.\u003c/p\u003e",
+                                                      "button_label":  "File a warranty claim",
+                                                      "button_link":  "/pages/contact"
+                                                  }
+                                 },
+                     "manifesto":  {
+                                       "type":  "statement",
+                                       "settings":  {
+                                                        "watermark":  "WARRANTY",
+                                                        "eyebrow":  "Our promise",
+                                                        "heading":  "Grade 5 titanium. Backed for life.",
+                                                        "text":  "\u003cp\u003eWe stand behind every stitch, magnet, and milled titanium edge. If something fails on us, we\u0027ll make it right — fast.\u003c/p\u003e",
+                                                        "button_label":  "Browse Luminor+",
+                                                        "button_link":  "/collections/all"
+                                                    }
+                                   }
+                 },
+    "order":  [
+                  "intro",
+                  "tiers",
+                  "scope",
+                  "process",
+                  "manifesto"
+              ]
+}

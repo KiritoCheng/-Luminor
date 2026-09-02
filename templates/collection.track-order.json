@@ -1,0 +1,138 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor orders",
+        "title": "Track your order.",
+        "text": "<p>Enter your order number and email — we'll pull the latest status from our carriers instantly.</p>"
+      }
+    },
+    "tracker": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Look up",
+        "title": "Find your shipment"
+      }
+    },
+    "timeline": {
+      "type": "multicolumn",
+      "blocks": {
+        "p1": {
+          "type": "column",
+          "settings": {
+            "title": "1 · Confirmed",
+            "text": "You'll receive an email receipt within 5 minutes of placing your order."
+          }
+        },
+        "p2": {
+          "type": "column",
+          "settings": {
+            "title": "2 · Packed",
+            "text": "Orders before 2pm EST are packed the same day; you'll get a packed notification."
+          }
+        },
+        "p3": {
+          "type": "column",
+          "settings": {
+            "title": "3 · Shipped",
+            "text": "A tracking link is emailed the moment the carrier scans your package."
+          }
+        },
+        "p4": {
+          "type": "column",
+          "settings": {
+            "title": "4 · Delivered",
+            "text": "Enjoy your Luminor gear. 30-day returns and warranty start from this day."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "eyebrow": "Order lifecycle",
+        "title": "What happens after you order.",
+        "subtitle": "Transparent updates at every stage.",
+        "columns": 4
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Where is my tracking number?",
+            "answer": "<p>It lives in your shipment confirmation email, titled \"Your Luminor order is on its way\". Search your inbox for that subject, or your spam/junk folder.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Why hasn't my tracking updated?",
+            "answer": "<p>Carrier scans sometimes lag 24–48 hours. If it's been over 3 business days with no movement, get in touch and we'll investigate with the carrier.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change my shipping address?",
+            "answer": "<p>Yes, within 2 hours of placing your order. After that the package may already be dispatched and we can't re-route it in the carrier network.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "My order says delivered but I can't find it.",
+            "answer": "<p>Check neighbors, leasing office, mailbox, side door, or any parcel drop-off locations. Still missing after 48 hours? Reach out and we'll open a claim + send a replacement.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "eyebrow": "Still need help?",
+        "title": "Order status questions",
+        "subtitle": "Can't find your tracking number? We'll look it up manually.",
+        "button_label": "Contact support",
+        "button_link": "/pages/contact"
+      }
+    },
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "watermark": "DELIVERY",
+        "eyebrow": "Shipping promise",
+        "heading": "Free on $50+. Fast worldwide.",
+        "text": "<p>Every Luminor order ships in 100% recyclable packaging. Carbon-neutral for all US domestic orders.</p>",
+        "button_label": "Shop now",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "tracker",
+    "timeline",
+    "faq",
+    "manifesto"
+  ]
+}

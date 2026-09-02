@@ -1,0 +1,147 @@
+{% comment %} Home page 3 gradient popular collection cards (from 404 page design) {% endcomment %}
+<section class="section home-popular">
+  <style>
+    .hp-max { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .hp-max { padding: 0 32px; } }
+    .hp-head { text-align: center; margin-bottom: 40px; }
+    .hp-head__eyebrow {
+      display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #0071e3; font-weight: 600; margin-bottom: 10px;
+    }
+    .hp-head h2 {
+      margin: 0 0 12px; font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+      letter-spacing: -0.02em; color: var(--color-text, #1d1d1f); line-height: 1.15;
+    }
+    .hp-head p { margin: 0 auto; max-width: 640px; color: var(--color-text-muted, #6e6e73); font-size: 16px; line-height: 1.55; }
+    .hp-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px;
+    }
+    @media (max-width: 1023px) { .hp-grid { grid-template-columns: 1fr; } }
+    .hp-card {
+      position: relative; display: block; border-radius: 28px; overflow: hidden;
+      text-decoration: none; color: #fff; min-height: 280px; padding: 30px;
+      transition: transform .3s ease, box-shadow .3s ease;
+      background: var(--card-gradient, linear-gradient(135deg, #0071e3 0%, #8b5cf6 100%));
+    }
+    .hp-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.16); }
+    .hp-card::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,0.18), transparent 45%),
+        radial-gradient(circle at 10% 110%, rgba(0,0,0,0.12), transparent 55%);
+    }
+    .hp-glyph {
+      width: 52px; height: 52px; border-radius: 16px; display: inline-flex;
+      align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.16); backdrop-filter: blur(6px);
+      margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.22);
+    }
+    .hp-glyph svg { width: 26px; height: 26px; }
+    .hp-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; opacity: .85; margin-bottom: 10px; }
+    .hp-card h3 { margin: 0 0 10px; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+    .hp-card p { margin: 0 0 22px; font-size: 14.5px; line-height: 1.5; opacity: .9; max-width: 360px; }
+    .hp-cta {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;
+      padding: 9px 16px; border-radius: 980px;
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(4px); transition: background .2s ease;
+    }
+    .hp-card:hover .hp-cta { background: rgba(255,255,255,0.3); }
+    .hp-cta svg { width: 12px; height: 12px; }
+  </style>
+
+  <div class="hp-max">
+    <div class="hp-head">
+      {%- if section.settings.eyebrow != blank -%}<span class="hp-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+    <div class="hp-grid">
+      {%- for b in section.blocks -%}
+        <a class="hp-card" href="{{ b.settings.link }}" style="--card-gradient: {{ b.settings.gradient }};">
+          <span class="hp-glyph" aria-hidden="true">
+            {{ b.settings.glyph_svg }}
+          </span>
+          <div style="position:relative;z-index:1">
+            <div class="hp-eyebrow">{{ b.settings.eyebrow }}</div>
+            <h3>{{ b.settings.title }}</h3>
+            {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+            <span class="hp-cta">{{ b.settings.cta_label }}
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Popular collections",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by category" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Popular collections" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Three curated lines, each one obsessively engineered. A good place to start if you\u2019re new to Luminor." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "textarea", "id": "glyph_svg", "label": "SVG glyph (raw)", "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"/><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"/></svg>" },
+        { "type": "text", "id": "gradient", "label": "Gradient CSS", "default": "linear-gradient(135deg, #1c1c1e 0%, #0071e3 60%, #5ac8fa 100%)" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Category 01 / Audio" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Sound, tuned for life." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Everyday carry audio for commute, work, and home." },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop Audio" },
+        { "type": "url", "id": "link", "label": "CTA link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Popular collections (3 cards)",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"/><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"/></svg>",
+            "gradient": "linear-gradient(135deg, #1c1c1e 0%, #0071e3 60%, #5ac8fa 100%)",
+            "eyebrow": "Category 01 / Audio",
+            "title": "Sound, tuned for life.",
+            "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",
+            "cta_label": "Shop Audio",
+            "link": "/collections/all?view=audio"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M6 18v2M18 18v2\"/></svg>",
+            "gradient": "linear-gradient(135deg, #0b8e70 0%, #35d69f 60%, #bf5af2 100%)",
+            "eyebrow": "Category 02 / Desk",
+            "title": "The workspace, rethought.",
+            "text": "Lamps, keyboards, chargers and hubs — built to be seen without stealing focus.",
+            "cta_label": "Shop Desk",
+            "link": "/collections/all?view=desk"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3\"/></svg>",
+            "gradient": "linear-gradient(135deg, #ff375f 0%, #ff9f0a 60%, #ffd60a 100%)",
+            "eyebrow": "Category 03 / Everyday",
+            "title": "Carry that ages well.",
+            "text": "Full-grain leather, titanium, and 316 stainless steel — objects for the every day.",
+            "cta_label": "Shop Everyday",
+            "link": "/collections/all?view=everyday"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
