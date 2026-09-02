@@ -16,7 +16,17 @@
         "title": "Latest articles",
         "posts_to_show": 6
       }
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor Journal",
+        "title": "Designed in detail.",
+        "text": "<p>Dig deeper into the craft behind Grade 5 titanium, MagSafe engineering, and the Apple ecosystem — stories from the people who make Luminor.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
     }
   },
-  "order": ["banner", "blog_posts"]
+  "order": ["banner", "blog_posts", "cta"]
 }

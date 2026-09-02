@@ -1,5 +1,82 @@
 {
-  "current": "luminor",
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "menu_shop": {
+            "type": "mega_menu",
+            "settings": {
+              "title": "Shop",
+              "url": "/collections/all",
+              "column_1_title": "Audio",
+              "column_1_label_1": "Headphones",
+              "column_1_link_1": "/collections/all",
+              "column_1_label_2": "Speakers",
+              "column_1_link_2": "/collections/all",
+              "column_1_label_3": "Earbuds",
+              "column_1_link_3": "/collections/all",
+              "column_1_label_4": "Soundbars",
+              "column_1_link_4": "/collections/all",
+              "column_2_title": "Desk",
+              "column_2_label_1": "Lamps",
+              "column_2_link_1": "/collections/all",
+              "column_2_label_2": "Keyboards",
+              "column_2_link_2": "/collections/all",
+              "column_2_label_3": "Chargers",
+              "column_2_link_3": "/collections/all",
+              "column_2_label_4": "USB Hubs",
+              "column_2_link_4": "/collections/all",
+              "column_3_title": "Everyday",
+              "column_3_label_1": "Wallets",
+              "column_3_link_1": "/collections/all",
+              "column_3_label_2": "Watches",
+              "column_3_link_2": "/collections/all",
+              "column_3_label_3": "Tumblers",
+              "column_3_link_3": "/collections/all",
+              "column_3_label_4": "Accessories",
+              "column_3_link_4": "/collections/all",
+              "feature_title": "New arrivals",
+              "feature_text": "Explore our latest premium essentials.",
+              "feature_link_label": "Shop new drops",
+              "feature_link": "/collections/all"
+            }
+          },
+          "menu_explore": {
+            "type": "mega_menu",
+            "settings": {
+              "title": "Explore",
+              "url": "/pages/about",
+              "column_1_title": "Company",
+              "column_1_label_1": "Our Story",
+              "column_1_link_1": "/pages/about",
+              "column_1_label_2": "Contact Us",
+              "column_1_link_2": "/pages/contact",
+              "column_1_label_3": "FAQs",
+              "column_1_link_3": "/pages/faq",
+              "column_2_title": "Journal",
+              "column_2_label_1": "Our Blog",
+              "column_2_link_1": "/blogs/news",
+              "column_2_label_2": "Design Philosophy",
+              "column_2_link_2": "/pages/about",
+              "column_3_title": "Support",
+              "column_3_label_1": "Shipping & Returns",
+              "column_3_link_1": "/pages/faq",
+              "column_3_label_2": "Warranty",
+              "column_3_link_2": "/pages/faq",
+              "column_3_label_3": "Track Order",
+              "column_3_link_3": "/pages/contact",
+              "feature_title": "Need help?",
+              "feature_text": "Our team is here for you 24/7.",
+              "feature_link_label": "Get support",
+              "feature_link": "/pages/contact"
+            }
+          }
+        },
+        "block_order": ["menu_shop", "menu_explore"]
+      }
+    }
+  },
   "presets": {
     "luminor": {
       "color_primary": "#0071e3",
@@ -12,8 +89,8 @@
       "color_text_invert": "#f5f5f7",
       "color_border": "#d2d2d7",
       "color_input_border": "#86868b",
-      "heading_font": "Inter",
-      "body_font": "Inter",
+      "heading_font": "system-ui",
+      "body_font": "system-ui",
       "heading_base_size": 40,
       "body_base_size": 17,
       "line_height": 1.5,
@@ -32,7 +109,83 @@
       "cart_type": "drawer",
       "show_cart_note": true,
       "search_type": "modal",
-      "show_search_collections": true
+      "show_search_collections": true,
+      "sections": {
+        "header": {
+          "type": "header",
+          "blocks": {
+            "menu_shop": {
+              "type": "mega_menu",
+              "settings": {
+                "title": "Shop",
+                "url": "/collections/all",
+                "column_1_title": "Audio",
+                "column_1_label_1": "Headphones",
+                "column_1_link_1": "/collections/all",
+                "column_1_label_2": "Speakers",
+                "column_1_link_2": "/collections/all",
+                "column_1_label_3": "Earbuds",
+                "column_1_link_3": "/collections/all",
+                "column_1_label_4": "Soundbars",
+                "column_1_link_4": "/collections/all",
+                "column_2_title": "Desk",
+                "column_2_label_1": "Lamps",
+                "column_2_link_1": "/collections/all",
+                "column_2_label_2": "Keyboards",
+                "column_2_link_2": "/collections/all",
+                "column_2_label_3": "Chargers",
+                "column_2_link_3": "/collections/all",
+                "column_2_label_4": "USB Hubs",
+                "column_2_link_4": "/collections/all",
+                "column_3_title": "Everyday",
+                "column_3_label_1": "Wallets",
+                "column_3_link_1": "/collections/all",
+                "column_3_label_2": "Watches",
+                "column_3_link_2": "/collections/all",
+                "column_3_label_3": "Tumblers",
+                "column_3_link_3": "/collections/all",
+                "column_3_label_4": "Accessories",
+                "column_3_link_4": "/collections/all",
+                "feature_title": "New arrivals",
+                "feature_text": "Explore our latest premium essentials.",
+                "feature_link_label": "Shop new drops",
+                "feature_link": "/collections/all"
+              }
+            },
+            "menu_explore": {
+              "type": "mega_menu",
+              "settings": {
+                "title": "Explore",
+                "url": "/pages/about",
+                "column_1_title": "Company",
+                "column_1_label_1": "Our Story",
+                "column_1_link_1": "/pages/about",
+                "column_1_label_2": "Contact Us",
+                "column_1_link_2": "/pages/contact",
+                "column_1_label_3": "FAQs",
+                "column_1_link_3": "/pages/faq",
+                "column_2_title": "Journal",
+                "column_2_label_1": "Our Blog",
+                "column_2_link_1": "/blogs/news",
+                "column_2_label_2": "Design Philosophy",
+                "column_2_link_2": "/pages/about",
+                "column_3_title": "Support",
+                "column_3_label_1": "Shipping & Returns",
+                "column_3_link_1": "/pages/faq",
+                "column_3_label_2": "Warranty",
+                "column_3_link_2": "/pages/faq",
+                "column_3_label_3": "Track Order",
+                "column_3_link_3": "/pages/contact",
+                "feature_title": "Need help?",
+                "feature_text": "Our team is here for you 24/7.",
+                "feature_link_label": "Get support",
+                "feature_link": "/pages/contact"
+              }
+            }
+          },
+          "block_order": ["menu_shop", "menu_explore"]
+        }
+      }
     },
     "midnight": {
       "color_primary": "#0a84ff",
@@ -44,11 +197,87 @@
       "color_text_invert": "#1d1d1f",
       "color_border": "#38383a",
       "color_input_border": "#545458",
-      "heading_font": "Inter",
-      "body_font": "Inter",
+      "heading_font": "system-ui",
+      "body_font": "system-ui",
       "button_radius": 18,
       "page_width": 1280,
-      "header_layout": "centered"
+      "header_layout": "centered",
+      "sections": {
+        "header": {
+          "type": "header",
+          "blocks": {
+            "menu_shop": {
+              "type": "mega_menu",
+              "settings": {
+                "title": "Shop",
+                "url": "/collections/all",
+                "column_1_title": "Audio",
+                "column_1_label_1": "Headphones",
+                "column_1_link_1": "/collections/all",
+                "column_1_label_2": "Speakers",
+                "column_1_link_2": "/collections/all",
+                "column_1_label_3": "Earbuds",
+                "column_1_link_3": "/collections/all",
+                "column_1_label_4": "Soundbars",
+                "column_1_link_4": "/collections/all",
+                "column_2_title": "Desk",
+                "column_2_label_1": "Lamps",
+                "column_2_link_1": "/collections/all",
+                "column_2_label_2": "Keyboards",
+                "column_2_link_2": "/collections/all",
+                "column_2_label_3": "Chargers",
+                "column_2_link_3": "/collections/all",
+                "column_2_label_4": "USB Hubs",
+                "column_2_link_4": "/collections/all",
+                "column_3_title": "Everyday",
+                "column_3_label_1": "Wallets",
+                "column_3_link_1": "/collections/all",
+                "column_3_label_2": "Watches",
+                "column_3_link_2": "/collections/all",
+                "column_3_label_3": "Tumblers",
+                "column_3_link_3": "/collections/all",
+                "column_3_label_4": "Accessories",
+                "column_3_link_4": "/collections/all",
+                "feature_title": "New arrivals",
+                "feature_text": "Explore our latest premium essentials.",
+                "feature_link_label": "Shop new drops",
+                "feature_link": "/collections/all"
+              }
+            },
+            "menu_explore": {
+              "type": "mega_menu",
+              "settings": {
+                "title": "Explore",
+                "url": "/pages/about",
+                "column_1_title": "Company",
+                "column_1_label_1": "Our Story",
+                "column_1_link_1": "/pages/about",
+                "column_1_label_2": "Contact Us",
+                "column_1_link_2": "/pages/contact",
+                "column_1_label_3": "FAQs",
+                "column_1_link_3": "/pages/faq",
+                "column_2_title": "Journal",
+                "column_2_label_1": "Our Blog",
+                "column_2_link_1": "/blogs/news",
+                "column_2_label_2": "Design Philosophy",
+                "column_2_link_2": "/pages/about",
+                "column_3_title": "Support",
+                "column_3_label_1": "Shipping & Returns",
+                "column_3_link_1": "/pages/faq",
+                "column_3_label_2": "Warranty",
+                "column_3_link_2": "/pages/faq",
+                "column_3_label_3": "Track Order",
+                "column_3_link_3": "/pages/contact",
+                "feature_title": "Need help?",
+                "feature_text": "Our team is here for you 24/7.",
+                "feature_link_label": "Get support",
+                "feature_link": "/pages/contact"
+              }
+            }
+          },
+          "block_order": ["menu_shop", "menu_explore"]
+        }
+      }
     }
   }
 }

@@ -7,7 +7,9 @@
       </div>
     {%- endif -%}
 
-    <div class="collection-list__grid stagger" style="grid-template-columns: repeat({{ section.settings.columns | default: 3 }}, 1fr)">
+    {%- assign layout_class = '' -%}
+    {%- if section.settings.layout == 'bento' -%}{%- assign layout_class = ' collection-list__grid--bento' -%}{%- endif -%}
+    <div class="collection-list__grid stagger{{ layout_class }}">
       {%- liquid
         assign blocks_have_collections = false
         for block in section.blocks
@@ -65,7 +67,9 @@
       "options": [ { "value": "default", "label": "Default" }, { "value": "alt", "label": "Alt background" } ], "default": "default" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Shop by category" },
-    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns", "default": 3 }
+    { "type": "select", "id": "layout", "label": "Layout",
+      "options": [ { "value": "grid", "label": "Uniform grid" }, { "value": "bento", "label": "Bento (asymmetric)" } ], "default": "bento" },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns (grid mode)", "default": 3 }
   ],
   "max_blocks": 8,
   "blocks": [

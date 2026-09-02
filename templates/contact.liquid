@@ -1,0 +1,25 @@
+{% comment %}
+  Contact page template.
+  Shopify 不允许 contact 模板使用 JSON 格式,改用 Liquid 模板 + section 调用。
+{% endcomment %}
+
+<section class="section reveal">
+  <div class="page-width page-width--narrow" style="text-align:center">
+    <p class="eyebrow">Contact us</p>
+    <h1>Get in touch.</h1>
+    <p class="lead color-muted" style="margin-top:14px">We'd love to hear from you. Send us a message and we'll respond as soon as possible — usually within 24 hours.</p>
+  </div>
+</section>
+
+{% section 'contact-form' %}
+
+<section class="section bg-alt reveal">
+  <div class="page-width page-width--narrow">
+    <h2>Other ways to reach us</h2>
+    <div class="rte" style="margin-top:18px">
+      <p><strong>Email</strong><br>support@luminor-theme.com</p>
+      <p><strong>Business hours</strong><br>Mon–Fri, 9:00 AM – 6:00 PM (EST)</p>
+      <p><strong>Location</strong><br>Remote · Serving customers worldwide</p>
+    </div>
+  </div>
+</section>

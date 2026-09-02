@@ -6,7 +6,23 @@
         "show_collection_title": true,
         "columns_desktop": 4
       }
+    },
+    "perks": {
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "Luminor promise",
+        "title": "Why shop with us",
+        "subtitle": "Every order is backed by our commitment to quality.",
+        "columns": 4
+      },
+      "blocks": {
+        "perk_1": { "type": "column", "settings": { "title": "Free shipping", "text": "On all orders over $50, delivered fast." } },
+        "perk_2": { "type": "column", "settings": { "title": "30-day returns", "text": "Not in love? Return within 30 days for a full refund." } },
+        "perk_3": { "type": "column", "settings": { "title": "Lifetime warranty", "text": "Titanium-grade build, backed for life." } },
+        "perk_4": { "type": "column", "settings": { "title": "Secure checkout", "text": "Encrypted payments. All major methods accepted." } }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3", "perk_4"]
     }
   },
-  "order": ["main"]
+  "order": ["main", "perks"]
 }

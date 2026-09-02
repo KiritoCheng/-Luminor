@@ -42,8 +42,7 @@
               return;
             }
             this.refresh();
-            if (window.AuroraTheme && window.settings && settings.cart_type === 'drawer') {
-              AuroraTheme.cartDrawer && AuroraTheme.cartDrawer.classList.add('is-open');
+            if (this.drawer) {
               this.open();
             } else {
               window.location.href = window.routes.cart_url;

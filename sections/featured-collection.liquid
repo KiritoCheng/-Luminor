@@ -18,24 +18,28 @@
       {%- endif -%}
     </div>
 
+    {%- assign grid_class = 'featured-collection__grid product-grid stagger' -%}
+    {%- if section.settings.bento -%}
+      {%- assign grid_class = grid_class | append: ' featured-collection__grid--bento' -%}
+    {%- endif -%}
+
     {%- if collection != blank and collection.products.size > 0 -%}
-      <div class="featured-collection__grid product-grid stagger" style="grid-template-columns: repeat({{ columns_desktop }}, 1fr)">
+      <div class="{{ grid_class }}" style="--cols: {{ columns_desktop }}">
         {%- for product in collection.products limit: products_to_show -%}
-          <div class="reveal">
+          <div class="reveal {% if forloop.first and section.settings.bento %}featured-collection__item--feature{% endif %}">
             {% render 'product-card', product: product %}
           </div>
         {%- endfor -%}
       </div>
     {%- else -%}
-      <div class="featured-collection__grid product-grid stagger" style="grid-template-columns: repeat({{ columns_desktop }}, 1fr)">
+      <div class="{{ grid_class }}" style="--cols: {{ columns_desktop }}">
         {%- for i in (1..products_to_show) -%}
-          <div class="reveal">
+          <div class="reveal {% if forloop.first and section.settings.bento %}featured-collection__item--feature{% endif %}">
             <div class="product-card">
               <div class="product-card__media">
                 {{ 'product-' | append: i | placeholder_svg_tag: 'product-card__placeholder' }}
               </div>
               <h3 class="product-card__title">{{ 'sections.featured_collection.example_title' | t }}</h3>
-              <div class="product-card__price">$99.00</div>
             </div>
           </div>
         {%- endfor -%}
@@ -54,6 +58,7 @@
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 4 },
     { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "checkbox", "id": "bento", "label": "Bento layout (first product spans 2x2)", "default": true },
     { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
     { "type": "url", "id": "view_all_link", "label": "View all link" }
   ],

@@ -1,5 +1,15 @@
 {
   "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor",
+        "title": "Shop by category.",
+        "text": "<p>Titanium cases, MagSafe mounts, leather wallets, and Apple Watch bands — explore the collections that make up the Luminor ecosystem.</p>",
+        "button_label": "Shop all",
+        "button_link": "/collections/all"
+      }
+    },
     "main": {
       "type": "list-collections",
       "settings": {
@@ -7,5 +17,5 @@
       }
     }
   },
-  "order": ["main"]
+  "order": ["intro", "main"]
 }

@@ -1,9 +1,19 @@
 {
   "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor Cart",
+        "title": "Your selection.",
+        "text": "<p>Titanium cases, MagSafe-ready gear, and Apple-grade essentials — review your picks below, then check out in seconds.</p>",
+        "button_label": "Continue shopping",
+        "button_link": "/collections/all"
+      }
+    },
     "main": {
       "type": "cart",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["intro", "main"]
 }

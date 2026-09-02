@@ -62,7 +62,18 @@
         "button_label": "Shop now",
         "button_link": "/collections/all"
       }
+    },
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "Our promise",
+        "heading": "Grade 5 titanium. Backed for life.",
+        "text": "<p>From MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
     }
   },
-  "order": ["hero", "editorial_1", "values", "editorial_2"]
+  "order": ["hero", "editorial_1", "values", "editorial_2", "manifesto"]
 }

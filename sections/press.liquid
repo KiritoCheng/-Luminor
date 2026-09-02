@@ -1,16 +1,23 @@
 {%- comment -%}
-  Press — "Featured on" section with media logos and review quotes.
+  Press — "Featured on" marquee scrolling band with media logos and review quotes.
 {%- endcomment -%}
 
-<section class="section section--tight press reveal">
-  <div class="page-width">
-    {%- if section.settings.title != blank -%}
-      <h2 class="press__title">{{ section.settings.title | escape }}</h2>
-    {%- endif -%}
+{%- liquid
+  assign logo_blocks = section.blocks | where: 'type', 'logo'
+  assign quote_blocks = section.blocks | where: 'type', 'quote'
+-%}
 
-    <div class="press__logos stagger">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'logo' -%}
+<section class="section section--tight press reveal">
+  {%- if section.settings.title != blank -%}
+    <div class="page-width">
+      <h2 class="press__title">{{ section.settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  {%- if logo_blocks.size > 0 -%}
+    <div class="press__marquee" data-press-marquee>
+      <div class="press__marquee-track">
+        {%- for block in logo_blocks -%}
           <div class="press__logo" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
@@ -18,12 +25,25 @@
               <span class="press__logo-text">{{ block.settings.name | escape }}</span>
             {%- endif -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
+        {%- endfor -%}
+      </div>
+      {%- comment -%}Duplicate track for seamless loop{%- endcomment -%}
+      <div class="press__marquee-track" aria-hidden="true">
+        {%- for block in logo_blocks -%}
+          <div class="press__logo">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+            {%- elsif block.settings.name != blank -%}
+              <span class="press__logo-text">{{ block.settings.name | escape }}</span>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
+  {%- endif -%}
 
-    {%- assign quote_blocks = section.blocks | where: 'type', 'quote' -%}
-    {%- if quote_blocks.size > 0 -%}
+  {%- if quote_blocks.size > 0 -%}
+    <div class="page-width">
       <div class="press__quotes" data-press-quotes>
         {%- for block in quote_blocks -%}
           <blockquote class="press__quote" {{ block.shopify_attributes }}>
@@ -32,13 +52,14 @@
           </blockquote>
         {%- endfor -%}
       </div>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
 .press {
   text-align: center;
+  overflow: hidden;
 }
 
 .press__title {
@@ -50,22 +71,42 @@
   margin-bottom: 32px;
 }
 
-.press__logos {
+/* ---- Marquee scrolling band ---- */
+.press__marquee {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   margin-bottom: 48px;
+}
+
+.press__marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding-right: 64px;
+  flex-shrink: 0;
+  animation: press-marquee 30s linear infinite;
+}
+
+.press__marquee:hover .press__marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes press-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
 .press__logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  opacity: 0.5;
+  height: 36px;
+  opacity: 0.45;
   transition: opacity 0.3s ease;
+  flex-shrink: 0;
 }
 
 .press__logo:hover {
@@ -73,17 +114,31 @@
 }
 
 .press__logo img {
-  max-height: 32px;
+  max-height: 36px;
   width: auto;
   filter: grayscale(1);
 }
 
 .press__logo-text {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .press__marquee-track {
+    animation: none;
+  }
+  .press__marquee {
+    justify-content: center;
+  }
+  .press__marquee-track + .press__marquee-track {
+    display: none;
+  }
+}
+
+/* ---- Quotes ---- */
 .press__quotes {
   position: relative;
   max-width: 720px;
@@ -116,11 +171,18 @@
 }
 
 @media (max-width: 749px) {
-  .press__logos {
-    gap: 24px;
+  .press__marquee-track {
+    gap: 40px;
+    padding-right: 40px;
   }
   .press__logo {
-    height: 28px;
+    height: 30px;
+  }
+  .press__logo img {
+    max-height: 30px;
+  }
+  .press__logo-text {
+    font-size: 1.1rem;
   }
 }
 </style>

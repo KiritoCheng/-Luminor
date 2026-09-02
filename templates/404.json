@@ -3,7 +3,17 @@
     "main": {
       "type": "main-404",
       "settings": {}
+    },
+    "recover": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Lost in transit",
+        "title": "This page wandered off.",
+        "text": "<p>The link may be broken, or the page may have moved. Let's get you back to the titanium gear, MagSafe mounts, and Apple accessories you came for.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "recover"]
 }

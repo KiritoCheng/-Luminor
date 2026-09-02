@@ -6,12 +6,12 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "eyebrow": "New Collection",
-            "heading": "Essentials, elevated.",
-            "subheading": "Premium accessories for the way you live, work, and play.",
+            "eyebrow": "MagSafe ready",
+            "heading": "Your iPhone, elevated.",
+            "subheading": "Titanium-grade finishes. MagSnap precision. Built for iPhone, AirPods, and Mac.",
             "button_label": "Shop now",
             "button_link": "/collections/all",
-            "button_label_2": "Our story",
+            "button_label_2": "Discover Luminor",
             "button_link_2": "/pages/about"
           }
         }
@@ -165,6 +165,7 @@
       "settings": {
         "title": "Shop by category",
         "eyebrow": "Browse collections",
+        "layout": "bento",
         "columns": 3
       },
       "blocks": {
@@ -221,13 +222,40 @@
         "title": "Join the Luminor circle.",
         "text": "Be the first to know about new arrivals, exclusive offers, and stories from the Luminor studio."
       }
+    },
+    "stats": {
+      "type": "stats",
+      "settings": {
+        "eyebrow": "By the numbers",
+        "heading": "Trusted worldwide",
+        "watermark": "LUMINOR"
+      },
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "number": "120", "suffix": "K+", "label": "Creators equipped" } },
+        "stat_2": { "type": "stat", "settings": { "number": "48", "label": "Countries shipped" } },
+        "stat_3": { "type": "stat", "settings": { "number": "4.9", "suffix": "★", "label": "Average rating" } }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3"]
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "Our philosophy",
+        "heading": "Designed in California. Assembled with intent.",
+        "text": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
     }
   },
   "order": [
     "hero",
+    "stats",
     "featured_collection",
     "category_pills",
     "lookbook",
+    "statement",
     "press",
     "image_with_text",
     "editorial",

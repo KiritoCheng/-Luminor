@@ -14,6 +14,10 @@
               sizes: '(max-width: 749px) 100vw, 50vw',
               alt: section.settings.image_1.alt | escape }}
           </div>
+        {%- else -%}
+          <div class="editorial__image editorial__image--main editorial__image--placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'editorial__placeholder' }}
+          </div>
         {%- endif -%}
         {%- if section.settings.image_2 != blank -%}
           <div class="editorial__image editorial__image--offset">
@@ -69,6 +73,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.editorial__image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editorial__placeholder {
+  width: 100%;
+  height: 100%;
 }
 
 .editorial__image--offset {

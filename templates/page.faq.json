@@ -1,5 +1,13 @@
 {
   "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor Support",
+        "title": "Questions, answered.",
+        "text": "<p>From MagSafe compatibility to titanium grades and Apple Watch band sizing — everything you need to know about your Luminor gear, in one place.</p>"
+      }
+    },
     "faq": {
       "type": "faq",
       "settings": {
@@ -68,5 +76,5 @@
       }
     }
   },
-  "order": ["faq", "contact_cta"]
+  "order": ["intro", "faq", "contact_cta"]
 }
