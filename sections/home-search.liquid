@@ -73,7 +73,7 @@
     .hs-search__input {
       width: 100%;
       height: 56px;
-      padding: 0 20px 0 50px;
+      padding: 0 20px 0 50px !important;
       border-radius: 980px;
       border: 1px solid var(--color-border, #d2d2d7);
       background: var(--color-background, #fff);
@@ -81,6 +81,7 @@
       font-size: 16px;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
     }
     .hs-search__input::placeholder {
       color: var(--color-text-muted, #86868b);
@@ -150,7 +151,8 @@
   </div>
 </section>
 
-{% schema %}{
+{% schema %}
+{
   "name": "Home search",
   "tag": "section",
   "settings": [
@@ -239,4 +241,5 @@
       ]
     }
   ]
-}{% endschema %}
+}
+{% endschema %}

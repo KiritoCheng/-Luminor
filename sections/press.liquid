@@ -7,7 +7,7 @@
   assign quote_blocks = section.blocks | where: 'type', 'quote'
 -%}
 
-<section class="section section--tight press reveal">
+<section class="section section--tight press reveal" style="--press-marquee-duration: {{ section.settings.marquee_speed }}s;">
   {%- if section.settings.title != blank -%}
     <div class="page-width">
       <h2 class="press__title">{{ section.settings.title | escape }}</h2>
@@ -17,21 +17,19 @@
   {%- if logo_blocks.size > 0 -%}
     <div class="press__marquee" data-press-marquee>
       <div class="press__marquee-track">
-        {%- for i in (1..2) -%}
-          {%- for block in logo_blocks -%}
-            <div class="press__logo" {{ block.shopify_attributes }}>
-              {%- if block.settings.image != blank -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 200
-                  | image_tag: loading: 'lazy', alt: block.settings.name
-                  | escape
-                }}
-              {%- elsif block.settings.name != blank -%}
-                <span class="press__logo-text">{{ block.settings.name | escape }}</span>
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
+        {%- for block in logo_blocks -%}
+          <div class="press__logo" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 200
+                | image_tag: loading: 'lazy', alt: block.settings.name
+                | escape
+              }}
+            {%- elsif block.settings.name != blank -%}
+              <span class="press__logo-text">{{ block.settings.name | escape }}</span>
+            {%- endif -%}
+          </div>
         {%- endfor -%}
       </div>
     </div>
@@ -80,24 +78,12 @@
   .press__marquee-track {
     display: flex;
     align-items: center;
-    gap: 64px;
-    padding-right: 64px;
     flex-shrink: 0;
     width: max-content;
-    animation: press-marquee 30s linear infinite;
   }
 
   .press__marquee:hover .press__marquee-track {
     animation-play-state: paused;
-  }
-
-  @keyframes press-marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
   }
 
   .press__logo {
@@ -105,6 +91,7 @@
     align-items: center;
     justify-content: center;
     height: 36px;
+    padding: 0 32px;
     opacity: 0.45;
     transition: opacity 0.3s ease;
     flex-shrink: 0;
@@ -129,7 +116,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .press__marquee-track {
-      animation: none;
+      animation: none !important;
     }
     .press__marquee {
       justify-content: center;
@@ -169,12 +156,9 @@
   }
 
   @media (max-width: 749px) {
-    .press__marquee-track {
-      gap: 40px;
-      padding-right: 40px;
-    }
     .press__logo {
       height: 30px;
+      padding: 0 24px;
     }
     .press__logo img {
       max-height: 30px;
@@ -187,7 +171,72 @@
 
 <script>
   (function () {
-    function initPress() {
+    var DYN_STYLE_ID = 'press-marquee-dyn-style';
+
+    function getDynSheet() {
+      var el = document.getElementById(DYN_STYLE_ID);
+      if (!el) {
+        el = document.createElement('style');
+        el.id = DYN_STYLE_ID;
+        document.head.appendChild(el);
+      }
+      return el.sheet;
+    }
+
+    function initPressMarquee() {
+      var prefersReduced =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.querySelectorAll('[data-press-marquee]').forEach(function (marquee) {
+        var track = marquee.querySelector('.press__marquee-track');
+        if (!track) return;
+
+        // Clean up previous clones & animation
+        track.querySelectorAll('[data-clone]').forEach(function (c) { c.remove(); });
+        track.style.animation = '';
+
+        var originals = Array.prototype.slice.call(
+          track.querySelectorAll('.press__logo:not([data-clone])')
+        );
+        if (originals.length === 0) return;
+
+        if (prefersReduced) return; // static, centered via CSS
+
+        var W = marquee.offsetWidth;
+        var L = track.scrollWidth; // single set width
+        if (L <= 0 || W <= 0) return;
+
+        // Center + seamless condition: L >= W/(n-2) => n >= W/L + 2.
+        // Pad to guarantee coverage on any viewport / logo count.
+        var n = Math.ceil(W / L) + 3;
+        n = Math.max(n, 4);
+
+        for (var i = 1; i < n; i++) {
+          originals.forEach(function (item) {
+            var clone = item.cloneNode(true);
+            clone.setAttribute('data-clone', '');
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+          });
+        }
+
+        var duration =
+          window.getComputedStyle(marquee).getPropertyValue('--press-marquee-duration').trim() ||
+          '50s';
+
+        var sheet = getDynSheet();
+        while (sheet.cssRules.length) sheet.deleteRule(0);
+        var pct = (100 / n).toFixed(4);
+        sheet.insertRule(
+          '@keyframes press-marquee-run { from { transform: translateX(0); } to { transform: translateX(-' + pct + '%); } }',
+          0
+        );
+        track.style.animation = 'press-marquee-run ' + duration + ' linear infinite';
+      });
+    }
+
+    function initPressQuotes() {
       document.querySelectorAll('[data-press-quotes]').forEach(function (container) {
         var quotes = container.querySelectorAll('.press__quote');
         if (quotes.length <= 1) return;
@@ -199,12 +248,24 @@
         }, 5000);
       });
     }
+
+    function initPress() {
+      initPressMarquee();
+      initPressQuotes();
+    }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initPress);
     } else {
       initPress();
     }
     document.addEventListener('shopify:section:load', initPress);
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initPressMarquee, 250);
+    });
   })();
 </script>
 
@@ -217,6 +278,16 @@
       "id": "title",
       "label": "Title",
       "default": "Featured on"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee duration",
+      "min": 15,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 50
     }
   ],
   "max_blocks": 12,

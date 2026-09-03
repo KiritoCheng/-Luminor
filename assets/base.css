@@ -76,7 +76,7 @@ a:not([class*="btn"]):not([class*="button"]):not([class*="icon"]):not(
     [class*="social"]
   ):not([class*="logo"]):not([class*="cart"]):not([class*="account"]):not(
     [class*="close"]
-  ):not([class*="preview"]):not([class*="hp-card"]):hover {
+  ):not([class*="preview"]):not([class*="hp-card"]):not([class*="pill"]):not([class*="chip"]):not([class*="tile"]):hover {
   color: var(--color-primary-hover);
 }
 
