@@ -154,6 +154,31 @@
   {{ product.variants | json }}
 </script>
 
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | truncate: 200 | json }},
+    {%- if product.featured_image -%}
+      "image": ["https:{{ product.featured_image | image_url: width: 1200 }}"],
+    {%- endif -%}
+    "sku": {{ current_variant.sku | default: product.id | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": {{ canonical_url | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ current_variant.price | money_without_currency | json }},
+      "availability": "https://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+      "itemCondition": "https://schema.org/NewCondition"
+    }
+  }
+</script>
+
 <script>
   {%- comment -%} enrich variants with formatted price strings for JS {%- endcomment -%}
   window.productVariants = window.productVariants || [];

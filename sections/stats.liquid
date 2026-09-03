@@ -26,21 +26,6 @@
   </div>
 </section>
 
-<style>
-  .stats { position: relative; overflow: hidden; padding-block: clamp(72px, 10vw, 120px); }
-  .stats__watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(6rem, 18vw, 16rem); font-weight: 700; letter-spacing: -0.06em; color: var(--color-text-invert); opacity: 0.04; pointer-events: none; white-space: nowrap; will-change: transform; }
-  .stats__inner { position: relative; z-index: 1; text-align: center; }
-  .stats__eyebrow { color: var(--color-text-invert); opacity: 0.7; }
-  .stats__eyebrow::before { background-color: var(--color-text-invert); opacity: 0.5; }
-  .stats__heading { font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 600; letter-spacing: -0.03em; color: var(--color-text-invert); margin-bottom: 56px; text-wrap: balance; overflow-wrap: break-word; }
-  .stats__grid { display: grid; grid-template-columns: repeat(var(--stats-cols, 3), 1fr); gap: 32px; }
-  .stats__item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .stats__number { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--color-text-invert); font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
-  .stats__label { font-size: 0.875rem; color: var(--color-text-invert); opacity: 0.65; letter-spacing: -0.01em; }
-  @media (max-width: 749px) { .stats__grid { grid-template-columns: 1fr; gap: 40px; } }
-  @media (prefers-reduced-motion: reduce) { .stats__watermark { display: none; } }
-</style>
-
 {% schema %}{
   "name": "Stats counter",
   "tag": "section",
