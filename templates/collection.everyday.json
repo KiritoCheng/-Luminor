@@ -21,7 +21,7 @@
         "button_label": "Read the warranty",
         "watermark": "EVERYDAY",
         "eyebrow": "Our promise",
-        "button_link": "/collections/all?view=warranty",
+        "button_link": "/pages/warranty",
         "heading": "Lifetime craftsmanship guarantee.",
         "text": "\u003cp\u003eStitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we\u0027ll repair or replace it at no cost to you — forever. That\u0027s the Luminor Everyday guarantee.\u003c/p\u003e"
       },
@@ -32,7 +32,7 @@
         "button_label": "About Luminor",
         "text": "\u003cp\u003eEvery Luminor leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.\u003c/p\u003e\u003cp\u003eMetals are Grade 5 titanium and 316 marine stainless. Nothing less.\u003c/p\u003e",
         "eyebrow": "Materials",
-        "button_link": "/collections/all?view=about",
+        "button_link": "/pages/about",
         "color_scheme": "alt",
         "title": "Full-grain, not corrected.",
         "layout": "text_first"

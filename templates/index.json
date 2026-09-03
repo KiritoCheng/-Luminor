@@ -21,7 +21,7 @@
             "button_label": "Shop now",
             "button_link": "/collections/all",
             "button_label_2": "Discover Luminor",
-            "button_link_2": "/collections/all?view=about"
+            "button_link_2": "/pages/about"
           }
         }
       },
@@ -87,7 +87,7 @@
           "type": "category",
           "settings": {
             "title": "Audio",
-            "link": "/collections/all?view=audio",
+            "link": "/collections/airpods-home",
             "count": "4"
           }
         },
@@ -95,7 +95,7 @@
           "type": "category",
           "settings": {
             "title": "Desk",
-            "link": "/collections/all?view=desk",
+            "link": "/collections/mac",
             "count": "8"
           }
         },
@@ -103,7 +103,7 @@
           "type": "category",
           "settings": {
             "title": "Everyday",
-            "link": "/collections/all?view=everyday",
+            "link": "/collections/accessories",
             "count": "7",
             "featured": true
           }
@@ -170,21 +170,21 @@
           "type": "hint",
           "settings": {
             "label": "Audio",
-            "link": "/collections/all?view=audio"
+            "link": "/collections/airpods-home"
           }
         },
         "hs_hint_2": {
           "type": "hint",
           "settings": {
             "label": "Desk",
-            "link": "/collections/all?view=desk"
+            "link": "/collections/mac"
           }
         },
         "hs_hint_3": {
           "type": "hint",
           "settings": {
             "label": "Warranty",
-            "link": "/collections/all?view=warranty"
+            "link": "/pages/warranty"
           }
         },
         "hs_hint_4": {
@@ -218,7 +218,7 @@
             "category_label": "Shop",
             "title": "Audio",
             "subtitle": "Headphones, earbuds, speakers & soundbars.",
-            "link": "/collections/all?view=audio"
+            "link": "/collections/airpods-home"
           }
         },
         "hql_2": {
@@ -227,7 +227,7 @@
             "category_label": "Shop",
             "title": "Desk",
             "subtitle": "Lamps, keyboards, MagSafe chargers & hubs.",
-            "link": "/collections/all?view=desk"
+            "link": "/collections/mac"
           }
         },
         "hql_3": {
@@ -236,7 +236,7 @@
             "category_label": "Shop",
             "title": "Everyday carry",
             "subtitle": "Wallets, watches, tumblers & accessories.",
-            "link": "/collections/all?view=everyday"
+            "link": "/collections/accessories"
           }
         },
         "hql_4": {
@@ -245,7 +245,7 @@
             "category_label": "Support",
             "title": "Help Center & FAQs",
             "subtitle": "Answers to the questions we get every day.",
-            "link": "/collections/all?view=faq"
+            "link": "/pages/faq"
           }
         },
         "hql_5": {
@@ -254,7 +254,7 @@
             "category_label": "Support",
             "title": "Shipping & Returns",
             "subtitle": "Delivery times, free returns, and how we pack.",
-            "link": "/collections/all?view=shipping-returns"
+            "link": "/pages/shipping-returns"
           }
         },
         "hql_6": {
@@ -263,7 +263,7 @@
             "category_label": "Support",
             "title": "Warranty",
             "subtitle": "1-2 year limited coverage, and what it covers.",
-            "link": "/collections/all?view=warranty"
+            "link": "/pages/warranty"
           }
         },
         "hql_7": {
@@ -272,7 +272,7 @@
             "category_label": "Support",
             "title": "Track an order",
             "subtitle": "Look up a shipment with your order number.",
-            "link": "/collections/all?view=track-order"
+            "link": "/pages/track-order"
           }
         },
         "hql_8": {
@@ -281,7 +281,7 @@
             "category_label": "Company",
             "title": "Our story",
             "subtitle": "Who we are, what we make, and why we exist.",
-            "link": "/collections/all?view=about"
+            "link": "/pages/about"
           }
         }
       },
@@ -383,7 +383,7 @@
         "title": "Crafted to the last detail.",
         "text": "<p>Every Luminor product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
         "button_label": "Read our story",
-        "button_link": "/collections/all?view=about"
+        "button_link": "/pages/about"
       }
     },
     "home_popular": {
@@ -398,7 +398,7 @@
             "title": "Sound, tuned for life.",
             "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",
             "cta_label": "Shop Audio",
-            "link": "/collections/all?view=audio"
+            "link": "/collections/airpods-home"
           }
         },
         "hp_card_2": {
@@ -410,7 +410,7 @@
             "title": "The workspace, rethought.",
             "text": "Lamps, keyboards, chargers and hubs — built to be seen without stealing focus.",
             "cta_label": "Shop Desk",
-            "link": "/collections/all?view=desk"
+            "link": "/collections/mac"
           }
         },
         "hp_card_3": {
@@ -422,7 +422,7 @@
             "title": "Carry that ages well.",
             "text": "Full-grain leather, titanium, and 316 stainless steel — objects for the every day.",
             "cta_label": "Shop Everyday",
-            "link": "/collections/all?view=everyday"
+            "link": "/collections/accessories"
           }
         }
       },
@@ -524,21 +524,21 @@
           "type": "question",
           "settings": {
             "question": "How long does shipping take and is it free?",
-            "answer": "<p>Standard US shipping is 3–5 business days and <strong>free on orders over $49</strong>. International orders arrive in 7–14 business days depending on destination. Full details in the <a href=\"/collections/all?view=shipping-returns\">Shipping &amp; Returns policy</a>.</p>"
+            "answer": "<p>Standard US shipping is 3–5 business days and <strong>free on orders over $49</strong>. International orders arrive in 7–14 business days depending on destination. Full details in the <a href=\"/pages/shipping-returns\">Shipping &amp; Returns policy</a>.</p>"
           }
         },
         "hf_q2": {
           "type": "question",
           "settings": {
             "question": "What is Luminor's return policy?",
-            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn't meet your expectations — for any reason — send it back in any condition and we'll refund 100% of your purchase. Start on the <a href=\"/collections/all?view=shipping-returns\">returns page</a>.</p>"
+            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn't meet your expectations — for any reason — send it back in any condition and we'll refund 100% of your purchase. Start on the <a href=\"/pages/shipping-returns\">returns page</a>.</p>"
           }
         },
         "hf_q3": {
           "type": "question",
           "settings": {
             "question": "Are Luminor products covered by warranty?",
-            "answer": "<p>Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/collections/all?view=warranty\">warranty page</a> for full terms.</p>"
+            "answer": "<p>Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/pages/warranty\">warranty page</a> for full terms.</p>"
           }
         }
       },
@@ -551,7 +551,7 @@
         "heading": "Quick answers to the top three questions.",
         "subheading": "These three alone solve more than 60% of support tickets. Still stuck? The help banner below connects you to a human.",
         "see_all_label": "See all frequently asked questions",
-        "see_all_link": "/collections/all?view=faq"
+        "see_all_link": "/pages/faq"
       }
     },
     "home_help": {

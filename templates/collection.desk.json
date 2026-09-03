@@ -21,7 +21,7 @@
         "button_label": "See our policy",
         "watermark": "DESK",
         "eyebrow": "Our promise",
-        "button_link": "/collections/all?view=shipping-returns",
+        "button_link": "/pages/shipping-returns",
         "heading": "Free shipping. Free returns. Zero risk.",
         "text": "\u003cp\u003eNot in love with your Luminor Desk setup? Send it back within 30 days, in any condition, and we\u0027ll refund 100% of the purchase price. Standard shipping on all orders over $49 is always free.\u003c/p\u003e"
       },
@@ -32,7 +32,7 @@
         "button_label": "Shipping info",
         "text": "\u003cp\u003eOur desk lamps and docks ship with precision-ground weighted bases — heavy enough to never tip over, light enough to pick up with one hand. A 4-degree lip at the base edge hides cables without hiding the design.\u003c/p\u003e\u003cp\u003eEverything is powered by USB-C. Everything pairs with your Apple devices instantly. Everything just works.\u003c/p\u003e",
         "eyebrow": "Design notes",
-        "button_link": "/collections/all?view=shipping-returns",
+        "button_link": "/pages/shipping-returns",
         "color_scheme": "alt",
         "title": "Weighted, not bulky.",
         "layout": "image_first"

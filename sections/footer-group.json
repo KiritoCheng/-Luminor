@@ -13,19 +13,19 @@
             "label_1": "All products",
             "link_1": "/collections/all",
             "label_2": "iPhone",
-            "link_2": "/collections/all?view=iphone",
+            "link_2": "/collections/iphone",
             "label_3": "iPad",
-            "link_3": "/collections/all?view=ipad",
+            "link_3": "/collections/ipad",
             "label_4": "Mac",
-            "link_4": "/collections/all?view=mac",
+            "link_4": "/collections/mac",
             "label_5": "Apple Watch",
-            "link_5": "/collections/all?view=watch",
+            "link_5": "/collections/apple-watch",
             "label_6": "AirPods",
-            "link_6": "/collections/all?view=airpods",
+            "link_6": "/collections/airpods-home",
             "label_7": "HomePod & TV",
-            "link_7": "/collections/all?view=airpods",
+            "link_7": "/collections/airpods-home",
             "label_8": "Accessories",
-            "link_8": "/collections/all?view=accessories"
+            "link_8": "/collections/accessories"
           }
         },
         "support_col": {
@@ -35,13 +35,13 @@
             "label_1": "Contact Us",
             "link_1": "/pages/contact",
             "label_2": "Shipping & Returns",
-            "link_2": "/collections/all?view=shipping-returns",
+            "link_2": "/pages/shipping-returns",
             "label_3": "Warranty & AppleCare+",
-            "link_3": "/collections/all?view=warranty",
+            "link_3": "/pages/warranty",
             "label_4": "Track Order",
-            "link_4": "/collections/all?view=track-order",
+            "link_4": "/pages/track-order",
             "label_5": "FAQs",
-            "link_5": "/collections/all?view=faq"
+            "link_5": "/pages/faq"
           }
         },
         "company_col": {
@@ -49,13 +49,13 @@
           "settings": {
             "heading": "Luminor Store",
             "label_1": "About our store",
-            "link_1": "/collections/all?view=about",
+            "link_1": "/pages/about",
             "label_2": "Financing & Trade-in",
-            "link_2": "/collections/all?view=shipping-returns",
+            "link_2": "/pages/shipping-returns",
             "label_3": "Student Pricing",
             "link_3": "/collections/all",
             "label_4": "News & Updates",
-            "link_4": "/collections/all?view=about"
+            "link_4": "/pages/about"
           }
         },
         "contact_col": {

@@ -18,7 +18,7 @@
             "button_label": "Shop the collection",
             "button_label_2": "Our story",
             "button_link": "/collections/all",
-            "button_link_2": "/collections/all?view=about"
+            "button_link_2": "/pages/about"
           }
         }
       },
@@ -50,7 +50,7 @@
         "title": "Considered, not decorated.",
         "text": "<p>Each product begins with a question: what can we remove? We strip away ornament until only the essential remains — then we refine that. The materials are chosen for how they age, the proportions for how they feel in hand, the weight for how they sit on a desk or in a pocket.</p>",
         "button_label": "Explore the process",
-        "button_link": "/collections/all?view=about"
+        "button_link": "/pages/about"
       }
     },
     "collection_list": {
@@ -69,7 +69,7 @@
         "title": "Made to outlast trends.",
         "text": "<p>We partner with workshops that have spent decades perfecting their craft. Every stitch is set by hand, every joint inspected, every surface finished until it feels right. These are objects designed to be used daily — and to look better the more they are.</p>",
         "button_label": "Meet the makers",
-        "button_link": "/collections/all?view=about"
+        "button_link": "/pages/about"
       }
     },
     "multicolumn": {

@@ -21,7 +21,7 @@
         "button_label": "See return policy",
         "watermark": "AUDIO",
         "eyebrow": "Our promise",
-        "button_link": "/collections/all?view=shipping-returns",
+        "button_link": "/pages/shipping-returns",
         "heading": "Two-year warranty. Free returns within 30 days.",
         "text": "\u003cp\u003eIf any Luminor Audio product doesn\u0027t meet your expectations — whether it\u0027s the fit, the sound, or the packaging — return it within 30 days for a full refund. No questions, no forms, no hoops.\u003c/p\u003e"
       },
@@ -32,7 +32,7 @@
         "button_label": "Our warranty",
         "text": "\u003cp\u003eGrade 5 titanium grilles don\u0027t just look premium — they dampen resonant frequencies that cheap plastic grilles introduce. The result is a cleaner, tighter soundstage across the entire frequency range.\u003c/p\u003e\u003cp\u003eEvery pair is hand-tuned and inspected before it leaves the factory.\u003c/p\u003e",
         "eyebrow": "The Luminor difference",
-        "button_link": "/collections/all?view=warranty",
+        "button_link": "/pages/warranty",
         "color_scheme": "alt",
         "title": "Materials you can hear.",
         "layout": "text_first"
