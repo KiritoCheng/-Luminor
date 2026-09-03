@@ -14,56 +14,54 @@
   <div class="hero__art-orb hero__art-orb--1"></div>
   <div class="hero__art-orb hero__art-orb--2"></div>
   <div class="hero__art-orb hero__art-orb--3"></div>
-  <svg class="hero__art-device" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="hp-body" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1d1d1f"/>
-        <stop offset="100%" stop-color="#424245"/>
-      </linearGradient>
-      <linearGradient id="hp-screen" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#0a84ff"/>
-        <stop offset="50%" stop-color="#5e5ce6"/>
-        <stop offset="100%" stop-color="#bf5af2"/>
-      </linearGradient>
-      <linearGradient id="hp-stand" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#86868b"/>
-        <stop offset="100%" stop-color="#6e6e73"/>
-      </linearGradient>
-    </defs>
-    <rect x="80" y="60" width="240" height="320" rx="28" ry="28" fill="url(#hp-body)"/>
-    <rect x="96" y="76" width="208" height="288" rx="18" ry="18" fill="url(#hp-screen)"/>
-    <rect x="176" y="68" width="48" height="10" rx="5" ry="5" fill="#1d1d1f" opacity="0.6"/>
-    <path d="M 96 76 L 304 76 L 304 200 Q 200 240 96 200 Z" fill="#ffffff" opacity="0.08"/>
-    <path d="M 150 380 L 250 380 L 270 410 L 130 410 Z" fill="url(#hp-stand)"/>
-    <rect x="110" y="410" width="180" height="8" rx="4" ry="4" fill="url(#hp-stand)"/>
-  </svg>
 </div>
 {%- endcapture -%}
 
 <style>
-  .hero--split { text-align: left; }
-  .hero--split .hero__cta { justify-content: flex-start; }
+  .hero--split {
+    text-align: left;
+  }
+  .hero--split .hero__cta {
+    justify-content: flex-start;
+  }
   @media screen and (min-width: 750px) {
-    .hero--split .hero__content { max-width: 620px; }
+    .hero--split .hero__content {
+      max-width: {{ section.settings.content_max_width }}px;
+    }
   }
 </style>
 
 {%- if blocks.size > 0 -%}
   <section class="section--flush hero-section" style="--reveal-delay:0ms">
     {%- if blocks.size > 1 -%}
-      <div class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-rotation-speed="{{ section.settings.autorotate_speed }}">
+      <div
+        class="slideshow"
+        data-slideshow
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-rotation-speed="{{ section.settings.autorotate_speed }}"
+      >
         <div class="slideshow__track" data-slideshow-track>
           {%- for block in blocks -%}
-            <div class="slideshow__slide hero hero--{{ section.settings.height }}"
+            <div
+              class="slideshow__slide hero hero--{{ section.settings.height }}"
               style="background-color: {{ block.settings.bg_color | default: '#f5f5f7' }}"
-              {{ block.shopify_attributes }}>
+              {{ block.shopify_attributes }}
+            >
               {%- if block.settings.image != blank -%}
                 <div class="hero__media" data-parallax="0.2">
-                  {{ block.settings.image | image_url: width: 2400 | image_tag:
-                    loading: 'eager',
-                    sizes: '100vw',
-                    widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
-                    alt: block.settings.image.alt | escape }}
+                  {{
+                    block.settings.image
+                    | image_url: width: 2400
+                    | image_tag:
+                      loading: 'eager',
+                      sizes: '100vw',
+                      widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+                      alt: block.settings.image.alt
+                    | escape
+                  }}
+                  {%- if block.settings.show_art -%}
+                    <div class="hero__media" aria-hidden="true">{{ hero_placeholder_svg }}</div>
+                  {%- endif -%}
                 </div>
               {%- else -%}
                 <div class="hero__media hero__media--placeholder">
@@ -74,9 +72,15 @@
               {%- if block.settings.show_overlay -%}
                 <div class="hero__overlay"></div>
               {%- endif -%}
-              <div class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}" data-hero-content>
+              <div
+                class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}"
+                data-hero-content
+              >
                 <div class="hero__meta">
-                  <span class="hero__index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+                  <span class="hero__index">
+                    {%- if forloop.index < 10 %}0{% endif -%}
+                    {{- forloop.index -}}
+                  </span>
                   <span class="hero__meta-line"></span>
                   <span class="hero__meta-label">{{ block.settings.eyebrow | default: 'Featured' | escape }}</span>
                 </div>
@@ -89,12 +93,16 @@
                 {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
                   <div class="hero__cta">
                     {%- if block.settings.button_label != blank -%}
-                      <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">{{ block.settings.button_label | escape }}</a>
+                      <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">
+                        {{- block.settings.button_label | escape -}}
+                      </a>
                     {%- endif -%}
                     {%- if block.settings.button_label_2 != blank -%}
                       <a href="{{ block.settings.button_link_2 }}" class="link-arrow">
                         {{ block.settings.button_label_2 | escape }}
-                        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                       </a>
                     {%- endif -%}
                   </div>
@@ -105,31 +113,57 @@
         </div>
 
         {%- if section.settings.show_arrows -%}
-          <button class="slideshow__nav slideshow__nav--prev" data-slideshow-prev aria-label="{{ 'general.slider.previous' | t }}">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button
+            class="slideshow__nav slideshow__nav--prev"
+            data-slideshow-prev
+            aria-label="{{ 'general.slider.previous' | t }}"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
-          <button class="slideshow__nav slideshow__nav--next" data-slideshow-next aria-label="{{ 'general.slider.next' | t }}">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button
+            class="slideshow__nav slideshow__nav--next"
+            data-slideshow-next
+            aria-label="{{ 'general.slider.next' | t }}"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
         {%- endif -%}
 
         <div class="slideshow__dots">
           {%- for block in blocks -%}
-            <button class="slideshow__dot {% if forloop.first %}is-active{% endif %}" data-slideshow-dot aria-label="{{ 'general.slider.go_to' | t: number: forloop.index }}"></button>
+            <button
+              class="slideshow__dot {% if forloop.first %}is-active{% endif %}"
+              data-slideshow-dot
+              aria-label="{{ 'general.slider.go_to' | t: number: forloop.index }}"
+            ></button>
           {%- endfor -%}
         </div>
       </div>
     {%- else -%}
-      <div class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
+      <div
+        class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
         style="background-color: {{ first_block.settings.bg_color | default: '#f5f5f7' }}"
-        {{ first_block.shopify_attributes }}>
+        {{ first_block.shopify_attributes }}
+      >
         {%- if first_block.settings.image != blank -%}
           <div class="hero__media" data-ken-burns data-parallax>
-            {{ first_block.settings.image | image_url: width: 2400 | image_tag:
-              loading: 'eager',
-              sizes: '100vw',
-              widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
-              alt: first_block.settings.image.alt | escape }}
+            {{
+              first_block.settings.image
+              | image_url: width: 2400
+              | image_tag:
+                loading: 'eager',
+                sizes: '100vw',
+                widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+                alt: first_block.settings.image.alt
+              | escape
+            }}
+            {%- if first_block.settings.show_art -%}
+              <div class="hero__media" aria-hidden="true">{{ hero_placeholder_svg }}</div>
+            {%- endif -%}
           </div>
         {%- else -%}
           <div class="hero__media hero__media--placeholder" data-ken-burns data-parallax>
@@ -137,11 +171,13 @@
           </div>
         {%- endif -%}
         <div class="hero__grain" aria-hidden="true"></div>
-        <span class="hero__watermark" aria-hidden="true" data-parallax>LUMINOR</span>
         {%- if first_block.settings.show_overlay -%}
           <div class="hero__overlay"></div>
         {%- endif -%}
-        <div class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}" data-hero-content>
+        <div
+          class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}"
+          data-hero-content
+        >
           <div class="hero__meta">
             <span class="hero__index">01</span>
             <span class="hero__meta-line"></span>
@@ -156,12 +192,20 @@
           {%- if first_block.settings.button_label != blank or first_block.settings.button_label_2 != blank -%}
             <div class="hero__cta">
               {%- if first_block.settings.button_label != blank -%}
-                <a href="{{ first_block.settings.button_link }}" class="button button--primary button--lg" data-magnetic>{{ first_block.settings.button_label | escape }}</a>
+                <a
+                  href="{{ first_block.settings.button_link }}"
+                  class="button button--primary button--lg"
+                  data-magnetic
+                >
+                  {{- first_block.settings.button_label | escape -}}
+                </a>
               {%- endif -%}
               {%- if first_block.settings.button_label_2 != blank -%}
                 <a href="{{ first_block.settings.button_link_2 }}" class="link-arrow">
                   {{ first_block.settings.button_label_2 | escape }}
-                  <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </a>
               {%- endif -%}
             </div>
@@ -230,7 +274,9 @@
           var content = slide.querySelector('[data-hero-content]');
           if (content) {
             content.classList.remove('is-in');
-            requestAnimationFrame(function () { content.classList.add('is-in'); });
+            requestAnimationFrame(function () {
+              content.classList.add('is-in');
+            });
           }
         }
       });
@@ -238,7 +284,8 @@
   </script>
 {%- endif -%}
 
-{% schema %}{
+{% schema %}
+{
   "name": "Hero / Slideshow",
   "settings": [
     {
@@ -256,6 +303,16 @@
         }
       ],
       "default": "split"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 400,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1220
     },
     {
       "type": "select",
@@ -318,6 +375,13 @@
           "id": "show_overlay",
           "label": "Show dark overlay",
           "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_art",
+          "label": "Show art overlay (color orbs)",
+          "default": true,
+          "info": "Adds a colorful abstract art layer over the image. Also shows when no image is set."
         },
         {
           "type": "select",
@@ -397,4 +461,5 @@
       ]
     }
   ]
-}{% endschema %}
+}
+{% endschema %}
