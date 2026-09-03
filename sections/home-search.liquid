@@ -150,34 +150,57 @@
   </div>
 </section>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Home search",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find it fast" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Search the entire store." },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Find it fast"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Search the Luminor store."
+    },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Products, help articles, journal stories — everything, one search box."
+      "default": "iPhone, iPad, Mac, Watch, AirPods, accessories and help - one search box, everything you need."
     },
     {
       "type": "text",
       "id": "placeholder",
       "label": "Search placeholder",
-      "default": "Search Luminor for products, articles, or help…"
+      "default": "Search for iPhone, MacBook, AirPods, accessories..."
     },
-    { "type": "text", "id": "hint_prefix", "label": "Hint prefix", "default": "Try:" }
+    {
+      "type": "text",
+      "id": "hint_prefix",
+      "label": "Hint prefix",
+      "default": "Try:"
+    }
   ],
   "blocks": [
     {
       "type": "hint",
       "name": "Suggestion link",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Audio" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Audio"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
@@ -185,12 +208,35 @@
     {
       "name": "Home search",
       "blocks": [
-        { "type": "hint", "settings": { "label": "Audio", "link": "/collections/all?view=audio" } },
-        { "type": "hint", "settings": { "label": "Desk", "link": "/collections/all?view=desk" } },
-        { "type": "hint", "settings": { "label": "Warranty", "link": "/collections/all?view=warranty" } },
-        { "type": "hint", "settings": { "label": "Contact", "link": "/pages/contact" } }
+        {
+          "type": "hint",
+          "settings": {
+            "label": "iPhone",
+            "link": "/collections/all?view=iphone"
+          }
+        },
+        {
+          "type": "hint",
+          "settings": {
+            "label": "MacBook",
+            "link": "/collections/all?view=mac"
+          }
+        },
+        {
+          "type": "hint",
+          "settings": {
+            "label": "AirPods",
+            "link": "/collections/all?view=airpods"
+          }
+        },
+        {
+          "type": "hint",
+          "settings": {
+            "label": "Accessories",
+            "link": "/collections/all?view=accessories"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

@@ -101,23 +101,51 @@
   })();
 </script>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Home mini FAQ",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Quick answers to the top three questions." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "These three alone solve more than 60% of support tickets. Still stuck? The CTA below connects you to a human." },
-    { "type": "text", "id": "see_all_label", "label": "See all CTA label", "default": "See all frequently asked questions" },
-    { "type": "url",  "id": "see_all_link",  "label": "See all CTA link" }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quick answers to the top three questions."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "These three alone solve more than 60% of support tickets. Still stuck? The CTA below connects you to a human."
+    },
+    {
+      "type": "text",
+      "id": "see_all_label",
+      "label": "See all CTA label",
+      "default": "See all frequently asked questions"
+    },
+    {
+      "type": "url",
+      "id": "see_all_link",
+      "label": "See all CTA link"
+    }
   ],
   "blocks": [
     {
       "type": "question",
       "name": "Q&A",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "How long does shipping take?" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Standard US shipping is 3\u20135 business days and <strong>free on orders over $49</strong>. Read more in our <a href=\"/collections/all?view=shipping-returns\">Shipping &amp; Returns policy</a>.</p>" }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does shipping take?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Standard US shipping is 3–5 business days and <strong>free on orders over $49</strong>. Read more in our <a href=\"/collections/all?view=shipping-returns\">Shipping &amp; Returns policy</a>.</p>"
+        }
       ]
     }
   ],
@@ -128,26 +156,25 @@
         {
           "type": "question",
           "settings": {
-            "question": "How long does shipping take and is it free?",
-            "answer": "<p>Standard US shipping is 3\u20135 business days and <strong>free on orders over $49</strong>. International orders arrive in 7\u201314 business days depending on destination. Full details in the <a href=\"/collections/all?view=shipping-returns\">Shipping &amp; Returns policy</a>.</p>"
+            "question": "Are the products genuine Apple products?",
+            "answer": "<p>Yes. <strong>Every product sold at Luminor is a genuine Apple device</strong> sourced from Apple Authorized Distribution channels. All items ship sealed in original packaging with full Apple warranty intact. You can verify any serial number directly on Apple Check Coverage portal.</p>"
           }
         },
         {
           "type": "question",
           "settings": {
-            "question": "What is Luminor\u2019s return policy?",
-            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn\u2019t meet your expectations \u2014 for any reason \u2014 send it back in any condition and we\u2019ll refund 100% of your purchase. Start on the <a href=\"/collections/all?view=shipping-returns\">returns page</a>.</p>"
+            "question": "Do I get Apple limited warranty and AppleCare+?",
+            "answer": "<p><strong>Yes. Every new device</strong> includes Apple 1-year limited warranty from date of purchase. AppleCare+ can be added within 60 days for eligible devices - it covers accidental damage, battery service, and Express Replacement. See Warranty &amp; AppleCare+ for all the details.</p>"
           }
         },
         {
           "type": "question",
           "settings": {
-            "question": "Are Luminor products covered by warranty?",
-            "answer": "<p>Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/collections/all?view=warranty\">warranty page</a> for full terms.</p>"
+            "question": "How fast is shipping and what does it cost?",
+            "answer": "<p><strong>Free 2-day shipping on all orders over $299.</strong> Standard shipping is $9.99 (3-5 business days) and free on orders over $99. Express and next-day options are available at checkout. Follow up anytime with Track Order. Full details in Shipping &amp; Returns.</p>"
           }
         }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

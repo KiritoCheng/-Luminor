@@ -41,14 +41,28 @@
   @media (prefers-reduced-motion: reduce) { .stats__watermark { display: none; } }
 </style>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Stats counter",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "watermark", "label": "Watermark text", "default": "LUMINOR" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "By the numbers" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted worldwide" }
+    {
+      "type": "text",
+      "id": "watermark",
+      "label": "Watermark text",
+      "default": "LUMINOR"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "By the numbers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted worldwide"
+    }
   ],
   "max_blocks": 4,
   "blocks": [
@@ -56,10 +70,28 @@
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "number", "label": "Number", "default": "120" },
-        { "type": "text", "id": "prefix", "label": "Prefix" },
-        { "type": "text", "id": "suffix", "label": "Suffix" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Creators equipped" }
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "120"
+        },
+        {
+          "type": "text",
+          "id": "prefix",
+          "label": "Prefix"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Creators equipped"
+        }
       ]
     }
   ],
@@ -67,11 +99,31 @@
     {
       "name": "Stats counter",
       "blocks": [
-        { "type": "stat", "settings": { "number": "120", "suffix": "K+", "label": "Creators equipped" } },
-        { "type": "stat", "settings": { "number": "48", "label": "Countries shipped" } },
-        { "type": "stat", "settings": { "number": "4.9", "suffix": "★", "label": "Average rating" } }
+        {
+          "type": "stat",
+          "settings": {
+            "number": "38",
+            "suffix": "+",
+            "label": "Apple products stocked"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "1",
+            "suffix": " Year",
+            "label": "Apple limited warranty included"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "24",
+            "suffix": "h",
+            "label": "Specialist response time"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

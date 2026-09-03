@@ -238,8 +238,7 @@
   </script>
 {%- endif -%}
 
-{% schema %}
-{
+{% schema %}{
   "name": "Hero / Slideshow",
   "settings": [
     {
@@ -247,8 +246,14 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "centered", "label": "Centered" },
-        { "value": "split", "label": "Split (left-aligned)" }
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "split",
+          "label": "Split (left-aligned)"
+        }
       ],
       "default": "split"
     },
@@ -257,8 +262,14 @@
       "id": "height",
       "label": "Height",
       "options": [
-        { "value": "medium", "label": "Medium (70vh)" },
-        { "value": "full", "label": "Full screen" }
+        {
+          "value": "medium",
+          "label": "Medium (70vh)"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        }
       ],
       "default": "medium"
     },
@@ -291,20 +302,79 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#f5f5f7" },
-        { "type": "checkbox", "id": "show_overlay", "label": "Show dark overlay", "default": true },
-        { "type": "select", "id": "color_scheme", "label": "Text color",
-          "options": [ { "value": "light", "label": "Dark text" }, { "value": "dark", "label": "Light text" } ],
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#f5f5f7"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_overlay",
+          "label": "Show dark overlay",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Text color",
+          "options": [
+            {
+              "value": "light",
+              "label": "Dark text"
+            },
+            {
+              "value": "dark",
+              "label": "Light text"
+            }
+          ],
           "default": "light"
         },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Apple gear, curated for you." },
-        { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium accessories and essentials, designed to pair perfectly with every device." },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the collection" },
-        { "type": "url", "id": "button_link", "label": "Button link" },
-        { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "Learn more" },
-        { "type": "url", "id": "button_link_2", "label": "Second button link" }
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "New"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Apple gear, curated for you."
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Premium accessories and essentials, designed to pair perfectly with every device."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Second button label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Second button link"
+        }
       ]
     }
   ],
@@ -312,9 +382,19 @@
     {
       "name": "Hero / Slideshow",
       "blocks": [
-        { "type": "slide", "settings": { "eyebrow": "New", "heading": "Apple gear, curated for you.", "subheading": "Premium accessories and essentials, designed to pair perfectly with every device." } }
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New",
+            "heading": "Apple gear, curated for you.",
+            "subheading": "Genuine Apple products and premium accessories. Every device, every color, every configuration - all in one place.",
+            "button_label": "Shop the collection",
+            "button_link": "/collections/all",
+            "button_label_2": "Learn more",
+            "button_link_2": "/collections/all?view=about"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

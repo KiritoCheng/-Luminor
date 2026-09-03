@@ -208,19 +208,34 @@
   })();
 </script>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Press",
   "tag": "section",
-  "settings": [{ "type": "text", "id": "title", "label": "Title", "default": "Featured on" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Featured on"
+    }
+  ],
   "max_blocks": 12,
   "blocks": [
     {
       "type": "logo",
       "name": "Media logo",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name (if no image)", "default": "MKBHD" },
-        { "type": "image_picker", "id": "image", "label": "Logo image" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (if no image)",
+          "default": "MKBHD"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image"
+        }
       ]
     },
     {
@@ -233,7 +248,12 @@
           "label": "Quote",
           "default": "I've gone on to basically replace all of my functional battery banks in my life with these."
         },
-        { "type": "text", "id": "source", "label": "Source", "default": "MKBHD" }
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "MKBHD"
+        }
       ]
     }
   ],
@@ -241,33 +261,64 @@
     {
       "name": "Press",
       "blocks": [
-        { "type": "logo", "settings": { "name": "MKBHD" } },
-        { "type": "logo", "settings": { "name": "TechSource" } },
-        { "type": "logo", "settings": { "name": "Austin Evans" } },
-        { "type": "logo", "settings": { "name": "Linus Tech Tips" } },
         {
-          "type": "quote",
+          "type": "logo",
           "settings": {
-            "quote": "I've gone on to basically replace all of my functional battery banks in my life with these.",
-            "source": "MKBHD"
+            "name": "9to5Mac"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "MacRumors"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "The Verge"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "iMore"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "AppleInsider"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Cult of Mac"
           }
         },
         {
           "type": "quote",
           "settings": {
-            "quote": "SHARGE is a company who tend to do batteries in a more interesting way.",
-            "source": "Austin Evans"
+            "quote": "Titanium makes the iPhone 15 Pro feel like a totally different class of device.",
+            "source": "The Verge"
           }
         },
         {
           "type": "quote",
           "settings": {
-            "quote": "If you don't have a dedicated spot in your setup to charge your devices, then you're gonna love SHARGE.",
-            "source": "Linus Tech Tips"
+            "quote": "The M3 Max is the kind of performance leap we haven't seen in mobile silicon in years.",
+            "source": "9to5Mac"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Apple Watch Ultra 2 is the best outdoor smartwatch on the market - bar none.",
+            "source": "iMore"
           }
         }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}
