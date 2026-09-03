@@ -1,29 +1,55 @@
 {%- comment -%}
   Hero / Slideshow section
   Supports a single slide or multiple rotating slides.
+  Awwwards-grade: editorial split, char-split headline, parallax layers, grain, magnetic CTA.
 {%- endcomment -%}
 {%- liquid
   assign blocks = section.blocks
   assign first_block = blocks | first
 -%}
 
+{%- comment -%} Awwwards-grade artistic placeholder: layered Apple-inspired composition {%- endcomment -%}
+{%- capture hero_placeholder_svg -%}
+<div class="hero__placeholder-art" aria-hidden="true">
+  <div class="hero__art-orb hero__art-orb--1"></div>
+  <div class="hero__art-orb hero__art-orb--2"></div>
+  <div class="hero__art-orb hero__art-orb--3"></div>
+  <svg class="hero__art-device" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="hp-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1d1d1f"/>
+        <stop offset="100%" stop-color="#424245"/>
+      </linearGradient>
+      <linearGradient id="hp-screen" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0a84ff"/>
+        <stop offset="50%" stop-color="#5e5ce6"/>
+        <stop offset="100%" stop-color="#bf5af2"/>
+      </linearGradient>
+      <linearGradient id="hp-stand" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#86868b"/>
+        <stop offset="100%" stop-color="#6e6e73"/>
+      </linearGradient>
+    </defs>
+    <rect x="80" y="60" width="240" height="320" rx="28" ry="28" fill="url(#hp-body)"/>
+    <rect x="96" y="76" width="208" height="288" rx="18" ry="18" fill="url(#hp-screen)"/>
+    <rect x="176" y="68" width="48" height="10" rx="5" ry="5" fill="#1d1d1f" opacity="0.6"/>
+    <path d="M 96 76 L 304 76 L 304 200 Q 200 240 96 200 Z" fill="#ffffff" opacity="0.08"/>
+    <path d="M 150 380 L 250 380 L 270 410 L 130 410 Z" fill="url(#hp-stand)"/>
+    <rect x="110" y="410" width="180" height="8" rx="4" ry="4" fill="url(#hp-stand)"/>
+  </svg>
+</div>
+{%- endcapture -%}
+
 <style>
-  /* Asymmetric split layout: content sits left over the image */
-  .hero--split {
-    text-align: left;
-  }
-  .hero--split .hero__cta {
-    justify-content: flex-start;
-  }
+  .hero--split { text-align: left; }
+  .hero--split .hero__cta { justify-content: flex-start; }
   @media screen and (min-width: 750px) {
-    .hero--split .hero__content {
-      max-width: 560px;
-    }
+    .hero--split .hero__content { max-width: 620px; }
   }
 </style>
 
 {%- if blocks.size > 0 -%}
-  <section class="section--flush hero-section reveal--clip" style="--reveal-delay:0ms">
+  <section class="section--flush hero-section" style="--reveal-delay:0ms">
     {%- if blocks.size > 1 -%}
       <div class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-rotation-speed="{{ section.settings.autorotate_speed }}">
         <div class="slideshow__track" data-slideshow-track>
@@ -32,7 +58,7 @@
               style="background-color: {{ block.settings.bg_color | default: '#f5f5f7' }}"
               {{ block.shopify_attributes }}>
               {%- if block.settings.image != blank -%}
-                <div class="hero__media">
+                <div class="hero__media" data-parallax="0.2">
                   {{ block.settings.image | image_url: width: 2400 | image_tag:
                     loading: 'eager',
                     sizes: '100vw',
@@ -41,18 +67,21 @@
                 </div>
               {%- else -%}
                 <div class="hero__media hero__media--placeholder">
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'hero__placeholder-img' }}
+                  {{ hero_placeholder_svg }}
                 </div>
               {%- endif -%}
+              <div class="hero__grain" aria-hidden="true"></div>
               {%- if block.settings.show_overlay -%}
                 <div class="hero__overlay"></div>
               {%- endif -%}
-              <div class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
-                {%- if block.settings.eyebrow != blank -%}
-                  <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
-                {%- endif -%}
+              <div class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}" data-hero-content>
+                <div class="hero__meta">
+                  <span class="hero__index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+                  <span class="hero__meta-line"></span>
+                  <span class="hero__meta-label">{{ block.settings.eyebrow | default: 'Featured' | escape }}</span>
+                </div>
                 {%- if block.settings.heading != blank -%}
-                  <h1 class="hero__title">{{ block.settings.heading | escape }}</h1>
+                  <h1 class="hero__title" data-split-chars>{{ block.settings.heading | escape }}</h1>
                 {%- endif -%}
                 {%- if block.settings.subheading != blank -%}
                   <p class="hero__subtitle">{{ block.settings.subheading | escape }}</p>
@@ -63,7 +92,10 @@
                       <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">{{ block.settings.button_label | escape }}</a>
                     {%- endif -%}
                     {%- if block.settings.button_label_2 != blank -%}
-                      <a href="{{ block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ block.settings.button_label_2 | escape }}</a>
+                      <a href="{{ block.settings.button_link_2 }}" class="link-arrow">
+                        {{ block.settings.button_label_2 | escape }}
+                        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </a>
                     {%- endif -%}
                   </div>
                 {%- endif -%}
@@ -101,19 +133,22 @@
           </div>
         {%- else -%}
           <div class="hero__media hero__media--placeholder" data-ken-burns data-parallax>
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'hero__placeholder-img' }}
+            {{ hero_placeholder_svg }}
           </div>
         {%- endif -%}
+        <div class="hero__grain" aria-hidden="true"></div>
         <span class="hero__watermark" aria-hidden="true" data-parallax>LUMINOR</span>
         {%- if first_block.settings.show_overlay -%}
           <div class="hero__overlay"></div>
         {%- endif -%}
-        <div class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
-          {%- if first_block.settings.eyebrow != blank -%}
-            <p class="eyebrow">{{ first_block.settings.eyebrow | escape }}</p>
-          {%- endif -%}
+        <div class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}" data-hero-content>
+          <div class="hero__meta">
+            <span class="hero__index">01</span>
+            <span class="hero__meta-line"></span>
+            <span class="hero__meta-label">{{ first_block.settings.eyebrow | default: 'Featured' | escape }}</span>
+          </div>
           {%- if first_block.settings.heading != blank -%}
-            <h1 class="hero__title">{{ first_block.settings.heading | escape }}</h1>
+            <h1 class="hero__title" data-split-chars>{{ first_block.settings.heading | escape }}</h1>
           {%- endif -%}
           {%- if first_block.settings.subheading != blank -%}
             <p class="hero__subtitle">{{ first_block.settings.subheading | escape }}</p>
@@ -121,17 +156,86 @@
           {%- if first_block.settings.button_label != blank or first_block.settings.button_label_2 != blank -%}
             <div class="hero__cta">
               {%- if first_block.settings.button_label != blank -%}
-                <a href="{{ first_block.settings.button_link }}" class="button button--primary button--lg">{{ first_block.settings.button_label | escape }}</a>
+                <a href="{{ first_block.settings.button_link }}" class="button button--primary button--lg" data-magnetic>{{ first_block.settings.button_label | escape }}</a>
               {%- endif -%}
               {%- if first_block.settings.button_label_2 != blank -%}
-                <a href="{{ first_block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ first_block.settings.button_label_2 | escape }}</a>
+                <a href="{{ first_block.settings.button_link_2 }}" class="link-arrow">
+                  {{ first_block.settings.button_label_2 | escape }}
+                  <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
               {%- endif -%}
             </div>
           {%- endif -%}
         </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <span class="hero__scroll-label">Scroll</span>
+          <span class="hero__scroll-line"></span>
+        </div>
       </div>
     {%- endif -%}
   </section>
+
+  <script>
+    (function () {
+      function splitChars(el) {
+        if (el.dataset.splitReady === '1') return;
+        var text = el.textContent;
+        el.setAttribute('aria-label', text);
+        el.textContent = '';
+        var words = text.split(/(\s+)/);
+        var fragment = document.createDocumentFragment();
+        var charIndex = 0;
+        words.forEach(function (word) {
+          if (/^\s+$/.test(word)) {
+            fragment.appendChild(document.createTextNode(word));
+            return;
+          }
+          var wordEl = document.createElement('span');
+          wordEl.className = 'hero__word';
+          wordEl.setAttribute('aria-hidden', 'true');
+          Array.from(word).forEach(function (ch) {
+            var span = document.createElement('span');
+            span.className = 'hero__char';
+            span.textContent = ch;
+            span.style.setProperty('--i', charIndex);
+            charIndex += 1;
+            wordEl.appendChild(span);
+          });
+          fragment.appendChild(wordEl);
+        });
+        el.appendChild(fragment);
+        el.dataset.splitReady = '1';
+      }
+
+      function initHeroAnimation() {
+        document.querySelectorAll('[data-hero-content]').forEach(function (content) {
+          var title = content.querySelector('[data-split-chars]');
+          if (title) splitChars(title);
+          requestAnimationFrame(function () {
+            content.classList.add('is-in');
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroAnimation);
+      } else {
+        initHeroAnimation();
+      }
+      document.addEventListener('shopify:section:load', initHeroAnimation);
+      document.addEventListener('shopify:section:select', initHeroAnimation);
+      document.addEventListener('slideshow:change', function (e) {
+        var slide = e.target && e.target.selectedSlide;
+        if (slide) {
+          var content = slide.querySelector('[data-hero-content]');
+          if (content) {
+            content.classList.remove('is-in');
+            requestAnimationFrame(function () { content.classList.add('is-in'); });
+          }
+        }
+      });
+    })();
+  </script>
 {%- endif -%}
 
 {% schema %}
@@ -194,10 +298,10 @@
           "options": [ { "value": "light", "label": "Dark text" }, { "value": "dark", "label": "Light text" } ],
           "default": "light"
         },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Essentials, elevated." },
-        { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium accessories for the way you live, work, and play." },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Apple gear, curated for you." },
+        { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium accessories and essentials, designed to pair perfectly with every device." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the collection" },
         { "type": "url", "id": "button_link", "label": "Button link" },
         { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "Learn more" },
         { "type": "url", "id": "button_link_2", "label": "Second button link" }
@@ -208,7 +312,7 @@
     {
       "name": "Hero / Slideshow",
       "blocks": [
-        { "type": "slide", "settings": { "heading": "Essentials, elevated.", "subheading": "Premium accessories for the way you live, work, and play." } }
+        { "type": "slide", "settings": { "eyebrow": "New", "heading": "Apple gear, curated for you.", "subheading": "Premium accessories and essentials, designed to pair perfectly with every device." } }
       ]
     }
   ]
