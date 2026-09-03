@@ -94,6 +94,8 @@
         /* ---- Layout ---- */
         --page-width: {{ settings.page_width }}px;
         --section-spacing: {{ settings.spacing_sections }}px;
+        --header-height: 60px; /* synced with header min-height 52 + padding-block 10*2; scrolled → 56 */
+        --grid-gap: 22px; /* default grid gap; sections may override locally */
         /* ---- Typography ---- */
         --heading-font: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
         --body-font: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
@@ -176,6 +178,9 @@
   </head>
 
   <body class="template-{{ request.page_type | handle }}">
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <a class="skip-to-content" href="#MainContent">
       {{ 'accessibility.skip_to_content' | t }}
     </a>

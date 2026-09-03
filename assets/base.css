@@ -69,14 +69,9 @@ a {
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-/* Only style text links blue — not buttons, nav, or action links */
-a:not([class*="btn"]):not([class*="button"]):not([class*="icon"]):not(
-    [class*="action"]
-  ):not([class*="nav-link"]):not([class*="dropdown"]):not(
-    [class*="social"]
-  ):not([class*="logo"]):not([class*="cart"]):not([class*="account"]):not(
-    [class*="close"]
-  ):not([class*="preview"]):not([class*="hp-card"]):not([class*="pill"]):not([class*="chip"]):not([class*="tile"]):hover {
+/* Only style plain text links blue — not buttons, nav, icons, or action links.
+   :where() drops specificity to (0,0,1) so component styles always win. */
+:where(a:not([class*="btn"], [class*="button"], [class*="icon"], [class*="action"], [class*="nav-link"], [class*="dropdown"], [class*="social"], [class*="logo"], [class*="cart"], [class*="account"], [class*="close"], [class*="preview"], [class*="hp-card"], [class*="pill"], [class*="chip"], [class*="tile"])):hover {
   color: var(--color-primary-hover);
 }
 
@@ -214,7 +209,7 @@ h6 {
 
 .grid {
   display: grid;
-  gap: 22px;
+  gap: var(--grid-gap, 22px);
 }
 
 .grid--2 {

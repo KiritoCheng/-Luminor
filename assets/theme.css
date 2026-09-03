@@ -41,36 +41,63 @@
   left: 0;
   right: 0;
   z-index: 100; /* BASELINE: drawers / modals / search MUST be above this */
-  background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
+  /* Fallback when backdrop-filter / color-mix are unsupported: fully opaque */
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.06));
   transition: background-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-    border-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-    backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
-    -webkit-backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+    border-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 /* Offset main content below fixed header */
 #MainContent {
-  padding-top: 60px;
+  padding-top: var(--header-height, 60px);
 }
 
-/* When mega menu is open: header background goes 100% opaque to prevent scrim from "bleeding through" its transparency */
-body.is-mega-open .header-wrapper,
-body.is-mega-open .header-wrapper.is-scrolled {
-  background-color: var(--color-bg);
-  backdrop-filter: saturate(180%) blur(32px);
-  -webkit-backdrop-filter: saturate(180%) blur(32px);
+/* Progressive enhancement: translucent bg + blur only when both supported */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (color: color-mix(in srgb, white, black)) {
+  .header-wrapper {
+    background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
+    transition: background-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+      border-color 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+      backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1),
+      -webkit-backdrop-filter 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+  }
+
+  /* When mega menu is open: header background goes 100% opaque to prevent scrim from "bleeding through" its transparency */
+  body.is-mega-open .header-wrapper,
+  body.is-mega-open .header-wrapper.is-scrolled {
+    background-color: var(--color-bg);
+    backdrop-filter: saturate(180%) blur(32px);
+    -webkit-backdrop-filter: saturate(180%) blur(32px);
+  }
+
+  .header-wrapper.is-scrolled {
+    background-color: color-mix(in srgb, var(--color-bg) 84%, transparent);
+    backdrop-filter: saturate(180%) blur(30px);
+    -webkit-backdrop-filter: saturate(180%) blur(30px);
+    border-bottom-color: color-mix(in srgb, var(--color-text) 9%, transparent);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 4%, transparent),
+      0 4px 24px color-mix(in srgb, var(--color-text) 5%, transparent);
+  }
 }
 
-.header-wrapper.is-scrolled {
-  background-color: color-mix(in srgb, var(--color-bg) 84%, transparent);
-  backdrop-filter: saturate(180%) blur(30px);
-  -webkit-backdrop-filter: saturate(180%) blur(30px);
-  border-bottom-color: color-mix(in srgb, var(--color-text) 9%, transparent);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 4%, transparent),
-    0 4px 24px color-mix(in srgb, var(--color-text) 5%, transparent);
+/* -------------------- Scroll progress bar -------------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 200; /* above header (100), drawers (200+) */
+  will-change: transform;
+  transition: transform 0.1s linear;
+  pointer-events: none;
 }
 
 .header {

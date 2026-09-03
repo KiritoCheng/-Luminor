@@ -17,6 +17,7 @@
       this.initParallax();
       this.initStaggerReveal();
       this.initTiltCards();
+      this.initMagneticButtons();
       this.initCountUp();
       this.initMegaMenu();
       this.initSlideshow();
@@ -27,6 +28,7 @@
       this.bindFacetsToggle();
       this.bindSmoothScroll();
       this.initHeaderScroll();
+      this.initScrollProgress();
       this.markLoaded();
       this.bindSectionReload();
     },
@@ -35,8 +37,9 @@
     bindSectionReload() {
       document.addEventListener('shopify:section:load', () => {
         this.initReveal();
-        this.initStaggerReveal();
-        this.initCountUp();
+      this.initStaggerReveal();
+      this.initMagneticButtons();
+      this.initCountUp();
         this.initParallax();
         this.initSlideshow();
         this.initAccordions();
@@ -928,7 +931,27 @@
       }, { passive: true });
     },
 
-    /* ---------- Toast ---------- */
+    /* ---------- Scroll progress bar (top reading indicator) ---------- */
+    initScrollProgress() {
+      const bar = document.querySelector('.scroll-progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, (window.scrollY || window.pageYOffset || 0) / max)) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    },
     toast(message) {
       let el = document.querySelector('[data-toast]');
       if (!el) {
