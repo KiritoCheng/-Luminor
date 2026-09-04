@@ -1,37 +1,35 @@
 {% comment %}
-  Apple-style rich 404 page. Structure:
-  1) Huge gradient watermark + eyebrow + heading + paragraph
-  2) Primary CTA bar (home / shop / browse all)
-  3) Inline search form
-  4) "You might be looking for" — 8 quick link tiles (Shop 3 × Support 4 × Company 1)
-  5) Popular collections strip (Audio / Desk / Everyday) — with gradient cards, icon glyphs, descriptions
-  6) Mini FAQ preview — 3 top collapsible questions
-  7) "Still stuck?" help CTA banner (contact support)
+  404 page — Stage 1 Hero only.
+  Gradient watermark + eyebrow + heading + paragraph + CTA bar.
 {% endcomment %}
 
 <section class="section not-found not-found--rich">
   <style>
     /* ---------- Layout tokens ---------- */
-    .nf-max { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .nf-max { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    @media (min-width: 480px) { .nf-max { padding: 0 24px; } }
     @media (min-width: 768px) { .nf-max { padding: 0 32px; } }
-
-    .nf-section-gap { margin-top: 96px; }
-    @media (max-width: 767px) { .nf-section-gap { margin-top: 64px; } }
 
     /* ---------- Stage 1. Hero ---------- */
     .nf-hero {
       position: relative;
       text-align: center;
-      padding-top: 88px;
-      padding-bottom: 40px;
+      padding-top: 48px;
+      padding-bottom: 72px;
       overflow: hidden;
+    }
+    @media (min-width: 480px) {
+      .nf-hero { padding-top: 88px; padding-bottom: 104px; }
     }
     .nf-hero__watermark {
       position: absolute;
       left: 50%;
-      top: 10px;
+      top: 0;
       transform: translateX(-50%);
-      font-size: clamp(220px, 32vw, 420px);
+      /*  320px → 140px (3字总宽≈252px，320px-40px padding=280px，两侧仅14px裁切)
+          768px → 338px (未到上限)
+          1024px+→ 420px 上限                             */
+      font-size: clamp(140px, 44vw, 420px);
       line-height: 0.82;
       font-weight: 900;
       letter-spacing: -0.06em;
@@ -55,7 +53,10 @@
       filter: blur(20px);
       z-index: -1;
     }
-    .nf-hero__meta { position: relative; z-index: 1; padding-top: clamp(160px, 22vw, 260px); }
+    /*  meta 起始位置 = watermark视觉高度的 ~85%，避免与水印底部重叠
+        320px: watermark≈115px高, padding-top 108px → 顶部留白+错位缓冲  */
+    .nf-hero__meta { position: relative; z-index: 1; padding-top: clamp(108px, 34vw, 260px); }
+    @media (min-width: 480px) { .nf-hero__meta { padding-top: clamp(160px, 22vw, 260px); } }
     .nf-eyebrow {
       display: inline-block;
       font-size: 13px;
@@ -81,31 +82,43 @@
       color: var(--color-text-muted, #71717A);
     }
 
-    /* ---------- Stage 2. CTA bar ---------- */
+    /* ---------- Hero CTA bar ---------- */
     .nf-cta {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin-top: 36px;
+      align-items: center;
+      column-gap: 12px;
+      row-gap: 8px;
+      margin-top: 28px;
     }
+    @media (min-width: 480px) { .nf-cta { margin-top: 36px; row-gap: 12px; } }
     .nf-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 12px 22px;
-      border-radius: 22px;
+      min-height: 44px;           /* WCAG 2.5.5 — 最小触控尺寸 */
+      padding: 10px 20px;
+      border-radius: var(--button-radius, 14px);
       font-size: 15px;
+      line-height: 1.2;
       font-weight: 500;
       text-decoration: none;
       transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+      box-sizing: border-box;
     }
+    @media (min-width: 480px) { .nf-btn { padding: 12px 22px; } }
     .nf-btn:hover { transform: translateY(-1px); }
     .nf-btn--primary {
       background: #4F46E5;
       color: #fff;
       box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(79,70,229,0.18);
+      flex: 1 1 auto;               /* 窄屏下主按钮占满整行，更易按 */
+      width: 100%;
+      max-width: 320px;
     }
+    @media (min-width: 480px) { .nf-btn--primary { flex: 0 0 auto; width: auto; } }
     .nf-btn--primary:hover { background: #4338CA; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 28px rgba(79,70,229,0.24); }
     .nf-btn--ghost {
       color: var(--color-text, #1B1B20);
@@ -116,357 +129,18 @@
       background: var(--color-background-alt, #F6F6F8);
       border-color: var(--color-input-border, #78716C);
     }
-    .nf-btn--link { color: #4F46E5; padding-left: 4px; padding-right: 4px; }
-    .nf-btn__arrow { transition: transform .2s ease; }
-    .nf-btn:hover .nf-btn__arrow { transform: translateX(3px); }
-
-    /* ---------- Stage 3. Search ---------- */
-    .nf-search {
-      margin-top: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .nf-search__wrap {
-      position: relative;
-      width: 100%;
-      max-width: 560px;
-    }
-    .nf-search__icon {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      color: var(--color-text-muted, #78716C);
-      pointer-events: none;
-    }
-    .nf-search__input {
-      width: 100%;
-      height: 54px;
-      padding: 0 20px 0 50px;
-      border-radius: 22px;
-      border: 1px solid var(--color-border, #D4D4D8);
-      background: var(--color-background, #fff);
-      color: var(--color-text, #1B1B20);
-      font-size: 16px;
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .nf-search__input::placeholder { color: var(--color-text-muted, #78716C); }
-    .nf-search__input:focus {
-      border-color: #4F46E5;
-      box-shadow: 0 0 0 4px rgba(0,113,227,0.12);
-    }
-    .nf-search__hint {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--color-text-muted, #78716C);
-    }
-    .nf-search__hint a { color: #4F46E5; text-decoration: none; margin: 0 6px; }
-    .nf-search__hint a:hover { text-decoration: underline; }
-
-    /* ---------- Section shared heading ---------- */
-    .nf-sec-head { text-align: center; margin-bottom: 40px; }
-    .nf-sec-head__eyebrow {
-      display: inline-block;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    /*  保持与兄弟按钮一致的上下 padding / min-height，
+        仅缩减左右内边距以呈现"链接"视觉，同时触控区仍≥44px  */
+    .nf-btn--link {
       color: #4F46E5;
-      font-weight: 600;
-      margin-bottom: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 6px;
+      padding-right: 6px;
     }
-    .nf-sec-head h2 {
-      margin: 0 0 12px;
-      font-size: clamp(26px, 3vw, 38px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--color-text, #1B1B20);
-      line-height: 1.15;
-    }
-    .nf-sec-head p {
-      margin: 0 auto;
-      max-width: 620px;
-      color: var(--color-text-muted, #71717A);
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    /* ---------- Stage 4. Quick link tiles ---------- */
-    .nf-tiles {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-    @media (max-width: 1023px) { .nf-tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-    @media (max-width: 479px) { .nf-tiles { grid-template-columns: 1fr; } }
-
-    .nf-tile {
-      position: relative;
-      display: block;
-      padding: 22px 22px 20px;
-      border-radius: 22px;
-      background: var(--color-background, #fff);
-      border: 1px solid var(--color-border, #D4D4D8);
-      text-decoration: none;
-      color: inherit;
-      overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .nf-tile::before {
-      content: "";
-      position: absolute;
-      inset: auto -1px -1px -1px;
-      height: 0;
-      background: linear-gradient(180deg, transparent, rgba(0,113,227,0.04));
-      transition: height .25s ease;
-      border-radius: 0 0 22px 22px;
-    }
-    .nf-tile:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-      border-color: rgba(0,113,227,0.35);
-    }
-    .nf-tile:hover::before { height: 60%; }
-    .nf-tile__cat {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-text-muted, #78716C);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .nf-tile__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .nf-tile__title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--color-text, #1B1B20);
-      margin: 0;
-      line-height: 1.3;
-    }
-    .nf-tile__sub {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--color-text-muted, #78716C);
-      line-height: 1.45;
-    }
-    .nf-tile__chev {
-      width: 32px;
-      height: 32px;
-      flex: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--color-background-alt, #F6F6F8);
-      color: var(--color-text, #1B1B20);
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .nf-tile:hover .nf-tile__chev {
-      background: #4F46E5;
-      color: #fff;
-      transform: translateX(2px);
-    }
-    .nf-tile__chev svg { width: 14px; height: 14px; }
-
-    /* ---------- Stage 5. Popular Collections gradient strip ---------- */
-    .nf-pop {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-    @media (max-width: 1023px) { .nf-pop { grid-template-columns: 1fr; } }
-    .nf-pop__card {
-      position: relative;
-      display: block;
-      border-radius: 28px;
-      overflow: hidden;
-      text-decoration: none;
-      color: #fff;
-      min-height: 260px;
-      padding: 30px;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-    .nf-pop__card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.16); }
-    .nf-pop__card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 85% 20%, rgba(255,255,255,0.18), transparent 45%),
-        radial-gradient(circle at 10% 110%, rgba(0,0,0,0.12), transparent 55%);
-      pointer-events: none;
-    }
-    .nf-pop--audio   { background: linear-gradient(135deg, #1F1F23 0%, #4F46E5 60%, #60A5FA 100%); }
-    .nf-pop--desk    { background: linear-gradient(135deg, #0b8e70 0%, #35d69f 60%, #bf5af2 100%); }
-    .nf-pop--everyday{ background: linear-gradient(135deg, #ff375f 0%, #ff9f0a 60%, #ffd60a 100%); }
-    .nf-pop__glyph {
-      width: 52px; height: 52px;
-      border-radius: 16px;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.16);
-      backdrop-filter: blur(6px);
-      margin-bottom: 40px;
-      border: 1px solid rgba(255,255,255,0.22);
-    }
-    .nf-pop__glyph svg { width: 26px; height: 26px; }
-    .nf-pop__eyebrow {
-      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
-      opacity: .85; margin-bottom: 10px;
-    }
-    .nf-pop__card h3 {
-      margin: 0 0 10px; font-size: 26px; font-weight: 700; letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
-    .nf-pop__card p {
-      margin: 0 0 22px;
-      font-size: 14.5px;
-      line-height: 1.5;
-      opacity: .9;
-      max-width: 360px;
-    }
-    .nf-pop__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 9px 16px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.28);
-      backdrop-filter: blur(4px);
-      transition: background .2s ease;
-    }
-    .nf-pop__card:hover .nf-pop__cta { background: rgba(255,255,255,0.3); }
-    .nf-pop__cta svg { width: 12px; height: 12px; }
-
-    /* ---------- Stage 6. Mini FAQ preview ---------- */
-    .nf-faq {
-      background: var(--color-background-alt, #F6F6F8);
-      border-radius: 28px;
-      padding: 48px clamp(20px, 4vw, 56px);
-    }
-    .nf-faq__inner { max-width: 820px; margin: 0 auto; }
-    .nf-faq__head { text-align: center; margin-bottom: 32px; }
-    .nf-faq__head h3 {
-      margin: 0 0 8px;
-      font-size: clamp(22px, 2.5vw, 30px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--color-text, #1B1B20);
-    }
-    .nf-faq__head p { margin: 0; color: var(--color-text-muted, #71717A); font-size: 15px; }
-    .nf-faq__item {
-      border-top: 1px solid var(--color-border, #D4D4D8);
-    }
-    .nf-faq__item:last-child { border-bottom: 1px solid var(--color-border, #D4D4D8); }
-    .nf-faq__q {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 20px 2px;
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      text-align: left;
-      color: var(--color-text, #1B1B20);
-      font-size: 16px;
-      font-weight: 600;
-      font-family: inherit;
-    }
-    .nf-faq__q:focus-visible { outline: 2px solid #4F46E5; outline-offset: 4px; border-radius: 8px; }
-    .nf-faq__ic {
-      position: relative;
-      width: 20px; height: 20px;
-      flex: none;
-      border-radius: 50%;
-      border: 1.5px solid var(--color-border, #D4D4D8);
-      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
-      color: var(--color-text, #1B1B20);
-    }
-    .nf-faq__q[aria-expanded="true"] .nf-faq__ic {
-      transform: rotate(45deg);
-      background: #4F46E5;
-      border-color: #4F46E5;
-      color: #fff;
-    }
-    .nf-faq__ic::before, .nf-faq__ic::after {
-      content: "";
-      position: absolute;
-      background: currentColor;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 1px;
-    }
-    .nf-faq__ic::before { width: 10px; height: 1.5px; }
-    .nf-faq__ic::after  { width: 1.5px; height: 10px; }
-    .nf-faq__a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease;
-    }
-    .nf-faq__q[aria-expanded="true"] + .nf-faq__a { max-height: 320px; }
-    .nf-faq__a > div {
-      padding: 0 2px 22px;
-      color: var(--color-text-muted, #71717A);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .nf-faq__a a { color: #4F46E5; text-decoration: none; }
-    .nf-faq__a a:hover { text-decoration: underline; }
-    .nf-faq__foot { text-align: center; margin-top: 28px; }
-
-    /* ---------- Stage 7. Help banner ---------- */
-    .nf-banner {
-      position: relative;
-      border-radius: 28px;
-      padding: clamp(36px, 5vw, 64px);
-      overflow: hidden;
-      background: linear-gradient(135deg, #0a0a0c 0%, #1B1B20 45%, #4F46E5 120%);
-      color: #fff;
-    }
-    .nf-banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 90% 10%, rgba(90,200,250,0.22), transparent 50%),
-        radial-gradient(circle at 10% 100%, rgba(191,90,242,0.18), transparent 50%);
-      pointer-events: none;
-    }
-    .nf-banner__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
-    @media (max-width: 900px) { .nf-banner__inner { grid-template-columns: 1fr; gap: 28px; } }
-    .nf-banner__eyebrow {
-      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #60A5FA; font-weight: 600; margin-bottom: 14px;
-    }
-    .nf-banner__inner h3 {
-      margin: 0 0 14px;
-      font-size: clamp(26px, 3vw, 40px);
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      font-weight: 700;
-    }
-    .nf-banner__inner p {
-      margin: 0;
-      font-size: 15.5px;
-      line-height: 1.55;
-      opacity: .82;
-      max-width: 520px;
-    }
-    .nf-banner__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end; }
-    @media (max-width: 900px) { .nf-banner__actions { justify-content: flex-start; } }
-    .nf-banner .nf-btn--primary { background: #fff; color: #0a0a0c; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    .nf-banner .nf-btn--primary:hover { background: #F6F6F8; }
-    .nf-banner .nf-btn--ghost { color: #fff; border-color: rgba(255,255,255,0.28); }
-    .nf-banner .nf-btn--ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+    @media (min-width: 480px) { .nf-btn--link { padding-top: 12px; padding-bottom: 12px; } }
+    .nf-btn__arrow { transition: transform .2s ease; display: inline-block; }
+    .nf-btn:hover .nf-btn__arrow { transform: translateX(3px); }
   </style>
 
   {% comment %} ==================== Stage 1. HERO ==================== {% endcomment %}
@@ -476,8 +150,8 @@
       <span class="nf-eyebrow">Nothing here</span>
       <h1>We can&rsquo;t find that page.</h1>
       <p class="lead">
-        The URL you followed might be out of date, or the page may have moved. Don&rsquo;t worry &mdash;
-        we&rsquo;ve put together a few of the most popular destinations below to get you back on track.
+        The URL you followed might be out of date, or the page may have moved.
+        Use the links below to get back on track.
       </p>
 
       <div class="nf-cta">
@@ -495,314 +169,7 @@
       </div>
     </div>
   </div>
-
-  {% comment %} ==================== Stage 2. SEARCH ==================== {% endcomment %}
-  <div class="nf-max nf-search">
-    <div>
-      <form class="nf-search__wrap" action="{{ routes.search_url }}" method="get" role="search">
-        <span class="nf-search__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        </span>
-        <input
-          id="nf-search-input"
-          class="nf-search__input"
-          type="search"
-          name="q"
-          placeholder="Search Luminor for products, articles, or help&hellip;"
-          aria-label="Search Luminor"
-          autocomplete="off"
-        />
-      </form>
-      <div class="nf-search__hint">
-        Try:
-        <a href="/collections/airpods-home">Audio</a>
-        <a href="/collections/mac">Desk</a>
-        <a href="/pages/warranty">Warranty</a>
-        <a href="/pages/contact">Contact</a>
-      </div>
-    </div>
-  </div>
-
-  {% comment %} ==================== Stage 3. QUICK LINK TILES ==================== {% endcomment %}
-  <div class="nf-max nf-section-gap">
-    <div class="nf-sec-head">
-      <span class="nf-sec-head__eyebrow">Start here</span>
-      <h2>You might be looking for</h2>
-      <p>Eight of the most-visited pages on Luminor &mdash; from the shop catalog to shipping and returns policy.</p>
-    </div>
-
-    <div class="nf-tiles">
-      {% comment %} Shop (3) + Support (4) + Company (1) = 8 tiles {% endcomment %}
-
-      <a class="nf-tile" href="/collections/airpods-home">
-        <span class="nf-tile__cat">Shop</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Audio</p>
-            <div class="nf-tile__sub">Headphones, earbuds, speakers &amp; soundbars.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/collections/mac">
-        <span class="nf-tile__cat">Shop</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Desk</p>
-            <div class="nf-tile__sub">Lamps, keyboards, MagSafe chargers &amp; hubs.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/collections/accessories">
-        <span class="nf-tile__cat">Shop</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Everyday carry</p>
-            <div class="nf-tile__sub">Wallets, watches, tumblers &amp; accessories.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/pages/faq">
-        <span class="nf-tile__cat">Support</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Help Center &amp; FAQs</p>
-            <div class="nf-tile__sub">Answers to the questions we get every day.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/pages/shipping-returns">
-        <span class="nf-tile__cat">Support</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Shipping &amp; Returns</p>
-            <div class="nf-tile__sub">Delivery times, free returns, and how we pack.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/pages/warranty">
-        <span class="nf-tile__cat">Support</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Warranty</p>
-            <div class="nf-tile__sub">1-2 year limited coverage, and what it covers.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/pages/track-order">
-        <span class="nf-tile__cat">Support</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Track an order</p>
-            <div class="nf-tile__sub">Look up a shipment with your order number.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="nf-tile" href="/pages/about">
-        <span class="nf-tile__cat">Company</span>
-        <div class="nf-tile__row">
-          <div>
-            <p class="nf-tile__title">Our story</p>
-            <div class="nf-tile__sub">Who we are, what we make, and why we exist.</div>
-          </div>
-          <span class="nf-tile__chev" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  {% comment %} ==================== Stage 4. POPULAR COLLECTIONS GRADIENT CARDS ==================== {% endcomment %}
-  <div class="nf-max nf-section-gap">
-    <div class="nf-sec-head">
-      <span class="nf-sec-head__eyebrow">Shop by category</span>
-      <h2>Popular collections</h2>
-      <p>Three curated lines, each one obsessively engineered. A good place to start if you&rsquo;re new to Luminor.</p>
-    </div>
-
-    <div class="nf-pop">
-      <a href="/collections/airpods-home" class="nf-pop__card nf-pop--audio">
-        <span class="nf-pop__glyph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z"/><path d="M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z"/></svg>
-        </span>
-        <div style="position:relative;z-index:1">
-          <div class="nf-pop__eyebrow">Category 01 / Audio</div>
-          <h3>Sound, tuned for life.</h3>
-          <p>Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.</p>
-          <span class="nf-pop__cta">Shop Audio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-        </div>
-      </a>
-
-      <a href="/collections/mac" class="nf-pop__card nf-pop--desk">
-        <span class="nf-pop__glyph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v2M18 18v2"/></svg>
-        </span>
-        <div style="position:relative;z-index:1">
-          <div class="nf-pop__eyebrow">Category 02 / Desk</div>
-          <h3>The workspace, rethought.</h3>
-          <p>Lamps, keyboards, chargers and hubs &mdash; built to be seen without stealing focus.</p>
-          <span class="nf-pop__cta">Shop Desk <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-        </div>
-      </a>
-
-      <a href="/collections/accessories" class="nf-pop__card nf-pop--everyday">
-        <span class="nf-pop__glyph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
-        </span>
-        <div style="position:relative;z-index:1">
-          <div class="nf-pop__eyebrow">Category 03 / Everyday</div>
-          <h3>Carry that ages well.</h3>
-          <p>Full-grain leather, titanium, and 316 stainless steel &mdash; objects for the every day.</p>
-          <span class="nf-pop__cta">Shop Everyday <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  {% comment %} ==================== Stage 5. MINI FAQ ==================== {% endcomment %}
-  <div class="nf-max nf-section-gap">
-    <div class="nf-faq">
-      <div class="nf-faq__inner">
-        <div class="nf-faq__head">
-          <h3>Quick answers, top three questions</h3>
-          <p>These three alone solve more than 60% of support tickets. Still stuck? Scroll to the bottom &mdash; we&rsquo;re here for you.</p>
-        </div>
-
-        <div class="nf-faq__item">
-          <button class="nf-faq__q" type="button" aria-expanded="false">
-            <span>How long does shipping take &amp; is it free?</span>
-            <span class="nf-faq__ic" aria-hidden="true"></span>
-          </button>
-          <div class="nf-faq__a"><div>
-            Standard US shipping is 3&ndash;5 business days and <strong>free on orders over $49</strong>. International orders arrive in 7&ndash;14 business days depending on the destination. Read the full breakdown in our
-            <a href="/pages/shipping-returns">Shipping &amp; Returns policy</a>.
-          </div></div>
-        </div>
-
-        <div class="nf-faq__item">
-          <button class="nf-faq__q" type="button" aria-expanded="false">
-            <span>What is Luminor&rsquo;s return policy?</span>
-            <span class="nf-faq__ic" aria-hidden="true"></span>
-          </button>
-          <div class="nf-faq__a"><div>
-            <strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn&rsquo;t meet your expectations &mdash; for any reason &mdash; send it back in any condition and we&rsquo;ll refund 100% of your purchase. You can start the process from the
-            <a href="/pages/shipping-returns">returns page</a>.
-          </div></div>
-        </div>
-
-        <div class="nf-faq__item">
-          <button class="nf-faq__q" type="button" aria-expanded="false">
-            <span>Are Luminor products covered by warranty?</span>
-            <span class="nf-faq__ic" aria-hidden="true"></span>
-          </button>
-          <div class="nf-faq__a"><div>
-            Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the
-            <a href="/pages/warranty">warranty page</a> for full terms and how to file a claim.
-          </div></div>
-        </div>
-
-        <div class="nf-faq__foot">
-          <a href="/pages/faq" class="nf-btn nf-btn--ghost">
-            See all frequently asked questions
-            <span class="nf-btn__arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% comment %} ==================== Stage 6. HELP BANNER ==================== {% endcomment %}
-  <div class="nf-max nf-section-gap" style="margin-bottom: 96px">
-    <div class="nf-banner">
-      <div class="nf-banner__inner">
-        <div>
-          <div class="nf-banner__eyebrow">Still stuck?</div>
-          <h3>We&rsquo;re one message away.</h3>
-          <p>
-            A real Luminor specialist &mdash; not a bot &mdash; will reply within 24 hours on weekdays. We can help with
-            orders, product questions, warranty claims, or even a recommendation if you&rsquo;re not sure what to buy.
-          </p>
-        </div>
-        <div class="nf-banner__actions">
-          <a href="/pages/contact" class="nf-btn nf-btn--primary">
-            Contact support
-            <span class="nf-btn__arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <a href="{{ routes.all_products_collection_url }}" class="nf-btn nf-btn--ghost">
-            Start shopping instead
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
-
-<script>
-  /* ----------- Mini FAQ accordion (no framework) ----------- */
-  (function () {
-    var root = document.querySelector('.not-found--rich');
-    if (!root) return;
-    var btns = root.querySelectorAll('.nf-faq__q');
-    btns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var open = btn.getAttribute('aria-expanded') === 'true';
-        // close siblings (single-open)
-        btns.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
-        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-      });
-    });
-  })();
-
-  /* ----------- Legacy virtual-page router (preserves existing fix) ----------- */
-  (function () {
-    var map = {
-      'faq':              '/pages/faq',
-      'about':            '/pages/about',
-      'shipping-returns': '/pages/shipping-returns',
-      'warranty':         '/pages/warranty',
-      'track-order':      '/pages/track-order',
-      'audio':            '/collections/airpods-home',
-      'desk':             '/collections/mac',
-      'everyday':         '/collections/accessories',
-      'contact':          '/pages/contact'
-    };
-    try {
-      var path = (location.pathname || '').replace(/\/+$/, '');
-      var m = path.match(/^\/pages\/(.+)$/i);
-      if (m && map[m[1]]) {
-        location.replace(map[m[1]] + (location.hash || ''));
-      }
-    } catch (e) {}
-  })();
-</script>
 
 {% schema %}
 {

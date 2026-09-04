@@ -95,10 +95,10 @@
   },
   "order": [
     "hero",
-    "rich_text_intro",
     "featured_collection",
-    "story_design",
     "collection_list",
+    "rich_text_intro",
+    "story_design",
     "story_craft",
     "multicolumn",
     "newsletter"
