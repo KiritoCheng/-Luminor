@@ -1,14 +1,27 @@
 {%- comment -%}
   Renders a price block for a product / variant.
-  Accepts: product (product object) or variant (variant object)
+  Accepts:
+    - product: product object (optional)
+    - variant: variant object (optional, falls back to product.selected_or_first_available_variant)
+    - selling_plan_allocation: selling plan allocation object (optional)
 {%- endcomment -%}
 {%- liquid
   assign target = product | default: variant
+  assign variant = variant | default: product.selected_or_first_available_variant
+  assign selling_plan_allocation = selling_plan_allocation | default: variant.selling_plan_allocation
+
   assign compare_at = target.compare_at_price
   assign price = target.price
+
+  if selling_plan_allocation
+    assign price = selling_plan_allocation.price
+    if selling_plan_allocation.compare_at_price > price
+      assign compare_at = selling_plan_allocation.compare_at_price
+    endif
+  endif
 -%}
 
-<div class="price {% if compare_at > price %}price--on-sale{% endif %}">
+<div class="price {% if compare_at > price %}price--on-sale{% endif %}" data-price>
   {%- if compare_at > price -%}
     <span class="price__regular">{{ compare_at | money }}</span>
     <span class="price__sale">{{ price | money }}</span>
@@ -19,6 +32,12 @@
   {%- if target.unit_price_measurement -%}
     <span class="price__unit">
       {{ target.unit_price | money }} / {{ target.unit_price_measurement.reference_unit }}
+    </span>
+  {%- endif -%}
+
+  {%- if selling_plan_allocation and selling_plan_allocation.selling_plan -%}
+    <span class="price__selling-plan" style="display:block;font-size:0.875rem;color:var(--color-text-muted, #6e6e73);margin-top:4px;">
+      {{ selling_plan_allocation.selling_plan.name | escape }}
     </span>
   {%- endif -%}
 </div>

@@ -8,11 +8,16 @@
       <div class="editorial__visual">
         {%- if section.settings.image_1 != blank -%}
           <div class="editorial__image editorial__image--main">
-            {{ section.settings.image_1 | image_url: width: 1200 | image_tag:
-              loading: 'lazy',
-              widths: '375, 550, 750, 1000, 1200',
-              sizes: '(max-width: 749px) 100vw, 50vw',
-              alt: section.settings.image_1.alt | escape }}
+            {{
+              section.settings.image_1
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 550, 750, 1000, 1200',
+                sizes: '(max-width: 749px) 100vw, 50vw',
+                alt: section.settings.image_1.alt
+              | escape
+            }}
           </div>
         {%- else -%}
           <div class="editorial__image editorial__image--main editorial__image--placeholder">
@@ -21,11 +26,16 @@
         {%- endif -%}
         {%- if section.settings.image_2 != blank -%}
           <div class="editorial__image editorial__image--offset">
-            {{ section.settings.image_2 | image_url: width: 800 | image_tag:
-              loading: 'lazy',
-              widths: '300, 400, 600, 800',
-              sizes: '(max-width: 749px) 40vw, 25vw',
-              alt: section.settings.image_2.alt | escape }}
+            {{
+              section.settings.image_2
+              | image_url: width: 800
+              | image_tag:
+                loading: 'lazy',
+                widths: '300, 400, 600, 800',
+                sizes: '(max-width: 749px) 40vw, 25vw',
+                alt: section.settings.image_2.alt
+              | escape
+            }}
           </div>
         {%- endif -%}
       </div>
@@ -41,110 +51,14 @@
           <div class="editorial__text rte">{{ section.settings.text }}</div>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link }}" class="button button--primary button--lg">{{ section.settings.button_label | escape }}</a>
+          <a href="{{ section.settings.button_link }}" class="button button--primary button--lg">
+            {{- section.settings.button_label | escape -}}
+          </a>
         {%- endif -%}
       </div>
     </div>
   </div>
 </section>
-
-<style>
-.editorial__grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 64px;
-  align-items: center;
-}
-
-.editorial__visual {
-  position: relative;
-}
-
-.editorial__image {
-  border-radius: var(--image-radius);
-  overflow: hidden;
-}
-
-.editorial__image--main {
-  aspect-ratio: 4 / 5;
-}
-
-.editorial__image--main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.editorial__image--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.editorial__placeholder {
-  width: 100%;
-  height: 100%;
-}
-
-.editorial__image--offset {
-  position: absolute;
-  bottom: -32px;
-  right: -32px;
-  width: 45%;
-  aspect-ratio: 1 / 1;
-  border: 6px solid var(--color-bg);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.12);
-  z-index: 2;
-}
-
-.editorial__image--offset img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.editorial__content {
-  max-width: 520px;
-}
-
-.editorial__heading {
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  margin-bottom: 24px;
-  text-wrap: balance;
-}
-
-.editorial__text {
-  font-size: 1.0625rem;
-  line-height: 1.65;
-  color: var(--color-text-muted);
-  margin-bottom: 32px;
-}
-
-.editorial__text p + p {
-  margin-top: 1em;
-}
-
-@media (max-width: 990px) {
-  .editorial__grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-  .editorial__image--offset {
-    width: 35%;
-    bottom: -20px;
-    right: -10px;
-  }
-}
-
-@media (max-width: 749px) {
-  .editorial__image--offset {
-    display: none;
-  }
-}
-</style>
 
 {% schema %}
 {
@@ -153,14 +67,17 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "Designed with intention. Built to last." },
-    { "type": "richtext", "id": "text", "label": "Body text", "default": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>"
+    },
     { "type": "image_picker", "id": "image_1", "label": "Main image" },
     { "type": "image_picker", "id": "image_2", "label": "Offset image (optional)" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Read our story" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
-  "presets": [
-    { "name": "Editorial" }
-  ]
+  "presets": [{ "name": "Editorial" }]
 }
 {% endschema %}

@@ -55,12 +55,15 @@
       "continue_shopping": "Continue shopping",
       "subtotal": "Subtotal",
       "taxes_note": "Shipping and taxes calculated at checkout.",
+      "taxes_included": "Taxes included. Shipping calculated at checkout.",
       "checkout": "Checkout",
       "remove": "Remove",
       "note": "Order note",
       "note_placeholder": "Add a note to your order...",
       "total": "Total",
       "order_summary": "Order summary",
+      "discount": "Discount",
+      "discount_savings": "You save {{ amount }}",
       "headings": {
         "product": "Product",
         "quantity": "Quantity",
@@ -118,7 +121,7 @@
       "sold_out": "Sold out",
       "on_sale": "Sale",
       "quick_view": "Quick view",
-      "add_to_cart": "Add to bag",
+      "add_to_cart": "Add to cart",
       "view_full_details": "View full details",
       "you_may_also_like": "You may also like",
       "share": "Share",
@@ -127,11 +130,21 @@
       "shipping_returns_text": "Free standard shipping on orders over $50. Returns accepted within 30 days of delivery. Items must be in original condition.",
       "materials": "Materials & Care",
       "materials_default": "See product packaging for full materials and care instructions.",
+      "taxes_included": "Tax included",
+      "pickup_available": "Available for pickup",
+      "pickup_unavailable": "Not available for pickup",
+      "selling_plan": "Purchase plan",
+      "one_time_purchase": "One-time purchase",
+      "recipient_email": "Recipient email",
+      "recipient_name": "Recipient name (optional)",
+      "recipient_message": "Message (optional)",
+      "send_on": "Send on (optional)",
       "quantity": {
         "label": "Quantity",
         "increase": "Increase quantity",
         "decrease": "Decrease quantity"
-      }
+      },
+      "buy_buttons_divider": "or"
     }
   },
   "customer": {

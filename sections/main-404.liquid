@@ -488,7 +488,7 @@
         <a href="{{ routes.all_products_collection_url }}" class="nf-btn nf-btn--ghost">
           Browse all products
         </a>
-        <a href="/collections/all?view=faq" class="nf-btn nf-btn--link">
+        <a href="/pages/faq" class="nf-btn nf-btn--link">
           Visit the help center
           <span class="nf-btn__arrow" aria-hidden="true">&rarr;</span>
         </a>
@@ -515,9 +515,9 @@
       </form>
       <div class="nf-search__hint">
         Try:
-        <a href="/collections/all?view=audio">Audio</a>
-        <a href="/collections/all?view=desk">Desk</a>
-        <a href="/collections/all?view=warranty">Warranty</a>
+        <a href="/collections/airpods-home">Audio</a>
+        <a href="/collections/mac">Desk</a>
+        <a href="/pages/warranty">Warranty</a>
         <a href="/pages/contact">Contact</a>
       </div>
     </div>
@@ -534,7 +534,7 @@
     <div class="nf-tiles">
       {% comment %} Shop (3) + Support (4) + Company (1) = 8 tiles {% endcomment %}
 
-      <a class="nf-tile" href="/collections/all?view=audio">
+      <a class="nf-tile" href="/collections/airpods-home">
         <span class="nf-tile__cat">Shop</span>
         <div class="nf-tile__row">
           <div>
@@ -547,7 +547,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=desk">
+      <a class="nf-tile" href="/collections/mac">
         <span class="nf-tile__cat">Shop</span>
         <div class="nf-tile__row">
           <div>
@@ -560,7 +560,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=everyday">
+      <a class="nf-tile" href="/collections/accessories">
         <span class="nf-tile__cat">Shop</span>
         <div class="nf-tile__row">
           <div>
@@ -573,7 +573,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=faq">
+      <a class="nf-tile" href="/pages/faq">
         <span class="nf-tile__cat">Support</span>
         <div class="nf-tile__row">
           <div>
@@ -586,7 +586,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=shipping-returns">
+      <a class="nf-tile" href="/pages/shipping-returns">
         <span class="nf-tile__cat">Support</span>
         <div class="nf-tile__row">
           <div>
@@ -599,7 +599,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=warranty">
+      <a class="nf-tile" href="/pages/warranty">
         <span class="nf-tile__cat">Support</span>
         <div class="nf-tile__row">
           <div>
@@ -612,7 +612,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=track-order">
+      <a class="nf-tile" href="/pages/track-order">
         <span class="nf-tile__cat">Support</span>
         <div class="nf-tile__row">
           <div>
@@ -625,7 +625,7 @@
         </div>
       </a>
 
-      <a class="nf-tile" href="/collections/all?view=about">
+      <a class="nf-tile" href="/pages/about">
         <span class="nf-tile__cat">Company</span>
         <div class="nf-tile__row">
           <div>
@@ -649,7 +649,7 @@
     </div>
 
     <div class="nf-pop">
-      <a href="/collections/all?view=audio" class="nf-pop__card nf-pop--audio">
+      <a href="/collections/airpods-home" class="nf-pop__card nf-pop--audio">
         <span class="nf-pop__glyph" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z"/><path d="M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z"/></svg>
         </span>
@@ -661,7 +661,7 @@
         </div>
       </a>
 
-      <a href="/collections/all?view=desk" class="nf-pop__card nf-pop--desk">
+      <a href="/collections/mac" class="nf-pop__card nf-pop--desk">
         <span class="nf-pop__glyph" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v2M18 18v2"/></svg>
         </span>
@@ -673,7 +673,7 @@
         </div>
       </a>
 
-      <a href="/collections/all?view=everyday" class="nf-pop__card nf-pop--everyday">
+      <a href="/collections/accessories" class="nf-pop__card nf-pop--everyday">
         <span class="nf-pop__glyph" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
         </span>
@@ -703,7 +703,7 @@
           </button>
           <div class="nf-faq__a"><div>
             Standard US shipping is 3&ndash;5 business days and <strong>free on orders over $49</strong>. International orders arrive in 7&ndash;14 business days depending on the destination. Read the full breakdown in our
-            <a href="/collections/all?view=shipping-returns">Shipping &amp; Returns policy</a>.
+            <a href="/pages/shipping-returns">Shipping &amp; Returns policy</a>.
           </div></div>
         </div>
 
@@ -714,7 +714,7 @@
           </button>
           <div class="nf-faq__a"><div>
             <strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn&rsquo;t meet your expectations &mdash; for any reason &mdash; send it back in any condition and we&rsquo;ll refund 100% of your purchase. You can start the process from the
-            <a href="/collections/all?view=shipping-returns">returns page</a>.
+            <a href="/pages/shipping-returns">returns page</a>.
           </div></div>
         </div>
 
@@ -725,12 +725,12 @@
           </button>
           <div class="nf-faq__a"><div>
             Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the
-            <a href="/collections/all?view=warranty">warranty page</a> for full terms and how to file a claim.
+            <a href="/pages/warranty">warranty page</a> for full terms and how to file a claim.
           </div></div>
         </div>
 
         <div class="nf-faq__foot">
-          <a href="/collections/all?view=faq" class="nf-btn nf-btn--ghost">
+          <a href="/pages/faq" class="nf-btn nf-btn--ghost">
             See all frequently asked questions
             <span class="nf-btn__arrow" aria-hidden="true">&rarr;</span>
           </a>
@@ -784,14 +784,14 @@
   /* ----------- Legacy virtual-page router (preserves existing fix) ----------- */
   (function () {
     var map = {
-      'faq':              '/collections/all?view=faq',
-      'about':            '/collections/all?view=about',
-      'shipping-returns': '/collections/all?view=shipping-returns',
-      'warranty':         '/collections/all?view=warranty',
-      'track-order':      '/collections/all?view=track-order',
-      'audio':            '/collections/all?view=audio',
-      'desk':             '/collections/all?view=desk',
-      'everyday':         '/collections/all?view=everyday',
+      'faq':              '/pages/faq',
+      'about':            '/pages/about',
+      'shipping-returns': '/pages/shipping-returns',
+      'warranty':         '/pages/warranty',
+      'track-order':      '/pages/track-order',
+      'audio':            '/collections/airpods-home',
+      'desk':             '/collections/mac',
+      'everyday':         '/collections/accessories',
       'contact':          '/pages/contact'
     };
     try {

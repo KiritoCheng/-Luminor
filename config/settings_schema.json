@@ -4,8 +4,8 @@
     "theme_name": "Luminor",
     "theme_version": "1.0.0",
     "theme_author": "Luminor Studio",
-    "theme_documentation_url": "https://luminor-theme.example.com/docs",
-    "theme_support_url": "https://luminor-theme.example.com/support"
+    "theme_documentation_url": "https://kiritocheng.github.io/luminor-help/docs/",
+    "theme_support_url": "https://kiritocheng.github.io/luminor-help/support/"
   },
   {
     "name": "Typography",
@@ -15,24 +15,10 @@
         "content": "Headings"
       },
       {
-        "type": "select",
+        "type": "font_picker",
         "id": "heading_font",
         "label": "Heading font",
-        "options": [
-          {
-            "value": "system-ui",
-            "label": "System UI (SF Pro / San Francisco)"
-          },
-          {
-            "value": "Helvetica Neue",
-            "label": "Helvetica Neue"
-          },
-          {
-            "value": "Inter",
-            "label": "Inter"
-          }
-        ],
-        "default": "Inter"
+        "default": "manrope_n6"
       },
       {
         "type": "range",
@@ -49,24 +35,10 @@
         "content": "Body"
       },
       {
-        "type": "select",
+        "type": "font_picker",
         "id": "body_font",
         "label": "Body font",
-        "options": [
-          {
-            "value": "system-ui",
-            "label": "System UI (SF Pro / San Francisco)"
-          },
-          {
-            "value": "Helvetica Neue",
-            "label": "Helvetica Neue"
-          },
-          {
-            "value": "Inter",
-            "label": "Inter"
-          }
-        ],
-        "default": "Inter"
+        "default": "inter_n4"
       },
       {
         "type": "range",

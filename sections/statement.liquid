@@ -1,9 +1,10 @@
 {%- comment -%}
   Statement — full-bleed 品牌冲击章节,装饰性巨字水印 + 单句宣言。
   用于打破首页节奏,提供视觉锚点。
+  Signature moment: scroll-driven word-by-word reveal on heading.
 {%- endcomment -%}
 
-<section class="section--flush statement reveal"
+<section class="section--flush statement reveal" data-statement
   style="background-color: var(--color-bg-dark); color: var(--color-text-invert);">
   {%- if section.settings.watermark != blank -%}
     <span class="statement__watermark" aria-hidden="true" data-parallax>{{ section.settings.watermark | escape }}</span>
@@ -13,7 +14,13 @@
       <p class="eyebrow statement__eyebrow">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
-      <h2 class="statement__heading">{{ section.settings.heading | escape }}</h2>
+      {%- assign words = section.settings.heading | split: ' ' -%}
+      <h2 class="statement__heading" data-statement-heading>
+        {%- for word in words -%}
+          <span class="statement__word" aria-hidden="true">{{ word }}</span>
+        {%- endfor -%}
+        <span class="sr-only">{{ section.settings.heading | escape }}</span>
+      </h2>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <div class="statement__text rte">{{ section.settings.text }}</div>
@@ -24,40 +31,101 @@
   </div>
 </section>
 
-<style>
-  .statement { position: relative; overflow: hidden; padding-block: clamp(72px, 12vw, 144px); text-align: center; }
-  .statement__watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(8rem, 22vw, 20rem); font-weight: 700; letter-spacing: -0.06em; color: var(--color-text-invert); opacity: 0.04; pointer-events: none; white-space: nowrap; will-change: transform; }
-  .statement__inner { position: relative; z-index: 1; max-width: 920px; }
-  .statement__eyebrow { color: var(--color-text-invert); opacity: 0.7; }
-  .statement__eyebrow::before { background-color: var(--color-text-invert); opacity: 0.5; }
-  .statement__heading { font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.04em; color: var(--color-text-invert); text-wrap: balance; margin-bottom: 24px; overflow-wrap: break-word; }
-  .statement__text { font-size: clamp(1.0625rem, 1.4vw, 1.3125rem); color: var(--color-text-invert); opacity: 0.72; max-width: 640px; margin-inline: auto; line-height: 1.55; }
-  .statement__text a { color: var(--color-text-invert); text-decoration: underline; text-underline-offset: 3px; }
-  .statement__cta { margin-top: 36px; background-color: var(--color-text-invert); color: var(--color-bg-dark); }
-  .statement__cta:hover { background-color: var(--color-text-invert); opacity: 0.85; color: var(--color-bg-dark); }
-  @media (max-width: 749px) { .statement { padding-block: 64px; } }
-  @media (prefers-reduced-motion: reduce) { .statement__watermark { display: none; } }
-</style>
+<script>
+(function () {
+  function initStatementReveal() {
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
 
-{% schema %}
-{
+    document.querySelectorAll('[data-statement]').forEach(function (section) {
+      var heading = section.querySelector('[data-statement-heading]');
+      if (!heading) return;
+      var words = heading.querySelectorAll('.statement__word');
+      if (!words.length) return;
+
+      function update() {
+        var rect = section.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // Progress: 0 when section bottom enters viewport, 1 when section top passes center
+        var start = vh * 0.9;
+        var end = -rect.height * 0.3;
+        var progress = (start - rect.top) / (start - end);
+        progress = Math.max(0, Math.min(1, progress));
+
+        var total = words.length;
+        // Each word reveals in sequence across the progress range
+        var window_size = 0.6; // words reveal within 60% of the scroll range
+        words.forEach(function (word, i) {
+          var wordProgress = (progress - (i / total) * (1 - window_size)) / window_size;
+          wordProgress = Math.max(0, Math.min(1, wordProgress));
+          // ease-out
+          var eased = 1 - Math.pow(1 - wordProgress, 3);
+          word.style.opacity = (0.12 + eased * 0.88).toFixed(3);
+          word.style.transform = 'translateY(' + ((1 - eased) * 0.18).toFixed(3) + 'em)';
+        });
+      }
+
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStatementReveal);
+  } else {
+    initStatementReveal();
+  }
+  document.addEventListener('shopify:section:load', initStatementReveal);
+})();
+</script>
+
+{% schema %}{
   "name": "Statement",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "watermark", "label": "Watermark text", "default": "LUMINOR" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our philosophy" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Designed in California. Assembled with intent." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the collection" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    {
+      "type": "text",
+      "id": "watermark",
+      "label": "Watermark text",
+      "default": "LUMINOR"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our philosophy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed in California. Assembled with intent."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
   ],
   "presets": [
     {
       "name": "Statement",
       "settings": {
-        "heading": "Designed in California. Assembled with intent."
+        "heading": "Apple Authorized selection. Boutique service."
       }
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

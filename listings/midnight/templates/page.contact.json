@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "narrow": true,
+        "color_scheme": "default",
+        "eyebrow": "Contact",
+        "title": "Get in touch",
+        "text": "We read every message and reply within 24 hours."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

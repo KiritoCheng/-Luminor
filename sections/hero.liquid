@@ -1,14 +1,23 @@
 {%- comment -%}
   Hero / Slideshow section
   Supports a single slide or multiple rotating slides.
+  Awwwards-grade: editorial split, char-split headline, parallax layers, grain, magnetic CTA.
 {%- endcomment -%}
 {%- liquid
   assign blocks = section.blocks
   assign first_block = blocks | first
 -%}
 
+{%- comment -%} Awwwards-grade artistic placeholder: layered Apple-inspired composition {%- endcomment -%}
+{%- capture hero_placeholder_svg -%}
+<div class="hero__placeholder-art" aria-hidden="true">
+  <div class="hero__art-orb hero__art-orb--1"></div>
+  <div class="hero__art-orb hero__art-orb--2"></div>
+  <div class="hero__art-orb hero__art-orb--3"></div>
+</div>
+{%- endcapture -%}
+
 <style>
-  /* Asymmetric split layout: content sits left over the image */
   .hero--split {
     text-align: left;
   }
@@ -17,53 +26,89 @@
   }
   @media screen and (min-width: 750px) {
     .hero--split .hero__content {
-      max-width: 560px;
+      max-width: {{ section.settings.content_max_width }}px;
     }
   }
 </style>
 
 {%- if blocks.size > 0 -%}
-  <section class="section--flush hero-section reveal--clip" style="--reveal-delay:0ms">
+  <section class="section--flush hero-section" style="--reveal-delay:0ms">
     {%- if blocks.size > 1 -%}
-      <div class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-rotation-speed="{{ section.settings.autorotate_speed }}">
+      <div
+        class="slideshow"
+        data-slideshow
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-rotation-speed="{{ section.settings.autorotate_speed }}"
+      >
         <div class="slideshow__track" data-slideshow-track>
           {%- for block in blocks -%}
-            <div class="slideshow__slide hero hero--{{ section.settings.height }}"
+            <div
+              class="slideshow__slide hero hero--{{ section.settings.height }}"
               style="background-color: {{ block.settings.bg_color | default: '#f5f5f7' }}"
-              {{ block.shopify_attributes }}>
+              {{ block.shopify_attributes }}
+            >
               {%- if block.settings.image != blank -%}
-                <div class="hero__media">
-                  {{ block.settings.image | image_url: width: 2400 | image_tag:
-                    loading: 'eager',
-                    sizes: '100vw',
-                    widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
-                    alt: block.settings.image.alt | escape }}
+                <div class="hero__media" data-parallax="0.2">
+                  {{
+                    block.settings.image
+                    | image_url: width: 2400
+                    | image_tag:
+                      loading: 'eager',
+                      sizes: '100vw',
+                      widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+                      alt: block.settings.image.alt
+                    | escape
+                  }}
+                  {%- if block.settings.show_art -%}
+                    <div class="hero__media" aria-hidden="true">{{ hero_placeholder_svg }}</div>
+                  {%- endif -%}
                 </div>
               {%- else -%}
                 <div class="hero__media hero__media--placeholder">
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'hero__placeholder-img' }}
+                  {{ hero_placeholder_svg }}
                 </div>
               {%- endif -%}
+              <div class="hero__grain" aria-hidden="true"></div>
               {%- if block.settings.show_overlay -%}
                 <div class="hero__overlay"></div>
               {%- endif -%}
-              <div class="page-width hero__content {% if block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
-                {%- if block.settings.eyebrow != blank -%}
-                  <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
-                {%- endif -%}
+              <div
+                class="page-width hero__content"
+                data-hero-content
+              >
+                <div class="hero__meta">
+                  <span class="hero__index">
+                    {%- if forloop.index < 10 %}0{% endif -%}
+                    {{- forloop.index -}}
+                  </span>
+                  <span class="hero__meta-line"></span>
+                  <span class="hero__meta-label">{{ block.settings.eyebrow | default: 'Featured' | escape }}</span>
+                </div>
                 {%- if block.settings.heading != blank -%}
-                  <h1 class="hero__title">{{ block.settings.heading | escape }}</h1>
+                  <h1 class="hero__title" data-split-chars>{{ block.settings.heading | escape }}</h1>
                 {%- endif -%}
                 {%- if block.settings.subheading != blank -%}
-                  <p class="hero__subtitle">{{ block.settings.subheading | escape }}</p>
+                  <p
+                    class="hero__subtitle"
+                    style="{% if block.settings.subheading_color != blank and block.settings.subheading_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.subheading_color }};{% endif %}"
+                  >
+                    {{ block.settings.subheading | escape }}
+                  </p>
                 {%- endif -%}
                 {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
                   <div class="hero__cta">
                     {%- if block.settings.button_label != blank -%}
-                      <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">{{ block.settings.button_label | escape }}</a>
+                      <a href="{{ block.settings.button_link }}" class="button button--primary button--lg">
+                        {{- block.settings.button_label | escape -}}
+                      </a>
                     {%- endif -%}
                     {%- if block.settings.button_label_2 != blank -%}
-                      <a href="{{ block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ block.settings.button_label_2 | escape }}</a>
+                      <a href="{{ block.settings.button_link_2 }}" class="link-arrow">
+                        {{ block.settings.button_label_2 | escape }}
+                        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </a>
                     {%- endif -%}
                   </div>
                 {%- endif -%}
@@ -73,65 +118,180 @@
         </div>
 
         {%- if section.settings.show_arrows -%}
-          <button class="slideshow__nav slideshow__nav--prev" data-slideshow-prev aria-label="{{ 'general.slider.previous' | t }}">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button
+            class="slideshow__nav slideshow__nav--prev"
+            data-slideshow-prev
+            aria-label="{{ 'general.slider.previous' | t }}"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
-          <button class="slideshow__nav slideshow__nav--next" data-slideshow-next aria-label="{{ 'general.slider.next' | t }}">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button
+            class="slideshow__nav slideshow__nav--next"
+            data-slideshow-next
+            aria-label="{{ 'general.slider.next' | t }}"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
         {%- endif -%}
 
         <div class="slideshow__dots">
           {%- for block in blocks -%}
-            <button class="slideshow__dot {% if forloop.first %}is-active{% endif %}" data-slideshow-dot aria-label="{{ 'general.slider.go_to' | t: number: forloop.index }}"></button>
+            <button
+              class="slideshow__dot {% if forloop.first %}is-active{% endif %}"
+              data-slideshow-dot
+              aria-label="{{ 'general.slider.go_to' | t: number: forloop.index }}"
+            ></button>
           {%- endfor -%}
         </div>
       </div>
     {%- else -%}
-      <div class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
+      <div
+        class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
         style="background-color: {{ first_block.settings.bg_color | default: '#f5f5f7' }}"
-        {{ first_block.shopify_attributes }}>
+        {{ first_block.shopify_attributes }}
+      >
         {%- if first_block.settings.image != blank -%}
           <div class="hero__media" data-ken-burns data-parallax>
-            {{ first_block.settings.image | image_url: width: 2400 | image_tag:
-              loading: 'eager',
-              sizes: '100vw',
-              widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
-              alt: first_block.settings.image.alt | escape }}
+            {{
+              first_block.settings.image
+              | image_url: width: 2400
+              | image_tag:
+                loading: 'eager',
+                sizes: '100vw',
+                widths: '375, 750, 1100, 1500, 1780, 2000, 2400',
+                alt: first_block.settings.image.alt
+              | escape
+            }}
+            {%- if first_block.settings.show_art -%}
+              <div class="hero__media" aria-hidden="true">{{ hero_placeholder_svg }}</div>
+            {%- endif -%}
           </div>
         {%- else -%}
           <div class="hero__media hero__media--placeholder" data-ken-burns data-parallax>
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'hero__placeholder-img' }}
+            {{ hero_placeholder_svg }}
           </div>
         {%- endif -%}
-        <span class="hero__watermark" aria-hidden="true" data-parallax>LUMINOR</span>
+        <div class="hero__grain" aria-hidden="true"></div>
         {%- if first_block.settings.show_overlay -%}
           <div class="hero__overlay"></div>
         {%- endif -%}
-        <div class="page-width hero__content {% if first_block.settings.color_scheme == 'dark' %}hero__content--invert{% endif %}">
-          {%- if first_block.settings.eyebrow != blank -%}
-            <p class="eyebrow">{{ first_block.settings.eyebrow | escape }}</p>
-          {%- endif -%}
+        <div
+          class="page-width hero__content"
+          data-hero-content
+        >
+          <div class="hero__meta">
+            <span class="hero__index">01</span>
+            <span class="hero__meta-line"></span>
+            <span class="hero__meta-label">{{ first_block.settings.eyebrow | default: 'Featured' | escape }}</span>
+          </div>
           {%- if first_block.settings.heading != blank -%}
-            <h1 class="hero__title">{{ first_block.settings.heading | escape }}</h1>
+            <h1 class="hero__title" data-split-chars>{{ first_block.settings.heading | escape }}</h1>
           {%- endif -%}
           {%- if first_block.settings.subheading != blank -%}
-            <p class="hero__subtitle">{{ first_block.settings.subheading | escape }}</p>
+            <p
+              class="hero__subtitle"
+              style="{% if first_block.settings.subheading_color != blank and first_block.settings.subheading_color != 'rgba(0,0,0,0)' %}color: {{ first_block.settings.subheading_color }};{% endif %}"
+            >
+              {{ first_block.settings.subheading | escape }}
+            </p>
           {%- endif -%}
           {%- if first_block.settings.button_label != blank or first_block.settings.button_label_2 != blank -%}
             <div class="hero__cta">
               {%- if first_block.settings.button_label != blank -%}
-                <a href="{{ first_block.settings.button_link }}" class="button button--primary button--lg">{{ first_block.settings.button_label | escape }}</a>
+                <a
+                  href="{{ first_block.settings.button_link }}"
+                  class="button button--primary button--lg"
+                  data-magnetic
+                >
+                  {{- first_block.settings.button_label | escape -}}
+                </a>
               {%- endif -%}
               {%- if first_block.settings.button_label_2 != blank -%}
-                <a href="{{ first_block.settings.button_link_2 }}" class="button button--tertiary link-arrow">{{ first_block.settings.button_label_2 | escape }}</a>
+                <a href="{{ first_block.settings.button_link_2 }}" class="link-arrow">
+                  {{ first_block.settings.button_label_2 | escape }}
+                  <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
               {%- endif -%}
             </div>
           {%- endif -%}
         </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <span class="hero__scroll-label">Scroll</span>
+          <span class="hero__scroll-line"></span>
+        </div>
       </div>
     {%- endif -%}
   </section>
+
+  <script>
+    (function () {
+      function splitChars(el) {
+        if (el.dataset.splitReady === '1') return;
+        var text = el.textContent;
+        el.setAttribute('aria-label', text);
+        el.textContent = '';
+        var words = text.split(/(\s+)/);
+        var fragment = document.createDocumentFragment();
+        var charIndex = 0;
+        words.forEach(function (word) {
+          if (/^\s+$/.test(word)) {
+            fragment.appendChild(document.createTextNode(word));
+            return;
+          }
+          var wordEl = document.createElement('span');
+          wordEl.className = 'hero__word';
+          wordEl.setAttribute('aria-hidden', 'true');
+          Array.from(word).forEach(function (ch) {
+            var span = document.createElement('span');
+            span.className = 'hero__char';
+            span.textContent = ch;
+            span.style.setProperty('--i', charIndex);
+            charIndex += 1;
+            wordEl.appendChild(span);
+          });
+          fragment.appendChild(wordEl);
+        });
+        el.appendChild(fragment);
+        el.dataset.splitReady = '1';
+      }
+
+      function initHeroAnimation() {
+        document.querySelectorAll('[data-hero-content]').forEach(function (content) {
+          var title = content.querySelector('[data-split-chars]');
+          if (title) splitChars(title);
+          requestAnimationFrame(function () {
+            content.classList.add('is-in');
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroAnimation);
+      } else {
+        initHeroAnimation();
+      }
+      document.addEventListener('shopify:section:load', initHeroAnimation);
+      document.addEventListener('shopify:section:select', initHeroAnimation);
+      document.addEventListener('slideshow:change', function (e) {
+        var slide = e.target && e.target.selectedSlide;
+        if (slide) {
+          var content = slide.querySelector('[data-hero-content]');
+          if (content) {
+            content.classList.remove('is-in');
+            requestAnimationFrame(function () {
+              content.classList.add('is-in');
+            });
+          }
+        }
+      });
+    })();
+  </script>
 {%- endif -%}
 
 {% schema %}
@@ -143,18 +303,40 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "centered", "label": "Centered" },
-        { "value": "split", "label": "Split (left-aligned)" }
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "split",
+          "label": "Split (left-aligned)"
+        }
       ],
       "default": "split"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 400,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1220
     },
     {
       "type": "select",
       "id": "height",
       "label": "Height",
       "options": [
-        { "value": "medium", "label": "Medium (70vh)" },
-        { "value": "full", "label": "Full screen" }
+        {
+          "value": "medium",
+          "label": "Medium (70vh)"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        }
       ],
       "default": "medium"
     },
@@ -187,20 +369,76 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#f5f5f7" },
-        { "type": "checkbox", "id": "show_overlay", "label": "Show dark overlay", "default": true },
-        { "type": "select", "id": "color_scheme", "label": "Text color",
-          "options": [ { "value": "light", "label": "Dark text" }, { "value": "dark", "label": "Light text" } ],
-          "default": "light"
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Essentials, elevated." },
-        { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium accessories for the way you live, work, and play." },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
-        { "type": "url", "id": "button_link", "label": "Button link" },
-        { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "Learn more" },
-        { "type": "url", "id": "button_link_2", "label": "Second button link" }
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#f5f5f7"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_overlay",
+          "label": "Show dark overlay",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_art",
+          "label": "Show art overlay (color orbs)",
+          "default": true,
+          "info": "Adds a colorful abstract art layer over the image. Also shows when no image is set."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "New"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Apple gear, curated for you."
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Premium accessories and essentials, designed to pair perfectly with every device."
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading color",
+          "default": "#86868b"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Second button label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Second button link"
+        }
       ]
     }
   ],
@@ -208,7 +446,19 @@
     {
       "name": "Hero / Slideshow",
       "blocks": [
-        { "type": "slide", "settings": { "heading": "Essentials, elevated.", "subheading": "Premium accessories for the way you live, work, and play." } }
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New",
+            "heading": "Apple gear, curated for you.",
+            "subheading": "Genuine Apple products and premium accessories. Every device, every color, every configuration - all in one place.",
+            "subheading_color": "#86868b",
+            "button_label": "Shop the collection",
+            "button_link": "/collections/all",
+            "button_label_2": "Learn more",
+            "button_link_2": "/pages/about"
+          }
+        }
       ]
     }
   ]

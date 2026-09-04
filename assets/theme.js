@@ -17,6 +17,7 @@
       this.initParallax();
       this.initStaggerReveal();
       this.initTiltCards();
+      this.initMagneticButtons();
       this.initCountUp();
       this.initMegaMenu();
       this.initSlideshow();
@@ -27,6 +28,7 @@
       this.bindFacetsToggle();
       this.bindSmoothScroll();
       this.initHeaderScroll();
+      this.initScrollProgress();
       this.markLoaded();
       this.bindSectionReload();
     },
@@ -35,8 +37,9 @@
     bindSectionReload() {
       document.addEventListener('shopify:section:load', () => {
         this.initReveal();
-        this.initStaggerReveal();
-        this.initCountUp();
+      this.initStaggerReveal();
+      this.initMagneticButtons();
+      this.initCountUp();
         this.initParallax();
         this.initSlideshow();
         this.initAccordions();
@@ -176,6 +179,9 @@
     refreshCartDrawer() {
       const drawer = this.cartDrawer;
       if (!drawer) return;
+      const body = drawer.querySelector('[data-cart-drawer-body]');
+      // Inject skeleton placeholder while fetching
+      if (body) body.innerHTML = this.cartSkeletonHTML();
       const cartUrl = (window.Shopify && window.Shopify.routes && window.Shopify.routes.cart_url)
         ? window.Shopify.routes.cart_url + '?view=drawer'
         : '/cart?view=drawer';
@@ -191,6 +197,34 @@
           }
         })
         .catch(() => {});
+    },
+
+    /* ---------- Cart drawer skeleton HTML (loading placeholder) ---------- */
+    cartSkeletonHTML() {
+      const item = `
+        <div class="cart-skeleton__item">
+          <span class="skeleton skeleton--img"></span>
+          <span>
+            <span class="skeleton skeleton--title"></span>
+            <span class="skeleton skeleton--text"></span>
+            <span class="skeleton skeleton--text-sm"></span>
+          </span>
+          <span class="skeleton skeleton--price"></span>
+        </div>`;
+      return `<div class="cart-skeleton" role="status" aria-busy="true">${item.repeat(3)}<span class="skeleton skeleton--btn"></span></div>`;
+    },
+
+    /* ---------- Search modal skeleton HTML (loading placeholder) ---------- */
+    searchSkeletonHTML() {
+      const item = `
+        <div class="search-skeleton__item">
+          <span class="skeleton skeleton--img"></span>
+          <span>
+            <span class="skeleton skeleton--title"></span>
+            <span class="skeleton skeleton--text-sm"></span>
+          </span>
+        </div>`;
+      return `<div class="search-skeleton" role="status" aria-busy="true">${item.repeat(3)}</div>`;
     },
 
     updateCartCount() {
@@ -263,6 +297,8 @@
           if (resultsEl) resultsEl.innerHTML = '';
           return;
         }
+        // Inject skeleton while fetching predictive results
+        if (resultsEl) resultsEl.innerHTML = this.searchSkeletonHTML();
         const url = `${window.routes.predictive_search_url}?q=${encodeURIComponent(term)}&resources[type]=product,collection,article,page&resources[limit]=4&section_id=predictive-search`;
         fetch(url)
           .then((r) => r.text())
@@ -374,6 +410,8 @@
       const btns = document.querySelectorAll('.button--primary, .button--lg');
       if (!btns.length) return;
       btns.forEach((btn) => {
+        // Skip buy buttons on product page (add to cart + dynamic checkout): magnetic translate misaligns full-width CTA row
+        if (btn.closest('.product__buy-buttons')) return;
         const host = btn.parentElement;
         if (!host) return;
         host.addEventListener('mousemove', (e) => {
@@ -928,7 +966,27 @@
       }, { passive: true });
     },
 
-    /* ---------- Toast ---------- */
+    /* ---------- Scroll progress bar (top reading indicator) ---------- */
+    initScrollProgress() {
+      const bar = document.querySelector('.scroll-progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, (window.scrollY || window.pageYOffset || 0) / max)) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    },
     toast(message) {
       let el = document.querySelector('[data-toast]');
       if (!el) {

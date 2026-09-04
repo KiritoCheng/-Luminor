@@ -84,24 +84,57 @@
   </div>
 </section>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Home quick links",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start here" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need, one click away." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Shop the catalog, read about our materials, or find an answer in the help center — it\u2019s all a tap away." }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Start here"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you need, one click away."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Shop the catalog, read about our materials, or find an answer in the help center — it’s all a tap away."
+    }
   ],
   "blocks": [
     {
       "type": "tile",
       "name": "Tile",
       "settings": [
-        { "type": "text", "id": "category_label", "label": "Category", "default": "Shop" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Audio" },
-        { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Headphones, earbuds, speakers and soundbars." },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "category_label",
+          "label": "Category",
+          "default": "Shop"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Audio"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Headphones, earbuds, speakers and soundbars."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
@@ -109,16 +142,79 @@
     {
       "name": "Home quick links (8 tiles)",
       "blocks": [
-        { "type": "tile", "settings": { "category_label": "Shop", "title": "Audio", "subtitle": "Headphones, earbuds, speakers & soundbars.", "link": "/collections/all?view=audio" } },
-        { "type": "tile", "settings": { "category_label": "Shop", "title": "Desk", "subtitle": "Lamps, keyboards, MagSafe chargers & hubs.", "link": "/collections/all?view=desk" } },
-        { "type": "tile", "settings": { "category_label": "Shop", "title": "Everyday carry", "subtitle": "Wallets, watches, tumblers & accessories.", "link": "/collections/all?view=everyday" } },
-        { "type": "tile", "settings": { "category_label": "Support", "title": "Help Center & FAQs", "subtitle": "Answers to the questions we get every day.", "link": "/collections/all?view=faq" } },
-        { "type": "tile", "settings": { "category_label": "Support", "title": "Shipping & Returns", "subtitle": "Delivery times, free returns, and how we pack.", "link": "/collections/all?view=shipping-returns" } },
-        { "type": "tile", "settings": { "category_label": "Support", "title": "Warranty", "subtitle": "1-2 year limited coverage, and what it covers.", "link": "/collections/all?view=warranty" } },
-        { "type": "tile", "settings": { "category_label": "Support", "title": "Track an order", "subtitle": "Look up a shipment with your order number.", "link": "/collections/all?view=track-order" } },
-        { "type": "tile", "settings": { "category_label": "Company", "title": "Our story", "subtitle": "Who we are, what we make, and why we exist.", "link": "/collections/all?view=about" } }
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "iPhone",
+            "subtitle": "From iPhone 15 Pro Titanium to iPhone SE. Every generation covered.",
+            "link": "/collections/iphone"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "iPad",
+            "subtitle": "iPad Pro, Air, mini and 10th gen - paired with Pencil Pro and Magic Keyboard.",
+            "link": "/collections/ipad"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Mac",
+            "subtitle": "MacBook Air M3, Pro 14/16-inch, iMac M3, Mac Studio and Mac Pro.",
+            "link": "/collections/mac"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Apple Watch",
+            "subtitle": "Series 9, SE 2nd gen, and Ultra 2 in Titanium. Swimproof and always-on.",
+            "link": "/collections/apple-watch"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "AirPods & Home",
+            "subtitle": "AirPods Pro 2, AirPods Max, HomePod 2nd gen, HomePod mini and Apple TV 4K.",
+            "link": "/collections/airpods-home"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Accessories",
+            "subtitle": "140W Charger, MagSafe, Thunderbolt 4 Cable, Apple Pencil Pro and iPhone cases.",
+            "link": "/collections/accessories"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Warranty & AppleCare+",
+            "subtitle": "Apple Limited Warranty, plus AppleCare+ extended coverage for eligible devices.",
+            "link": "/pages/warranty"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Contact a specialist",
+            "subtitle": "Free product advice, order help, financing. Real people, 24h weekday response.",
+            "link": "/pages/contact"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

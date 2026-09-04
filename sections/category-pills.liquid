@@ -55,7 +55,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: transform 0.3s var(--ease-spring), background-color 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s var(--ease-spring), background-color 0.2s ease, box-shadow 0.3s ease, color 0.2s ease;
   border: 1px solid transparent;
 }
 
@@ -63,6 +63,7 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 16px color-mix(in srgb, var(--color-text) 12%, transparent);
   background-color: color-mix(in srgb, var(--color-bg-alt) 50%, var(--color-bg));
+  color: var(--color-text);
 }
 
 .category-pill--featured {
@@ -95,12 +96,16 @@
 }
 </style>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Category pills",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Shop by category" }
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop by category"
+    }
   ],
   "max_blocks": 10,
   "blocks": [
@@ -108,11 +113,34 @@
       "type": "category",
       "name": "Category",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Power Banks" },
-        { "type": "url", "id": "link", "label": "Link" },
-        { "type": "image_picker", "id": "image", "label": "Icon image" },
-        { "type": "text", "id": "count", "label": "Product count", "default": "12" },
-        { "type": "checkbox", "id": "featured", "label": "Featured (highlighted)", "default": false }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Power Banks"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Product count",
+          "default": "12"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured (highlighted)",
+          "default": false
+        }
       ]
     }
   ],
@@ -120,13 +148,57 @@
     {
       "name": "Category pills",
       "blocks": [
-        { "type": "category", "settings": { "title": "Power Banks", "count": "12" } },
-        { "type": "category", "settings": { "title": "Chargers", "count": "8" } },
-        { "type": "category", "settings": { "title": "Cables", "count": "6" } },
-        { "type": "category", "settings": { "title": "Bundles", "count": "4", "featured": true } },
-        { "type": "category", "settings": { "title": "Accessories", "count": "10" } }
+        {
+          "type": "category",
+          "settings": {
+            "title": "iPhone",
+            "count": "9"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "iPad",
+            "count": "5"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Mac",
+            "count": "7"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Apple Watch",
+            "count": "3",
+            "featured": true
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "AirPods",
+            "count": "3"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "HomePod",
+            "count": "2"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "count": "6"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

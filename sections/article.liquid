@@ -21,6 +21,41 @@
   </div>
 </article>
 
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ canonical_url | json }}
+    },
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | default: shop.name | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:{{ settings.logo | image_url: width: 200 | default: shop.url }}"
+      }
+    }
+    {%- if article.image -%}
+    ,"image": {
+      "@type": "ImageObject",
+      "url": "https:{{ article.image | image_url: width: 1200 }}"
+    }
+    {%- endif -%}
+    {%- if article.excerpt != blank -%}
+    ,"description": {{ article.excerpt | strip_html | truncate: 200 | json }}
+    {%- endif -%}
+  }
+</script>
+
 {% schema %}
 {
   "name": "Article",

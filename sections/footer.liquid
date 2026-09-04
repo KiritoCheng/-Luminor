@@ -82,6 +82,20 @@
                     </svg>
                   </a>
                 {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <a href="{{ settings.social_youtube_link }}" aria-label="YouTube" rel="noopener" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>
+                    </svg>
+                  </a>
+                {%- endif -%}
+                {%- if settings.social_tiktok_link != blank -%}
+                  <a href="{{ settings.social_tiktok_link }}" aria-label="TikTok" rel="noopener" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .6.04.88.13V9.4a6.33 6.33 0 0 0-.88-.06A6.34 6.34 0 0 0 3 15.69a6.34 6.34 0 0 0 6.34 6.34A6.34 6.34 0 0 0 15.68 15.69V9.01a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-.86-.44z"/>
+                    </svg>
+                  </a>
+                {%- endif -%}
               </div>
             </div>
           {%- endif -%}
@@ -166,211 +180,6 @@
   </div>
 </footer>
 
-<style>
-  .footer__newsletter-bar {
-    background-color: var(--color-bg-alt);
-    padding: 48px 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-  }
-  .footer__newsletter-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-  .footer__newsletter-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    margin-bottom: 4px;
-  }
-  .footer__newsletter-sub {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-  .footer__newsletter-field {
-    display: flex;
-    gap: 8px;
-  }
-  .footer__newsletter-input {
-    min-width: 280px;
-    padding: 12px 16px;
-    border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
-    border-radius: 100px;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    font-size: 0.875rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  .footer__newsletter-input:focus {
-    border-color: var(--color-primary);
-  }
-  .footer__newsletter-btn {
-    padding: 12px 28px;
-    border-radius: 100px;
-    background-color: var(--color-primary);
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  .footer__newsletter-btn:hover {
-    background-color: var(--color-primary-hover);
-  }
-  .footer__newsletter-success {
-    color: var(--color-primary);
-    font-size: 0.8125rem;
-    margin-top: 8px;
-  }
-  .footer__main {
-    padding: 56px 0 40px;
-  }
-  .footer__cols {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-    gap: 40px;
-  }
-  .footer__logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    color: var(--color-text);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 12px;
-  }
-  .footer__brand-text {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    max-width: 280px;
-  }
-  .footer__social-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-    margin-bottom: 12px;
-  }
-  .footer__social-icons {
-    display: flex;
-    gap: 12px;
-  }
-  .footer__social-icons a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
-    color: var(--color-text);
-    transition: background-color 0.2s ease, transform 0.2s var(--ease-spring);
-  }
-  .footer__social-icons a:hover {
-    background-color: var(--color-primary);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-  .footer__social-icons svg {
-    width: 18px;
-    height: 18px;
-  }
-  .footer__col-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text);
-    margin-bottom: 16px;
-  }
-  .footer__col-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .footer__col-links a {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .footer__col-links a:hover {
-    color: var(--color-text);
-  }
-  .footer__col-address {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
-    white-space: pre-line;
-  }
-  .footer__bottom {
-    border-top: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-    padding: 24px 0;
-  }
-  .footer__bottom-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .footer__copyright {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-  }
-  .footer__bottom-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .footer__payment {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .footer__payment-icon {
-    height: 24px;
-    width: auto;
-  }
-  @media (max-width: 990px) {
-    .footer__cols {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-    .footer__col--brand {
-      grid-column: 1 / -1;
-    }
-  }
-  @media (max-width: 749px) {
-    .footer__newsletter-inner {
-      flex-direction: column;
-      text-align: center;
-    }
-    .footer__newsletter-input {
-      min-width: 0;
-      flex: 1;
-    }
-    .footer__cols {
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-    .footer__bottom-inner {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-</style>
-
 {% schema %}
 {
   "name": "Footer",
@@ -447,13 +256,13 @@
           "settings": {
             "heading": "Support",
             "label_1": "FAQs",
-            "link_1": "/collections/all?view=faq",
+            "link_1": "/pages/faq",
             "label_2": "Shipping & Returns",
-            "link_2": "/collections/all?view=shipping-returns",
+            "link_2": "/pages/shipping-returns",
             "label_3": "Warranty",
-            "link_3": "/collections/all?view=warranty",
+            "link_3": "/pages/warranty",
             "label_4": "Track Order",
-            "link_4": "/collections/all?view=track-order"
+            "link_4": "/pages/track-order"
           }
         },
         {
@@ -461,11 +270,11 @@
           "settings": {
             "heading": "Company",
             "label_1": "Our Story",
-            "link_1": "/collections/all?view=about",
+            "link_1": "/pages/about",
             "label_2": "Contact Us",
             "link_2": "/pages/contact",
             "label_3": "Our Blog",
-            "link_3": "/collections/all?view=about"
+            "link_3": "/pages/about"
           }
         },
         {

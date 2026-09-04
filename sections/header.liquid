@@ -184,9 +184,11 @@
         {%- endif -%}
 
         {%- if shop.customer_accounts_enabled -%}
-          <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
-            {% render 'icon-account' %}
-          </a>
+          <shopify-account>
+            <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+              {% render 'icon-account' %}
+            </a>
+          </shopify-account>
         {%- endif -%}
 
         <a
@@ -311,12 +313,16 @@
   </nav>
   <div class="mobile-menu__footer">
     <div class="mobile-menu__actions">
-      <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {{ 'customer.account.title' | t }}
-      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <shopify-account>
+          <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ 'customer.account.title' | t }}
+          </a>
+        </shopify-account>
+      {%- endif -%}
       <a href="{{ routes.search_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--ghost">
         <svg viewBox="0 0 24 24" fill="none">
           <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -326,308 +332,6 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* ============ Apple / Awwwards Premium Mega Menu ============ */
-
-  /* Chevron with refined easing */
-  .header__nav-chevron {
-    transition: transform 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
-    margin-left: 4px;
-    opacity: 0.6;
-  }
-  .header__nav-item--mega:hover .header__nav-chevron,
-  .header__nav-item--mega.is-open .header__nav-chevron {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-
-  /* Mega menu panel — full VIEWPORT bleed, SINGLE LAYER (this IS the panel, not a wrapper) */
-  .header__dropdown--mega {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    transform: translateY(-12px);
-    transform-origin: 50% 0;
-    width: auto;
-    max-width: none;
-    background-color: var(--color-bg);
-    backdrop-filter: saturate(180%) blur(32px);
-    -webkit-backdrop-filter: saturate(180%) blur(32px);
-    border-top: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
-    box-shadow: 0 28px 64px -20px color-mix(in srgb, var(--color-text) 24%, transparent),
-      0 12px 32px -12px color-mix(in srgb, var(--color-text) 12%, transparent);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    overflow: hidden;
-    transition: opacity 0.32s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
-      visibility 0.32s ease;
-    z-index: 20;  /* inside header context, above header content only — global baseline is header-wrapper z-100 */
-  }
-
-  .header__nav-item--mega:hover .header__dropdown--mega,
-  .header__nav-item--mega:focus-within .header__dropdown--mega,
-  .header__nav-item--mega.is-open .header__dropdown--mega {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  /* Inner panel — layered frosted glass with inset highlight */
-  /* Single clean panel — 100% opaque to prevent page content bleeding through */
-  /* Inner wrapper — transparent, structure only (the panel skin lives on .header__dropdown--mega now) */
-  .header__dropdown-inner {
-    background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    overflow: visible;
-  }
-
-  /* Content — page-width centered, with padding for breathing room */
-  .header__dropdown-cols {
-    max-width: var(--page-width);
-    margin-inline: auto;
-    padding: 40px;
-  }
-
-  /* Subtle ambient gradient sheen for depth */
-  .header__dropdown-inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      900px 220px at 50% -80%,
-      color-mix(in srgb, var(--color-primary, #06c) 4%, transparent),
-      transparent 65%
-    );
-    pointer-events: none;
-    opacity: 1;
-  }
-
-  /* Columns layout */
-  /* Column grid — inherits page-width wrapper, keeps gap and z-index */
-  .header__dropdown-cols {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 48px;
-    position: relative;
-    z-index: 1;
-    box-sizing: border-box;
-  }
-
-  .header__dropdown-col--feature {
-    grid-column: span 1;
-  }
-
-  /* Section titles — refined uppercase eyebrow */
-  .header__dropdown-title {
-    font-size: 0.625rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-text-muted);
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
-  }
-
-  /* Link list */
-  .header__dropdown-sub {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .header__dropdown-sub a {
-    position: relative;
-    display: block;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 0.875rem;
-    color: color-mix(in srgb, var(--color-text) 84%, transparent);
-    text-decoration: none;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    transition: background-color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
-      padding-left 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.22s cubic-bezier(0.28, 0.11, 0.32, 1);
-  }
-
-  /* Pill highlight + text-lift on hover (Apple menu style) */
-  .header__dropdown-sub a::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%) scale(0.4);
-    width: 2px;
-    height: 0;
-    border-radius: 2px;
-    background-color: var(--color-primary, var(--color-text));
-    transition: height 0.25s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
-      opacity 0.25s ease;
-    opacity: 0;
-  }
-
-  .header__dropdown-sub a:hover {
-    background-color: color-mix(in srgb, var(--color-text) 7%, transparent);
-    color: var(--color-text);
-    padding-left: 20px;
-  }
-
-  .header__dropdown-sub a:hover::before {
-    height: 14px;
-    transform: translateY(-50%) scale(1);
-    opacity: 1;
-  }
-
-  /* Featured card — premium "feature panel" look */
-  .header__dropdown-feature-card {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-decoration: none;
-    color: inherit;
-    padding: 16px;
-    border-radius: 18px;
-    background-color: color-mix(in srgb, var(--color-bg-alt) 70%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
-    transition: transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1), box-shadow 0.4s cubic-bezier(0.28, 0.11, 0.32, 1),
-      border-color 0.3s ease, background-color 0.3s ease;
-  }
-
-  .header__dropdown-feature-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 36px color-mix(in srgb, var(--color-text) 10%, transparent),
-      0 4px 12px color-mix(in srgb, var(--color-text) 5%, transparent);
-    border-color: color-mix(in srgb, var(--color-text) 10%, transparent);
-    background-color: color-mix(in srgb, var(--color-bg-alt) 90%, transparent);
-  }
-
-  .header__dropdown-feature-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 14px;
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-    transition: transform 0.6s cubic-bezier(0.28, 0.11, 0.32, 1);
-  }
-
-  .header__dropdown-feature-card:hover .header__dropdown-feature-img {
-    transform: scale(1.04);
-  }
-
-  .header__dropdown-feature-img-wrap {
-    overflow: hidden;
-    border-radius: 14px;
-    aspect-ratio: 4 / 3;
-    background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
-  }
-
-  .header__dropdown-feature-title {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--color-text);
-  }
-
-  .header__dropdown-feature-text {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  .header__dropdown-feature-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-primary, var(--color-text));
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 4px;
-  }
-
-  .header__dropdown-feature-cta svg {
-    width: 12px;
-    height: 12px;
-    transition: transform 0.3s ease;
-  }
-
-  .header__dropdown-feature-card:hover .header__dropdown-feature-cta svg {
-    transform: translateX(3px);
-  }
-
-  @media (max-width: 990px) {
-    .header__dropdown--mega {
-      display: none;
-    }
-  }
-
-  /* Mobile menu feature link */
-  .mobile-menu__feature-link {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-  }
-  .mobile-menu__feature-link img {
-    border-radius: 12px;
-  }
-
-  /* ============ Global page scrim blur on mega menu open (Apple.com style) ============ */
-  body.is-mega-open::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 99;  /* one below header-wrapper (z-100) so it sits between page content and the header bar */
-    background: color-mix(in srgb, var(--color-text) 24%, transparent);
-    backdrop-filter: saturate(180%) blur(18px);
-    -webkit-backdrop-filter: saturate(180%) blur(18px);
-    opacity: 0;
-    pointer-events: none;
-    animation: mega-scrim-in 0.3s cubic-bezier(0.28, 0.11, 0.32, 1) forwards;
-  }
-
-  @keyframes mega-scrim-in {
-    from {
-      opacity: 0;
-      backdrop-filter: saturate(180%) blur(0);
-      -webkit-backdrop-filter: saturate(180%) blur(0);
-    }
-    to {
-      opacity: 1;
-      backdrop-filter: saturate(180%) blur(18px);
-      -webkit-backdrop-filter: saturate(180%) blur(18px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    body.is-mega-open::after {
-      animation: none;
-      opacity: 1;
-    }
-    .header__dropdown--mega {
-      transition: none;
-    }
-  }
-</style>
 
 {% schema %}
 {
@@ -653,7 +357,7 @@
       "limit": 10,
       "settings": [
         { "type": "text", "id": "title", "label": "Label", "default": "Home" },
-        { "type": "url", "id": "url", "label": "Link", "default": "/" }
+        { "type": "url", "id": "url", "label": "Link" }
       ]
     },
     {
@@ -662,7 +366,7 @@
       "limit": 6,
       "settings": [
         { "type": "text", "id": "title", "label": "Menu title", "default": "Shop" },
-        { "type": "url", "id": "url", "label": "Menu link", "default": "/collections/all" },
+        { "type": "url", "id": "url", "label": "Menu link" },
         { "type": "header", "content": "Column 1" },
         { "type": "text", "id": "column_1_title", "label": "Title", "default": "Audio" },
         { "type": "text", "id": "column_1_label_1", "label": "Link 1 label", "default": "Headphones" },
@@ -740,26 +444,26 @@
           "type": "mega_menu",
           "settings": {
             "title": "Explore",
-            "url": "/collections/all?view=about",
+            "url": "/pages/about",
             "column_1_title": "Company",
             "column_1_label_1": "Our Story",
-            "column_1_link_1": "/collections/all?view=about",
+            "column_1_link_1": "/pages/about",
             "column_1_label_2": "Contact Us",
             "column_1_link_2": "/pages/contact",
             "column_1_label_3": "FAQs",
-            "column_1_link_3": "/collections/all?view=faq",
+            "column_1_link_3": "/pages/faq",
             "column_2_title": "Journal",
             "column_2_label_1": "Our Blog",
-            "column_2_link_1": "/collections/all?view=about",
+            "column_2_link_1": "/pages/about",
             "column_2_label_2": "Design Philosophy",
-            "column_2_link_2": "/collections/all?view=about",
+            "column_2_link_2": "/pages/about",
             "column_3_title": "Support",
             "column_3_label_1": "Shipping & Returns",
-            "column_3_link_1": "/collections/all?view=shipping-returns",
+            "column_3_link_1": "/pages/shipping-returns",
             "column_3_label_2": "Warranty",
-            "column_3_link_2": "/collections/all?view=warranty",
+            "column_3_link_2": "/pages/warranty",
             "column_3_label_3": "Track Order",
-            "column_3_link_3": "/collections/all?view=track-order"
+            "column_3_link_3": "/pages/track-order"
           }
         }
       ]

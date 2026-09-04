@@ -33,6 +33,14 @@
                     {%- unless item.variant.title contains 'Default' -%}
                       <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
                     {%- endunless -%}
+                    {%- if item.selling_plan_allocation -%}
+                      <p class="cart-item__selling-plan color-muted">{{ item.selling_plan_allocation.selling_plan.name | escape }}</p>
+                    {%- endif -%}
+                    {%- if item.unit_price_measurement -%}
+                      <p class="cart-item__unit-price color-muted">
+                        {{ item.unit_price | money }} / {{ item.unit_price_measurement.reference_unit }}
+                      </p>
+                    {%- endif -%}
                     <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t }}</a>
                   </td>
                   <td>
@@ -45,15 +53,20 @@
                   <td>
                     {%- if item.original_line_price != item.final_line_price -%}
                       <s>{{ item.original_line_price | money }}</s><br>
+                      <span class="cart-item__discount">
+                        {{ 'sections.cart.discount_savings' | t: amount: item.total_discount | money }}
+                      </span><br>
                     {%- endif -%}
                     {{ item.final_line_price | money }}
+                    {%- for discount in item.discounts -%}
+                      <br><small class="cart-item__discount-label">{{ discount.title | escape }}</small>
+                    {%- endfor -%}
                   </td>
                 </tr>
               {%- endfor -%}
             </tbody>
           </table>
         </form>
-      </div>
 
       <aside class="cart-summary">
         <h2 class="cart-summary__title">{{ 'sections.cart.order_summary' | t }}</h2>
@@ -65,16 +78,36 @@
           <span>{{ 'sections.cart.subtotal' | t }}</span>
           <span class="cart-summary__subtotal-value">{{ cart.total_price | money }}</span>
         </div>
-        <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
+        {%- if cart.cart_level_discount_applications.size > 0 -%}
+          {%- for discount in cart.cart_level_discount_applications -%}
+            <div class="cart-summary__row cart-summary__row--discount">
+              <span>{{ 'sections.cart.discount' | t }} ({{ discount.title | escape }})</span>
+              <span>-{{ discount.total_allocated_amount | money }}</span>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+        <p class="cart-drawer__note">
+          {%- if cart.taxes_included -%}
+            {{ 'sections.cart.taxes_included' | t | default: 'Taxes included. Shipping calculated at checkout.' }}
+          {%- else -%}
+            {{ 'sections.cart.taxes_note' | t }}
+          {%- endif -%}
+        </p>
         <div class="cart-summary__row cart-summary__row--total">
           <span>{{ 'sections.cart.total' | t }}</span>
           <span>{{ cart.total_price | money }}</span>
         </div>
         <button type="submit" name="checkout" form="CartPageForm" class="button button--primary button--full button--lg">{{ 'sections.cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div class="cart__additional-checkout-buttons" style="margin-top:12px;">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        {%- endif -%}
         <div style="text-align:center;margin-top:12px;">
           <a href="{{ routes.all_products_collection_url }}" class="link-arrow">{{ 'sections.cart.continue_shopping' | t }}</a>
         </div>
       </aside>
+      </div>
     {%- endif -%}
   </div>
 </section>
