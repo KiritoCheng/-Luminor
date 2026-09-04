@@ -4262,6 +4262,29 @@
 }
 
 /* Accessibility & reduced motion */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only-focusable:focus,
+.visually-hidden-focusable:focus {
+  position: static !important;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
 @media (prefers-reduced-motion: reduce) {
   .modal,
   .modal__dialog,
@@ -4386,8 +4409,11 @@
 .statement {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(72px, 12vw, 144px);
+  padding-block: clamp(80px, 13vw, 160px);
   text-align: center;
+  /* Fallback if section-level vars are not set by liquid */
+  background-color: var(--st-bg-color, var(--color-bg-dark, #111114));
+  color: var(--st-h-color, #FFFFFF);
 }
 .statement__watermark {
   position: absolute;
@@ -4395,11 +4421,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(8rem, 22vw, 20rem);
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  color: var(--color-text-invert);
-  opacity: 0.04;
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  /* 水印强度直接走 color-mix 百分比，支持任意颜色（而不是单一的 opacity 变白） */
+  color: color-mix(in srgb, var(--st-wm-color, #A78BFA) var(--st-wm-strength, 7), transparent);
+  -webkit-text-fill-color: color-mix(in srgb, var(--st-wm-color, #A78BFA) var(--st-wm-strength, 7), transparent);
   pointer-events: none;
   white-space: nowrap;
   will-change: transform;
@@ -4407,24 +4434,31 @@
 .statement__inner {
   position: relative;
   z-index: 1;
-  max-width: 920px;
+  max-width: 960px;
+  margin-inline: auto;
 }
 .statement__eyebrow {
-  color: var(--color-text-invert);
-  opacity: 0.7;
+  display: inline-flex;
+  font-weight: var(--st-eyebrow-weight, 600);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 0.95vw, 0.875rem);
+  color: var(--st-eyebrow-color, #A78BFA);
+  margin-bottom: 24px;
 }
 .statement__eyebrow::before {
-  background-color: var(--color-text-invert);
-  opacity: 0.5;
+  display: none;  /* 原来的眉标小圆点 + uppercase 不协调；大写字距就是最好的装饰 */
 }
 .statement__heading {
-  font-size: clamp(2.5rem, 7vw, 6rem);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  color: var(--color-text-invert);
+  font-size: var(--st-h-fs, clamp(2.5rem, 6vw, 5rem));
+  font-weight: var(--st-h-weight, 700);
+  line-height: var(--st-h-leading, 1.05);
+  letter-spacing: var(--st-h-tracking, -0.03em);
+  color: var(--st-h-color, #FFFFFF);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.18);
   text-wrap: balance;
-  margin-bottom: 24px;
+  margin: 0 auto 28px;
+  max-width: 18ch;
   overflow-wrap: break-word;
 }
 .statement__word {
@@ -4432,52 +4466,60 @@
   margin-right: 0.22em;
   opacity: 0.12;
   transform: translateY(0.18em);
-  transition: opacity var(--duration-slow) var(--ease-out-expo),
-    transform var(--duration-slow) var(--ease-out-expo);
+  transition:
+    opacity   var(--duration-slow, 900ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform var(--duration-slow, 900ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
   will-change: opacity, transform;
 }
-.statement__word:last-child {
-  margin-right: 0;
-}
+.statement__word:last-child { margin-right: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .statement__word {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  .statement__word { opacity: 1; transform: none; transition: none; }
 }
 .statement__text {
-  font-size: clamp(1.0625rem, 1.4vw, 1.3125rem);
-  color: var(--color-text-invert);
-  opacity: 0.72;
-  max-width: 640px;
+  font-size: var(--st-text-fs, clamp(1rem, 1.5vw, 1.25rem));
+  font-weight: var(--st-text-weight, 400);
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  /* 正文 72% 强度，颜色来源统一，不用全局 opacity 与 text-shadow 打架 */
+  color: color-mix(in srgb, var(--st-text-color, #FFFFFF) 72%, transparent);
+  -webkit-text-fill-color: color-mix(in srgb, var(--st-text-color, #FFFFFF) 72%, transparent);
+  max-width: 620px;
   margin-inline: auto;
-  line-height: 1.55;
 }
 .statement__text a {
-  color: var(--color-text-invert);
+  color: var(--st-eyebrow-color, #A78BFA);
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
+.statement__text strong {
+  color: var(--st-h-color, #FFFFFF);
+  font-weight: 600;
+  -webkit-text-fill-color: currentColor;
+}
 .statement__cta {
-  margin-top: 36px;
-  background-color: var(--color-text-invert);
-  color: var(--color-bg-dark);
+  margin-top: 40px;
+  background: var(--st-cta-bg, #FFFFFF);
+  color: var(--st-cta-text, #0a0a0c);
+  border-radius: var(--button-radius, 14px);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.06),
+    0 12px 32px color-mix(in srgb, var(--st-cta-text, #0a0a0c) 14%, transparent);
 }
 .statement__cta:hover {
-  background-color: var(--color-text-invert);
-  opacity: 0.85;
-  color: var(--color-bg-dark);
+  background: color-mix(in srgb, var(--st-cta-bg, #FFFFFF) 88%, var(--st-cta-text, #0a0a0c) 12%);
+  color: var(--st-cta-text, #0a0a0c);
+  opacity: 1;
 }
 @media (max-width: 749px) {
-  .statement {
-    padding-block: 64px;
-  }
+  .statement { padding-block: clamp(56px, 14vw, 72px); }
+  .statement__inner { max-width: 100%; }
+  .statement__heading { max-width: 20ch; margin-bottom: 20px; }
+  .statement__cta { width: 100%; max-width: 320px; display: inline-flex; justify-content: center; }
+  .statement__watermark { font-size: clamp(4.5rem, 22vw, 9rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .statement__watermark {
-    display: none;
-  }
+  .statement__watermark { display: none; }
 }
 
 /* -------------------- Stats -------------------- */
