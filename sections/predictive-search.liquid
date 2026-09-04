@@ -1,0 +1,56 @@
+{%- comment -%}
+  Predictive search section.
+  Rendered by Shopify's predictive search API via ?section_id=predictive-search.
+{%- endcomment -%}
+<div data-predictive-results>
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <p class="predictive-results__title">{{ 'general.search.products' | t }}</p>
+      <div class="predictive-results__grid">
+        {%- for product in predictive_search.resources.products -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if settings.show_search_collections and predictive_search.resources.collections.size > 0 -%}
+      <p class="predictive-results__title" style="margin-top:32px;">{{ 'general.search.collections' | t }}</p>
+      <div class="addresses__grid">
+        {%- for collection in predictive_search.resources.collections -%}
+          <a href="{{ collection.url }}" class="tag" style="font-size:1rem;padding:8px 18px;">{{ collection.title | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.articles.size > 0 -%}
+      <p class="predictive-results__title" style="margin-top:32px;">{{ 'general.search.articles' | t }}</p>
+      <div class="addresses__grid">
+        {%- for article in predictive_search.resources.articles -%}
+          <a href="{{ article.url }}" class="tag" style="font-size:1rem;padding:8px 18px;">{{ article.title | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.pages.size > 0 -%}
+      <p class="predictive-results__title" style="margin-top:32px;">{{ 'general.search.pages' | t }}</p>
+      <div class="addresses__grid">
+        {%- for page in predictive_search.resources.pages -%}
+          <a href="{{ page.url }}" class="tag" style="font-size:1rem;padding:8px 18px;">{{ page.title | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.products.size == 0 and predictive_search.resources.collections.size == 0 and predictive_search.resources.articles.size == 0 and predictive_search.resources.pages.size == 0 -%}
+      <p class="color-muted">{{ 'general.search.no_matches' | t }}</p>
+    {%- endif -%}
+  {%- else -%}
+    <p class="color-muted">{{ 'general.search.start_typing' | t }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Predictive search",
+  "tag": "section"
+}
+{% endschema %}

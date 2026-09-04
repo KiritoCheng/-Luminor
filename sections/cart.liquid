@@ -1,0 +1,87 @@
+<section class="section">
+  <div class="page-width">
+    <h1 class="section-heading__title text-center">{{ 'sections.cart.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-drawer__empty">
+        <p>{{ 'sections.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">{{ 'sections.cart.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      <div class="cart-page" data-cart-page-items>
+        <form action="{{ routes.cart_url }}" method="post" id="CartPageForm">
+          <table class="cart-items">
+            <thead>
+              <tr>
+                <th colspan="2">{{ 'sections.cart.headings.product' | t }}</th>
+                <th>{{ 'sections.cart.headings.quantity' | t }}</th>
+                <th>{{ 'sections.cart.headings.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for item in cart.items -%}
+                <tr class="cart-item" data-cart-item data-line="{{ forloop.index }}">
+                  <td class="cart-items__media">
+                    <a href="{{ item.url }}">
+                      {%- if item.image -%}
+                        {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title | escape }}
+                      {%- endif -%}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+                    {%- unless item.variant.title contains 'Default' -%}
+                      <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
+                    {%- endunless -%}
+                    <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t }}</a>
+                  </td>
+                  <td>
+                    <div class="qty-stepper">
+                      <button type="button" data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
+                      <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" data-qty-input data-line="{{ forloop.index }}">
+                      <button type="button" data-qty-step="up" aria-label="{{ 'products.product.quantity.increase' | t }}">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    {%- if item.original_line_price != item.final_line_price -%}
+                      <s>{{ item.original_line_price | money }}</s><br>
+                    {%- endif -%}
+                    {{ item.final_line_price | money }}
+                  </td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </form>
+      </div>
+
+      <aside class="cart-summary">
+        <h2 class="cart-summary__title">{{ 'sections.cart.order_summary' | t }}</h2>
+        {%- if settings.show_cart_note -%}
+          <label for="CartNote" class="field-label">{{ 'sections.cart.note' | t }}</label>
+          <textarea id="CartNote" name="note" form="CartPageForm" placeholder="{{ 'sections.cart.note_placeholder' | t }}" style="margin-bottom:16px;"></textarea>
+        {%- endif -%}
+        <div class="cart-summary__row">
+          <span>{{ 'sections.cart.subtotal' | t }}</span>
+          <span class="cart-summary__subtotal-value">{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
+        <div class="cart-summary__row cart-summary__row--total">
+          <span>{{ 'sections.cart.total' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <button type="submit" name="checkout" form="CartPageForm" class="button button--primary button--full button--lg">{{ 'sections.cart.checkout' | t }}</button>
+        <div style="text-align:center;margin-top:12px;">
+          <a href="{{ routes.all_products_collection_url }}" class="link-arrow">{{ 'sections.cart.continue_shopping' | t }}</a>
+        </div>
+      </aside>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section"
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer" style="max-width:720px;">
+      <a href="{{ routes.account_url }}" class="link-arrow" style="margin-bottom:16px;display:inline-block;">{{ 'customer.order.back_to_account' | t }}</a>
+      <h1 class="customer__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <p class="color-muted text-center" style="margin-bottom:24px;">
+        {{ 'customer.order.placed_on' | t: date: order.created_at | date: '%B %-d, %Y %I:%M %p' }}
+        &bull; {{ order.financial_status_label }}
+      </p>
+
+      <table class="account-orders">
+        <thead>
+          <tr>
+            <th>{{ 'customer.order.product' | t }}</th>
+            <th>{{ 'customer.order.sku' | t }}</th>
+            <th>{{ 'customer.order.price' | t }}</th>
+            <th>{{ 'customer.order.quantity' | t }}</th>
+            <th>{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td>{{ line_item.title | escape }}</td>
+              <td>{{ line_item.sku | escape }}</td>
+              <td>{{ line_item.price | money }}</td>
+              <td>{{ line_item.quantity }}</td>
+              <td>{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="4">{{ 'customer.order.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          {%- for discount in order.discounts -%}
+            <tr><td colspan="4">{{ discount.code }} {{ 'customer.order.discount' | t }}</td><td>&minus;{{ discount.savings | money }}</td></tr>
+          {%- endfor -%}
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr><td colspan="4">{{ shipping_method.title }}</td><td>{{ shipping_method.price | money }}</td></tr>
+          {%- endfor -%}
+          <tr><td colspan="4"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+        </tfoot>
+      </table>
+
+      <div class="addresses__grid" style="margin-top:32px;">
+        <div class="cart-summary" style="background:var(--color-bg-alt);">
+          <h3 style="font-size:1rem;margin-bottom:10px;">{{ 'customer.order.billing_address' | t }}</h3>
+          <p class="color-muted" style="font-size:0.9375rem;">{{ order.billing_address | format_address }}</p>
+        </div>
+        <div class="cart-summary" style="background:var(--color-bg-alt);">
+          <h3 style="font-size:1rem;margin-bottom:10px;">{{ 'customer.order.shipping_address' | t }}</h3>
+          <p class="color-muted" style="font-size:0.9375rem;">{{ order.shipping_address | format_address }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Order",
+  "tag": "section"
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="page-width">
+    <div class="collection-hero">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h1 class="collection-hero__title">{{ blog.title | escape }}</h1>
+      {%- if blog.metafields.blog.description != blank -%}
+        <p class="collection-hero__description">{{ blog.metafields.blog.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- paginate blog.articles by 12 -%}
+    <div class="blog-grid">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" class="article-card reveal">
+          {%- if article.image -%}
+            <div class="article-card__media">
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title | escape }}
+            </div>
+          {%- endif -%}
+          <p class="article-card__date">{{ article.published_at | date: '%b %-d, %Y' }}</p>
+          <h3 class="article-card__title">{{ article.title | escape }}</h3>
+          {%- if article.excerpt_or_content != blank -%}
+            <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 18 }}</p>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" }
+  ]
+}
+{% endschema %}

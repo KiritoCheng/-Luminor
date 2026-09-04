@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "intro",
+    "editorial",
+    "collection_types",
+    "feature",
+    "manifesto"
+  ],
+  "sections": {
+    "manifesto": {
+      "settings": {
+        "button_label": "Read the warranty",
+        "watermark": "EVERYDAY",
+        "eyebrow": "Our promise",
+        "button_link": "/collections/all?view=warranty",
+        "heading": "Lifetime craftsmanship guarantee.",
+        "text": "\u003cp\u003eStitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we\u0027ll repair or replace it at no cost to you — forever. That\u0027s the Luminor Everyday guarantee.\u003c/p\u003e"
+      },
+      "type": "statement"
+    },
+    "feature": {
+      "settings": {
+        "button_label": "About Luminor",
+        "text": "\u003cp\u003eEvery Luminor leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.\u003c/p\u003e\u003cp\u003eMetals are Grade 5 titanium and 316 marine stainless. Nothing less.\u003c/p\u003e",
+        "eyebrow": "Materials",
+        "button_link": "/collections/all?view=about",
+        "color_scheme": "alt",
+        "title": "Full-grain, not corrected.",
+        "layout": "text_first"
+      },
+      "type": "image-with-text"
+    },
+    "intro": {
+      "settings": {
+        "eyebrow": "Shop / Everyday",
+        "title": "The carry line.",
+        "text": "\u003cp\u003eObjects for the things you do every day — wallets, watches, tumblers, and the small accessories that tie a life together. Built to go with you.\u003c/p\u003e"
+      },
+      "type": "rich-text"
+    },
+    "collection_types": {
+      "blocks": {
+        "t4": {
+          "settings": {
+            "text": "Key organizers, AirTag holders, cable clips. The small pieces that complete a carry.",
+            "title": "Accessories"
+          },
+          "type": "column"
+        },
+        "t1": {
+          "settings": {
+            "text": "Italian full-grain leather billfolds with RFID lining. Patina-ready, slim-cut.",
+            "title": "Wallets"
+          },
+          "type": "column"
+        },
+        "t3": {
+          "settings": {
+            "text": "Vacuum-insulated 316 stainless. 24h cold / 12h hot. Fits every cup holder.",
+            "title": "Tumblers"
+          },
+          "type": "column"
+        },
+        "t2": {
+          "settings": {
+            "text": "Automatic dress watches with sapphire crystals and 100m water resistance.",
+            "title": "Watches"
+          },
+          "type": "column"
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "Shop the collection",
+        "title": "Four carry categories.",
+        "columns": 4,
+        "subtitle": "One uncompromising standard: would we carry this ourselves, every single day?"
+      }
+    },
+    "editorial": {
+      "settings": {
+        "eyebrow": "Everyday carry",
+        "button_label": "Browse everyday",
+        "heading": "Smaller items. Higher bar.",
+        "text": "\u003cp\u003eThe things you touch every day deserve the most attention. We prototype every Luminor Everyday piece for a minimum of 12 weeks — 80+ iterations on hinge feel, cap torque, and leather patina — because when a product is always with you, every detail matters.\u003c/p\u003e\u003cp\u003eThe result is a carry collection that gets better with age, not worse.\u003c/p\u003e",
+        "button_link": "/collections/all"
+      },
+      "type": "editorial"
+    }
+  }
+}

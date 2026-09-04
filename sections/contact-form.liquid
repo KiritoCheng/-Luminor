@@ -1,0 +1,116 @@
+<section class="section {% if section.settings.color_scheme == 'alt' %}bg-alt{% endif %} reveal">
+  <div class="page-width {% if section.settings.narrow %}page-width--narrow{% endif %}">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="lead color-muted" style="margin-top:14px">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+
+    {%- form 'contact', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-success" role="status">
+          {{ 'sections.contact_form.success' | t }}
+        </p>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="form-errors" role="alert">
+          <p>{{ 'sections.contact_form.error_heading' | t }}</p>
+          <ul>
+            {%- if form.errors.translated_fields -%}
+              {%- assign error_fields = form.errors.translated_fields -%}
+              {%- assign error_messages = form.errors.messages -%}
+              {%- for i in (0..error_fields.size) -%}
+                {%- assign field = error_fields[i] -%}
+                {%- if field and field != 'form' -%}
+                  <li>{{ field | capitalize }} — {{ error_messages[i] | escape }}</li>
+                {%- elsif field == 'form' -%}
+                  <li>{{ error_messages[i] | escape }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="contact-form__grid">
+        <div class="field-group">
+          <label for="ContactName">{{ 'sections.contact_form.name' | t }}</label>
+          <input
+            type="text"
+            id="ContactName"
+            name="contact[name]"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="field-group">
+          <label for="ContactEmail">{{ 'sections.contact_form.email' | t }} *</label>
+          <input
+            type="email"
+            id="ContactEmail"
+            name="contact[email]"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            autocomplete="email"
+            required
+            {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactEmail-error"{% endif %}
+          >
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:16px">
+        <label for="ContactSubject">{{ 'sections.contact_form.subject' | t }}</label>
+        <input
+          type="text"
+          id="ContactSubject"
+          name="contact[body]"
+          value="{{ form.body }}"
+        >
+      </div>
+
+      <div class="field-group" style="margin-top:16px">
+        <label for="ContactMessage">{{ 'sections.contact_form.message' | t }}</label>
+        <textarea
+          id="ContactMessage"
+          name="contact[body]"
+          rows="5"
+        >{{ form.body }}</textarea>
+      </div>
+
+      <button type="submit" class="button button--primary" style="margin-top:20px">
+        {{ 'sections.contact_form.submit' | t }}
+      </button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Get in touch." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "We'd love to hear from you. Send us a message and we'll respond as soon as possible." },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow width", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "alt", "label": "Alt background" }
+      ],
+      "default": "default"
+    }
+  ],
+  "presets": [
+    { "name": "Contact form" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <h1 class="customer__title">{{ 'customer.reset_password.title' | t }}</h1>
+      <p class="color-muted text-center" style="margin-bottom:24px;">{{ 'customer.reset_password.subtext' | t }}</p>
+
+      {%- form 'reset_customer_password', class: 'customer__form' -%}
+        {%- if form.errors -%}
+          <p style="color:var(--color-text);background:var(--color-bg-alt);padding:12px;border-radius:12px;margin-bottom:16px;">
+            {{ form.errors | default_errors }}
+          </p>
+        {%- endif -%}
+        <div>
+          <label for="ResetPassword" class="field-label">{{ 'customer.reset_password.password' | t }}</label>
+          <input type="password" name="customer[password]" id="ResetPassword" autocomplete="new-password" required>
+        </div>
+        <div>
+          <label for="ResetPasswordConfirmation" class="field-label">{{ 'customer.reset_password.password_confirm' | t }}</label>
+          <input type="password" name="customer[password_confirmation]" id="ResetPasswordConfirmation" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="button button--primary button--full button--lg">{{ 'customer.reset_password.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reset password",
+  "tag": "section"
+}
+{% endschema %}

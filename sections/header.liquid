@@ -1,0 +1,769 @@
+{%- comment -%}
+  Header — Apple-style navigation with self-contained mega menu blocks.
+  Each "mega_menu" block holds its own columns + featured card in settings,
+  so there is no fragile parent/child block ID matching.
+{%- endcomment -%}
+
+<header class="header-wrapper" data-header>
+  <div class="page-width">
+    <div class="header header--{{ settings.header_layout | default: 'centered' }}">
+      <button
+        class="header__icon-btn header__menu-toggle"
+        data-mobile-menu-open
+        aria-label="{{ 'accessibility.menu' | t }}"
+      >
+        {% render 'icon-menu' %}
+      </button>
+
+      {%- if settings.header_layout == 'left' -%}
+        <div class="header__logo">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {{ section.settings.logo | image_url: width: 240 | image_tag: alt: logo_alt, class: 'header__logo-img' }}
+          {%- else -%}
+            <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <nav class="header__nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link' -%}
+            <div class="header__nav-item" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.url }}" class="header__nav-link">{{ block.settings.title | escape }}</a>
+            </div>
+
+          {%- elsif block.type == 'mega_menu' -%}
+            {%- liquid
+              assign has_content = false
+              if block.settings.column_1_title != blank or block.settings.column_2_title != blank or block.settings.column_3_title != blank or block.settings.column_4_title != blank
+                assign has_content = true
+              endif
+              if block.settings.feature_title != blank or block.settings.feature_image != blank
+                assign has_content = true
+              endif
+            -%}
+            <div class="header__nav-item header__nav-item--mega" data-header-nav-item {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.url | default: '#' }}" class="header__nav-link" data-mega-trigger>
+                {{ block.settings.title | escape }}
+                <svg
+                  class="header__nav-chevron"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+
+              {%- if has_content -%}
+                <div class="header__dropdown header__dropdown--mega" data-header-dropdown>
+                  <div class="header__dropdown-inner">
+                    <div class="header__dropdown-cols">
+                      {%- for i in (1..4) -%}
+                        {%- liquid
+                          assign col_title = 'column_' | append: i | append: '_title'
+                          assign col_link_1 = 'column_' | append: i | append: '_link_1'
+                          assign col_link_2 = 'column_' | append: i | append: '_link_2'
+                          assign col_link_3 = 'column_' | append: i | append: '_link_3'
+                          assign col_link_4 = 'column_' | append: i | append: '_link_4'
+                          assign col_label_1 = 'column_' | append: i | append: '_label_1'
+                          assign col_label_2 = 'column_' | append: i | append: '_label_2'
+                          assign col_label_3 = 'column_' | append: i | append: '_label_3'
+                          assign col_label_4 = 'column_' | append: i | append: '_label_4'
+                        -%}
+                        {%- if block.settings[col_title] != blank -%}
+                          <div class="header__dropdown-col">
+                            <h4 class="header__dropdown-title">{{ block.settings[col_title] | escape }}</h4>
+                            <ul class="header__dropdown-sub">
+                              {%- if block.settings[col_label_1] != blank -%}
+                                <li>
+                                  <a href="{{ block.settings[col_link_1] | default: '#' }}">
+                                    {{- block.settings[col_label_1] | escape -}}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                              {%- if block.settings[col_label_2] != blank -%}
+                                <li>
+                                  <a href="{{ block.settings[col_link_2] | default: '#' }}">
+                                    {{- block.settings[col_label_2] | escape -}}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                              {%- if block.settings[col_label_3] != blank -%}
+                                <li>
+                                  <a href="{{ block.settings[col_link_3] | default: '#' }}">
+                                    {{- block.settings[col_label_3] | escape -}}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                              {%- if block.settings[col_label_4] != blank -%}
+                                <li>
+                                  <a href="{{ block.settings[col_link_4] | default: '#' }}">
+                                    {{- block.settings[col_label_4] | escape -}}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                            </ul>
+                          </div>
+                        {%- endif -%}
+                      {%- endfor -%}
+
+                      {%- if block.settings.feature_title != blank or block.settings.feature_image != blank -%}
+                        <div class="header__dropdown-col header__dropdown-col--feature">
+                          <a
+                            href="{{ block.settings.feature_link | default: '#' }}"
+                            class="header__dropdown-feature-card"
+                          >
+                            <div class="header__dropdown-feature-img-wrap">
+                              {%- if block.settings.feature_image != blank -%}
+                                {{
+                                  block.settings.feature_image
+                                  | image_url: width: 600
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    widths: '300, 400, 600',
+                                    sizes: '300px',
+                                    class: 'header__dropdown-feature-img',
+                                    alt: block.settings.feature_title
+                                  | escape
+                                }}
+                              {%- else -%}
+                                {{ 'lifestyle-1' | placeholder_svg_tag: 'header__dropdown-feature-img' }}
+                              {%- endif -%}
+                            </div>
+                            {%- if block.settings.feature_title != blank -%}
+                              <h4 class="header__dropdown-feature-title">
+                                {{ block.settings.feature_title | escape }}
+                              </h4>
+                            {%- endif -%}
+                            {%- if block.settings.feature_text != blank -%}
+                              <p class="header__dropdown-feature-text">{{ block.settings.feature_text | escape }}</p>
+                            {%- endif -%}
+                            <span class="header__dropdown-feature-cta">
+                              {{ block.settings.feature_link_label | default: 'Shop now' | escape }}
+                              <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </span>
+                          </a>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      {%- comment -%} Centered logo {%- endcomment -%}
+      {%- if settings.header_layout != 'left' -%}
+        <div class="header__logo">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {{ section.settings.logo | image_url: width: 240 | image_tag: alt: logo_alt, class: 'header__logo-img' }}
+          {%- else -%}
+            <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="header__actions">
+        {%- if settings.search_type == 'modal' -%}
+          <button class="header__icon-btn" data-search-open aria-label="{{ 'general.search.search' | t }}">
+            {% render 'icon-search' %}
+          </button>
+        {%- else -%}
+          <a class="header__icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
+            {% render 'icon-search' %}
+          </a>
+        {%- endif -%}
+
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            {% render 'icon-account' %}
+          </a>
+        {%- endif -%}
+
+        <a
+          class="header__icon-btn header__cart-count"
+          {% if settings.cart_type == 'drawer' %}
+            data-cart-drawer-open href="#"
+          {% else %}
+            href="{{ routes.cart_url }}"
+          {% endif %}
+          aria-label="{{ 'sections.cart.title' | t }}"
+        >
+          {% render 'icon-cart' %}
+          <span class="cart-count-bubble" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile menu drawer {%- endcomment -%}
+<div class="mobile-menu" data-mobile-menu aria-hidden="true">
+  <div class="mobile-menu__header">
+    <div class="mobile-menu__brand">
+      <span class="mobile-menu__brand-name">{{ shop.name }}</span>
+      <span class="mobile-menu__brand-tagline">{{ 'sections.header.menu' | t }}</span>
+    </div>
+    <button class="mobile-menu__close" data-mobile-menu-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+  <nav class="mobile-menu__nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'link' -%}
+        <a href="{{ block.settings.url }}" class="mobile-menu__link">
+          <span>{{ block.settings.title | escape }}</span>
+        </a>
+
+      {%- elsif block.type == 'mega_menu' -%}
+        {%- liquid
+          assign mob_has_children = false
+          for i in (1..4)
+            assign col_title = 'column_' | append: i | append: '_title'
+            if block.settings[col_title] != blank
+              assign mob_has_children = true
+              break
+            endif
+          endfor
+          if block.settings.feature_title != blank
+            assign mob_has_children = true
+          endif
+        -%}
+        {%- if mob_has_children -%}
+          <details class="mobile-menu__details">
+            <summary>
+              <span>{{ block.settings.title | escape }}</span>
+              <span class="mobile-menu__chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="mobile-menu__subnav">
+              {%- for i in (1..4) -%}
+                {%- liquid
+                  assign col_title = 'column_' | append: i | append: '_title'
+                  assign col_link_1 = 'column_' | append: i | append: '_link_1'
+                  assign col_link_2 = 'column_' | append: i | append: '_link_2'
+                  assign col_link_3 = 'column_' | append: i | append: '_link_3'
+                  assign col_link_4 = 'column_' | append: i | append: '_link_4'
+                  assign col_label_1 = 'column_' | append: i | append: '_label_1'
+                  assign col_label_2 = 'column_' | append: i | append: '_label_2'
+                  assign col_label_3 = 'column_' | append: i | append: '_label_3'
+                  assign col_label_4 = 'column_' | append: i | append: '_label_4'
+                -%}
+                {%- if block.settings[col_title] != blank -%}
+                  <div class="mobile-menu__sub-group">
+                    <span class="mobile-menu__sub-title">{{ block.settings[col_title] | escape }}</span>
+                    {%- if block.settings[col_label_1] != blank -%}
+                      <a href="{{ block.settings[col_link_1] | default: '#' }}">
+                        {{- block.settings[col_label_1] | escape -}}
+                      </a>
+                    {%- endif -%}
+                    {%- if block.settings[col_label_2] != blank -%}
+                      <a href="{{ block.settings[col_link_2] | default: '#' }}">
+                        {{- block.settings[col_label_2] | escape -}}
+                      </a>
+                    {%- endif -%}
+                    {%- if block.settings[col_label_3] != blank -%}
+                      <a href="{{ block.settings[col_link_3] | default: '#' }}">
+                        {{- block.settings[col_label_3] | escape -}}
+                      </a>
+                    {%- endif -%}
+                    {%- if block.settings[col_label_4] != blank -%}
+                      <a href="{{ block.settings[col_link_4] | default: '#' }}">
+                        {{- block.settings[col_label_4] | escape -}}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if block.settings.feature_title != blank -%}
+                <div class="mobile-menu__sub-group">
+                  <a href="{{ block.settings.feature_link | default: '#' }}" class="mobile-menu__feature-link">
+                    {%- if block.settings.feature_image != blank -%}
+                      {{
+                        block.settings.feature_image
+                        | image_url: width: 400
+                        | image_tag: loading: 'lazy', alt: block.settings.feature_title
+                        | escape
+                      }}
+                    {%- endif -%}
+                    <span>{{ block.settings.feature_title | escape }}</span>
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </details>
+        {%- else -%}
+          <a href="{{ block.settings.url | default: '#' }}" class="mobile-menu__link">
+            <span>{{ block.settings.title | escape }}</span>
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+  <div class="mobile-menu__footer">
+    <div class="mobile-menu__actions">
+      <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ 'customer.account.title' | t }}
+      </a>
+      <a href="{{ routes.search_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--ghost">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        {{ 'general.search.search' | t }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============ Apple / Awwwards Premium Mega Menu ============ */
+
+  /* Chevron with refined easing */
+  .header__nav-chevron {
+    transition: transform 0.35s cubic-bezier(0.28, 0.11, 0.32, 1);
+    margin-left: 4px;
+    opacity: 0.6;
+  }
+  .header__nav-item--mega:hover .header__nav-chevron,
+  .header__nav-item--mega.is-open .header__nav-chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  /* Mega menu panel — full VIEWPORT bleed, SINGLE LAYER (this IS the panel, not a wrapper) */
+  .header__dropdown--mega {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: translateY(-12px);
+    transform-origin: 50% 0;
+    width: auto;
+    max-width: none;
+    background-color: var(--color-bg);
+    backdrop-filter: saturate(180%) blur(32px);
+    -webkit-backdrop-filter: saturate(180%) blur(32px);
+    border-top: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 7%, transparent);
+    box-shadow: 0 28px 64px -20px color-mix(in srgb, var(--color-text) 24%, transparent),
+      0 12px 32px -12px color-mix(in srgb, var(--color-text) 12%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+    transition: opacity 0.32s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.38s cubic-bezier(0.28, 0.11, 0.32, 1),
+      visibility 0.32s ease;
+    z-index: 20;  /* inside header context, above header content only — global baseline is header-wrapper z-100 */
+  }
+
+  .header__nav-item--mega:hover .header__dropdown--mega,
+  .header__nav-item--mega:focus-within .header__dropdown--mega,
+  .header__nav-item--mega.is-open .header__dropdown--mega {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Inner panel — layered frosted glass with inset highlight */
+  /* Single clean panel — 100% opaque to prevent page content bleeding through */
+  /* Inner wrapper — transparent, structure only (the panel skin lives on .header__dropdown--mega now) */
+  .header__dropdown-inner {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Content — page-width centered, with padding for breathing room */
+  .header__dropdown-cols {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding: 40px;
+  }
+
+  /* Subtle ambient gradient sheen for depth */
+  .header__dropdown-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      900px 220px at 50% -80%,
+      color-mix(in srgb, var(--color-primary, #06c) 4%, transparent),
+      transparent 65%
+    );
+    pointer-events: none;
+    opacity: 1;
+  }
+
+  /* Columns layout */
+  /* Column grid — inherits page-width wrapper, keeps gap and z-index */
+  .header__dropdown-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  .header__dropdown-col--feature {
+    grid-column: span 1;
+  }
+
+  /* Section titles — refined uppercase eyebrow */
+  .header__dropdown-title {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
+  }
+
+  /* Link list */
+  .header__dropdown-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .header__dropdown-sub a {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--color-text) 84%, transparent);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    transition: background-color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), color 0.22s cubic-bezier(0.28, 0.11, 0.32, 1),
+      padding-left 0.22s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.22s cubic-bezier(0.28, 0.11, 0.32, 1);
+  }
+
+  /* Pill highlight + text-lift on hover (Apple menu style) */
+  .header__dropdown-sub a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scale(0.4);
+    width: 2px;
+    height: 0;
+    border-radius: 2px;
+    background-color: var(--color-primary, var(--color-text));
+    transition: height 0.25s cubic-bezier(0.28, 0.11, 0.32, 1), transform 0.25s cubic-bezier(0.28, 0.11, 0.32, 1),
+      opacity 0.25s ease;
+    opacity: 0;
+  }
+
+  .header__dropdown-sub a:hover {
+    background-color: color-mix(in srgb, var(--color-text) 7%, transparent);
+    color: var(--color-text);
+    padding-left: 20px;
+  }
+
+  .header__dropdown-sub a:hover::before {
+    height: 14px;
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+
+  /* Featured card — premium "feature panel" look */
+  .header__dropdown-feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    padding: 16px;
+    border-radius: 18px;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
+    transition: transform 0.4s cubic-bezier(0.28, 0.11, 0.32, 1), box-shadow 0.4s cubic-bezier(0.28, 0.11, 0.32, 1),
+      border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .header__dropdown-feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px color-mix(in srgb, var(--color-text) 10%, transparent),
+      0 4px 12px color-mix(in srgb, var(--color-text) 5%, transparent);
+    border-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+    background-color: color-mix(in srgb, var(--color-bg-alt) 90%, transparent);
+  }
+
+  .header__dropdown-feature-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.6s cubic-bezier(0.28, 0.11, 0.32, 1);
+  }
+
+  .header__dropdown-feature-card:hover .header__dropdown-feature-img {
+    transform: scale(1.04);
+  }
+
+  .header__dropdown-feature-img-wrap {
+    overflow: hidden;
+    border-radius: 14px;
+    aspect-ratio: 4 / 3;
+    background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
+  }
+
+  .header__dropdown-feature-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .header__dropdown-feature-text {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .header__dropdown-feature-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary, var(--color-text));
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .header__dropdown-feature-cta svg {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .header__dropdown-feature-card:hover .header__dropdown-feature-cta svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 990px) {
+    .header__dropdown--mega {
+      display: none;
+    }
+  }
+
+  /* Mobile menu feature link */
+  .mobile-menu__feature-link {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+  }
+  .mobile-menu__feature-link img {
+    border-radius: 12px;
+  }
+
+  /* ============ Global page scrim blur on mega menu open (Apple.com style) ============ */
+  body.is-mega-open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 99;  /* one below header-wrapper (z-100) so it sits between page content and the header bar */
+    background: color-mix(in srgb, var(--color-text) 24%, transparent);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    opacity: 0;
+    pointer-events: none;
+    animation: mega-scrim-in 0.3s cubic-bezier(0.28, 0.11, 0.32, 1) forwards;
+  }
+
+  @keyframes mega-scrim-in {
+    from {
+      opacity: 0;
+      backdrop-filter: saturate(180%) blur(0);
+      -webkit-backdrop-filter: saturate(180%) blur(0);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: saturate(180%) blur(18px);
+      -webkit-backdrop-filter: saturate(180%) blur(18px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.is-mega-open::after {
+      animation: none;
+      opacity: 1;
+    }
+    .header__dropdown--mega {
+      transition: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "section-header",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Simple link",
+      "limit": 10,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label", "default": "Home" },
+        { "type": "url", "id": "url", "label": "Link", "default": "/" }
+      ]
+    },
+    {
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Menu title", "default": "Shop" },
+        { "type": "url", "id": "url", "label": "Menu link", "default": "/collections/all" },
+        { "type": "header", "content": "Column 1" },
+        { "type": "text", "id": "column_1_title", "label": "Title", "default": "Audio" },
+        { "type": "text", "id": "column_1_label_1", "label": "Link 1 label", "default": "Headphones" },
+        { "type": "url", "id": "column_1_link_1", "label": "Link 1 URL" },
+        { "type": "text", "id": "column_1_label_2", "label": "Link 2 label", "default": "Speakers" },
+        { "type": "url", "id": "column_1_link_2", "label": "Link 2 URL" },
+        { "type": "text", "id": "column_1_label_3", "label": "Link 3 label", "default": "Earbuds" },
+        { "type": "url", "id": "column_1_link_3", "label": "Link 3 URL" },
+        { "type": "text", "id": "column_1_label_4", "label": "Link 4 label" },
+        { "type": "url", "id": "column_1_link_4", "label": "Link 4 URL" },
+        { "type": "header", "content": "Column 2" },
+        { "type": "text", "id": "column_2_title", "label": "Title", "default": "Desk" },
+        { "type": "text", "id": "column_2_label_1", "label": "Link 1 label", "default": "Lamps" },
+        { "type": "url", "id": "column_2_link_1", "label": "Link 1 URL" },
+        { "type": "text", "id": "column_2_label_2", "label": "Link 2 label", "default": "Keyboards" },
+        { "type": "url", "id": "column_2_link_2", "label": "Link 2 URL" },
+        { "type": "text", "id": "column_2_label_3", "label": "Link 3 label", "default": "Chargers" },
+        { "type": "url", "id": "column_2_link_3", "label": "Link 3 URL" },
+        { "type": "text", "id": "column_2_label_4", "label": "Link 4 label" },
+        { "type": "url", "id": "column_2_link_4", "label": "Link 4 URL" },
+        { "type": "header", "content": "Column 3" },
+        { "type": "text", "id": "column_3_title", "label": "Title", "default": "Everyday" },
+        { "type": "text", "id": "column_3_label_1", "label": "Link 1 label", "default": "Wallets" },
+        { "type": "url", "id": "column_3_link_1", "label": "Link 1 URL" },
+        { "type": "text", "id": "column_3_label_2", "label": "Link 2 label", "default": "Watches" },
+        { "type": "url", "id": "column_3_link_2", "label": "Link 2 URL" },
+        { "type": "text", "id": "column_3_label_3", "label": "Link 3 label", "default": "Tumblers" },
+        { "type": "url", "id": "column_3_link_3", "label": "Link 3 URL" },
+        { "type": "text", "id": "column_3_label_4", "label": "Link 4 label" },
+        { "type": "url", "id": "column_3_link_4", "label": "Link 4 URL" },
+        { "type": "header", "content": "Column 4" },
+        { "type": "text", "id": "column_4_title", "label": "Title" },
+        { "type": "text", "id": "column_4_label_1", "label": "Link 1 label" },
+        { "type": "url", "id": "column_4_link_1", "label": "Link 1 URL" },
+        { "type": "text", "id": "column_4_label_2", "label": "Link 2 label" },
+        { "type": "url", "id": "column_4_link_2", "label": "Link 2 URL" },
+        { "type": "text", "id": "column_4_label_3", "label": "Link 3 label" },
+        { "type": "url", "id": "column_4_link_3", "label": "Link 3 URL" },
+        { "type": "header", "content": "Featured card" },
+        { "type": "image_picker", "id": "feature_image", "label": "Feature image" },
+        { "type": "text", "id": "feature_title", "label": "Feature title", "default": "New arrivals" },
+        { "type": "text", "id": "feature_text", "label": "Feature text", "default": "Discover our latest collection" },
+        { "type": "text", "id": "feature_link_label", "label": "Feature link label", "default": "Shop now" },
+        { "type": "url", "id": "feature_link", "label": "Feature link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        {
+          "type": "mega_menu",
+          "settings": {
+            "title": "Shop",
+            "url": "/collections/all",
+            "column_1_title": "Audio",
+            "column_1_label_1": "Headphones",
+            "column_1_label_2": "Speakers",
+            "column_1_label_3": "Earbuds",
+            "column_2_title": "Desk",
+            "column_2_label_1": "Lamps",
+            "column_2_label_2": "Keyboards",
+            "column_2_label_3": "Chargers",
+            "column_3_title": "Everyday",
+            "column_3_label_1": "Wallets",
+            "column_3_label_2": "Watches",
+            "column_3_label_3": "Tumblers",
+            "feature_title": "New arrivals",
+            "feature_text": "Discover our latest collection",
+            "feature_link_label": "Shop now"
+          }
+        },
+        {
+          "type": "mega_menu",
+          "settings": {
+            "title": "Explore",
+            "url": "/collections/all?view=about",
+            "column_1_title": "Company",
+            "column_1_label_1": "Our Story",
+            "column_1_link_1": "/collections/all?view=about",
+            "column_1_label_2": "Contact Us",
+            "column_1_link_2": "/pages/contact",
+            "column_1_label_3": "FAQs",
+            "column_1_link_3": "/collections/all?view=faq",
+            "column_2_title": "Journal",
+            "column_2_label_1": "Our Blog",
+            "column_2_link_1": "/collections/all?view=about",
+            "column_2_label_2": "Design Philosophy",
+            "column_2_link_2": "/collections/all?view=about",
+            "column_3_title": "Support",
+            "column_3_label_1": "Shipping & Returns",
+            "column_3_link_1": "/collections/all?view=shipping-returns",
+            "column_3_label_2": "Warranty",
+            "column_3_link_2": "/collections/all?view=warranty",
+            "column_3_label_3": "Track Order",
+            "column_3_link_3": "/collections/all?view=track-order"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

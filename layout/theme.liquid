@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- capture seo_title -%}
+      {%- if request.page_type == 'search' and search.performed -%}
+        {{ 'general.search.results' | t: terms: search.terms }}
+      {%- else -%}
+        {{ page_title }}
+      {%- endif -%}
+      {%- if current_tags -%}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{%- endif -%}
+      {%- if current_page != 1 -%} &ndash; {{ 'general.meta.page' | t: page: current_page }}{%- endif -%}
+      {%- unless page_title contains shop.name -%} &ndash; {{ shop.name }}{%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title }}</title>
+
+    {%- capture meta_description -%}
+      {%- if page_description -%}
+        {{ page_description }}
+      {%- elsif shop.description != blank -%}
+        {{ shop.description }}
+      {%- else -%}
+        {{ shop.name }} — A minimalist storefront powered by the Luminor theme.
+      {%- endif -%}
+    {%- endcapture -%}
+    <meta name="description" content="{{ meta_description | escape }}">
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign font_stack_suffix = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+      assign heading_font = font_stack_suffix
+      assign body_font = font_stack_suffix
+    -%}
+
+    <style>
+      :root {
+        --color-primary: {{ settings.color_primary }};
+        --color-primary-hover: {{ settings.color_primary_hover }};
+        --color-bg: {{ settings.color_background }};
+        --color-bg-alt: {{ settings.color_background_alt }};
+        --color-bg-dark: {{ settings.color_background_dark }};
+        --color-text: {{ settings.color_text }};
+        --color-text-muted: {{ settings.color_text_muted }};
+        --color-text-invert: {{ settings.color_text_invert }};
+        --color-border: {{ settings.color_border }};
+        --color-input-border: {{ settings.color_input_border }};
+        --page-width: {{ settings.page_width }}px;
+        --section-spacing: {{ settings.spacing_sections }}px;
+        --heading-font: {{ heading_font }};
+        --body-font: {{ body_font }};
+        --heading-base-size: {{ settings.heading_base_size }}px;
+        --body-base-size: {{ settings.body_base_size }}px;
+        --line-height: {{ settings.line_height }};
+        --button-radius: {{ settings.button_radius }}px;
+        --image-radius: {{ settings.image_corner_radius }}px;
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    </style>
+
+    <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'cart.js' | asset_url }}" defer></script>
+
+    {%- if request.page_type == 'product' -%}
+      <script src="{{ 'product.js' | asset_url }}" defer></script>
+    {%- endif -%}
+  </head>
+
+  <body class="template-{{ request.page_type | handle }}">
+    <a class="skip-to-content" href="#MainContent">
+      {{ 'accessibility.skip_to_content' | t }}
+    </a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- if settings.cart_type == 'drawer' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+    {%- if settings.search_type == 'modal' -%}
+      {% render 'search-modal' %}
+    {%- endif -%}
+
+    <div class="drawer-overlay" data-drawer-overlay hidden></div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-selection-message">{{ 'accessibility.selection_help' | t }}</li>
+      <li id="a11y-slideshow-info">{{ 'accessibility.slideshow_info' | t }}</li>
+    </ul>
+
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+      window.cartStrings = {
+        error: {{ 'cart.cart_error' | t | json }},
+        quantityError: {{ 'cart.cart_quantity_error' | t: quantity: '[quantity]' | json }}
+      };
+      window.shopCurrency = {{ cart.currency.iso_code | json }};
+    </script>
+  </body>
+</html>

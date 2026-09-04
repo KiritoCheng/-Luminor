@@ -1,0 +1,106 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "layout": "split",
+        "height": "full",
+        "autoplay": false,
+        "show_arrows": false
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New season",
+            "heading": "Designed for the way you live.",
+            "subheading": "Premium essentials, considered down to the last detail. Built to feel effortless, made to last.",
+            "button_label": "Shop the collection",
+            "button_label_2": "Our story",
+            "button_link": "/collections/all",
+            "button_link_2": "/collections/all?view=about"
+          }
+        }
+      },
+      "block_order": ["slide_1"]
+    },
+    "rich_text_intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Our philosophy",
+        "title": "Less, but better.",
+        "text": "<p>We make a small number of products, and we make them well. Every piece is the result of obsessive refinement — stripped of the unnecessary, perfected down to the detail you'll never see. The result is calm, confident design that disappears into your day.</p>"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "New arrivals",
+        "title": "This season's edit",
+        "products_to_show": 4,
+        "columns_desktop": 4
+      }
+    },
+    "story_design": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_first",
+        "color_scheme": "default",
+        "eyebrow": "Design",
+        "title": "Considered, not decorated.",
+        "text": "<p>Each product begins with a question: what can we remove? We strip away ornament until only the essential remains — then we refine that. The materials are chosen for how they age, the proportions for how they feel in hand, the weight for how they sit on a desk or in a pocket.</p>",
+        "button_label": "Explore the process",
+        "button_link": "/collections/all?view=about"
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Shop by category",
+        "columns": 3
+      }
+    },
+    "story_craft": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "Craftsmanship",
+        "title": "Made to outlast trends.",
+        "text": "<p>We partner with workshops that have spent decades perfecting their craft. Every stitch is set by hand, every joint inspected, every surface finished until it feels right. These are objects designed to be used daily — and to look better the more they are.</p>",
+        "button_label": "Meet the makers",
+        "button_link": "/collections/all?view=about"
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Why you'll love it",
+        "columns": 3
+      },
+      "blocks": {
+        "col_1": { "type": "column", "settings": { "title": "Free shipping", "text": "On all orders over $50, delivered fast and carbon-neutral." } },
+        "col_2": { "type": "column", "settings": { "title": "30-day returns", "text": "Not in love? Return it within 30 days, no questions asked." } },
+        "col_3": { "type": "column", "settings": { "title": "Secure checkout", "text": "Encrypted payments you can trust, on every order." } }
+      },
+      "block_order": ["col_1", "col_2", "col_3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Stay in the loop.",
+        "text": "New drops, early access, and stories from the workshop — delivered occasionally, never spam."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "rich_text_intro",
+    "featured_collection",
+    "story_design",
+    "collection_list",
+    "story_craft",
+    "multicolumn",
+    "newsletter"
+  ]
+}

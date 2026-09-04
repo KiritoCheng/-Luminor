@@ -1,0 +1,596 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "MagSafe ready",
+            "heading": "Your iPhone, elevated.",
+            "subheading": "Titanium-grade finishes. MagSnap precision. Built for iPhone, AirPods, and Mac.",
+            "button_label": "Shop now",
+            "button_link": "/collections/all",
+            "button_label_2": "Discover Luminor",
+            "button_link_2": "/collections/all?view=about"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1"
+      ],
+      "settings": {}
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "120",
+            "suffix": "K+",
+            "label": "Creators equipped"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "48",
+            "label": "Countries shipped"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "4.9",
+            "suffix": "★",
+            "label": "Average rating"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "By the numbers",
+        "heading": "Trusted worldwide"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Top picks",
+        "title": "Best sellers",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "view_all_label": "View all products",
+        "view_all_link": "/collections/all"
+      }
+    },
+    "category_pills": {
+      "type": "category-pills",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "title": "Audio",
+            "link": "/collections/all?view=audio",
+            "count": "4"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Desk",
+            "link": "/collections/all?view=desk",
+            "count": "8"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Everyday",
+            "link": "/collections/all?view=everyday",
+            "count": "7",
+            "featured": true
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "title": "New arrivals",
+            "link": "/collections/all",
+            "count": "3"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ],
+      "settings": {
+        "title": "Shop by category"
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "hot_1": {
+          "type": "product",
+          "settings": {
+            "position_x": 25,
+            "position_y": 40
+          }
+        },
+        "hot_2": {
+          "type": "product",
+          "settings": {
+            "position_x": 65,
+            "position_y": 55
+          }
+        },
+        "hot_3": {
+          "type": "product",
+          "settings": {
+            "position_x": 80,
+            "position_y": 30
+          }
+        }
+      },
+      "block_order": [
+        "hot_1",
+        "hot_2",
+        "hot_3"
+      ],
+      "settings": {
+        "eyebrow": "Shop the look",
+        "title": "Curated for modern living",
+        "subtitle": "Tap the dots to explore products from this scene."
+      }
+    },
+    "home_search": {
+      "type": "home-search",
+      "blocks": {
+        "hs_hint_1": {
+          "type": "hint",
+          "settings": {
+            "label": "Audio",
+            "link": "/collections/all?view=audio"
+          }
+        },
+        "hs_hint_2": {
+          "type": "hint",
+          "settings": {
+            "label": "Desk",
+            "link": "/collections/all?view=desk"
+          }
+        },
+        "hs_hint_3": {
+          "type": "hint",
+          "settings": {
+            "label": "Warranty",
+            "link": "/collections/all?view=warranty"
+          }
+        },
+        "hs_hint_4": {
+          "type": "hint",
+          "settings": {
+            "label": "Contact",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "hs_hint_1",
+        "hs_hint_2",
+        "hs_hint_3",
+        "hs_hint_4"
+      ],
+      "settings": {
+        "eyebrow": "Find it fast",
+        "heading": "Search the entire store.",
+        "subheading": "Products, help articles, and our brand story — everything, one search box.",
+        "placeholder": "Search Luminor for products, articles, or help…",
+        "hint_prefix": "Try:"
+      }
+    },
+    "home_quick_links": {
+      "type": "home-quick-links",
+      "blocks": {
+        "hql_1": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Audio",
+            "subtitle": "Headphones, earbuds, speakers & soundbars.",
+            "link": "/collections/all?view=audio"
+          }
+        },
+        "hql_2": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Desk",
+            "subtitle": "Lamps, keyboards, MagSafe chargers & hubs.",
+            "link": "/collections/all?view=desk"
+          }
+        },
+        "hql_3": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Shop",
+            "title": "Everyday carry",
+            "subtitle": "Wallets, watches, tumblers & accessories.",
+            "link": "/collections/all?view=everyday"
+          }
+        },
+        "hql_4": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Help Center & FAQs",
+            "subtitle": "Answers to the questions we get every day.",
+            "link": "/collections/all?view=faq"
+          }
+        },
+        "hql_5": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Shipping & Returns",
+            "subtitle": "Delivery times, free returns, and how we pack.",
+            "link": "/collections/all?view=shipping-returns"
+          }
+        },
+        "hql_6": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Warranty",
+            "subtitle": "1-2 year limited coverage, and what it covers.",
+            "link": "/collections/all?view=warranty"
+          }
+        },
+        "hql_7": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Support",
+            "title": "Track an order",
+            "subtitle": "Look up a shipment with your order number.",
+            "link": "/collections/all?view=track-order"
+          }
+        },
+        "hql_8": {
+          "type": "tile",
+          "settings": {
+            "category_label": "Company",
+            "title": "Our story",
+            "subtitle": "Who we are, what we make, and why we exist.",
+            "link": "/collections/all?view=about"
+          }
+        }
+      },
+      "block_order": [
+        "hql_1",
+        "hql_2",
+        "hql_3",
+        "hql_4",
+        "hql_5",
+        "hql_6",
+        "hql_7",
+        "hql_8"
+      ],
+      "settings": {
+        "eyebrow": "Start here",
+        "heading": "Everything you need, one click away.",
+        "subheading": "Shop the catalog, read about our materials, or find an answer in the help center — it's all a tap away."
+      }
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "Our philosophy",
+        "heading": "Designed in California. Assembled with intent.",
+        "text": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "press": {
+      "type": "press",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "TechCrunch"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "The Verge"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Wired"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Engadget"
+          }
+        },
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Luminor's approach to everyday essentials is refreshingly thoughtful — every detail feels intentional.",
+            "source": "TechCrunch"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "The closest thing to Apple-grade design I've seen from an independent brand.",
+            "source": "The Verge"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Minimalism done right — Luminor proves that less really is more.",
+            "source": "Wired"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ],
+      "settings": {
+        "title": "Featured on"
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "Craftsmanship",
+        "title": "Crafted to the last detail.",
+        "text": "<p>Every Luminor product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
+        "button_label": "Read our story",
+        "button_link": "/collections/all?view=about"
+      }
+    },
+    "home_popular": {
+      "type": "home-popular-collections",
+      "blocks": {
+        "hp_card_1": {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"/><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"/></svg>",
+            "gradient": "linear-gradient(135deg, #1c1c1e 0%, #0071e3 60%, #5ac8fa 100%)",
+            "eyebrow": "Category 01 / Audio",
+            "title": "Sound, tuned for life.",
+            "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",
+            "cta_label": "Shop Audio",
+            "link": "/collections/all?view=audio"
+          }
+        },
+        "hp_card_2": {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M6 18v2M18 18v2\"/></svg>",
+            "gradient": "linear-gradient(135deg, #0b8e70 0%, #35d69f 60%, #bf5af2 100%)",
+            "eyebrow": "Category 02 / Desk",
+            "title": "The workspace, rethought.",
+            "text": "Lamps, keyboards, chargers and hubs — built to be seen without stealing focus.",
+            "cta_label": "Shop Desk",
+            "link": "/collections/all?view=desk"
+          }
+        },
+        "hp_card_3": {
+          "type": "card",
+          "settings": {
+            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3\"/></svg>",
+            "gradient": "linear-gradient(135deg, #ff375f 0%, #ff9f0a 60%, #ffd60a 100%)",
+            "eyebrow": "Category 03 / Everyday",
+            "title": "Carry that ages well.",
+            "text": "Full-grain leather, titanium, and 316 stainless steel — objects for the every day.",
+            "cta_label": "Shop Everyday",
+            "link": "/collections/all?view=everyday"
+          }
+        }
+      },
+      "block_order": [
+        "hp_card_1",
+        "hp_card_2",
+        "hp_card_3"
+      ],
+      "settings": {
+        "eyebrow": "Shop by category",
+        "heading": "Popular collections",
+        "subheading": "Three curated lines, each one obsessively engineered. A good place to start if you're new to Luminor."
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Designed with intention. Built to last.",
+        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "blocks": {
+        "coll_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        },
+        "coll_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories-featured"
+          }
+        },
+        "coll_3": {
+          "type": "collection",
+          "settings": {
+            "collection": "automated-collection"
+          }
+        }
+      },
+      "block_order": [
+        "coll_1",
+        "coll_2",
+        "coll_3"
+      ],
+      "settings": {
+        "eyebrow": "Browse collections",
+        "title": "Shop by category",
+        "layout": "bento",
+        "columns": 3
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "title": "Free shipping",
+            "text": "On all orders over $50, delivered fast to your door."
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "title": "30-day returns",
+            "text": "Not in love? Return it within 30 days for a full refund."
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "title": "Secure payments",
+            "text": "Encrypted checkout you can trust. All major payment methods accepted."
+          }
+        }
+      },
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
+      "settings": {
+        "title": "Why you'll love it",
+        "subtitle": "Designed to make every interaction effortless.",
+        "columns": 3
+      }
+    },
+    "home_faq": {
+      "type": "home-mini-faq",
+      "blocks": {
+        "hf_q1": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take and is it free?",
+            "answer": "<p>Standard US shipping is 3–5 business days and <strong>free on orders over $49</strong>. International orders arrive in 7–14 business days depending on destination. Full details in the <a href=\"/collections/all?view=shipping-returns\">Shipping &amp; Returns policy</a>.</p>"
+          }
+        },
+        "hf_q2": {
+          "type": "question",
+          "settings": {
+            "question": "What is Luminor's return policy?",
+            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn't meet your expectations — for any reason — send it back in any condition and we'll refund 100% of your purchase. Start on the <a href=\"/collections/all?view=shipping-returns\">returns page</a>.</p>"
+          }
+        },
+        "hf_q3": {
+          "type": "question",
+          "settings": {
+            "question": "Are Luminor products covered by warranty?",
+            "answer": "<p>Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/collections/all?view=warranty\">warranty page</a> for full terms.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "hf_q1",
+        "hf_q2",
+        "hf_q3"
+      ],
+      "settings": {
+        "heading": "Quick answers to the top three questions.",
+        "subheading": "These three alone solve more than 60% of support tickets. Still stuck? The help banner below connects you to a human.",
+        "see_all_label": "See all frequently asked questions",
+        "see_all_link": "/collections/all?view=faq"
+      }
+    },
+    "home_help": {
+      "type": "home-help-banner",
+      "settings": {
+        "eyebrow": "We're here",
+        "heading": "One message away from a real person.",
+        "text": "A Luminor specialist — not a bot — will reply within 24 hours on weekdays. We help with orders, product questions, warranty claims, or a recommendation if you're not sure what to buy.",
+        "primary_label": "Contact support",
+        "primary_link": "/pages/contact",
+        "secondary_label": "Browse the store",
+        "secondary_link": "/collections/all"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Join the Luminor circle.",
+        "text": "Be the first to know about new arrivals, exclusive offers, and stories from the Luminor studio."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "stats",
+    "featured_collection",
+    "category_pills",
+    "lookbook",
+    "home_search",
+    "home_quick_links",
+    "statement",
+    "press",
+    "image_with_text",
+    "home_popular",
+    "editorial",
+    "collection_list",
+    "multicolumn",
+    "home_faq",
+    "home_help",
+    "newsletter"
+  ]
+}

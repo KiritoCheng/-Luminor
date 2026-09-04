@@ -1,0 +1,64 @@
+{%- comment -%}
+  Alternate cart template rendered for AJAX refresh (?view=drawer).
+  Outputs only the cart drawer markup for in-place replacement.
+{%- endcomment -%}
+<div class="cart-drawer" data-cart-drawer>
+  <div class="cart-drawer__header">
+    <p class="cart-drawer__title">{{ 'sections.cart.title' | t }} ({{ cart.item_count }})</p>
+    <button class="cart-drawer__close" data-cart-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+
+  <div class="cart-drawer__body">
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-drawer__empty">
+        <p>{{ 'sections.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">{{ 'sections.cart.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      {%- for item in cart.items -%}
+        <div class="cart-item" data-cart-item data-line="{{ forloop.index }}">
+          <a href="{{ item.url }}" class="cart-item__media">
+            {%- if item.image -%}
+              {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title | escape }}
+            {%- endif -%}
+          </a>
+          <div class="cart-item__info">
+            <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+            {%- unless item.variant.title contains 'Default' -%}
+              <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
+            {%- endunless -%}
+            <div class="qty-stepper cart-item__qty">
+              <button data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" data-qty-input data-line="{{ forloop.index }}">
+              <button data-qty-step="up" aria-label="{{ 'products.product.quantity.increase' | t }}">+</button>
+            </div>
+            <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t }}</a>
+          </div>
+          <div class="cart-item__price">
+            {%- if item.original_line_price != item.final_line_price -%}
+              <s>{{ item.original_line_price | money }}</s>
+            {%- endif -%}
+            {{ item.final_line_price | money }}
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>{{ 'sections.cart.subtotal' | t }}</span>
+        <span class="cart-drawer__subtotal-value" data-cart-subtotal>{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
+      <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
+        <button type="submit" name="checkout" class="button button--primary button--full button--lg">{{ 'sections.cart.checkout' | t }}</button>
+      </form>
+    </div>
+  {%- endif -%}
+</div>
+
+<span data-cart-count hidden>{{ cart.item_count }}</span>

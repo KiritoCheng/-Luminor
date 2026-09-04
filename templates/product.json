@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-details",
+      "settings": {
+        "show_dynamic_checkout": true,
+        "enable_sticky": true
+      }
+    },
+    "material_story": {
+      "type": "image-with-text",
+      "settings": {
+        "height": "medium",
+        "layout": "image_right",
+        "color_scheme": "scheme_1",
+        "eyebrow": "Material & Craft",
+        "title": "Aerospace-grade titanium, milled to micron precision.",
+        "text": "<p>Every Luminor titanium case is forged from Grade 5 aerospace alloy — the same spec used in Apple's iPhone 15 Pro chassis — then CNC-milled and bead-blasted to a soft, fingerprint-resistant finish. It's twice the strength of steel at less than half the weight, so your iPhone stays protected without the bulk.</p>",
+        "button_label": "Explore the material",
+        "button_link": ""
+      }
+    },
+    "features": {
+      "type": "multicolumn",
+      "blocks": {
+        "feature_magsafe": {
+          "type": "column",
+          "settings": {
+            "title": "MagSafe, perfectly aligned.",
+            "text": "N52 Neodymium magnets deliver a locked-in 15W charge every time you snap on. Precision-machined ring matches Apple's MagSafe geometry to the tenth of a millimeter."
+          }
+        },
+        "feature_titanium": {
+          "type": "column",
+          "settings": {
+            "title": "Titanium, not aluminum.",
+            "text": "Grade 5 aerospace titanium body — stronger than stainless steel, lighter than aluminum. Anodized in Apple's matching finishes for a seamless ecosystem look."
+          }
+        },
+        "feature_fastcharge": {
+          "type": "column",
+          "settings": {
+            "title": "USB-C fast charge.",
+            "text": "Pass-through 30W USB-C charging keeps your iPhone 15 Pro topped up while the case is on, with built-in thermal management that won't throttle your device."
+          }
+        },
+        "feature_warranty": {
+          "type": "column",
+          "settings": {
+            "title": "Lifetime Luminor warranty.",
+            "text": "We build accessories to outlast the device they protect. Every titanium case ships with a lifetime warranty against manufacturing defects — register within 30 days to activate."
+          }
+        }
+      },
+      "block_order": [
+        "feature_magsafe",
+        "feature_titanium",
+        "feature_fastcharge",
+        "feature_warranty"
+      ],
+      "settings": {
+        "color_scheme": "scheme_1",
+        "eyebrow": "Why Luminor",
+        "title": "Engineered for the Apple ecosystem.",
+        "subtitle": "Every detail considered. Every material chosen for a reason.",
+        "columns": 4,
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "related": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "You may also like",
+        "title": "Complete the setup.",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "bento": false,
+        "view_all_label": "Shop all accessories",
+        "view_all_link": ""
+      }
+    },
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "Our philosophy",
+        "heading": "Designed in California. Built for the Apple ecosystem.",
+        "text": "<p>We don't make accessories for every phone. We make them for the one in your pocket — engineered to Apple's exacting tolerances, crafted from the same aerospace materials, and obsessively refined until the seam between device and accessory disappears. A Luminor isn't an add-on. It's the finishing detail the product was always meant to have.</p>",
+        "button_label": "Shop the collection",
+        "button_link": ""
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_recommendations": true,
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "material_story",
+    "features",
+    "related",
+    "manifesto",
+    "recommendations"
+  ]
+}

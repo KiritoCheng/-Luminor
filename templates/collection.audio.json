@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "intro",
+    "editorial",
+    "collection_types",
+    "feature",
+    "manifesto"
+  ],
+  "sections": {
+    "manifesto": {
+      "settings": {
+        "button_label": "See return policy",
+        "watermark": "AUDIO",
+        "eyebrow": "Our promise",
+        "button_link": "/collections/all?view=shipping-returns",
+        "heading": "Two-year warranty. Free returns within 30 days.",
+        "text": "\u003cp\u003eIf any Luminor Audio product doesn\u0027t meet your expectations — whether it\u0027s the fit, the sound, or the packaging — return it within 30 days for a full refund. No questions, no forms, no hoops.\u003c/p\u003e"
+      },
+      "type": "statement"
+    },
+    "feature": {
+      "settings": {
+        "button_label": "Our warranty",
+        "text": "\u003cp\u003eGrade 5 titanium grilles don\u0027t just look premium — they dampen resonant frequencies that cheap plastic grilles introduce. The result is a cleaner, tighter soundstage across the entire frequency range.\u003c/p\u003e\u003cp\u003eEvery pair is hand-tuned and inspected before it leaves the factory.\u003c/p\u003e",
+        "eyebrow": "The Luminor difference",
+        "button_link": "/collections/all?view=warranty",
+        "color_scheme": "alt",
+        "title": "Materials you can hear.",
+        "layout": "text_first"
+      },
+      "type": "image-with-text"
+    },
+    "intro": {
+      "settings": {
+        "eyebrow": "Shop / Audio",
+        "title": "Sound that moves you.",
+        "text": "\u003cp\u003eEveryday carry audio, engineered for the moments that matter. From commute-ready earbuds to home-office soundbars — tuned for clarity, built for life.\u003c/p\u003e"
+      },
+      "type": "rich-text"
+    },
+    "collection_types": {
+      "blocks": {
+        "t4": {
+          "settings": {
+            "text": "Minimal home theatre soundbars with Dolby Atmos support. Wires, hidden.",
+            "title": "Soundbars"
+          },
+          "type": "column"
+        },
+        "t1": {
+          "settings": {
+            "text": "Over-ear noise cancelling with 40-hour battery. Foldable, travel-ready.",
+            "title": "Headphones"
+          },
+          "type": "column"
+        },
+        "t3": {
+          "settings": {
+            "text": "Portable Bluetooth speakers with 360-degree sound. Room-filling, pocket-sized.",
+            "title": "Speakers"
+          },
+          "type": "column"
+        },
+        "t2": {
+          "settings": {
+            "text": "True wireless, IP67 rated. 8 hours per charge, 32 with the case.",
+            "title": "Earbuds"
+          },
+          "type": "column"
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "Shop the collection",
+        "title": "Four categories. One standard.",
+        "columns": 4,
+        "subtitle": "Every Luminor Audio piece is engineered to last — and backed by our 2-year limited warranty."
+      }
+    },
+    "editorial": {
+      "settings": {
+        "eyebrow": "Crafted for listening",
+        "button_label": "Explore all Audio",
+        "heading": "Studio-grade sound, daily-ready build.",
+        "text": "\u003cp\u003eWe pick every driver, every mesh grille, and every band material with the same obsession: a product that sounds as good on day 1,000 as it did on day one. Titanium finishes, braided cables, and housings machined from a single block of aerospace-grade aluminum.\u003c/p\u003e\u003cp\u003eEach Luminor Audio piece is tuned for neutral response with a slight lift in the low mids — so speech, music, and calls all sound natural, wherever you are.\u003c/p\u003e",
+        "button_link": "/collections/all"
+      },
+      "type": "editorial"
+    }
+  }
+}

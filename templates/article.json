@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "article",
+      "settings": {}
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor",
+        "title": "More to explore.",
+        "text": "<p>Discover the titanium craft and MagSafe engineering behind every Luminor accessory — built for the Apple ecosystem, made to outlast it.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["main", "cta"]
+}

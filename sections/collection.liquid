@@ -1,0 +1,136 @@
+{%- liquid
+  assign columns = section.settings.columns_desktop | default: 4
+-%}
+
+<section class="section section--tight">
+  <div class="page-width">
+    {%- if section.settings.show_collection_title -%}
+      <div class="collection-hero">
+        <h1 class="collection-hero__title">{{ collection.title | escape }}</h1>
+        {%- if collection.description != blank -%}
+          <div class="collection-hero__description rte">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="collection-layout">
+      {%- comment -%} Facets sidebar {%- endcomment -%}
+      <aside class="facets" data-facets>
+        <div class="facets__header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <h2 style="font-size:1rem;font-weight:600;">{{ 'sections.collection_template.filter' | t }}</h2>
+          <button class="facets__close" data-facets-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+        </div>
+        <form id="FacetForm">
+          {%- for filter in collection.filters -%}
+            <details class="facets__group" {% if filter.active_values.size > 0 %}open{% endif %}>
+              <summary>{{ filter.label | escape }}</summary>
+              <div class="facets__options">
+                {%- case filter.type -%}
+                  {%- when 'price_range' -%}
+                    <div style="display:flex;gap:8px;">
+                      <input type="number" name="{{ filter.min_value_param }}" value="{{ filter.min_value.value }}" placeholder="Min">
+                      <input type="number" name="{{ filter.max_value_param }}" value="{{ filter.max_value.value }}" placeholder="Max">
+                    </div>
+                  {%- else -%}
+                    {%- for value in filter.values -%}
+                      <label class="checkbox">
+                        <input type="checkbox" name="{{ value.param }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        <span>{{ value.label | escape }} ({{ value.count }})</span>
+                      </label>
+                    {%- endfor -%}
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+          <noscript>
+            <button type="submit" class="button button--primary button--full">{{ 'sections.collection_template.apply' | t }}</button>
+          </noscript>
+        </form>
+      </aside>
+
+      <div>
+        <div class="collection-toolbar">
+          <span class="collection-toolbar__count">{{ 'sections.collection_template.product_count' | t: count: collection.products_count }}</span>
+          <div class="collection-toolbar__sort">
+            <button class="collection-toolbar__filters-btn" data-facets-open>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              {{ 'sections.collection_template.filter' | t }}
+            </button>
+            <form id="SortForm" method="get">
+              {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+              <select name="sort_by" aria-label="{{ 'sections.collection_template.sort_by' | t }}">
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name | escape }}</option>
+                {%- endfor -%}
+              </select>
+            </form>
+          </div>
+        </div>
+
+        <div id="ProductGrid" data-cart-page-items>
+          {%- paginate collection.products by section.settings.products_per_page -%}
+          <div class="product-grid" style="--cols: {{ columns }}">
+            {%- for product in collection.products -%}
+              <div class="reveal" style="--reveal-delay: {{ forloop.index0 | modulo: 4 | times: 80 }}ms">
+                {% render 'product-card', product: product %}
+              </div>
+            {%- else -%}
+              <p class="color-muted" style="grid-column: 1 / -1">{{ 'sections.collection_template.no_matches' | t }}</p>
+            {%- endfor -%}
+          </div>
+
+          {% render 'pagination', paginate: paginate %}
+          {%- endpaginate -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('FacetForm');
+    if (form) form.addEventListener('change', function () { form.submit(); });
+    var sortForm = document.getElementById('SortForm');
+    if (sortForm) {
+      sortForm.addEventListener('change', function (e) {
+        var params = new URLSearchParams(window.location.search);
+        params.set('sort_by', e.target.value);
+        window.location.search = params.toString();
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_title",
+      "label": "Show collection title",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Products per page",
+      "default": 24
+    }
+  ]
+}
+{% endschema %}

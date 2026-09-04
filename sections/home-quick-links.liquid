@@ -1,0 +1,124 @@
+{% comment %} Home page 8 quick-link tiles (from 404 page design) {% endcomment %}
+<section class="section home-quick-links">
+  <style>
+    .hql-max { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .hql-max { padding: 0 32px; } }
+    .hql-head { text-align: center; margin-bottom: 40px; }
+    .hql-head__eyebrow {
+      display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #0071e3; font-weight: 600; margin-bottom: 10px;
+    }
+    .hql-head h2 {
+      margin: 0 0 12px; font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+      letter-spacing: -0.02em; color: var(--color-text, #1d1d1f); line-height: 1.15;
+    }
+    .hql-head p { margin: 0 auto; max-width: 640px; color: var(--color-text-muted, #6e6e73); font-size: 16px; line-height: 1.55; }
+    .hql-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px;
+    }
+    @media (max-width: 1023px) { .hql-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 479px)  { .hql-grid { grid-template-columns: 1fr; } }
+    .hql-tile {
+      position: relative; display: block; padding: 22px 22px 20px;
+      border-radius: 22px; background: var(--color-background, #fff);
+      border: 1px solid var(--color-border, #d2d2d7);
+      text-decoration: none; color: inherit; overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .hql-tile::before {
+      content: ""; position: absolute; inset: auto -1px -1px -1px; height: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,113,227,0.04));
+      transition: height .25s ease; border-radius: 0 0 22px 22px;
+    }
+    .hql-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      border-color: rgba(0,113,227,0.35);
+    }
+    .hql-tile:hover::before { height: 60%; }
+    .hql-tile__cat {
+      display: inline-block; font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--color-text-muted, #86868b);
+      font-weight: 600; margin-bottom: 12px;
+    }
+    .hql-tile__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .hql-tile__title {
+      font-size: 17px; font-weight: 600; color: var(--color-text, #1d1d1f);
+      margin: 0; line-height: 1.3;
+    }
+    .hql-tile__sub { margin-top: 6px; font-size: 13px; color: var(--color-text-muted, #86868b); line-height: 1.45; }
+    .hql-tile__chev {
+      width: 32px; height: 32px; flex: none; display: inline-flex;
+      align-items: center; justify-content: center; border-radius: 50%;
+      background: var(--color-background-alt, #f5f5f7); color: var(--color-text, #1d1d1f);
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .hql-tile:hover .hql-tile__chev {
+      background: #0071e3; color: #fff; transform: translateX(2px);
+    }
+    .hql-tile__chev svg { width: 14px; height: 14px; }
+  </style>
+
+  <div class="hql-max">
+    <div class="hql-head">
+      {%- if section.settings.eyebrow != blank -%}<span class="hql-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+    <div class="hql-grid">
+      {%- for b in section.blocks -%}
+        <a class="hql-tile" href="{{ b.settings.link }}">
+          {%- if b.settings.category_label != blank -%}<span class="hql-tile__cat">{{ b.settings.category_label }}</span>{%- endif -%}
+          <div class="hql-tile__row">
+            <div>
+              <p class="hql-tile__title">{{ b.settings.title }}</p>
+              {%- if b.settings.subtitle != blank -%}<div class="hql-tile__sub">{{ b.settings.subtitle }}</div>{%- endif -%}
+            </div>
+            <span class="hql-tile__chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home quick links",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start here" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need, one click away." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Shop the catalog, read about our materials, or find an answer in the help center — it\u2019s all a tap away." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "category_label", "label": "Category", "default": "Shop" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Audio" },
+        { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Headphones, earbuds, speakers and soundbars." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home quick links (8 tiles)",
+      "blocks": [
+        { "type": "tile", "settings": { "category_label": "Shop", "title": "Audio", "subtitle": "Headphones, earbuds, speakers & soundbars.", "link": "/collections/all?view=audio" } },
+        { "type": "tile", "settings": { "category_label": "Shop", "title": "Desk", "subtitle": "Lamps, keyboards, MagSafe chargers & hubs.", "link": "/collections/all?view=desk" } },
+        { "type": "tile", "settings": { "category_label": "Shop", "title": "Everyday carry", "subtitle": "Wallets, watches, tumblers & accessories.", "link": "/collections/all?view=everyday" } },
+        { "type": "tile", "settings": { "category_label": "Support", "title": "Help Center & FAQs", "subtitle": "Answers to the questions we get every day.", "link": "/collections/all?view=faq" } },
+        { "type": "tile", "settings": { "category_label": "Support", "title": "Shipping & Returns", "subtitle": "Delivery times, free returns, and how we pack.", "link": "/collections/all?view=shipping-returns" } },
+        { "type": "tile", "settings": { "category_label": "Support", "title": "Warranty", "subtitle": "1-2 year limited coverage, and what it covers.", "link": "/collections/all?view=warranty" } },
+        { "type": "tile", "settings": { "category_label": "Support", "title": "Track an order", "subtitle": "Look up a shipment with your order number.", "link": "/collections/all?view=track-order" } },
+        { "type": "tile", "settings": { "category_label": "Company", "title": "Our story", "subtitle": "Who we are, what we make, and why we exist.", "link": "/collections/all?view=about" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

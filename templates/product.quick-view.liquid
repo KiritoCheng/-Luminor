@@ -1,0 +1,89 @@
+{%- comment -%}
+  Alternate product template rendered for the quick-view modal (?view=quick-view).
+  Apple / Awwwards minimalist 2-column compact product card.
+{%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_only_default_variant = false
+  if product.options.size == 1
+    if product.options.first.name == 'Title'
+      assign has_only_default_variant = true
+    endif
+  endif
+-%}
+
+<div class="modal__content-inner">
+  <!-- LEFT: Media panel -->
+  <div class="modal__media">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(max-width: 768px) 100vw, 50vw', alt: product.title | escape }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'modal__placeholder-img' }}
+    {%- endif -%}
+  </div>
+
+  <!-- RIGHT: Info panel -->
+  <div class="modal__info">
+    {%- if product.vendor != blank -%}
+      <p class="modal__vendor">{{ product.vendor | escape }}</p>
+    {%- endif -%}
+
+    <h1 class="modal__title">{{ product.title | escape }}</h1>
+
+    <div class="modal__price" data-quick-view-price>
+      {% render 'price', product: product, variant: current_variant %}
+    </div>
+
+    {%- if product.description != blank -%}
+      <div class="modal__description rte">
+        {{ product.description | strip_html | truncatewords: 28 }}
+      </div>
+    {%- endif -%}
+
+    {%- unless has_only_default_variant -%}
+      <form method="post" action="/cart/add" data-product-form data-quick-view-form accept-charset="UTF-8" class="modal__options">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-quick-view-variant-id>
+        {%- for option in product.options_with_values -%}
+          <div class="modal__option-group" data-option-group data-option-name="{{ option.name | escape }}">
+            <label class="modal__option-label">
+              <span>{{ option.name | escape }}</span>
+              <span data-option-selected>{{ option.selected_value | escape }}</span>
+            </label>
+            <div class="modal__option-values">
+              {%- for value in option.values -%}
+                {%- assign is_sel = false -%}
+                {%- if value == option.selected_value -%}{%- assign is_sel = true -%}{%- endif -%}
+                <button type="button" class="modal__option-value{% if is_sel %} is-active{% endif %}" data-option-value data-value="{{ value | escape }}">{{ value | escape }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+    {%- else -%}
+      <form method="post" action="/cart/add" data-product-form data-quick-view-form accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+    {%- endunless -%}
+
+      <div class="modal__qty">
+        <span>Quantity</span>
+        <div class="qty-stepper" data-qty-stepper>
+          <button type="button" aria-label="Decrease quantity" data-qty-dec>&minus;</button>
+          <input type="number" name="quantity" value="1" min="1" max="9999" inputmode="numeric" pattern="[0-9]*" data-qty-input>
+          <button type="button" aria-label="Increase quantity" data-qty-inc>+</button>
+        </div>
+      </div>
+
+      <button type="submit" name="add" class="modal__add" data-add-to-cart {% unless current_variant.available %}disabled{% endunless %}>
+        {%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t | default: 'Add to Cart' }}{%- else -%}{{ 'products.product.sold_out' | t | default: 'Sold Out' }}{%- endif -%}
+      </button>
+    </form>
+
+    <a href="{{ product.url }}" class="modal__view-full" data-quick-view-full>
+      <span>{{ 'products.product.view_full_details' | t | default: 'View full details' }}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>

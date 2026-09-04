@@ -1,0 +1,225 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Search",
+      "title": "Search",
+      "placeholder": "Search products, articles...",
+      "start_typing": "Start typing to search",
+      "no_matches": "No results found. Try a different search term.",
+      "results": "Results for \"{{ terms }}\"",
+      "results_with_count": "{{ count }} results for \"{{ terms }}\"",
+      "products": "Products",
+      "collections": "Collections",
+      "articles": "Articles",
+      "pages": "Pages"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "slider": {
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "go_to": "Go to slide {{ number }}"
+    },
+    "social": {
+      "share_on_facebook": "Share on Facebook",
+      "share_on_twitter": "Share on X",
+      "share_on_pinterest": "Share on Pinterest"
+    },
+    "newsletter_form": {
+      "newsletter_email": "Your email"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "selection_help": "Press the up and down arrow keys to navigate.",
+    "slideshow_info": "Use left and right arrow keys to navigate the slideshow.",
+    "menu": "Open menu",
+    "close": "Close"
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": "{{ count }} items in your cart"
+    },
+    "cart": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue shopping",
+      "subtotal": "Subtotal",
+      "taxes_note": "Shipping and taxes calculated at checkout.",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "note": "Order note",
+      "note_placeholder": "Add a note to your order...",
+      "total": "Total",
+      "order_summary": "Order summary",
+      "headings": {
+        "product": "Product",
+        "quantity": "Quantity",
+        "total": "Total"
+      }
+    },
+    "footer": {
+      "rights": "All rights reserved."
+    },
+    "newsletter": {
+      "placeholder": "Email address",
+      "button_label": "Subscribe",
+      "success": "Thanks for subscribing!",
+      "error": "Something went wrong. Please try again."
+    },
+    "contact_form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Thanks for reaching out. We'll get back to you shortly.",
+      "error_heading": "Please correct the following:"
+    },
+    "featured_collection": {
+      "example_title": "Example product"
+    },
+    "collection_template": {
+      "filter": "Filter",
+      "apply": "Apply",
+      "sort_by": "Sort by",
+      "product_count": "{{ count }} products",
+      "no_matches": "No products found in this collection."
+    },
+    "list_collections": {
+      "title": "Collections"
+    },
+    "404": {
+      "eyebrow": "Error",
+      "title": "Page not found",
+      "text": "The page you were looking for doesn't exist or has been moved.",
+      "link": "Return home",
+      "browse": "Browse products"
+    },
+    "password": {
+      "opening_soon": "Opening soon",
+      "placeholder": "Enter store password",
+      "enter": "Enter",
+      "error": "Incorrect password. Please try again.",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\">Log in here</a>."
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold out",
+      "on_sale": "Sale",
+      "quick_view": "Quick view",
+      "add_to_cart": "Add to bag",
+      "view_full_details": "View full details",
+      "you_may_also_like": "You may also like",
+      "share": "Share",
+      "details": "Product details",
+      "shipping_returns": "Shipping & Returns",
+      "shipping_returns_text": "Free standard shipping on orders over $50. Returns accepted within 30 days of delivery. Items must be in original condition.",
+      "materials": "Materials & Care",
+      "materials_default": "See product packaging for full materials and care instructions.",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity",
+        "decrease": "Decrease quantity"
+      }
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Account",
+      "welcome": "Welcome, {{ name }}",
+      "log_out": "Log out",
+      "manage_addresses": "Manage addresses"
+    },
+    "orders": {
+      "title": "Order history",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "addresses": {
+      "title": "Addresses",
+      "none": "No addresses on file.",
+      "default": "Default",
+      "edit": "Edit",
+      "delete": "Delete",
+      "add_new": "Add a new address",
+      "add": "Add address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "address1": "Address",
+      "city": "City",
+      "country": "Country",
+      "zip": "Postal code",
+      "phone": "Phone",
+      "save": "Save address"
+    },
+    "login_page": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign in",
+      "create_account": "Create account",
+      "forgot_password": "Forgot password?"
+    },
+    "register_page": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create account",
+      "have_account": "Already have an account?"
+    },
+    "reset_password": {
+      "title": "Reset password",
+      "subtext": "Enter a new password for your account.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset password"
+    },
+    "activate_account": {
+      "title": "Activate account",
+      "subtext": "Create a password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Activate account",
+      "decline": "Decline invitation"
+    },
+    "order": {
+      "back_to_account": "Back to account",
+      "title": "Order {{ name }}",
+      "placed_on": "Placed on {{ date }}",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "discount": "discount",
+      "billing_address": "Billing address",
+      "shipping_address": "Shipping address"
+    }
+  },
+  "blogs": {
+    "article": {
+      "back_to_blog": "Back to {{ blog }}"
+    }
+  },
+  "cart": {
+    "cart_error": "There was an error updating your cart. Please try again.",
+    "cart_quantity_error": "You can only add {{ quantity }} of this item to your cart."
+  }
+}

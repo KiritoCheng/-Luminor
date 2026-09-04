@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Luminor Journal",
+        "title": "Stories, ideas, and inspiration.",
+        "text": "<p>Explore the Luminor journal for design insights, product stories, and the philosophy behind everything we make.</p>",
+        "layout": "text_first",
+        "color_scheme": "alt"
+      }
+    },
+    "blog_posts": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "Latest articles",
+        "posts_to_show": 6
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor Journal",
+        "title": "Designed in detail.",
+        "text": "<p>Dig deeper into the craft behind Grade 5 titanium, MagSafe engineering, and the Apple ecosystem — stories from the people who make Luminor.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["banner", "blog_posts", "cta"]
+}

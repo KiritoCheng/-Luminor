@@ -1,0 +1,60 @@
+{%- if section.settings.show_recommendations and recommendations.performed and recommendations.products_count > 0 -%}
+  <section class="section bg-alt reveal">
+    <div class="page-width">
+      <div class="featured-collection__header">
+        <h2 class="featured-collection__title">{{ 'products.product.you_may_also_like' | t }}</h2>
+      </div>
+      <div class="product-row">
+        {%- for product in recommendations.products limit: section.settings.products_to_show -%}
+          <div class="reveal">{% render 'product-card', product: product %}</div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<script>
+  // Load recommendations when section is shown via AJAX endpoint
+  (function () {
+    var section = document.querySelector('[data-product-recommendations]');
+    if (!section) return;
+    var productId = section.getAttribute('data-product-id');
+    var limit = section.getAttribute('data-limit') || 4;
+    var url = '{{ routes.product_recommendations_url }}?product_id=' + productId + '&limit=' + limit + '&section_id={{ section.id }}';
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var newSection = doc.querySelector('[data-product-recommendations]');
+        if (newSection && newSection.innerHTML.trim() !== '') {
+          section.innerHTML = newSection.innerHTML;
+          if (window.AuroraTheme) AuroraTheme.initReveal();
+        }
+      })
+      .catch(function () {});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_recommendations",
+      "label": "Show recommendations",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+
+{
+    "sections":  {
+                     "intro":  {
+                                   "type":  "rich-text",
+                                   "settings":  {
+                                                    "eyebrow":  "Luminor policy",
+                                                    "title":  "Shipping \u0026 returns.",
+                                                    "text":  "\u003cp\u003eWe deliver premium gear worldwide, fast. And if it\u0027s not perfect, we make it right — zero hassle.\u003c/p\u003e"
+                                                }
+                               },
+                     "shipping_grid":  {
+                                           "type":  "multicolumn",
+                                           "settings":  {
+                                                            "eyebrow":  "Shipping",
+                                                            "title":  "Fast, tracked, carbon-neutral.",
+                                                            "subtitle":  "Every Luminor order ships in recyclable packaging — on us, when you spend $50+.",
+                                                            "columns":  3
+                                                        },
+                                           "blocks":  {
+                                                          "s1":  {
+                                                                     "type":  "column",
+                                                                     "settings":  {
+                                                                                      "title":  "Free standard shipping",
+                                                                                      "text":  "On all orders over $50. US delivery 3–5 business days."
+                                                                                  }
+                                                                 },
+                                                          "s2":  {
+                                                                     "type":  "column",
+                                                                     "settings":  {
+                                                                                      "title":  "Express (2-day)",
+                                                                                      "text":  "Available at checkout for domestic orders under 10lbs. Ships same-day if ordered before 2pm EST."
+                                                                                  }
+                                                                 },
+                                                          "s3":  {
+                                                                     "type":  "column",
+                                                                     "settings":  {
+                                                                                      "title":  "Worldwide delivery",
+                                                                                      "text":  "We ship to 40+ countries. International 7–14 business days. Duties \u0026 taxes calculated at checkout."
+                                                                                  }
+                                                                 }
+                                                      },
+                                           "block_order":  [
+                                                               "s1",
+                                                               "s2",
+                                                               "s3"
+                                                           ]
+                                       },
+                     "returns_ed":  {
+                                        "type":  "editorial",
+                                        "settings":  {
+                                                         "eyebrow":  "30-day promise",
+                                                         "heading":  "Not in love? Send it back.",
+                                                         "text":  "\u003cp\u003eWe obsess over craftsmanship. If a Luminor product doesn\u0027t meet your expectations within the first 30 days, return it in original condition for a full refund. No restocking fees, no attitude.\u003c/p\u003e\u003cp\u003eInitiate a return from your account dashboard or email us at \u003ca href=\"mailto:support@luminor-theme.com\"\u003esupport@luminor-theme.com\u003c/a\u003e with your order number.\u003c/p\u003e",
+                                                         "button_label":  "Start a return",
+                                                         "button_link":  "/pages/contact"
+                                                     }
+                                    },
+                     "faq":  {
+                                 "type":  "faq",
+                                 "settings":  {
+                                                  "eyebrow":  "Common questions",
+                                                  "title":  "Shipping \u0026 returns FAQs",
+                                                  "subtitle":  "Can\u0027t find your answer? Our team is one message away."
+                                              },
+                                 "blocks":  {
+                                                "q1":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "When will my order ship?",
+                                                                            "answer":  "\u003cp\u003eOrders placed before 2pm EST ship the same business day. Weekend and holiday orders ship next business day.\u003c/p\u003e"
+                                                                        }
+                                                       },
+                                                "q2":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Do I need to pay return shipping?",
+                                                                            "answer":  "\u003cp\u003eFor US customers, we cover return shipping on all eligible returns. International customers are responsible for return postage.\u003c/p\u003e"
+                                                                        }
+                                                       },
+                                                "q3":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "How long until I get my refund?",
+                                                                            "answer":  "\u003cp\u003eRefunds are processed within 3 business days of us receiving and inspecting your return. It may take an extra 2–5 days to show on your statement depending on your bank.\u003c/p\u003e"
+                                                                        }
+                                                       },
+                                                "q4":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "My package shows as delivered but I haven\u0027t received it.",
+                                                                            "answer":  "\u003cp\u003ePlease check with neighbors, your building\u0027s front desk, or alternate locations. If still missing after 48 hours, reach out and we\u0027ll open a carrier investigation and send a replacement.\u003c/p\u003e"
+                                                                        }
+                                                       },
+                                                "q5":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Do you ship to PO boxes or APO/FPO?",
+                                                                            "answer":  "\u003cp\u003eYes, standard shipping to PO boxes and military addresses is available via USPS Priority Mail.\u003c/p\u003e"
+                                                                        }
+                                                       }
+                                            },
+                                 "block_order":  [
+                                                     "q1",
+                                                     "q2",
+                                                     "q3",
+                                                     "q4",
+                                                     "q5"
+                                                 ]
+                             },
+                     "cta":  {
+                                 "type":  "statement",
+                                 "settings":  {
+                                                  "watermark":  "LUMINOR",
+                                                  "eyebrow":  "Need help?",
+                                                  "heading":  "Questions? We\u0027re standing by.",
+                                                  "text":  "\u003cp\u003eA real human from the Luminor team will reply to your message — usually within a few hours, always within 24.\u003c/p\u003e",
+                                                  "button_label":  "Contact support",
+                                                  "button_link":  "/pages/contact"
+                                              }
+                             }
+                 },
+    "order":  [
+                  "intro",
+                  "shipping_grid",
+                  "returns_ed",
+                  "faq",
+                  "cta"
+              ]
+}

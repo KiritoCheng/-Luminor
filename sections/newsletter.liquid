@@ -1,0 +1,48 @@
+<section class="section {% if section.settings.color_scheme == 'alt' %}bg-alt{% endif %} reveal">
+  <div class="page-width">
+    <div class="newsletter">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="lead color-muted" style="margin-top:14px">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'newsletter__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="{{ 'sections.newsletter.placeholder' | t }}"
+          required
+          aria-label="{{ 'sections.newsletter.placeholder' | t }}"
+          {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}
+        >
+        <button type="submit" class="button button--primary">{{ 'sections.newsletter.button_label' | t }}</button>
+        {%- if form.posted_successfully? -%}
+          <p class="form-success" role="status">{{ 'sections.newsletter.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <p class="form-error" role="alert">{{ 'sections.newsletter.error' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Stay in the loop." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Get the latest news, product launches, and exclusive offers." },
+    { "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [ { "value": "default", "label": "Default" }, { "value": "alt", "label": "Alt background" } ], "default": "default" }
+  ],
+  "presets": [ { "name": "Newsletter" } ]
+}
+{% endschema %}
