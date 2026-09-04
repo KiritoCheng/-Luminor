@@ -410,7 +410,7 @@
       const btns = document.querySelectorAll('.button--primary, .button--lg');
       if (!btns.length) return;
       btns.forEach((btn) => {
-        // Skip buy buttons on product page (add to bag + dynamic checkout): magnetic translate misaligns full-width CTA row
+        // Skip buy buttons on product page (add to cart + dynamic checkout): magnetic translate misaligns full-width CTA row
         if (btn.closest('.product__buy-buttons')) return;
         const host = btn.parentElement;
         if (!host) return;

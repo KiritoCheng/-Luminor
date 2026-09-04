@@ -61,6 +61,8 @@
       "note_placeholder": "Add a note to your order...",
       "total": "Total",
       "order_summary": "Order summary",
+      "discount": "Discount",
+      "discount_savings": "You save {{ amount }}",
       "headings": {
         "product": "Product",
         "quantity": "Quantity",
@@ -118,7 +120,7 @@
       "sold_out": "Sold out",
       "on_sale": "Sale",
       "quick_view": "Quick view",
-      "add_to_cart": "Add to bag",
+      "add_to_cart": "Add to cart",
       "view_full_details": "View full details",
       "you_may_also_like": "You may also like",
       "share": "Share",

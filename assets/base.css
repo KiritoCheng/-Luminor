@@ -355,32 +355,30 @@ h6 {
   transform: translateX(3px);
 }
 
-/* -------------------- Dynamic Checkout (product page only) -------------------- */
+/* -------------------- Dynamic Checkout (product page only) --------------------
+   Shopify Theme Store rule: branded buttons (Apple Pay, PayPal, etc.) colors
+   must NOT be modified. Only the unbranded "Buy it now" button is styled here. */
 .product__buy-buttons .shopify-payment-button {
-  margin: 0 !important;
-}
-
-.product__buy-buttons .shopify-payment-button__button {
-  background-color: var(--color-primary) !important;
-  color: #fff !important;
-  border: 1px solid transparent !important;
-  border-radius: var(--button-radius) !important;
-  font-family: var(--body-font) !important;
-  font-size: 1.0625rem !important;
-  font-weight: 500 !important;
-  padding: 14px 28px !important;
-  min-height: 50px !important;
-  letter-spacing: -0.01em !important;
-  transition: background-color 0.2s ease, transform 0.15s ease !important;
-}
-
-.product__buy-buttons .shopify-payment-button__button:hover {
-  background-color: var(--color-primary-hover) !important;
-  transform: translateY(-1px) !important;
+  margin: 0;
 }
 
 .product__buy-buttons .shopify-payment-button__button--unbranded {
-  background-color: var(--color-primary) !important;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--button-radius);
+  font-family: var(--body-font);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  padding: 14px 28px;
+  min-height: 50px;
+  letter-spacing: -0.01em;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.product__buy-buttons .shopify-payment-button__button--unbranded:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
 }
 
 /* -------------------- Forms -------------------- */

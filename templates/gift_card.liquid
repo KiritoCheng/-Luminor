@@ -121,6 +121,9 @@
 <body>
   <main class="gift-card">
     <a href="{{ shop.url }}" class="gift-card__logo">{{ shop.name }}</a>
+    {%- if gift_card.image -%}
+      <img src="{{ gift_card.image | image_url: width: 480 }}" alt="{{ shop.name | escape }}" class="gift-card__image" loading="eager">
+    {%- endif -%}
     <h1 class="gift-card__title">Your gift card</h1>
     <p class="gift-card__subtitle">Use this code at checkout to apply your gift card balance.</p>
 
@@ -130,9 +133,9 @@
       </a>
     {%- endif -%}
 
-    {%- if gift_card.qr_identifier -%}
+    {%- if gift_card.qr_code_image_url -%}
       <div class="gift-card__qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{ gift_card.qr_identifier }}" alt="QR code" width="120" height="120">
+        <img src="{{ gift_card.qr_code_image_url }}" alt="QR code" width="120" height="120" loading="lazy">
       </div>
     {%- endif -%}
 

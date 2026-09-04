@@ -1,6 +1,10 @@
 {%- liquid
   assign product = product | default: section.settings.product | default: product
   assign current_variant = product.selected_or_first_available_variant
+  assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+  if product.selected_selling_plan
+    assign current_selling_plan_allocation = current_variant.selling_plan_allocations | where: 'selling_plan', product.selected_selling_plan | first
+  endif
   assign show_thumbs = false
   if product.images.size > 1
     assign show_thumbs = true
@@ -46,7 +50,7 @@
         <h1 class="product__title">{{ product.title | escape }}</h1>
 
         <div class="product__price" data-price>
-          {% render 'price', product: product, variant: current_variant %}
+          {% render 'price', product: product, variant: current_variant, selling_plan_allocation: current_selling_plan_allocation %}
         </div>
         <span data-compare-price hidden></span>
 
@@ -83,6 +87,25 @@
               </div>
             </div>
           {%- endfor -%}
+
+          {%- comment -%} Selling plans (subscriptions) {%- endcomment -%}
+          {%- if product.selling_plan_groups.size > 0 -%}
+            <div class="product__selling-plans" data-selling-plans>
+              <label class="product__option-label" for="SellingPlan-{{ section.id }}">{{ 'products.product.selling_plan' | t | default: 'Purchase plan' }}</label>
+              <select name="selling_plan" id="SellingPlan-{{ section.id }}" data-selling-plan-select>
+                <option value="" {% unless product.selected_selling_plan %}selected{% endunless %}>{{ 'products.product.one_time_purchase' | t | default: 'One-time purchase' }}</option>
+                {%- for group in product.selling_plan_groups -%}
+                  <optgroup label="{{ group.name | escape }}">
+                    {%- for plan in group.selling_plans -%}
+                      <option value="{{ plan.id }}" {% if product.selected_selling_plan.id == plan.id %}selected{% endif %}>
+                        {{ plan.name | escape }}
+                      </option>
+                    {%- endfor -%}
+                  </optgroup>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endif -%}
 
           <div class="product__qty">
             <label class="product__qty-label" for="Quantity-{{ section.id }}">{{ 'products.product.quantity.label' | t }}</label>
@@ -152,6 +175,27 @@
 
 <script type="application/json" data-product-variants>
   {{ product.variants | json }}
+</script>
+
+<script type="application/json" data-selling-plan-allocations>
+  {%- if product.selling_plan_groups.size > 0 -%}
+    {
+      {%- for variant in product.variants -%}
+        "{{ variant.id }}": [
+          {%- for allocation in variant.selling_plan_allocations -%}
+            {
+              "selling_plan_id": {{ allocation.selling_plan.id }},
+              "name": {{ allocation.selling_plan.name | json }},
+              "price": {{ allocation.price | money_without_currency | json }},
+              "compare_at_price": {{ allocation.compare_at_price | money_without_currency | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    }
+  {%- else -%}
+    {}
+  {%- endif -%}
 </script>
 
 <script type="application/ld+json">

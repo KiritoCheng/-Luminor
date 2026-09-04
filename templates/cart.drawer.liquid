@@ -39,6 +39,7 @@
           <div class="cart-item__price">
             {%- if item.original_line_price != item.final_line_price -%}
               <s>{{ item.original_line_price | money }}</s>
+              <br><small class="cart-item__discount-label">{{ 'sections.cart.discount_savings' | t: amount: item.total_discount | money }}</small>
             {%- endif -%}
             {{ item.final_line_price | money }}
           </div>
@@ -53,9 +54,22 @@
         <span>{{ 'sections.cart.subtotal' | t }}</span>
         <span class="cart-drawer__subtotal-value" data-cart-subtotal>{{ cart.total_price | money }}</span>
       </div>
+      {%- if cart.cart_level_discount_applications.size > 0 -%}
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-drawer__discount">
+            <span>{{ 'sections.cart.discount' | t }} ({{ discount.title | escape }})</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
       <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
       <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
         <button type="submit" name="checkout" class="button button--primary button--full button--lg">{{ 'sections.cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div class="cart__additional-checkout-buttons" style="margin-top:12px;">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        {%- endif -%}
       </form>
     </div>
   {%- endif -%}

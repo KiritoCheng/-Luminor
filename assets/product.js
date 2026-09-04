@@ -124,7 +124,7 @@
           buyBtn.textContent = buyBtn.dataset.soldOut || 'Sold out';
         } else {
           buyBtn.removeAttribute('disabled');
-          buyBtn.textContent = buyBtn.dataset.available || 'Add to bag';
+          buyBtn.textContent = buyBtn.dataset.available || 'Add to cart';
         }
       }
       // update URL
