@@ -4012,24 +4012,34 @@
   min-width: 64px;
 }
 
-/* Quantity stepper — Luminor indigo capsule (tight fill, no hover bleed) */
+/* Quantity stepper — Luminor indigo capsule (full-fill, container-focus ring) */
 .qty-stepper {
   display: inline-flex;
+  flex-direction: row;
   align-items: stretch;
+  justify-content: flex-start;
   height: 46px;
   border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
   border-radius: 22px;
   overflow: hidden;
   background-color: transparent;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.22s ease;
+  isolation: isolate;
 }
-
 .qty-stepper:hover {
   border-color: color-mix(in srgb, var(--color-text) 24%, transparent);
 }
+.qty-stepper:focus-within {
+  border-color: var(--color-primary, #4F46E5);
+  box-shadow: 0 0 0 2px var(--color-background, #fff),
+              0 0 0 4px color-mix(in srgb, var(--color-primary, #4F46E5) 40%, transparent);
+}
 
 .qty-stepper button {
+  flex: 0 0 44px;
   width: 44px;
+  min-height: 0;
+  align-self: stretch;
   border: none;
   background: transparent;
   color: var(--color-text);
@@ -4037,25 +4047,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1;
   padding: 0;
-  transition: background-color 0.15s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease, opacity 0.15s ease, color 0.15s ease;
+  border-radius: 0;
+  position: relative;
+  height: 100%;
 }
-.qty-stepper button:first-of-type { border-top-left-radius: 22px; border-bottom-left-radius: 22px; }
-.qty-stepper button:last-of-type  { border-top-right-radius: 22px; border-bottom-right-radius: 22px; }
-
+.qty-stepper button:focus,
+.qty-stepper button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.qty-stepper button:focus-visible {
+  background-color: color-mix(in srgb, var(--color-primary, #4F46E5) 10%, transparent);
+  color: var(--color-primary, #4F46E5);
+}
 .qty-stepper button:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
 }
-
+.qty-stepper button:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+  transform: scale(0.96);
+}
 .qty-stepper button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
 .qty-stepper input {
+  flex: 0 0 48px;
   width: 48px;
+  min-width: 48px;
+  min-height: 0;
+  align-self: stretch;
+  height: 100%;
   border: none;
   text-align: center;
   font-size: 0.9375rem;
@@ -4064,13 +4091,22 @@
   background: transparent;
   outline: none;
   -moz-appearance: textfield;
+  -webkit-appearance: none;
   padding: 0;
-  height: 100%;
+  box-shadow: none !important;
+  border-radius: 0;
 }
 .qty-stepper input::-webkit-outer-spin-button,
 .qty-stepper input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.qty-stepper input:focus,
+.qty-stepper input:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: color-mix(in srgb, var(--color-primary, #4F46E5) 4%, transparent);
 }
 
 /* Add to cart — Apple-style filled pill button */
