@@ -167,6 +167,64 @@
           {{ shop.name }}. All rights reserved.
         </p>
         <div class="footer__bottom-right">
+          {%- if section.settings.show_localization -%}
+            {% form 'localization', class: 'localization-form' %}
+              <div class="localization" data-localization>
+                <button
+                  type="button"
+                  class="localization__trigger"
+                  data-localization-trigger
+                  aria-expanded="false"
+                  aria-controls="localization-panel-{{ section.id }}"
+                >
+                  <span class="localization__current">
+                    {{ localization.country.iso_code }} · {{ localization.currency.iso_code }}
+                  </span>
+                  <svg class="localization__chevron" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="localization__panel" id="localization-panel-{{ section.id }}" role="listbox" data-localization-panel>
+                  <div class="localization__group">
+                    <p class="localization__group-label">{{ 'sections.footer.country' | t }}</p>
+                    {%- for country in localization.available_countries -%}
+                      <button
+                        type="submit"
+                        name="country_code"
+                        value="{{ country.iso_code }}"
+                        class="localization__option"
+                        role="option"
+                        {% if country.iso_code == localization.country.iso_code %}aria-selected="true"{% endif %}
+                      >
+                        <span>{{ country.name }}</span>
+                        {%- if country.iso_code == localization.country.iso_code -%}
+                          <span class="localization__dot" aria-hidden="true"></span>
+                        {%- endif -%}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                  <div class="localization__group">
+                    <p class="localization__group-label">{{ 'sections.footer.currency' | t }}</p>
+                    {%- for currency in localization.available_currencies -%}
+                      <button
+                        type="submit"
+                        name="currency_code"
+                        value="{{ currency.iso_code }}"
+                        class="localization__option"
+                        role="option"
+                        {% if currency.iso_code == localization.currency.iso_code %}aria-selected="true"{% endif %}
+                      >
+                        <span>{{ currency.iso_code }} · {{ currency.symbol }}</span>
+                        {%- if currency.iso_code == localization.currency.iso_code -%}
+                          <span class="localization__dot" aria-hidden="true"></span>
+                        {%- endif -%}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            {% endform %}
+          {%- endif -%}
           {%- if section.settings.show_payment -%}
             <div class="footer__payment">
               {%- for type in shop.enabled_payment_types -%}
@@ -201,6 +259,7 @@
       "default": "<p>Premium accessories designed for the way you live. Minimalism, elevated.</p>"
     },
     { "type": "header", "content": "Bottom bar" },
+    { "type": "checkbox", "id": "show_localization", "label": "Show country & currency selector", "default": true },
     { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
   ],
   "max_blocks": 6,

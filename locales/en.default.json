@@ -71,7 +71,9 @@
       }
     },
     "footer": {
-      "rights": "All rights reserved."
+      "rights": "All rights reserved.",
+      "country": "Country",
+      "currency": "Currency"
     },
     "newsletter": {
       "placeholder": "Email address",

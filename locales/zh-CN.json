@@ -55,12 +55,15 @@
       "continue_shopping": "继续购物",
       "subtotal": "小计",
       "taxes_note": "运费和税费在结账时计算。",
+      "taxes_included": "已含税费。运费在结账时计算。",
       "checkout": "去结账",
       "remove": "移除",
       "note": "订单备注",
       "note_placeholder": "为您的订单添加备注...",
       "total": "合计",
       "order_summary": "订单摘要",
+      "discount": "折扣",
+      "discount_savings": "已优惠 {{ amount }}",
       "headings": {
         "product": "商品",
         "quantity": "数量",
@@ -68,7 +71,9 @@
       }
     },
     "footer": {
-      "rights": "保留所有权利。"
+      "rights": "保留所有权利。",
+      "country": "国家/地区",
+      "currency": "货币"
     },
     "newsletter": {
       "placeholder": "邮箱地址",
@@ -127,11 +132,21 @@
       "shipping_returns_text": "满 $50 免标准运费。收货后 30 天内可退换。商品须保持原状。",
       "materials": "材质与保养",
       "materials_default": "请查看商品包装了解完整的材质与保养说明。",
+      "taxes_included": "已含税费",
+      "pickup_available": "支持到店自提",
+      "pickup_unavailable": "不支持到店自提",
+      "selling_plan": "购买方案",
+      "one_time_purchase": "单次购买",
+      "recipient_email": "收件人邮箱",
+      "recipient_name": "收件人姓名（可选）",
+      "recipient_message": "留言（可选）",
+      "send_on": "发送日期（可选）",
       "quantity": {
         "label": "数量",
         "increase": "增加数量",
         "decrease": "减少数量"
-      }
+      },
+      "buy_buttons_divider": "或"
     }
   },
   "customer": {

@@ -53,6 +53,9 @@
   .hero--split .hero__cta {
     justify-content: flex-start;
   }
+  .hero--split .hero__content {
+    max-width: {{ section.settings.content_max_width_mobile }}px;
+  }
   @media screen and (min-width: 750px) {
     .hero--split .hero__content {
       max-width: {{ section.settings.content_max_width }}px;
@@ -386,8 +389,15 @@
       "type": "range",
       "id": "content_max_width",
       "min": 400, "max": 1600, "step": 20, "unit": "px",
-      "label": "Content max width",
+      "label": "Content max width — Desktop",
       "default": 1220
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_mobile",
+      "min": 280, "max": 600, "step": 10, "unit": "px",
+      "label": "Content max width — Mobile",
+      "default": 400
     },
     {
       "type": "select",

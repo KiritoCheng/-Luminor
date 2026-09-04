@@ -29,6 +29,7 @@
       this.bindSmoothScroll();
       this.initHeaderScroll();
       this.initScrollProgress();
+      this.initLocalization();
       this.markLoaded();
       this.bindSectionReload();
     },
@@ -999,6 +1000,43 @@
       el.classList.add('is-visible');
       clearTimeout(this._toastTimer);
       this._toastTimer = setTimeout(() => el.classList.remove('is-visible'), 3000);
+    },
+
+    /* ---------- Localization disclosure (country/currency) ---------- */
+    initLocalization() {
+      const containers = document.querySelectorAll('[data-localization]');
+      if (!containers.length) return;
+
+      containers.forEach((container) => {
+        const trigger = container.querySelector('[data-localization-trigger]');
+        if (!trigger) return;
+
+        const toggle = (open) => {
+          const isOpen = open !== undefined ? open : !container.classList.contains('is-open');
+          container.classList.toggle('is-open', isOpen);
+          trigger.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggle();
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!container.contains(e.target)) {
+            toggle(false);
+          }
+        });
+
+        // Close on ESC and return focus to trigger
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && container.classList.contains('is-open')) {
+            toggle(false);
+            trigger.focus();
+          }
+        });
+      });
     }
   };
 
