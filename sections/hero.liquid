@@ -125,7 +125,9 @@
                   {{ hero_placeholder_svg }}
                 </div>
               {%- endif -%}
-              <div class="hero__grain" aria-hidden="true"></div>
+              {%- if block.settings.show_grain -%}
+                <div class="hero__grain" aria-hidden="true"></div>
+              {%- endif -%}
               {%- if block.settings.show_overlay -%}
                 <div class="hero__overlay"></div>
               {%- endif -%}
@@ -208,7 +210,19 @@
     {%- else -%}
       <div
         class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
-        style="background-color: {{ first_block.settings.bg_color | default: '#F6F6F8' }}"
+        style="
+          background-color:    {{ first_block.settings.bg_color | default: '#F6F6F8' }};
+          --hero-h-color:       {{ first_block.settings.heading_color | default: '#FFFFFF' }};
+          --hero-sub-color:     {{ first_block.settings.subheading_color | default: '#FFFFFF' }};
+          --hero-eyebrow-color: {{ first_block.settings.eyebrow_color | default: '#A78BFA' }};
+          --hero-meta-index-color: {{ first_block.settings.meta_index_color | default: 'rgba(255,255,255,0.72)' }};
+          --hero-meta-line-color:  {{ first_block.settings.meta_line_color  | default: 'rgba(255,255,255,0.45)' }};
+          --hero-link-color:    {{ first_block.settings.link_color | default: '#FFFFFF' }};
+          {%- if first_block.settings.override_overlay -%}
+            --hero-overlay-color:    {{ first_block.settings.slide_overlay_color   | default: section.settings.overlay_color   | default: '#000000' }};
+            --hero-overlay-strength: {{ first_block.settings.slide_overlay_strength | default: section.settings.overlay_strength | default: 55 }};
+          {%- endif -%}
+        "
         {{ first_block.shopify_attributes }}
       >
         {%- if first_block.settings.image != blank -%}
@@ -232,7 +246,9 @@
             {{ hero_placeholder_svg }}
           </div>
         {%- endif -%}
-        <div class="hero__grain" aria-hidden="true"></div>
+        {%- if first_block.settings.show_grain -%}
+          <div class="hero__grain" aria-hidden="true"></div>
+        {%- endif -%}
         {%- if first_block.settings.show_overlay -%}
           <div class="hero__overlay"></div>
         {%- endif -%}
@@ -578,13 +594,19 @@
           "type": "range",
           "id": "slide_overlay_strength",
           "min": 0, "max": 100, "step": 5, "unit": "%",
-          "label": "Overlay darkness (override)",
+          "label": "Overlay strength (override)",
           "default": 55
         },
         {
           "type": "checkbox",
           "id": "show_art",
           "label": "Show art overlay (color orbs)",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_grain",
+          "label": "Show film grain",
           "default": true
         },
         {
@@ -697,6 +719,7 @@
             "bg_color": "#F6F6F8",
             "show_overlay": true,
             "show_art": true,
+            "show_grain": true,
             "override_overlay": false,
             "button_label": "Shop the collection",
             "button_link": "/collections/all",

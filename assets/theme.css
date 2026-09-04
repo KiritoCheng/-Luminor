@@ -1158,7 +1158,8 @@
   left: 0;
   width: 100%;
   height: 40%;
-  background: var(--color-primary);
+  /* Pulse 颜色接入 Slide 级 accent（eyebrow 色）→ 深/浅底都跟随主题；末级 fallback 留品牌主色兜底 */
+  background: var(--hero-scroll-pulse-color, var(--hero-eyebrow-color, var(--color-primary, #A78BFA)));
   animation: hero-scroll-pulse 2.4s ease-in-out infinite;
 }
 @keyframes hero-scroll-pulse {
