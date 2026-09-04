@@ -1,0 +1,240 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tags « {{ tags }} »",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Rechercher",
+      "title": "Recherche",
+      "placeholder": "Rechercher des produits, des articles...",
+      "start_typing": "Commencez à taper pour rechercher",
+      "no_matches": "Aucun résultat. Essayez un autre terme.",
+      "results": "Résultats pour « {{ terms }} »",
+      "results_with_count": "{{ count }} résultats pour « {{ terms }} »",
+      "products": "Produits",
+      "collections": "Collections",
+      "articles": "Articles",
+      "pages": "Pages"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Précédent",
+      "next": "Suivant"
+    },
+    "slider": {
+      "previous": "Diapositive précédente",
+      "next": "Diapositive suivante",
+      "go_to": "Aller à la diapositive {{ number }}"
+    },
+    "social": {
+      "share_on_facebook": "Partager sur Facebook",
+      "share_on_twitter": "Partager sur X",
+      "share_on_pinterest": "Partager sur Pinterest"
+    },
+    "newsletter_form": {
+      "newsletter_email": "Votre e-mail"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Passer au contenu",
+    "refresh_page": "Le choix d'une option entraîne l'actualisation complète de la page.",
+    "selection_help": "Utilisez les flèches haut et bas pour naviguer.",
+    "slideshow_info": "Utilisez les flèches gauche et droite pour naviguer dans le diaporama.",
+    "menu": "Ouvrir le menu",
+    "close": "Fermer"
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": "{{ count }} article(s) dans votre panier"
+    },
+    "cart": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide",
+      "continue_shopping": "Continuer vos achats",
+      "subtotal": "Sous-total",
+      "taxes_note": "Frais de livraison et taxes calculés au paiement.",
+      "taxes_included": "Taxes incluses. Livraison calculée au paiement.",
+      "checkout": "Paiement",
+      "remove": "Retirer",
+      "note": "Note de commande",
+      "note_placeholder": "Ajoutez une note à votre commande...",
+      "total": "Total",
+      "order_summary": "Récapitulatif de la commande",
+      "discount": "Réduction",
+      "discount_savings": "Vous économisez {{ amount }}",
+      "headings": {
+        "product": "Produit",
+        "quantity": "Quantité",
+        "total": "Total"
+      }
+    },
+    "footer": {
+      "rights": "Tous droits réservés.",
+      "country": "Pays",
+      "currency": "Devise"
+    },
+    "newsletter": {
+      "placeholder": "Adresse e-mail",
+      "button_label": "S'abonner",
+      "success": "Merci de votre abonnement !",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "contact_form": {
+      "name": "Nom",
+      "email": "E-mail",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer le message",
+      "success": "Merci de nous avoir contactés. Nous vous répondrons bientôt.",
+      "error_heading": "Veuillez corriger ce qui suit :"
+    },
+    "featured_collection": {
+      "example_title": "Produit exemple"
+    },
+    "collection_template": {
+      "filter": "Filtrer",
+      "apply": "Appliquer",
+      "sort_by": "Trier par",
+      "product_count": "{{ count }} produits",
+      "no_matches": "Aucun produit trouvé dans cette collection."
+    },
+    "list_collections": {
+      "title": "Collections"
+    },
+    "404": {
+      "eyebrow": "Erreur",
+      "title": "Page introuvable",
+      "text": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "link": "Retour à l'accueil",
+      "browse": "Parcourir les produits"
+    },
+    "password": {
+      "opening_soon": "Ouverture prochaine",
+      "placeholder": "Entrez le mot de passe de la boutique",
+      "enter": "Entrer",
+      "error": "Mot de passe incorrect. Veuillez réessayer.",
+      "admin_link_html": "Êtes-vous le propriétaire de la boutique ? <a href=\"/admin\">Connectez-vous ici</a>."
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Épuisé",
+      "on_sale": "Promotion",
+      "quick_view": "Aperçu rapide",
+      "add_to_cart": "Ajouter au panier",
+      "view_full_details": "Voir tous les détails",
+      "you_may_also_like": "Vous aimerez aussi",
+      "share": "Partager",
+      "details": "Détails du produit",
+      "shipping_returns": "Livraison et retours",
+      "shipping_returns_text": "Livraison standard gratuite pour les commandes de plus de 50 €. Retours acceptés dans les 30 jours suivant la livraison. Les articles doivent être dans leur état d'origine.",
+      "materials": "Matériaux et entretien",
+      "materials_default": "Consultez l'emballage du produit pour les instructions complètes sur les matériaux et l'entretien.",
+      "taxes_included": "Taxes incluses",
+      "pickup_available": "Disponible en retrait",
+      "pickup_unavailable": "Non disponible en retrait",
+      "selling_plan": "Plan d'achat",
+      "one_time_purchase": "Achat unique",
+      "recipient_email": "E-mail du destinataire",
+      "recipient_name": "Nom du destinataire (facultatif)",
+      "recipient_message": "Message (facultatif)",
+      "send_on": "Envoyer le (facultatif)",
+      "quantity": {
+        "label": "Quantité",
+        "increase": "Augmenter la quantité",
+        "decrease": "Diminuer la quantité"
+      },
+      "buy_buttons_divider": "ou"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Compte",
+      "welcome": "Bienvenue, {{ name }}",
+      "log_out": "Déconnexion",
+      "manage_addresses": "Gérer les adresses"
+    },
+    "orders": {
+      "title": "Historique des commandes",
+      "order_number": "Commande",
+      "date": "Date",
+      "payment_status": "Statut du paiement",
+      "total": "Total",
+      "none": "Vous n'avez pas encore passé de commande."
+    },
+    "addresses": {
+      "title": "Adresses",
+      "none": "Aucune adresse enregistrée.",
+      "default": "Par défaut",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "add_new": "Ajouter une nouvelle adresse",
+      "add": "Ajouter l'adresse",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "address1": "Adresse",
+      "city": "Ville",
+      "country": "Pays",
+      "zip": "Code postal",
+      "phone": "Téléphone",
+      "save": "Enregistrer l'adresse"
+    },
+    "login_page": {
+      "title": "Connexion",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "sign_in": "Se connecter",
+      "create_account": "Créer un compte",
+      "forgot_password": "Mot de passe oublié ?"
+    },
+    "register_page": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Créer un compte",
+      "have_account": "Vous avez déjà un compte ?"
+    },
+    "reset_password": {
+      "title": "Réinitialiser le mot de passe",
+      "subtext": "Entrez un nouveau mot de passe pour votre compte.",
+      "password": "Mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "submit": "Réinitialiser le mot de passe"
+    },
+    "activate_account": {
+      "title": "Activer le compte",
+      "subtext": "Créez un mot de passe pour activer votre compte.",
+      "password": "Mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "submit": "Activer le compte",
+      "decline": "Refuser l'invitation"
+    },
+    "order": {
+      "back_to_account": "Retour au compte",
+      "title": "Commande {{ name }}",
+      "placed_on": "Passée le {{ date }}",
+      "product": "Produit",
+      "sku": "Référence",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "total": "Total",
+      "subtotal": "Sous-total",
+      "discount": "réduction",
+      "billing_address": "Adresse de facturation",
+      "shipping_address": "Adresse de livraison"
+    }
+  },
+  "blogs": {
+    "article": {
+      "back_to_blog": "Retour à {{ blog }}"
+    }
+  },
+  "cart": {
+    "cart_error": "Une erreur s'est produite lors de la mise à jour de votre panier. Veuillez réessayer.",
+    "cart_quantity_error": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre panier."
+  }
+}
