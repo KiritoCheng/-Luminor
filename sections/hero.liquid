@@ -44,7 +44,7 @@
           {%- for block in blocks -%}
             <div
               class="slideshow__slide hero hero--{{ section.settings.height }}"
-              style="background-color: {{ block.settings.bg_color | default: '#f5f5f7' }}"
+              style="background-color: {{ block.settings.bg_color | default: '#F6F6F8' }}"
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.image != blank -%}
@@ -151,7 +151,7 @@
     {%- else -%}
       <div
         class="hero hero--{{ section.settings.height }} {% if section.settings.layout == 'split' %}hero--split{% endif %}"
-        style="background-color: {{ first_block.settings.bg_color | default: '#f5f5f7' }}"
+        style="background-color: {{ first_block.settings.bg_color | default: '#F6F6F8' }}"
         {{ first_block.shopify_attributes }}
       >
         {%- if first_block.settings.image != blank -%}
@@ -378,7 +378,7 @@
           "type": "color",
           "id": "bg_color",
           "label": "Background color",
-          "default": "#f5f5f7"
+          "default": "#F6F6F8"
         },
         {
           "type": "checkbox",
@@ -415,7 +415,7 @@
           "type": "color",
           "id": "subheading_color",
           "label": "Subheading color",
-          "default": "#86868b"
+          "default": "#71717A"
         },
         {
           "type": "text",
@@ -452,7 +452,7 @@
             "eyebrow": "New",
             "heading": "Apple gear, curated for you.",
             "subheading": "Genuine Apple products and premium accessories. Every device, every color, every configuration - all in one place.",
-            "subheading_color": "#86868b",
+            "subheading_color": "#71717A",
             "button_label": "Shop the collection",
             "button_link": "/collections/all",
             "button_label_2": "Learn more",

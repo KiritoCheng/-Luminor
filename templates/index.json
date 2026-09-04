@@ -393,7 +393,7 @@
           "type": "card",
           "settings": {
             "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"/><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"/></svg>",
-            "gradient": "linear-gradient(135deg, #1c1c1e 0%, #0071e3 60%, #5ac8fa 100%)",
+            "gradient": "linear-gradient(135deg, #1F1F23 0%, #4F46E5 60%, #818CF8 100%)",
             "eyebrow": "Category 01 / Audio",
             "title": "Sound, tuned for life.",
             "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",

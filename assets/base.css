@@ -597,7 +597,7 @@ label,
   letter-spacing: 0.02em;
   text-transform: uppercase;
   padding: 4px 10px;
-  border-radius: 980px;
+  border-radius: 22px;
   background-color: var(--color-bg-alt);
   color: var(--color-text);
 }
@@ -839,7 +839,7 @@ body.no-scroll {
   min-width: 40px;
   min-height: 40px;
   padding: 8px 12px;
-  border-radius: 980px;
+  border-radius: 22px;
   font-size: 0.9375rem;
   color: var(--color-text);
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -892,7 +892,7 @@ body.no-scroll {
   align-items: center;
   font-size: 0.8125rem;
   padding: 4px 12px;
-  border-radius: 980px;
+  border-radius: 22px;
   background-color: var(--color-bg-alt);
   color: var(--color-text);
   text-decoration: none;

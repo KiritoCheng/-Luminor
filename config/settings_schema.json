@@ -18,7 +18,7 @@
         "type": "font_picker",
         "id": "heading_font",
         "label": "Heading font",
-        "default": "manrope_n6"
+        "default": "plus_jakarta_sans_n7"
       },
       {
         "type": "range",
@@ -38,7 +38,7 @@
         "type": "font_picker",
         "id": "body_font",
         "label": "Body font",
-        "default": "inter_n4"
+        "default": "work_sans_n4"
       },
       {
         "type": "range",
@@ -72,13 +72,13 @@
         "type": "color",
         "id": "color_primary",
         "label": "Primary (accent)",
-        "default": "#0071e3"
+        "default": "#4F46E5"
       },
       {
         "type": "color",
         "id": "color_primary_hover",
         "label": "Primary hover",
-        "default": "#0077ed"
+        "default": "#4338CA"
       },
       {
         "type": "header",
@@ -94,7 +94,7 @@
         "type": "color",
         "id": "color_background_alt",
         "label": "Alt background",
-        "default": "#f5f5f7"
+        "default": "#F6F6F8"
       },
       {
         "type": "color",
@@ -110,19 +110,19 @@
         "type": "color",
         "id": "color_text",
         "label": "Primary text",
-        "default": "#1d1d1f"
+        "default": "#1B1B20"
       },
       {
         "type": "color",
         "id": "color_text_muted",
         "label": "Muted text",
-        "default": "#6e6e73"
+        "default": "#71717A"
       },
       {
         "type": "color",
         "id": "color_text_invert",
         "label": "Inverted text",
-        "default": "#f5f5f7"
+        "default": "#F6F6F8"
       },
       {
         "type": "header",
@@ -132,13 +132,13 @@
         "type": "color",
         "id": "color_border",
         "label": "Border color",
-        "default": "#d2d2d7"
+        "default": "#D4D4D8"
       },
       {
         "type": "color",
         "id": "color_input_border",
         "label": "Input border",
-        "default": "#86868b"
+        "default": "#78716C"
       }
     ]
   },
@@ -153,7 +153,7 @@
         "step": 1,
         "unit": "px",
         "label": "Corner radius",
-        "default": 18
+        "default": 14
       },
       {
         "type": "select",
@@ -202,15 +202,15 @@
         "label": "Header layout",
         "options": [
           {
-            "value": "centered",
-            "label": "Centered (Apple style)"
-          },
-          {
-            "value": "left",
-            "label": "Left aligned"
-          }
-        ],
-        "default": "centered"
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "left",
+          "label": "Left aligned"
+        }
+      ],
+      "default": "left"
       }
     ]
   },
@@ -270,7 +270,7 @@
         "step": 2,
         "unit": "px",
         "label": "Image corner radius",
-        "default": 18
+        "default": 16
       }
     ]
   },

@@ -368,7 +368,7 @@
 
   .product__vendor {
     font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--color-primary, #0071e3); margin: 0;
+    text-transform: uppercase; color: var(--color-primary, #4F46E5); margin: 0;
   }
   .product__rating { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; }
   .product__rating-stars { color: #f5a623; letter-spacing: 1px; }
@@ -377,31 +377,31 @@
   .product__options { display: flex; flex-direction: column; gap: 18px; }
   .product__option { border: 0; padding: 0; margin: 0; }
   .product__option-label {
-    font-size: 0.8125rem; font-weight: 500; color: var(--color-text-muted, #6e6e73);
+    font-size: 0.8125rem; font-weight: 500; color: var(--color-text-muted, #71717A);
     margin: 0 0 10px; display: block;
   }
   .product__option-values { display: flex; flex-wrap: wrap; gap: 8px; }
   .product__option-value {
     min-height: 44px; min-width: 44px; padding: 8px 18px;
-    border: 1px solid color-mix(in srgb, var(--color-text, #1d1d1f) 14%, transparent);
-    border-radius: 12px; background: transparent; color: var(--color-text, #1d1d1f);
+    border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
+    border-radius: 12px; background: transparent; color: var(--color-text, #1B1B20);
     font-size: 0.875rem; font-weight: 500; cursor: pointer;
     transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .product__option-value:hover { border-color: color-mix(in srgb, var(--color-text, #1d1d1f) 30%, transparent); }
+  .product__option-value:hover { border-color: color-mix(in srgb, var(--color-text, #1B1B20) 30%, transparent); }
   .product__option-value.is-active {
-    border-color: var(--color-primary, #0071e3);
-    background: color-mix(in srgb, var(--color-primary, #0071e3) 6%, transparent);
+    border-color: var(--color-primary, #4F46E5);
+    background: color-mix(in srgb, var(--color-primary, #4F46E5) 6%, transparent);
   }
   .product__option-value--swatch {
     width: 40px; height: 40px; min-width: 40px; padding: 0; border-radius: 50%;
-    border: 2px solid color-mix(in srgb, var(--color-text, #1d1d1f) 14%, transparent);
+    border: 2px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
     background-size: cover; background-position: center;
   }
   .product__option-value--swatch.is-active {
-    border-color: var(--color-primary, #0071e3);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #0071e3) 35%, transparent);
+    border-color: var(--color-primary, #4F46E5);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #4F46E5) 35%, transparent);
   }
 
   .product__selling-plans select,
@@ -409,25 +409,25 @@
   .product__gift-recipient textarea,
   .product__gift-recipient select {
     width: 100%; padding: 12px 14px; font-size: 0.875rem;
-    border: 1px solid color-mix(in srgb, var(--color-text, #1d1d1f) 14%, transparent);
-    border-radius: 12px; background: transparent; color: var(--color-text, #1d1d1f);
+    border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
+    border-radius: 12px; background: transparent; color: var(--color-text, #1B1B20);
     font-family: inherit; -webkit-appearance: none; appearance: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .product__selling-plans select:focus,
   .product__gift-recipient input:focus,
   .product__gift-recipient textarea:focus {
-    outline: none; border-color: var(--color-primary, #0071e3);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary, #0071e3) 12%, transparent);
+    outline: none; border-color: var(--color-primary, #4F46E5);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary, #4F46E5) 12%, transparent);
   }
   .product__gift-recipient { display: flex; flex-direction: column; gap: 12px; }
   .product__gift-recipient-label { font-size: 0.875rem; font-weight: 600; margin: 0; }
   .product__gift-recipient .field { display: flex; flex-direction: column; gap: 6px; }
-  .product__gift-recipient .field__label { font-size: 0.75rem; color: var(--color-text-muted, #6e6e73); }
+  .product__gift-recipient .field__label { font-size: 0.75rem; color: var(--color-text-muted, #71717A); }
 
   .product__pickup { font-size: 0.875rem; }
   .product__pickup-status { display: flex; align-items: center; gap: 8px; margin: 0; }
-  .product__pickup-status--available { color: var(--color-text, #1d1d1f); font-weight: 500; }
+  .product__pickup-status--available { color: var(--color-text, #1B1B20); font-weight: 500; }
   .product__pickup-time { margin: 4px 0 0; font-size: 0.8125rem; }
 
   .product__follow-shop { padding: 4px 0; }
@@ -437,47 +437,47 @@
   .product__accordion-item { border-top: 0; border-bottom: 0; }
   .product__block--accordion + .product__block--accordion .product__accordion-item,
   .product__accordion-item + .product__accordion-item {
-    border-top: 1px solid color-mix(in srgb, var(--color-text, #1d1d1f) 8%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 8%, transparent);
   }
   .product__accordion-summary {
     list-style: none; cursor: pointer; padding: 12px 0;
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 0.9375rem; font-weight: 500; color: var(--color-text, #1d1d1f);
+    font-size: 0.9375rem; font-weight: 500; color: var(--color-text, #1B1B20);
     transition: opacity 0.2s ease;
   }
   .product__accordion-summary::-webkit-details-marker { display: none; }
   .product__accordion-summary:hover { opacity: 0.62; }
-  .product__accordion-summary:focus-visible { outline: 2px solid var(--color-primary, #0071e3); outline-offset: 4px; border-radius: 4px; }
-  .product__accordion-arrow { transition: transform 0.25s cubic-bezier(.2,.8,.2,1); color: var(--color-text-muted, #6e6e73); }
+  .product__accordion-summary:focus-visible { outline: 2px solid var(--color-primary, #4F46E5); outline-offset: 4px; border-radius: 4px; }
+  .product__accordion-arrow { transition: transform 0.25s cubic-bezier(.2,.8,.2,1); color: var(--color-text-muted, #71717A); }
   .product__accordion-item[open] .product__accordion-arrow { transform: rotate(180deg); }
-  .product__accordion-content { padding-bottom: 12px; font-size: 0.875rem; line-height: 1.65; color: var(--color-text-muted, #6e6e73); }
-  .product__accordion-content a { color: var(--color-primary, #0071e3); text-underline-offset: 3px; }
+  .product__accordion-content { padding-bottom: 12px; font-size: 0.875rem; line-height: 1.65; color: var(--color-text-muted, #71717A); }
+  .product__accordion-content a { color: var(--color-primary, #4F46E5); text-underline-offset: 3px; }
 
   {%- comment -%} Buy buttons — Apple-style hierarchy: primary filled accent, secondary muted light fill {%- endcomment -%}
   .product__buy-buttons { display: flex; flex-direction: column; gap: 10px; }
   {%- comment -%} Primary: Add to cart — dominant solid Apple Blue, 18px radius, soft depth {%- endcomment -%}
   .product__buy-buttons .button--primary {
-    background-color: var(--color-primary, #0071e3);
+    background-color: var(--color-primary, #4F46E5);
     color: #fff;
-    border-radius: 18px;
+    border-radius: 14px;
     font-size: 1.0625rem;
     font-weight: 400;
     letter-spacing: -0.01em;
     padding: 16px 28px;
     min-height: 52px;
     border: none;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary, #0071e3) 18%, transparent);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary, #4F46E5) 18%, transparent);
     transition: background-color 0.2s ease, transform 0.15s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
   .product__buy-buttons .button--primary:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--color-primary, #0071e3) 90%, #000);
+    background-color: color-mix(in srgb, var(--color-primary, #4F46E5) 90%, #000);
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary, #0071e3) 28%, transparent);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary, #4F46E5) 28%, transparent);
   }
   .product__buy-buttons .button--primary:active:not(:disabled) {
     transform: translateY(0) scale(0.985);
-    box-shadow: 0 1px 4px color-mix(in srgb, var(--color-primary, #0071e3) 16%, transparent);
+    box-shadow: 0 1px 4px color-mix(in srgb, var(--color-primary, #4F46E5) 16%, transparent);
   }
   .product__buy-buttons .button--primary:disabled {
     opacity: 0.4;
@@ -487,10 +487,10 @@
   {%- comment -%} Secondary: Buy it now — Apple pearl capsule, muted light-gray fill, subordinate {%- endcomment -%}
   .product__buy-buttons .shopify-payment-button { margin-top: 0; }
   .product__buy-buttons .shopify-payment-button__button--unbranded {
-    background: #f5f5f7 !important;
-    color: var(--color-text, #1d1d1f) !important;
+    background: #F6F6F8 !important;
+    color: var(--color-text, #1B1B20) !important;
     border: 1px solid transparent !important;
-    border-radius: 18px !important;
+    border-radius: 14px !important;
     font-size: 1.0625rem !important;
     font-weight: 400 !important;
     letter-spacing: -0.01em !important;
