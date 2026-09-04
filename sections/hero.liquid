@@ -17,7 +17,36 @@
 </div>
 {%- endcapture -%}
 
+{%- liquid
+  # Convert section-level px range values → rem clamp tokens for fluid typography
+  assign h_mob  = section.settings.heading_mobile  | default: 40 | times: 0.0625
+  assign h_dsk  = section.settings.heading_desktop | default: 72 | times: 0.0625
+  assign s_mob  = section.settings.sub_mobile      | default: 16 | times: 0.0625
+  assign s_dsk  = section.settings.sub_desktop     | default: 20 | times: 0.0625
+  assign e_mob  = section.settings.eyebrow_mobile  | default: 11 | times: 0.0625
+  assign e_dsk  = section.settings.eyebrow_desktop | default: 13 | times: 0.0625
+  assign h_wt   = section.settings.heading_weight
+  assign h_trk  = section.settings.heading_tracking
+  assign h_ld   = section.settings.heading_leading
+  assign s_wt   = section.settings.sub_weight
+  assign e_wt   = section.settings.eyebrow_weight
+  assign o_col  = section.settings.overlay_color   | default: '#000000'
+  assign o_str  = section.settings.overlay_strength | default: 55
+-%}
 <style>
+  /* ===== Section-level tokens (fluid sizing + typography) ===== */
+  .hero-section {
+    --hero-h-fs:          clamp({{ h_mob }}rem, 6vw, {{ h_dsk }}rem);
+    --hero-h-weight:      {{ h_wt }};
+    --hero-h-tracking:    {{ h_trk }};
+    --hero-h-leading:     {{ h_ld }};
+    --hero-sub-fs:        clamp({{ s_mob }}rem, 1.6vw, {{ s_dsk }}rem);
+    --hero-sub-weight:    {{ s_wt }};
+    --hero-eyebrow-fs:    clamp({{ e_mob }}rem, 0.95vw, {{ e_dsk }}rem);
+    --hero-eyebrow-weight:{{ e_wt }};
+    --hero-overlay-color: {{ o_col }};
+    --hero-overlay-strength: {{ o_str }};
+  }
   .hero--split {
     text-align: left;
   }
@@ -29,6 +58,9 @@
       max-width: {{ section.settings.content_max_width }}px;
     }
   }
+  /* ===== Eyebrow size token applied through the section variable =====
+     (hero__meta-label uses its own size var but also responds to weight/color)  */
+  .hero-section .hero__meta-label { font-size: var(--hero-eyebrow-fs); }
 </style>
 
 {%- if blocks.size > 0 -%}
@@ -42,9 +74,34 @@
       >
         <div class="slideshow__track" data-slideshow-track>
           {%- for block in blocks -%}
+            {%- liquid
+              assign style_tokens = ''
+              assign s_bg = block.settings.bg_color | default: '#F6F6F8'
+              if block.settings.override_overlay
+                assign s_oc = block.settings.slide_overlay_color | default: '#000000'
+                assign style_tokens = style_tokens | append: '--hero-overlay-color:' | append: s_oc | append: ';'
+                assign s_os = block.settings.slide_overlay_strength | default: 55
+                assign style_tokens = style_tokens | append: '--hero-overlay-strength:' | append: s_os | append: ';'
+              endif
+              assign s_hc = block.settings.heading_color | default: '#FFFFFF'
+              assign style_tokens = style_tokens | append: '--hero-h-color:' | append: s_hc | append: ';'
+              assign s_sc = block.settings.subheading_color | default: '#FFFFFF'
+              if s_sc == blank or s_sc == 'rgba(0,0,0,0)'
+                assign s_sc = '#FFFFFF'
+              endif
+              assign style_tokens = style_tokens | append: '--hero-sub-color:' | append: s_sc | append: ';'
+              assign s_ec = block.settings.eyebrow_color | default: '#A78BFA'
+              assign style_tokens = style_tokens | append: '--hero-eyebrow-color:' | append: s_ec | append: ';'
+              assign s_ic = block.settings.meta_index_color | default: 'rgba(255,255,255,0.72)'
+              assign style_tokens = style_tokens | append: '--hero-meta-index-color:' | append: s_ic | append: ';'
+              assign s_mc = block.settings.meta_line_color | default: 'rgba(255,255,255,0.45)'
+              assign style_tokens = style_tokens | append: '--hero-meta-line-color:' | append: s_mc | append: ';'
+              assign s_lc = block.settings.link_color | default: '#FFFFFF'
+              assign style_tokens = style_tokens | append: '--hero-link-color:' | append: s_lc | append: ';'
+            -%}
             <div
               class="slideshow__slide hero hero--{{ section.settings.height }}"
-              style="background-color: {{ block.settings.bg_color | default: '#F6F6F8' }}"
+              style="background-color: {{ s_bg }}; {{ style_tokens }}"
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.image != blank -%}
@@ -192,10 +249,7 @@
             <h1 class="hero__title" data-split-chars>{{ first_block.settings.heading | escape }}</h1>
           {%- endif -%}
           {%- if first_block.settings.subheading != blank -%}
-            <p
-              class="hero__subtitle"
-              style="{% if first_block.settings.subheading_color != blank and first_block.settings.subheading_color != 'rgba(0,0,0,0)' %}color: {{ first_block.settings.subheading_color }};{% endif %}"
-            >
+            <p class="hero__subtitle">
               {{ first_block.settings.subheading | escape }}
             </p>
           {%- endif -%}
@@ -299,28 +353,23 @@
   "name": "Hero / Slideshow",
   "settings": [
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
       "type": "select",
       "id": "layout",
       "label": "Layout",
       "options": [
-        {
-          "value": "centered",
-          "label": "Centered"
-        },
-        {
-          "value": "split",
-          "label": "Split (left-aligned)"
-        }
+        { "value": "centered", "label": "Centered" },
+        { "value": "split",    "label": "Split (left-aligned)" }
       ],
       "default": "split"
     },
     {
       "type": "range",
       "id": "content_max_width",
-      "min": 400,
-      "max": 1600,
-      "step": 20,
-      "unit": "px",
+      "min": 400, "max": 1600, "step": 20, "unit": "px",
       "label": "Content max width",
       "default": 1220
     },
@@ -329,16 +378,142 @@
       "id": "height",
       "label": "Height",
       "options": [
-        {
-          "value": "medium",
-          "label": "Medium (70vh)"
-        },
-        {
-          "value": "full",
-          "label": "Full screen"
-        }
+        { "value": "medium", "label": "Medium (70vh)" },
+        { "value": "full",   "label": "Full screen" }
       ],
       "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Heading typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "min": 28, "max": 60, "step": 2, "unit": "px",
+      "label": "Heading size — Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_desktop",
+      "min": 56, "max": 120, "step": 2, "unit": "px",
+      "label": "Heading size — Desktop",
+      "default": 72
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "heading_tracking",
+      "label": "Letter spacing",
+      "options": [
+        { "value": "-0.04em", "label": "Very tight" },
+        { "value": "-0.03em", "label": "Tight" },
+        { "value": "-0.02em", "label": "Normal" },
+        { "value": "-0.01em", "label": "Relaxed" }
+      ],
+      "default": "-0.03em"
+    },
+    {
+      "type": "select",
+      "id": "heading_leading",
+      "label": "Line height",
+      "options": [
+        { "value": "0.98", "label": "Compact" },
+        { "value": "1.02", "label": "Balanced" },
+        { "value": "1.08", "label": "Relaxed" },
+        { "value": "1.15", "label": "Airy" }
+      ],
+      "default": "1.02"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle typography"
+    },
+    {
+      "type": "range",
+      "id": "sub_mobile",
+      "min": 12, "max": 24, "step": 1, "unit": "px",
+      "label": "Subtitle size — Mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "sub_desktop",
+      "min": 16, "max": 32, "step": 1, "unit": "px",
+      "label": "Subtitle size — Desktop",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "sub_weight",
+      "label": "Subtitle weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow typography"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_mobile",
+      "min": 9, "max": 16, "step": 1, "unit": "px",
+      "label": "Eyebrow size — Mobile",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_desktop",
+      "min": 10, "max": 18, "step": 1, "unit": "px",
+      "label": "Eyebrow size — Desktop",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight",
+      "label": "Eyebrow weight",
+      "options": [
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay tint",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_strength",
+      "min": 0, "max": 100, "step": 5, "unit": "%",
+      "label": "Overlay darkness",
+      "default": 55
+    },
+    {
+      "type": "header",
+      "content": "Slideshow"
     },
     {
       "type": "checkbox",
@@ -349,10 +524,7 @@
     {
       "type": "range",
       "id": "autorotate_speed",
-      "min": 3,
-      "max": 12,
-      "step": 1,
-      "unit": "s",
+      "min": 3, "max": 12, "step": 1, "unit": "s",
       "label": "Change slides every",
       "default": 6
     },
@@ -381,17 +553,43 @@
           "default": "#F6F6F8"
         },
         {
+          "type": "header",
+          "content": "Overlay"
+        },
+        {
           "type": "checkbox",
           "id": "show_overlay",
-          "label": "Show dark overlay",
+          "label": "Show overlay",
           "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "override_overlay",
+          "label": "Customize overlay per slide",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "slide_overlay_color",
+          "label": "Overlay tint (override)",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "slide_overlay_strength",
+          "min": 0, "max": 100, "step": 5, "unit": "%",
+          "label": "Overlay darkness (override)",
+          "default": 55
         },
         {
           "type": "checkbox",
           "id": "show_art",
           "label": "Show art overlay (color orbs)",
-          "default": true,
-          "info": "Adds a colorful abstract art layer over the image. Also shows when no image is set."
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Content"
         },
         {
           "type": "text",
@@ -403,41 +601,79 @@
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Apple gear, curated for you."
+          "default": "Premium gear. Thoughtfully curated."
         },
         {
           "type": "textarea",
           "id": "subheading",
           "label": "Subheading",
-          "default": "Premium accessories and essentials, designed to pair perfectly with every device."
+          "default": "Everyday essentials and curated accessories, built to pair beautifully with what you already love."
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#FFFFFF"
         },
         {
           "type": "color",
           "id": "subheading_color",
-          "label": "Subheading color",
-          "default": "#71717A"
+          "label": "Subtitle color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "Eyebrow color",
+          "default": "#A78BFA"
+        },
+        {
+          "type": "color",
+          "id": "meta_index_color",
+          "label": "Slide index & scroll color",
+          "default": "#FFFFFFB8"
+        },
+        {
+          "type": "color",
+          "id": "meta_line_color",
+          "label": "Meta divider line color",
+          "default": "#FFFFFF73"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Secondary link color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Buttons"
         },
         {
           "type": "text",
           "id": "button_label",
-          "label": "Button label",
+          "label": "Primary button label",
           "default": "Shop the collection"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button link"
+          "label": "Primary button link"
         },
         {
           "type": "text",
           "id": "button_label_2",
-          "label": "Second button label",
+          "label": "Secondary link label",
           "default": "Learn more"
         },
         {
           "type": "url",
           "id": "button_link_2",
-          "label": "Second button link"
+          "label": "Secondary link link"
         }
       ]
     }
@@ -450,9 +686,18 @@
           "type": "slide",
           "settings": {
             "eyebrow": "New",
-            "heading": "Apple gear, curated for you.",
-            "subheading": "Genuine Apple products and premium accessories. Every device, every color, every configuration - all in one place.",
-            "subheading_color": "#71717A",
+            "heading": "Premium gear. Thoughtfully curated.",
+            "subheading": "Everyday essentials and curated accessories, built to pair beautifully with what you already love.",
+            "heading_color": "#FFFFFF",
+            "subheading_color": "#FFFFFF",
+            "eyebrow_color": "#A78BFA",
+            "meta_index_color": "#FFFFFFB8",
+            "meta_line_color": "#FFFFFF73",
+            "link_color": "#FFFFFF",
+            "bg_color": "#F6F6F8",
+            "show_overlay": true,
+            "show_art": true,
+            "override_overlay": false,
             "button_label": "Shop the collection",
             "button_link": "/collections/all",
             "button_label_2": "Learn more",

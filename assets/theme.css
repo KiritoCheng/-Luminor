@@ -944,10 +944,19 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  /*  1) 均匀压色层 — 强度直接映射到 color-mix 百分比，由 Theme Editor 滑块控制
+      2) 底部柔化渐变层 — 加深文字所在的下半区，提升可读性          */
+  background-color: color-mix(in srgb, var(--hero-overlay-color, #000000) var(--hero-overlay-strength, 55%), transparent);
+}
+.hero__overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.35) 100%
+    transparent 0%,
+    color-mix(in srgb, var(--hero-overlay-color, #000000) 40%, transparent) 100%
   );
 }
 
@@ -1040,17 +1049,22 @@
 }
 
 .hero__subtitle {
-  font-size: clamp(1.25rem, 2.2vw, 1.875rem);
-  font-weight: 400;
-  color: var(--color-text-muted);
+  font-size: var(--hero-sub-fs, clamp(1rem, 1.6vw, 1.25rem));
+  font-weight: var(--hero-sub-weight, 400);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--hero-sub-color, currentColor) 82%, transparent);
+  -webkit-text-fill-color: color-mix(in srgb, var(--hero-sub-color, currentColor) 82%, transparent);
   margin: 0 0 36px;
-  letter-spacing: -0.018em;
   text-wrap: pretty;
-  max-width: 48ch;
+  max-width: 56ch;
+  text-shadow: 0 1px 14px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.22);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.6s var(--ease-out-expo),
-    transform 0.6s var(--ease-out-expo);
+    transform 0.6s var(--ease-out-expo),
+    color 0.25s ease,
+    -webkit-text-fill-color 0.25s ease;
 }
 .hero__content.is-in .hero__subtitle {
   opacity: 1;
@@ -1124,14 +1138,14 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--hero-meta-index-color, var(--color-text-muted));
 }
 .hero__scroll-line {
   width: 1px;
   height: 48px;
   background: linear-gradient(
     180deg,
-    var(--color-text-muted) 0%,
+    var(--hero-meta-line-color, var(--color-text-muted)) 0%,
     transparent 100%
   );
   position: relative;

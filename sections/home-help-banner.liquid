@@ -1,18 +1,31 @@
 {% comment %} Home page dark help CTA banner (from 404 page design) {% endcomment %}
 <section class="section home-help">
+  {%- liquid
+    assign bg_from = section.settings.bg_color_from   | default: '#111114'
+    assign bg_to   = section.settings.bg_color_to     | default: '#4F46E5'
+    assign c_eye   = section.settings.eyebrow_color   | default: '#A78BFA'
+    assign c_h     = section.settings.heading_color   | default: '#FFFFFF'
+    assign c_p     = section.settings.text_color      | default: '#FFFFFF'
+    assign c_pri_b = section.settings.primary_bg      | default: '#FFFFFF'
+    assign c_pri_t = section.settings.primary_text    | default: '#0a0a0c'
+    assign c_sec_t = section.settings.secondary_text  | default: '#FFFFFF'
+    assign accent_a = section.settings.accent_aura_1  | default: '#6366F1'
+    assign accent_b = section.settings.accent_aura_2  | default: '#A78BFA'
+  -%}
   <style>
     .hh-max { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     @media (min-width: 768px) { .hh-max { padding: 0 32px; } }
     .hh-banner {
       position: relative; border-radius: 28px; padding: clamp(36px, 5vw, 64px);
-      overflow: hidden; color: #fff;
-      background: linear-gradient(135deg, #111114 0%, #1B1B20 45%, #4F46E5 120%);
+      overflow: hidden;
+      color: {{ c_h }};
+      background: linear-gradient(135deg, {{ bg_from }} 0%, color-mix(in srgb, {{ bg_from }} 55%, {{ bg_to }}) 50%, {{ bg_to }} 120%);
     }
     .hh-banner::after {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(circle at 90% 10%, rgba(99,102,241,0.24), transparent 50%),
-        radial-gradient(circle at 10% 100%, rgba(167,139,250,0.20), transparent 50%);
+        radial-gradient(circle at 90% 10%, color-mix(in srgb, {{ accent_a }} 24%, transparent), transparent 50%),
+        radial-gradient(circle at 10% 100%, color-mix(in srgb, {{ accent_b }} 20%, transparent), transparent 50%);
     }
     .hh-inner {
       position: relative; z-index: 1;
@@ -21,14 +34,22 @@
     @media (max-width: 900px) { .hh-inner { grid-template-columns: 1fr; gap: 28px; } }
     .hh-eyebrow {
       font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #A78BFA; font-weight: 600; margin-bottom: 14px;
+      color: {{ c_eye }}; font-weight: 600; margin-bottom: 14px;
     }
     .hh-inner h3 {
       margin: 0 0 14px; font-size: clamp(26px, 3vw, 40px);
       line-height: 1.1; letter-spacing: -0.025em; font-weight: 700;
+      color: {{ c_h }};  /* 显式覆盖全局 .section h3 变量，避免深色背景 + 黑字 */
     }
     .hh-inner p {
-      margin: 0; font-size: 15.5px; line-height: 1.55; opacity: .82; max-width: 520px;
+      margin: 0; font-size: 15.5px; line-height: 1.55;
+      color: {{ c_p }};  /* 显式，不走 opacity+继承 */
+      max-width: 520px;
+      /* 用 color-mix 做淡色，保留精确 contrast 控制 */
+      mix-blend-mode: normal;
+      opacity: 1;
+      -webkit-text-fill-color: color-mix(in srgb, {{ c_p }} 82%, transparent);
+              color: color-mix(in srgb, {{ c_p }} 82%, transparent);
     }
     .hh-actions {
       display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
@@ -37,19 +58,28 @@
     @media (max-width: 900px) { .hh-actions { justify-content: flex-start; } }
     .hh-btn {
       display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px;
-      border-radius: 22px; font-size: 15px; font-weight: 500; text-decoration: none;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      border-radius: var(--button-radius, 14px);
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
     }
     .hh-btn:hover { transform: translateY(-1px); }
     .hh-btn--primary {
-      background: #fff; color: #0a0a0c;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      background: {{ c_pri_b }};
+      color: {{ c_pri_t }};
+      box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 30px color-mix(in srgb, {{ c_pri_t }} 18%, transparent);
     }
-    .hh-btn--primary:hover { background: #F6F6F8; }
+    .hh-btn--primary:hover {
+      background: color-mix(in srgb, {{ c_pri_b }} 88%, {{ c_pri_t }} 12%);
+    }
     .hh-btn--ghost {
-      color: #fff; border: 1px solid rgba(255,255,255,0.28);
+      color: {{ c_sec_t }};
+      border: 1px solid color-mix(in srgb, {{ c_sec_t }} 28%, transparent);
+      background: transparent;
     }
-    .hh-btn--ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+    .hh-btn--ghost:hover {
+      background: color-mix(in srgb, {{ c_sec_t }} 8%, transparent);
+      border-color: color-mix(in srgb, {{ c_sec_t }} 50%, transparent);
+    }
   </style>
 
   <div class="hh-max">
@@ -81,10 +111,50 @@
   "tag": "section",
   "settings": [
     {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_from",
+      "label": "Gradient start",
+      "default": "#111114"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_to",
+      "label": "Gradient end",
+      "default": "#4F46E5"
+    },
+    {
+      "type": "color",
+      "id": "accent_aura_1",
+      "label": "Top-right aura",
+      "default": "#6366F1",
+      "info": "Radial glow accent placed in the top-right corner of the banner."
+    },
+    {
+      "type": "color",
+      "id": "accent_aura_2",
+      "label": "Bottom-left aura",
+      "default": "#A78BFA",
+      "info": "Radial glow accent placed in the bottom-left corner of the banner."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
       "default": "We’re here"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#A78BFA"
     },
     {
       "type": "text",
@@ -93,10 +163,26 @@
       "default": "One message away from a real person."
     },
     {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FFFFFF"
+    },
+    {
       "type": "textarea",
       "id": "text",
       "label": "Body",
       "default": "A Luminor specialist — not a bot — will reply within 24 hours on weekdays. We help with orders, product questions, warranty claims, or a recommendation if you’re not sure what to buy."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
     },
     {
       "type": "text",
@@ -110,6 +196,18 @@
       "label": "Primary button link"
     },
     {
+      "type": "color",
+      "id": "primary_bg",
+      "label": "Primary button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "primary_text",
+      "label": "Primary button text",
+      "default": "#0a0a0c"
+    },
+    {
       "type": "text",
       "id": "secondary_label",
       "label": "Secondary button label",
@@ -119,19 +217,35 @@
       "type": "url",
       "id": "secondary_link",
       "label": "Secondary button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_text",
+      "label": "Secondary button text + border",
+      "default": "#FFFFFF"
     }
   ],
   "presets": [
     {
       "name": "Home help banner",
       "settings": {
+        "bg_color_from": "#111114",
+        "bg_color_to": "#4F46E5",
+        "accent_aura_1": "#6366F1",
+        "accent_aura_2": "#A78BFA",
         "eyebrow": "Product specialists",
+        "eyebrow_color": "#A78BFA",
         "heading": "Not sure which device is right for you?",
+        "heading_color": "#FFFFFF",
         "text": "Chat with a real Luminor specialist - not a bot - about storage, colors, AppleCare+ or compatibility with your current setup. We reply within 24 hours on weekdays.",
+        "text_color": "#FFFFFF",
         "primary_label": "Talk to a specialist",
         "primary_link": "/pages/contact",
+        "primary_bg": "#FFFFFF",
+        "primary_text": "#0a0a0c",
         "secondary_label": "Browse all products",
-        "secondary_link": "/collections/all"
+        "secondary_link": "/collections/all",
+        "secondary_text": "#FFFFFF"
       }
     }
   ]
