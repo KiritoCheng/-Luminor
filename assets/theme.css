@@ -1613,62 +1613,8 @@
   pointer-events: none;
 }
 
-.header__nav-item:hover .header__dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.header__dropdown-inner {
-  background-color: var(--color-bg);
-  backdrop-filter: saturate(180%) blur(24px);
-  -webkit-backdrop-filter: saturate(180%) blur(24px);
-  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  border-top: none;
-  box-shadow: 0 20px 56px -12px color-mix(in srgb, var(--color-text) 20%, transparent),
-    0 6px 18px -6px color-mix(in srgb, var(--color-text) 10%, transparent);
-  padding: 22px;
-}
-
-.header__dropdown-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 24px;
-}
-
 .header__dropdown-col {
   min-width: 0;
-}
-
-.header__dropdown-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  margin-bottom: 10px;
-}
-
-.header__dropdown-sub {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.header__dropdown-sub a {
-  font-size: 0.8125rem;
-  color: var(--color-text);
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: inline-block;
 }
 
 .header__dropdown-sub a:hover {
@@ -1989,46 +1935,6 @@
   font-weight: 500;
   color: var(--color-text-muted);
   margin-right: 16px;
-}
-
-.qty-stepper {
-  display: inline-flex;
-  align-items: center;
-  border: 1.5px solid var(--color-border);
-  border-radius: 22px;
-  overflow: hidden;
-  background-color: transparent;
-}
-
-.qty-stepper button {
-  width: 42px;
-  height: 42px;
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: var(--color-text);
-  transition: background-color 0.18s ease;
-}
-
-.qty-stepper button:hover {
-  background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
-}
-
-.qty-stepper input {
-  width: 44px;
-  height: 42px;
-  text-align: center;
-  border: none;
-  background: none;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  -moz-appearance: textfield;
-  color: var(--color-text);
-}
-
-.qty-stepper input::-webkit-outer-spin-button,
-.qty-stepper input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .product__buy-buttons {
@@ -3661,7 +3567,7 @@
 /* -------------------- 404 -------------------- */
 .not-found {
   text-align: center;
-  padding-block: 80px;
+  padding-block: 0;
 }
 
 .not-found__code {
