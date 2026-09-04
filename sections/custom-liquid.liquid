@@ -1,0 +1,42 @@
+{%- liquid
+  assign custom_liquid = section.settings.custom_liquid
+-%}
+<section class="section section--tight" data-custom-liquid-section>
+  <div class="page-width">
+    {%- if custom_liquid != blank -%}
+      <div class="custom-liquid__content rte">
+        {{ custom_liquid }}
+      </div>
+    {%- else -%}
+      <div class="custom-liquid__placeholder">
+        <p class="color-muted">{{ 'general.custom_liquid.empty' | t | default: 'Add custom Liquid code in the section settings.' }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .custom-liquid__content { font-size: 0.9375rem; line-height: 1.6; }
+  .custom-liquid__content:empty { display: none; }
+  .custom-liquid__placeholder { text-align: center; padding: 24px 0; }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom Liquid",
+      "info": "Add app snippets or custom Liquid code. Acts as an insertion point for certain apps."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,252 @@
+{%- liquid
+  assign product = section.settings.product
+  assign current_variant = product.selected_or_first_available_variant
+  assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+  if product.selected_selling_plan
+    assign current_selling_plan_allocation = current_variant.selling_plan_allocations | where: 'selling_plan', product.selected_selling_plan | first
+  endif
+  assign product_form_id = 'featured-product-form-' | append: section.id
+  assign main_alt = product.featured_image.alt | default: product.title | escape
+-%}
+
+<section class="section" data-featured-product>
+  <div class="page-width">
+    {%- if product != blank -%}
+      <div class="featured-product">
+        <div class="featured-product__media">
+          {%- if product.featured_media -%}
+            {%- render 'product-media', media: product.featured_media, main_alt: main_alt -%}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'featured-product__placeholder' }}
+          {%- endif -%}
+        </div>
+
+        <div class="featured-product__info">
+          {%- form 'product', product, id: product_form_id, class: 'featured-product__form', data-product-form: '', data-product-id: product.id -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id disabled>
+            <div class="featured-product__payment-terms">{{ form | payment_terms }}</div>
+
+            {%- for block in section.blocks -%}
+              <div class="featured-product__block featured-product__block--{{ block.type }}" {{ block.shopify_attributes }}>
+                {%- case block.type -%}
+                  {%- when 'title' -%}
+                    <h2 class="featured-product__title">
+                      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+                    </h2>
+
+                  {%- when 'price' -%}
+                    <div class="featured-product__price" data-price>
+                      {% render 'price', product: product, variant: current_variant, selling_plan_allocation: current_selling_plan_allocation %}
+                    </div>
+                    {%- if cart.taxes_included -%}
+                      <p class="featured-product__tax-note color-muted">{{ 'products.product.taxes_included' | t | default: 'Tax included' }}</p>
+                    {%- endif -%}
+
+                  {%- when 'variant_picker' -%}
+                    <div class="featured-product__options" data-variant-picker>
+                      {%- for option in product.options_with_values -%}
+                        {%- liquid
+                          assign opt_name_down = option.name | downcase
+                          assign is_color = false
+                          if opt_name_down == 'color' or opt_name_down == 'colour'
+                            assign is_color = true
+                          endif
+                        -%}
+                        <fieldset class="featured-product__option" data-option-group data-option-index="{{ forloop.index0 }}">
+                          <legend class="featured-product__option-label">{{ option.name | escape }}: <strong data-option-label>{{ option.selected_value | escape }}</strong></legend>
+                          <div class="featured-product__option-values">
+                            {%- for value in option.values -%}
+                              {%- liquid
+                                assign swatch = value.swatch
+                                assign swatch_style = ''
+                                if swatch != blank
+                                  if swatch.image
+                                    assign swatch_style = 'background-image: url(' | append: swatch.image | image_url: width: 80 | append: '); background-size: cover; background-position: center;'
+                                  elsif swatch.color
+                                    assign swatch_style = 'background-color: ' | append: swatch.color | append: ';'
+                                  endif
+                                endif
+                                assign value_active = ''
+                                if option.selected_value == value
+                                  assign value_active = 'is-active'
+                                endif
+                              -%}
+                              <button type="button"
+                                class="featured-product__option-value {% if is_color or swatch != blank %}featured-product__option-value--swatch{% endif %} {{ value_active }}"
+                                data-option-value="{{ value | escape }}"
+                                {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %}>
+                                {%- if is_color == false and swatch == blank -%}<span>{{ value | escape }}</span>{%- endif -%}
+                                <span class="visually-hidden">{{ value | escape }}</span>
+                              </button>
+                            {%- endfor -%}
+                          </div>
+                        </fieldset>
+                      {%- endfor -%}
+                    </div>
+
+                  {%- when 'buy_buttons' -%}
+                    <div class="featured-product__buy-buttons">
+                      <button type="submit" name="add" class="button button--primary button--full button--lg"
+                        data-add-to-cart
+                        data-available="{{ 'products.product.add_to_cart' | t }}"
+                        data-sold-out="{{ 'products.product.sold_out' | t }}"
+                        {% unless current_variant.available %}disabled{% endunless %}>
+                        {%- if current_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </button>
+                      {%- if block.settings.show_dynamic_checkout -%}
+                        {{ form | payment_button }}
+                      {%- endif -%}
+                    </div>
+
+                  {%- when 'description' -%}
+                    {%- if product.description != blank -%}
+                      <div class="featured-product__description rte">{{ product.description }}</div>
+                    {%- endif -%}
+
+                  {%- when 'custom_liquid' -%}
+                    {%- if block.settings.custom_liquid != blank -%}
+                      <div class="featured-product__custom-liquid rte">{{ block.settings.custom_liquid }}</div>
+                    {%- endif -%}
+
+                  {%- when '@app' -%}
+                    {% render block %}
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          {%- endform -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="featured-product featured-product--placeholder">
+        <div class="featured-product__media">
+          {{ 'product-1' | placeholder_svg_tag: 'featured-product__placeholder' }}
+        </div>
+        <div class="featured-product__info">
+          <h2 class="featured-product__title">{{ 'sections.featured_product.placeholder_title' | t | default: 'Featured product' }}</h2>
+          <p class="color-muted">{{ 'sections.featured_product.placeholder_text' | t | default: 'Select a product in the section settings.' }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .featured-product { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  @media (max-width: 900px) { .featured-product { grid-template-columns: 1fr; } }
+  .featured-product__media { border-radius: 18px; overflow: hidden; background: var(--color-bg-alt, #f5f5f7); }
+  .featured-product__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .featured-product__placeholder { width: 100%; }
+  .featured-product__info { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
+  .featured-product__title { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+  .featured-product__title a { color: inherit; text-decoration: none; }
+  .featured-product__title a:hover { color: var(--color-primary, #0071e3); }
+  .featured-product__price { font-size: 1.0625rem; font-weight: 600; }
+  .featured-product__tax-note { font-size: 0.8125rem; margin: 4px 0 0; }
+  .featured-product__payment-terms { min-height: 0; }
+  .featured-product__payment-terms:empty { display: none; }
+  .featured-product__options { display: flex; flex-direction: column; gap: 16px; }
+  .featured-product__option { border: 0; padding: 0; margin: 0; }
+  .featured-product__option-label { font-size: 0.8125rem; font-weight: 500; color: var(--color-text-muted, #6e6e73); margin: 0 0 8px; display: block; }
+  .featured-product__option-values { display: flex; flex-wrap: wrap; gap: 8px; }
+  .featured-product__option-value {
+    min-height: 44px; min-width: 44px; padding: 8px 18px;
+    border: 1px solid color-mix(in srgb, var(--color-text, #1d1d1f) 14%, transparent);
+    border-radius: 12px; background: transparent; color: var(--color-text, #1d1d1f);
+    font-size: 0.875rem; font-weight: 500; cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .featured-product__option-value:hover { border-color: color-mix(in srgb, var(--color-text, #1d1d1f) 30%, transparent); }
+  .featured-product__option-value.is-active { border-color: var(--color-primary, #0071e3); background: color-mix(in srgb, var(--color-primary, #0071e3) 6%, transparent); }
+  .featured-product__option-value--swatch { width: 40px; height: 40px; min-width: 40px; padding: 0; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--color-text, #1d1d1f) 14%, transparent); background-size: cover; }
+  .featured-product__option-value--swatch.is-active { border-color: var(--color-primary, #0071e3); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #0071e3) 35%, transparent); }
+  .featured-product__description { font-size: 0.9375rem; line-height: 1.6; color: var(--color-text-muted, #6e6e73); }
+  .featured-product__buy-buttons { padding-top: 4px; }
+</style>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Color options automatically use Shopify swatches (swatch.color and swatch.image)."
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Show dynamic checkout button",
+          "default": true,
+          "info": "Accelerated checkout buttons are enabled by default and their brand colors cannot be modified."
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid",
+          "info": "Add app snippets or custom Liquid code."
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "blocks": [
+        { "type": "title" },
+        { "type": "price" },
+        { "type": "variant_picker" },
+        { "type": "buy_buttons" },
+        { "type": "description" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -146,7 +146,9 @@
     </div>
     <a href="{{ shop.url }}" class="gift-card__shop-link">Shop now</a>
     <p class="gift-card__expiry">
-      {%- if gift_card.expires_on -%}
+      {%- if gift_card.send_on -%}
+        Sent on {{ gift_card.send_on | date: "%B %d, %Y" }}
+      {%- elsif gift_card.expires_on -%}
         Expires {{ gift_card.expires_on | date: "%B %d, %Y" }}
       {%- else -%}
         No expiration date

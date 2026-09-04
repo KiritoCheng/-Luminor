@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders a single product media item with rich media support.
+  Accepts:
+    - media: media object
+    - main_alt: fallback alt text (optional)
+{%- endcomment -%}
+{%- liquid
+  assign media_alt = media.alt | default: main_alt | escape
+-%}
+<div class="product__media-item" data-media-id="{{ media.id }}" data-media-type="{{ media.media_type }}">
+  {%- case media.media_type -%}
+    {%- when 'image' -%}
+      {{ media | image_url: width: 1600 | image_tag:
+        loading: 'eager',
+        widths: '375, 550, 750, 1100, 1500, 1780',
+        sizes: '(max-width: 990px) 100vw, 50vw',
+        alt: media_alt,
+        data-image-id: media.id }}
+    {%- when 'video' -%}
+      {{ media | video_tag: image_size: '1600x', controls: true, loading: 'lazy' }}
+    {%- when 'external_video' -%}
+      {{ media | external_video_tag }}
+    {%- when 'model' -%}
+      {{ media | model_viewer_tag: reveal: 'interaction', auto-rotate: true, camera-controls: true, loading: 'lazy' }}
+    {%- else -%}
+      {{ media | media_tag }}
+  {%- endcase -%}
+</div>

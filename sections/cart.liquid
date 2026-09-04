@@ -33,6 +33,14 @@
                     {%- unless item.variant.title contains 'Default' -%}
                       <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
                     {%- endunless -%}
+                    {%- if item.selling_plan_allocation -%}
+                      <p class="cart-item__selling-plan color-muted">{{ item.selling_plan_allocation.selling_plan.name | escape }}</p>
+                    {%- endif -%}
+                    {%- if item.unit_price_measurement -%}
+                      <p class="cart-item__unit-price color-muted">
+                        {{ item.unit_price | money }} / {{ item.unit_price_measurement.reference_unit }}
+                      </p>
+                    {%- endif -%}
                     <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t }}</a>
                   </td>
                   <td>
@@ -78,7 +86,13 @@
             </div>
           {%- endfor -%}
         {%- endif -%}
-        <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
+        <p class="cart-drawer__note">
+          {%- if cart.taxes_included -%}
+            {{ 'sections.cart.taxes_included' | t | default: 'Taxes included. Shipping calculated at checkout.' }}
+          {%- else -%}
+            {{ 'sections.cart.taxes_note' | t }}
+          {%- endif -%}
+        </p>
         <div class="cart-summary__row cart-summary__row--total">
           <span>{{ 'sections.cart.total' | t }}</span>
           <span>{{ cart.total_price | money }}</span>

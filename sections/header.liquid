@@ -184,9 +184,11 @@
         {%- endif -%}
 
         {%- if shop.customer_accounts_enabled -%}
-          <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
-            {% render 'icon-account' %}
-          </a>
+          <shopify-account>
+            <a class="header__icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+              {% render 'icon-account' %}
+            </a>
+          </shopify-account>
         {%- endif -%}
 
         <a
@@ -311,12 +313,16 @@
   </nav>
   <div class="mobile-menu__footer">
     <div class="mobile-menu__actions">
-      <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {{ 'customer.account.title' | t }}
-      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <shopify-account>
+          <a href="{{ routes.account_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--primary">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M16 18.5v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 14.5v-2a3 3 0 0 0-2.5-2.9M16.5 4.2A3 3 0 0 1 16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ 'customer.account.title' | t }}
+          </a>
+        </shopify-account>
+      {%- endif -%}
       <a href="{{ routes.search_url }}" class="mobile-menu__action-btn mobile-menu__action-btn--ghost">
         <svg viewBox="0 0 24 24" fill="none">
           <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>

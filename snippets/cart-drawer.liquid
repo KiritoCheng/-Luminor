@@ -29,6 +29,14 @@
             {%- unless item.variant.title contains 'Default' -%}
               <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
             {%- endunless -%}
+            {%- if item.selling_plan_allocation -%}
+              <p class="cart-item__selling-plan color-muted">{{ item.selling_plan_allocation.selling_plan.name | escape }}</p>
+            {%- endif -%}
+            {%- if item.unit_price_measurement -%}
+              <p class="cart-item__unit-price color-muted">
+                {{ item.unit_price | money }} / {{ item.unit_price_measurement.reference_unit }}
+              </p>
+            {%- endif -%}
             <div class="qty-stepper cart-item__qty">
               <button data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
               <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" data-qty-input data-line="{{ forloop.index }}">
@@ -62,7 +70,13 @@
           </div>
         {%- endfor -%}
       {%- endif -%}
-      <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t }}</p>
+      <p class="cart-drawer__note">
+        {%- if cart.taxes_included -%}
+          {{ 'sections.cart.taxes_included' | t | default: 'Taxes included. Shipping calculated at checkout.' }}
+        {%- else -%}
+          {{ 'sections.cart.taxes_note' | t }}
+        {%- endif -%}
+      </p>
       <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
         <button type="submit" name="checkout" class="button button--primary button--full button--lg">{{ 'sections.cart.checkout' | t }}</button>
         {%- if additional_checkout_buttons -%}

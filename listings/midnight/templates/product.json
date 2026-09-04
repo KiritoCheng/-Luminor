@@ -3,9 +3,57 @@
     "main": {
       "type": "product-details",
       "settings": {
-        "show_dynamic_checkout": true,
         "enable_sticky": true
-      }
+      },
+      "blocks": {
+        "vendor": { "type": "vendor" },
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "rating": { "type": "rating" },
+        "variant_picker": { "type": "variant_picker" },
+        "selling_plans": { "type": "selling_plans" },
+        "quantity": { "type": "quantity" },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": { "show_dynamic_checkout": true }
+        },
+        "gift_card_recipient": { "type": "gift_card_recipient" },
+        "pickup_availability": { "type": "pickup_availability" },
+        "follow_on_shop": { "type": "follow_on_shop" },
+        "description": { "type": "description" },
+        "shipping_returns": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns",
+            "text": "<p>Free standard shipping on orders over $50. Returns accepted within 30 days of delivery.</p>"
+          }
+        },
+        "materials": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Materials",
+            "text": "<p>Precision-milled from aerospace-grade materials. Built to last and designed to match.</p>"
+          }
+        },
+        "share": { "type": "share" }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "rating",
+        "variant_picker",
+        "selling_plans",
+        "quantity",
+        "buy_buttons",
+        "gift_card_recipient",
+        "pickup_availability",
+        "follow_on_shop",
+        "description",
+        "shipping_returns",
+        "materials",
+        "share"
+      ]
     },
     "story_design": {
       "type": "image-with-text",
