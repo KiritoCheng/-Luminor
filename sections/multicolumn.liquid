@@ -12,7 +12,7 @@
       </div>
     {%- endif -%}
 
-    <div class="multicolumn__grid stagger" style="grid-template-columns: repeat({{ columns }}, 1fr)">
+    <div class="multicolumn__grid stagger" style="--columns: {{ columns }}">
       {%- for block in section.blocks -%}
         <div class="multicolumn__item" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
