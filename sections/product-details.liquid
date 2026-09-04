@@ -462,8 +462,11 @@
   .product__custom-liquid { font-size: 0.875rem; }
 
   {%- comment -%} Accordion — Minimalism & Swiss: independent rounded cards, strict 44px+ touch, dual-state arrow {%- endcomment -%}
-  .product__block--accordion { margin-top: 0 !important; }
-  .product__block--accordion + .product__block--accordion { margin-top: 10px; }
+  .product__block--accordion {
+    margin-top: 0 !important;
+    margin-bottom: var(--accordion-block-gap, 14px);
+  }
+  .product__block--accordion:last-child { margin-bottom: 0; }
   .product__accordion-item {
     border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 10%, transparent);
     border-radius: 14px;
@@ -757,8 +760,8 @@
         { "type": "pickup_availability" },
         { "type": "follow_on_shop" },
         { "type": "description" },
-        { "type": "accordion", "settings": { "heading": "Shipping and returns" } },
-        { "type": "accordion", "settings": { "heading": "Materials" } },
+        { "type": "accordion", "settings": { "heading": "Shipping and returns", "block_gap": 14 } },
+        { "type": "accordion", "settings": { "heading": "Materials", "block_gap": 14 } },
         { "type": "share" }
       ]
     }

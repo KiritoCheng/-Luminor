@@ -4012,10 +4012,11 @@
   min-width: 64px;
 }
 
-/* Quantity stepper - Apple capsule style */
+/* Quantity stepper — Luminor indigo capsule (tight fill, no hover bleed) */
 .qty-stepper {
   display: inline-flex;
-  align-items: center;
+  align-items: stretch;
+  height: 46px;
   border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
   border-radius: 22px;
   overflow: hidden;
@@ -4028,8 +4029,7 @@
 }
 
 .qty-stepper button {
-  width: 40px;
-  height: 40px;
+  width: 44px;
   border: none;
   background: transparent;
   color: var(--color-text);
@@ -4039,8 +4039,11 @@
   justify-content: center;
   font-size: 1.1rem;
   line-height: 1;
+  padding: 0;
   transition: background-color 0.15s ease, opacity 0.15s ease;
 }
+.qty-stepper button:first-of-type { border-top-left-radius: 22px; border-bottom-left-radius: 22px; }
+.qty-stepper button:last-of-type  { border-top-right-radius: 22px; border-bottom-right-radius: 22px; }
 
 .qty-stepper button:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
@@ -4052,8 +4055,7 @@
 }
 
 .qty-stepper input {
-  width: 44px;
-  height: 40px;
+  width: 48px;
   border: none;
   text-align: center;
   font-size: 0.9375rem;
@@ -4062,6 +4064,8 @@
   background: transparent;
   outline: none;
   -moz-appearance: textfield;
+  padding: 0;
+  height: 100%;
 }
 .qty-stepper input::-webkit-outer-spin-button,
 .qty-stepper input::-webkit-inner-spin-button {
@@ -5163,7 +5167,9 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   aspect-ratio: 4 / 3;
+  display: block;
   background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
+  margin-bottom: 4px;
 }
 
 .header__dropdown-feature-title {
