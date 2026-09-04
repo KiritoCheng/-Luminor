@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-details",
+      "settings": {
+        "enable_sticky": true
+      },
+      "blocks": {
+        "vendor": { "type": "vendor" },
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "rating": { "type": "rating" },
+        "variant_picker": { "type": "variant_picker" },
+        "selling_plans": { "type": "selling_plans" },
+        "quantity": { "type": "quantity" },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": { "show_dynamic_checkout": true }
+        },
+        "gift_card_recipient": { "type": "gift_card_recipient" },
+        "pickup_availability": { "type": "pickup_availability" },
+        "follow_on_shop": { "type": "follow_on_shop" },
+        "description": { "type": "description" },
+        "shipping_returns": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns",
+            "text": "<p>Free standard shipping on orders over $50. Returns accepted within 30 days of delivery.</p>"
+          }
+        },
+        "materials": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Materials",
+            "text": "<p>Precision-milled from aerospace-grade materials. Built to last and designed to match.</p>"
+          }
+        },
+        "share": { "type": "share" }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "rating",
+        "variant_picker",
+        "selling_plans",
+        "quantity",
+        "buy_buttons",
+        "gift_card_recipient",
+        "pickup_availability",
+        "follow_on_shop",
+        "description",
+        "shipping_returns",
+        "materials",
+        "share"
+      ]
+    },
+    "story_design": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_first",
+        "color_scheme": "default",
+        "eyebrow": "Design",
+        "title": "Designed without compromise.",
+        "text": "<p>Every detail is considered. From the precision-milled aluminum to the soft-touch finish, each element is chosen to feel as good as it looks. We obsess over the things you'll never notice — so you can focus on what matters.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "features": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Highlights",
+        "columns": 3
+      },
+      "blocks": {
+        "feat_1": { "type": "column", "settings": { "title": "Premium materials", "text": "Aerospace-grade aluminum and recycled fabrics, built to last." } },
+        "feat_2": { "type": "column", "settings": { "title": "All-day comfort", "text": "Ergonomically engineered for extended use without fatigue." } },
+        "feat_3": { "type": "column", "settings": { "title": "Seamless integration", "text": "Works effortlessly with your existing setup and devices." } }
+      },
+      "block_order": ["feat_1", "feat_2", "feat_3"]
+    },
+    "story_craft": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "Craftsmanship",
+        "title": "Made to last a lifetime.",
+        "text": "<p>We partner with workshops that have spent decades perfecting their craft. Every stitch, every joint, every surface is inspected by hand. The result is a product that ages beautifully and performs reliably, year after year.</p>",
+        "button_label": "Learn more",
+        "button_link": "/pages/about"
+      }
+    },
+    "specs": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Specifications",
+        "text": "<ul><li><strong>Materials:</strong> Anodized aluminum, recycled polymers</li><li><strong>Dimensions:</strong> Optimized for everyday carry</li><li><strong>Weight:</strong> Lightweight, balanced design</li><li><strong>Warranty:</strong> 2-year limited warranty included</li><li><strong>Compatibility:</strong> Universal — works with all devices</li></ul>"
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_recommendations": true,
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main", "story_design", "features", "story_craft", "specs", "recommendations"]
+}
