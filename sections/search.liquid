@@ -3,25 +3,30 @@
   assign filter_type = section.settings.filter_type | default: 'product'
 -%}
 
-<section class="section section--tight">
+<section class="section section--tight anode-search">
   <div class="page-width">
-    <div class="collection-hero">
+    <header class="anode-search__intro collection-hero">
+      <p class="eyebrow">05 / Search</p>
       <h1 class="collection-hero__title">{{ 'general.search.title' | t }}</h1>
-    </div>
+      <p class="anode-search__lede">Search products, pages and stories across the storefront.</p>
+    </header>
 
-    <form action="{{ routes.search_url }}" method="get" role="search" class="newsletter__form" style="max-width:560px;margin-bottom:32px;">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="anode-search__form">
+      <label class="visually-hidden" for="AnodeSearchInput">{{ 'general.search.search' | t }}</label>
+      <input id="AnodeSearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
       <input type="hidden" name="type" value="{{ filter_type }}">
-      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
       <button type="submit" class="button button--primary">{{ 'general.search.search' | t }}</button>
     </form>
 
     {%- if search.performed -%}
       <div class="collection-layout">
-        {%- comment -%} Facets sidebar {%- endcomment -%}
         <aside class="facets" data-facets>
-          <div class="facets__header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <h2 style="font-size:1rem;font-weight:600;">{{ 'sections.collection_template.filter' | t }}</h2>
-            <button class="facets__close" data-facets-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+          <div class="facets__header">
+            <div>
+              <p class="eyebrow">Filter</p>
+              <h2>{{ 'sections.collection_template.filter' | t }}</h2>
+            </div>
+            <button type="button" class="facets__close" data-facets-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
           </div>
           <form id="FacetForm">
             {%- for filter in search.filters -%}
@@ -30,9 +35,15 @@
                 <div class="facets__options">
                   {%- case filter.type -%}
                     {%- when 'price_range' -%}
-                      <div style="display:flex;gap:8px;">
-                        <input type="number" name="{{ filter.min_value_param }}" value="{{ filter.min_value.value }}" placeholder="Min" aria-label="{{ 'sections.collection_template.min_price' | t | default: 'Minimum price' }}">
-                        <input type="number" name="{{ filter.max_value_param }}" value="{{ filter.max_value.value }}" placeholder="Max" aria-label="{{ 'sections.collection_template.max_price' | t | default: 'Maximum price' }}">
+                      <div class="anode-search__price-range">
+                        <label>
+                          <span>{{ 'sections.collection_template.min_price' | t | default: 'Minimum price' }}</span>
+                          <input type="number" name="{{ filter.min_value_param }}" value="{{ filter.min_value.value }}" placeholder="Min">
+                        </label>
+                        <label>
+                          <span>{{ 'sections.collection_template.max_price' | t | default: 'Maximum price' }}</span>
+                          <input type="number" name="{{ filter.max_value_param }}" value="{{ filter.max_value.value }}" placeholder="Max">
+                        </label>
                       </div>
                     {%- else -%}
                       {%- for value in filter.values -%}
@@ -55,15 +66,16 @@
           <div class="collection-toolbar">
             <span class="collection-toolbar__count">{{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}</span>
             <div class="collection-toolbar__sort">
-              <button class="collection-toolbar__filters-btn" data-facets-open>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <button type="button" class="collection-toolbar__filters-btn" data-facets-open>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                 {{ 'sections.collection_template.filter' | t }}
               </button>
               {%- if search.sort_options.size > 0 -%}
                 <form id="SortForm" method="get">
                   <input type="hidden" name="q" value="{{ search.terms | escape }}">
                   <input type="hidden" name="type" value="{{ filter_type }}">
-                  <select name="sort_by" aria-label="{{ 'sections.collection_template.sort_by' | t }}">
+                  <label class="visually-hidden" for="SearchSort">{{ 'sections.collection_template.sort_by' | t }}</label>
+                  <select id="SearchSort" name="sort_by" aria-label="{{ 'sections.collection_template.sort_by' | t }}">
                     {%- for option in search.sort_options -%}
                       <option value="{{ option.value }}" {% if option.value == search.sort_by %}selected{% endif %}>{{ option.name | escape }}</option>
                     {%- endfor -%}
@@ -81,23 +93,40 @@
                     {%- if item.object_type == 'product' -%}
                       <div class="reveal">{% render 'product-card', product: item %}</div>
                     {%- else -%}
-                      <a href="{{ item.url }}" class="product-card">
+                      <a href="{{ item.url }}" class="product-card product-card--search-result">
                         <div class="product-card__media">
-                          {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+                          {%- if item.image -%}
+                            {{ item.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 600, 900', sizes: '(max-width: 749px) 50vw, 25vw', alt: item.title | escape }}
+                          {%- else -%}
+                            <div class="product-card__placeholder product-card__placeholder--indexed" aria-hidden="true">{{ forloop.index | prepend: '0' }}</div>
+                          {%- endif -%}
                         </div>
-                        <h2 class="product-card__title">{{ item.title | escape }}</h2>
-                        <p class="product-card__vendor">{{ item.object_type | capitalize }}</p>
+                        <div class="product-card__info">
+                          <p class="product-card__vendor">{{ item.object_type | capitalize }}</p>
+                          <h2 class="product-card__title">{{ item.title | escape }}</h2>
+                        </div>
                       </a>
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
                 {% render 'pagination', paginate: paginate %}
               {%- else -%}
-                <p class="color-muted">{{ 'general.search.no_matches' | t }}</p>
+                <div class="anode-search__empty" role="status">
+                  <p class="eyebrow">No match</p>
+                  <h2>Nothing surfaced for “{{ search.terms | escape }}”.</h2>
+                  <p>Try a broader term, a product name, or return to the full catalog.</p>
+                  <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">Browse all products</a>
+                </div>
               {%- endif -%}
             {%- endpaginate -%}
           </div>
         </div>
+      </div>
+    {%- else -%}
+      <div class="anode-search__empty anode-search__empty--initial">
+        <p class="eyebrow">Search the catalog</p>
+        <h2>Start with a product, material, or collection.</h2>
+        <p>Use the search field above to move directly into the catalog.</p>
       </div>
     {%- endif -%}
   </div>
@@ -128,30 +157,35 @@
   })();
 </script>
 
+<style>
+  .anode-search__intro { border-bottom: 1px solid var(--anode-line, rgba(0, 0, 0, .11)); padding-bottom: clamp(28px, 4vw, 48px); }
+  .anode-search__lede { max-width: 620px; margin: 18px 0 0; color: var(--anode-muted, rgba(0, 0, 0, .6)); font-size: clamp(1rem, 1.3vw, 1.2rem); }
+  .anode-search__form { display: grid; grid-template-columns: 1fr auto; gap: 12px; max-width: 900px; margin: clamp(28px, 4vw, 48px) 0 var(--anode-section-space, 96px); }
+  .anode-search__form input[type='search'] { min-height: 52px; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; background: transparent; padding: 10px 2px; font-size: clamp(1.1rem, 2vw, 1.5rem); }
+  .anode-search__form input[type='search']:focus { outline: 2px solid var(--anode-accent, #4f46e5); outline-offset: 5px; }
+  .anode-search__price-range { display: grid; gap: 12px; }
+  .anode-search__price-range label { display: grid; gap: 5px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+  .anode-search__empty { border-top: 1px solid var(--anode-line, rgba(0, 0, 0, .11)); border-bottom: 1px solid var(--anode-line, rgba(0, 0, 0, .11)); padding: clamp(56px, 9vw, 120px) clamp(16px, 4vw, 56px); }
+  .anode-search__empty h2 { max-width: 760px; margin: 12px 0; font-size: clamp(2rem, 5vw, 4.5rem); line-height: .98; letter-spacing: -.04em; }
+  .anode-search__empty p:not(.eyebrow) { max-width: 560px; color: var(--anode-muted, rgba(0, 0, 0, .6)); }
+  .anode-search__empty .button { margin-top: 28px; }
+  .anode-search__empty--initial { margin-top: 0; }
+  .product-card--search-result .product-card__media { aspect-ratio: 1 / 1; overflow: hidden; }
+  .product-card__placeholder--indexed { display: grid; place-items: center; height: 100%; font-size: clamp(2rem, 6vw, 5rem); font-weight: 600; letter-spacing: -.05em; }
+  @media (max-width: 749px) {
+    .anode-search__form { grid-template-columns: 1fr; margin-bottom: var(--anode-section-space-sm, 64px); }
+    .anode-search__form .button { width: 100%; }
+    .anode-search__empty { padding-block: 56px; }
+  }
+</style>
+
 {% schema %}
 {
   "name": "Search",
   "tag": "section",
   "settings": [
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "label": "Columns on desktop",
-      "default": 4
-    },
-    {
-      "type": "select",
-      "id": "filter_type",
-      "label": "Search type for filtering",
-      "options": [
-        { "value": "product", "label": "Product" },
-        { "value": "article,page", "label": "Article and page" }
-      ],
-      "default": "product"
-    }
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "select", "id": "filter_type", "label": "Search type for filtering", "options": [ { "value": "product", "label": "Product" }, { "value": "article,page", "label": "Article and page" } ], "default": "product" }
   ]
 }
 {% endschema %}
