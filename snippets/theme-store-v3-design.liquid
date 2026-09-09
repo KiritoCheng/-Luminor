@@ -1,7 +1,7 @@
 {%- comment -%}
   Theme Store v3 visual layer.
-  Intentionally scoped to the storefront body so it can coexist with
-  the merchant's existing section settings and Shopify editor.
+  Loaded from the product card so it remains compatible with the existing
+  Shopify section architecture without changing merchant editor structure.
 {%- endcomment -%}
 <style>
   :root {
@@ -41,7 +41,6 @@
     line-height: 1.05;
   }
 
-  /* Give image-led sections a consistent editorial rhythm. */
   #MainContent .section:not(.section--flush),
   #MainContent .featured-collection,
   #MainContent .category-pills,
@@ -53,6 +52,39 @@
   #MainContent .image-with-text,
   #MainContent .home-popular-collections {
     padding-block: var(--v3-section-space);
+  }
+
+  /* Homepage: make the hero the visual anchor instead of another generic block. */
+  .template-index .hero-section {
+    min-height: min(760px, calc(100svh - 60px));
+  }
+
+  .template-index .hero-section .hero__content {
+    max-width: min(760px, 78vw);
+  }
+
+  .template-index .hero-section .hero__heading,
+  .template-index .hero-section h1 {
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .template-index .hero-section .hero__cta {
+    gap: 12px;
+  }
+
+  .template-index .hero-section .hero__cta a {
+    min-height: 48px;
+    padding-inline: 22px;
+  }
+
+  /* Keep social proof quiet so it supports the product story rather than competing with it. */
+  .template-index .stats {
+    background: var(--color-bg-alt);
+  }
+
+  .template-index .press {
+    background: var(--color-bg-alt);
   }
 
   /* Product grids: calmer, more premium rhythm. */
@@ -67,6 +99,7 @@
   #MainContent .product-card__media {
     border-radius: var(--v3-radius);
     background: var(--color-bg-alt);
+    overflow: hidden;
   }
 
   #MainContent .product-card__actions {
@@ -111,7 +144,6 @@
     text-transform: uppercase;
   }
 
-  /* Inputs and controls use one visual language. */
   #MainContent input,
   #MainContent select,
   #MainContent textarea,
@@ -171,6 +203,18 @@
     #MainContent .product-card__action-btn {
       width: 40px;
       height: 40px;
+    }
+
+    .template-index .hero-section {
+      min-height: min(680px, calc(100svh - 52px));
+    }
+
+    .template-index .hero-section .hero__content {
+      max-width: calc(100vw - 32px);
+    }
+
+    .template-index .hero-section .hero__cta {
+      flex-wrap: wrap;
     }
   }
 </style>
