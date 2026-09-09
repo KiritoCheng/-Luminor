@@ -2,6 +2,8 @@
   Cart drawer — rendered by layout/theme.liquid.
   Also rendered on refresh via the cart.drawer template view.
 {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'anode-v3.css' | asset_url }}">
+
 <div class="cart-drawer" data-cart-drawer aria-hidden="true">
   <div class="cart-drawer__header">
     <p class="cart-drawer__title">{{ 'sections.cart.title' | t }} ({{ cart.item_count }})</p>
@@ -38,9 +40,9 @@
               </p>
             {%- endif -%}
             <div class="qty-stepper cart-item__qty">
-              <button data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
-              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" data-qty-input data-line="{{ forloop.index }}">
-              <button data-qty-step="up" aria-label="{{ 'products.product.quantity.increase' | t }}">+</button>
+              <button type="button" data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" data-qty-input data-line="{{ forloop.index }}" aria-label="{{ 'products.product.quantity.label' | t: product: item.product.title }}">
+              <button type="button" data-qty-step="up" aria-label="{{ 'products.product.quantity.increase' | t }}">+</button>
             </div>
             <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t }}</a>
           </div>
