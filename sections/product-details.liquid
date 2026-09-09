@@ -13,12 +13,23 @@
   endif
 -%}
 
-<section class="section" data-product-section>
+<section class="section anode-product" data-product-section>
   <div class="page-width">
-    <div class="product">
-      {%- comment -%} Media gallery with rich media support {%- endcomment -%}
-      <div class="product__media" data-product-gallery>
-        <div class="product__media-main" data-product-main>
+    <div class="anode-product__intro" aria-hidden="true">
+      <span class="anode-product__index">01</span>
+      <span class="anode-product__rule"></span>
+      <span class="anode-product__label">Product / Detail</span>
+    </div>
+
+    <div class="product anode-product__layout {% if section.settings.enable_sticky %}anode-product__layout--sticky{% endif %}">
+      <div class="product__media anode-product__media" data-product-gallery>
+        <div class="anode-product__media-count" aria-hidden="true">
+          <span>{{ product.media.size | prepend: '0' | slice: -2, 2 }}</span>
+          <span>/</span>
+          <span>{{ product.media.size | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+
+        <div class="product__media-main anode-product__media-main" data-product-main>
           {%- if product.featured_media -%}
             {%- for media in product.media limit: 1 -%}
               {%- render 'product-media', media: media, main_alt: main_alt -%}
@@ -29,7 +40,7 @@
         </div>
 
         {%- if show_thumbs -%}
-          <div class="product__thumbs" data-product-thumbs>
+          <div class="product__thumbs anode-product__thumbs" data-product-thumbs aria-label="Product media">
             {%- for media in product.media limit: 8 -%}
               {%- liquid
                 assign thumb_alt = media.alt | default: product.title | escape
@@ -38,7 +49,7 @@
                   assign thumb_active = 'is-active'
                 endif
               -%}
-              <button class="product__thumb {{ thumb_active }}" data-product-thumb data-media-id="{{ media.id }}" data-main-url="{{ media | image_url: width: 1600 }}">
+              <button type="button" class="product__thumb anode-product__thumb {{ thumb_active }}" data-product-thumb data-media-id="{{ media.id }}" data-main-url="{{ media | image_url: width: 1600 }}" aria-label="View product image {{ forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
                 {%- if media.media_type == 'image' -%}
                   {{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: thumb_alt }}
                 {%- else -%}
@@ -53,11 +64,14 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Product info — block-based {%- endcomment -%}
-      <div class="product__info">
-        {%- form 'product', product, id: product_form_id, class: 'product__form', data-product-form: '', data-product-id: product.id -%}
+      <div class="product__info anode-product__info">
+        <div class="anode-product__info-head">
+          <span class="anode-product__micro">ANODE / OBJECT</span>
+          <span class="anode-product__status">{{ current_variant.available | default: false | if: 'Available', 'Unavailable' }}</span>
+        </div>
+
+        {%- form 'product', product, id: product_form_id, class: 'product__form anode-product__form', data-product-form: '', data-product-id: product.id -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
-          {%- comment -%} Shop Pay Installments banner (must sit inside product form) {%- endcomment -%}
           <div class="product__payment-terms" data-payment-terms>
             {{ form | payment_terms }}
           </div>
@@ -67,24 +81,29 @@
               {%- case block.type -%}
                 {%- when 'vendor' -%}
                   {%- if product.vendor != blank -%}
-                    <p class="product__vendor" {{ block.shopify_attributes }}>{{ product.vendor | escape }}</p>
+                    <p class="product__vendor">{{ product.vendor | escape }}</p>
                   {%- endif -%}
 
                 {%- when 'title' -%}
-                  <h1 class="product__title" {{ block.shopify_attributes }}>{{ product.title | escape }}</h1>
+                  <div class="anode-product__title-wrap">
+                    <span class="anode-product__title-mark" aria-hidden="true">/</span>
+                    <h1 class="product__title">{{ product.title | escape }}</h1>
+                  </div>
 
                 {%- when 'price' -%}
-                  <div class="product__price" data-price {{ block.shopify_attributes }}>
-                    {% render 'price', product: product, variant: current_variant, selling_plan_allocation: current_selling_plan_allocation %}
+                  <div class="anode-product__price-row">
+                    <div class="product__price" data-price>
+                      {% render 'price', product: product, variant: current_variant, selling_plan_allocation: current_selling_plan_allocation %}
+                    </div>
+                    <span data-compare-price hidden></span>
                   </div>
-                  <span data-compare-price hidden></span>
                   {%- if cart.taxes_included -%}
                     <p class="product__tax-note color-muted">{{ 'products.product.taxes_included' | t | default: 'Tax included' }}</p>
                   {%- endif -%}
 
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
-                    <div class="product__rating" {{ block.shopify_attributes }}>
+                    <div class="product__rating" aria-label="{{ product.metafields.reviews.rating.value }} out of 5 stars">
                       <span class="product__rating-value">{{ product.metafields.reviews.rating.value }}</span>
                       <span class="product__rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                       <span class="product__rating-count color-muted">({{ product.metafields.reviews.rating_count.value | default: 0 }})</span>
@@ -92,7 +111,7 @@
                   {%- endif -%}
 
                 {%- when 'variant_picker' -%}
-                  <div class="product__options" data-variant-picker {{ block.shopify_attributes }}>
+                  <div class="product__options" data-variant-picker>
                     {%- for option in product.options_with_values -%}
                       {%- liquid
                         assign is_color = false
@@ -102,7 +121,7 @@
                         endif
                       -%}
                       <fieldset class="product__option" data-option-group data-option-index="{{ forloop.index0 }}">
-                        <legend class="product__option-label">{{ option.name | escape }}: <strong data-option-label>{{ option.selected_value | escape }}</strong></legend>
+                        <legend class="product__option-label"><span>{{ option.name | escape }}</span><strong data-option-label>{{ option.selected_value | escape }}</strong></legend>
                         <div class="product__option-values">
                           {%- for value in option.values -%}
                             {%- liquid
@@ -122,14 +141,8 @@
                                 assign value_active = 'is-active'
                               endif
                             -%}
-                            <button type="button"
-                              class="product__option-value {% if is_color or swatch != blank %}product__option-value--swatch{% endif %} {{ value_active }}"
-                              data-option-value="{{ value | escape }}"
-                              {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %}
-                              {% if is_color == false and swatch == blank %}aria-label="{{ value | escape }}"{% endif %}>
-                              {%- if is_color == false and swatch == blank -%}
-                                <span class="product__option-label-text">{{ value | escape }}</span>
-                              {%- endif -%}
+                            <button type="button" class="product__option-value {% if is_color or swatch != blank %}product__option-value--swatch{% endif %} {{ value_active }}" data-option-value="{{ value | escape }}" {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %} {% if is_color == false and swatch == blank %}aria-label="{{ value | escape }}"{% endif %} aria-pressed="{% if value_active != blank %}true{% else %}false{% endif %}">
+                              {%- if is_color == false and swatch == blank -%}<span class="product__option-label-text">{{ value | escape }}</span>{%- endif -%}
                               <span class="visually-hidden">{{ value | escape }}</span>
                             </button>
                           {%- endfor -%}
@@ -140,8 +153,8 @@
 
                 {%- when 'selling_plans' -%}
                   {%- if product.selling_plan_groups.size > 0 -%}
-                    <div class="product__selling-plans" data-selling-plans {{ block.shopify_attributes }}>
-                      <label class="product__option-label" for="SellingPlan-{{ section.id }}">{{ 'products.product.selling_plan' | t | default: 'Purchase plan' }}</label>
+                    <div class="product__selling-plans" data-selling-plans>
+                      <label class="product__option-label" for="SellingPlan-{{ section.id }}"><span>{{ 'products.product.selling_plan' | t | default: 'Purchase plan' }}</span></label>
                       <select name="selling_plan" id="SellingPlan-{{ section.id }}" data-selling-plan-select>
                         <option value="" {% unless product.selected_selling_plan %}selected{% endunless %}>{{ 'products.product.one_time_purchase' | t | default: 'One-time purchase' }}</option>
                         {%- for group in product.selling_plan_groups -%}
@@ -156,7 +169,7 @@
                   {%- endif -%}
 
                 {%- when 'quantity' -%}
-                  <div class="product__qty" {{ block.shopify_attributes }}>
+                  <div class="product__qty anode-product__quantity">
                     <label class="product__qty-label" for="Quantity-{{ section.id }}">{{ 'products.product.quantity.label' | t }}</label>
                     <div class="qty-stepper">
                       <button type="button" data-qty-step="down" aria-label="{{ 'products.product.quantity.decrease' | t }}">&minus;</button>
@@ -166,104 +179,60 @@
                   </div>
 
                 {%- when 'buy_buttons' -%}
-                  <div class="product__buy-buttons" {{ block.shopify_attributes }}>
-                    <button type="submit" name="add" class="button button--primary button--full button--lg"
-                      data-add-to-cart
-                      data-available="{{ 'products.product.add_to_cart' | t }}"
-                      data-sold-out="{{ 'products.product.sold_out' | t }}"
-                      {% unless current_variant.available %}disabled{% endunless %}>
-                      {%- if current_variant.available -%}
-                        {{ 'products.product.add_to_cart' | t }}
-                      {%- else -%}
-                        {{ 'products.product.sold_out' | t }}
-                      {%- endif -%}
+                  <div class="product__buy-buttons anode-product__purchase" {{ block.shopify_attributes }}>
+                    <button type="submit" name="add" class="button button--primary button--full button--lg" data-add-to-cart data-available="{{ 'products.product.add_to_cart' | t }}" data-sold-out="{{ 'products.product.sold_out' | t }}" {% unless current_variant.available %}disabled{% endunless %}>
+                      <span>{% if current_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+                      <span aria-hidden="true">↗</span>
                     </button>
                     {%- if block.settings.show_dynamic_checkout -%}
                       {{ form | payment_button }}
                     {%- endif -%}
+                    <p class="anode-product__purchase-note">Secure checkout · Flexible payments</p>
                   </div>
 
                 {%- when 'gift_card_recipient' -%}
                   {%- if product.gift_card? and block.settings.show_recipient_form -%}
-                    <div class="product__gift-recipient" data-gift-card-recipient {{ block.shopify_attributes }}>
+                    <div class="product__gift-recipient" data-gift-card-recipient>
                       <p class="product__gift-recipient-label">{{ block.settings.recipient_label | default: 'Send as a gift' }}</p>
-                      <label class="field">
-                        <span class="field__label">{{ 'products.product.recipient_email' | t | default: 'Recipient email' }}</span>
-                        <input type="email" name="properties[Recipient email]" value="{{ form.email }}" autocomplete="email" {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}>
-                      </label>
-                      <label class="field">
-                        <span class="field__label">{{ 'products.product.recipient_name' | t | default: 'Recipient name (optional)' }}</span>
-                        <input type="text" name="properties[Recipient name]" value="{{ form.name }}" autocomplete="name">
-                      </label>
-                      <label class="field field--textarea">
-                        <span class="field__label">{{ 'products.product.recipient_message' | t | default: 'Message (optional)' }}</span>
-                        <textarea name="properties[Recipient message]" rows="3">{{ form.message }}</textarea>
-                      </label>
-                      <label class="field">
-                        <span class="field__label">{{ 'products.product.send_on' | t | default: 'Send on (optional)' }}</span>
-                        <input type="date" name="properties[Send on]" value="{{ form.send_on }}">
-                      </label>
+                      <label class="field"><span class="field__label">{{ 'products.product.recipient_email' | t | default: 'Recipient email' }}</span><input type="email" name="properties[Recipient email]" value="{{ form.email }}" autocomplete="email" {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}></label>
+                      <label class="field"><span class="field__label">{{ 'products.product.recipient_name' | t | default: 'Recipient name (optional)' }}</span><input type="text" name="properties[Recipient name]" value="{{ form.name }}" autocomplete="name"></label>
+                      <label class="field field--textarea"><span class="field__label">{{ 'products.product.recipient_message' | t | default: 'Message (optional)' }}</span><textarea name="properties[Recipient message]" rows="3">{{ form.message }}</textarea></label>
+                      <label class="field"><span class="field__label">{{ 'products.product.send_on' | t | default: 'Send on (optional)' }}</span><input type="date" name="properties[Send on]" value="{{ form.send_on }}"></label>
                     </div>
                   {%- endif -%}
 
                 {%- when 'pickup_availability' -%}
                   {%- assign pickup = current_variant.store_pickup_availability -%}
                   {%- if pickup != blank -%}
-                    <div class="product__pickup" data-pickup-availability {{ block.shopify_attributes }}>
+                    <div class="product__pickup" data-pickup-availability>
                       {%- if pickup.available -%}
-                        <p class="product__pickup-status product__pickup-status--available">
-                          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                          {{ 'products.product.pickup_available' | t | default: 'Available for pickup' }}
-                        </p>
-                        {%- if pickup.pick_up_time -%}
-                          <p class="product__pickup-time color-muted">{{ pickup.pick_up_time }}</p>
-                        {%- endif -%}
+                        <p class="product__pickup-status product__pickup-status--available"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ 'products.product.pickup_available' | t | default: 'Available for pickup' }}</p>
+                        {%- if pickup.pick_up_time -%}<p class="product__pickup-time color-muted">{{ pickup.pick_up_time }}</p>{%- endif -%}
                       {%- else -%}
-                        <p class="product__pickup-status product__pickup-status--unavailable color-muted">
-                          {{ 'products.product.pickup_unavailable' | t | default: 'Not available for pickup' }}
-                        </p>
+                        <p class="product__pickup-status product__pickup-status--unavailable color-muted">{{ 'products.product.pickup_unavailable' | t | default: 'Not available for pickup' }}</p>
                       {%- endif -%}
                     </div>
                   {%- endif -%}
 
                 {%- when 'follow_on_shop' -%}
-                  {%- if block.settings.enable_follow_on_shop -%}
-                    <div class="product__follow-shop" {{ block.shopify_attributes }}>
-                      {{ form | login_button }}
-                    </div>
-                  {%- endif -%}
+                  {%- if block.settings.enable_follow_on_shop -%}<div class="product__follow-shop">{{ form | login_button }}</div>{%- endif -%}
 
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
-                    <div class="product__description rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
+                    <div class="product__description rte">{{ product.description }}</div>
                   {%- endif -%}
 
                 {%- when 'accordion' -%}
                   <details class="product__accordion-item" {{ block.shopify_attributes }} data-accordion-item>
-                    <summary class="product__accordion-summary">
-                      <span class="product__accordion-heading">{{ block.settings.heading | escape | default: 'Details' }}</span>
-                      <span class="product__accordion-arrow" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                      </span>
-                    </summary>
-                    <div class="product__accordion-content rte">
-                      {%- if block.settings.text != blank -%}
-                        {{ block.settings.text }}
-                      {%- elsif block.settings.page != blank -%}
-                        {{ block.settings.page.content }}
-                      {%- endif -%}
-                    </div>
+                    <summary class="product__accordion-summary"><span class="product__accordion-heading">{{ block.settings.heading | escape | default: 'Details' }}</span><span class="product__accordion-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+                    <div class="product__accordion-content rte">{%- if block.settings.text != blank -%}{{ block.settings.text }}{%- elsif block.settings.page != blank -%}{{ block.settings.page.content }}{%- endif -%}</div>
                   </details>
 
                 {%- when 'share' -%}
-                  <div class="product__share" {{ block.shopify_attributes }}>
-                    <a href="{{ product.url }}" class="link-arrow">{{ 'products.product.share' | t | default: 'Share' }}</a>
-                  </div>
+                  <div class="product__share"><a href="{{ product.url }}" class="link-arrow">{{ 'products.product.share' | t | default: 'Share' }} <span aria-hidden="true">↗</span></a></div>
 
                 {%- when 'custom_liquid' -%}
-                  {%- if block.settings.custom_liquid != blank -%}
-                    <div class="product__custom-liquid" {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
-                  {%- endif -%}
+                  {%- if block.settings.custom_liquid != blank -%}<div class="product__custom-liquid">{{ block.settings.custom_liquid }}</div>{%- endif -%}
 
                 {%- when '@app' -%}
                   {% render block %}
@@ -271,6 +240,10 @@
             </div>
           {%- endfor -%}
         {%- endform -%}
+
+        <div class="anode-product__signature" aria-hidden="true">
+          <span>ANODE</span><span>FORM / FUNCTION / DETAIL</span>
+        </div>
       </div>
     </div>
   </div>
@@ -354,239 +327,124 @@
 </script>
 
 <style>
-  {%- comment -%} Block-based product info spacing — Apple-style spacing, no stacked lines {%- endcomment -%}
-  .product__block { padding-block: 0; margin-block: 0; }
-  .product__block + .product__block { margin-top: 18px; }
-  .product__block--vendor { margin-bottom: 4px; }
-  .product__block--title { margin-top: 0; margin-bottom: 4px; }
-  .product__block--price { margin-top: 0; margin-bottom: 4px; }
-  .product__block--rating { margin-top: 0; margin-bottom: 4px; }
-  .product__block--tax-note,
-  .product__tax-note { margin-top: 4px; }
-  .product__block--buy-buttons { margin-top: 24px; }
-  .product__block--description { margin-top: 20px; }
-  .product__payment-terms { padding-block: 2px 8px; min-height: 0; }
-  .product__payment-terms:empty { display: none; }
-
-  .product__vendor {
-    font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--color-primary, #4F46E5); margin: 0;
+  .anode-product { --anode-product-line: color-mix(in srgb, var(--color-text, #1b1b20) 13%, transparent); }
+  .anode-product__intro { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; margin-bottom: 22px; color: var(--color-text-muted, #71717a); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .anode-product__index { color: var(--color-text, #1b1b20); font-weight: 700; }
+  .anode-product__rule { height: 1px; background: var(--anode-product-line); }
+  .anode-product__label { white-space: nowrap; }
+  .anode-product__layout { align-items: start; gap: clamp(38px, 6vw, 96px); }
+  .anode-product__layout--sticky .anode-product__info { position: sticky; top: 32px; }
+  .anode-product__media { position: relative; min-width: 0; }
+  .anode-product__media-main { position: relative; overflow: hidden; background: color-mix(in srgb, var(--color-text, #1b1b20) 3%, var(--color-background, #fff)); }
+  .anode-product__media-main::before { content: ""; position: absolute; z-index: 2; left: 0; top: 0; width: 3px; height: 26%; background: var(--color-primary, #4f46e5); pointer-events: none; }
+  .anode-product__media-count { position: absolute; z-index: 3; right: 14px; top: 14px; display: flex; gap: 5px; font-size: 0.625rem; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; mix-blend-mode: multiply; }
+  .anode-product__thumbs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .anode-product__thumb { width: 100%; aspect-ratio: 1; padding: 0; border: 1px solid var(--anode-product-line); background: transparent; overflow: hidden; position: relative; cursor: pointer; transition: border-color .2s ease, transform .2s ease; }
+  .anode-product__thumb:hover { transform: translateY(-2px); border-color: var(--color-text, #1b1b20); }
+  .anode-product__thumb.is-active { border-color: var(--color-primary, #4f46e5); box-shadow: inset 0 0 0 1px var(--color-primary, #4f46e5); }
+  .anode-product__thumb[aria-current="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--color-primary, #4f46e5); }
+  .anode-product__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .anode-product__info { min-width: 0; max-width: 620px; }
+  .anode-product__info-head { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--anode-product-line); margin-bottom: 28px; font-size: 0.625rem; letter-spacing: .14em; text-transform: uppercase; }
+  .anode-product__micro { color: var(--color-text-muted, #71717a); }
+  .anode-product__status { font-weight: 700; }
+  .anode-product__form { position: relative; }
+  .product__block { margin: 0; padding: 0; }
+  .product__block + .product__block { margin-top: 22px; }
+  .product__block--vendor { margin-top: 0; }
+  .product__vendor { margin: 0; font-size: .6875rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--color-primary, #4f46e5); }
+  .anode-product__title-wrap { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; }
+  .anode-product__title-mark { font-size: 1.25rem; line-height: 1.2; color: var(--color-primary, #4f46e5); font-weight: 700; }
+  .anode-product .product__title { margin: 0; font-size: clamp(2rem, 3.8vw, 4.25rem); line-height: .98; letter-spacing: -.055em; font-weight: 600; text-wrap: balance; }
+  .anode-product__price-row { display: flex; align-items: baseline; gap: 12px; padding: 17px 0; border-top: 1px solid var(--anode-product-line); border-bottom: 1px solid var(--anode-product-line); }
+  .anode-product .product__price { font-size: 1.25rem; font-weight: 650; letter-spacing: -.025em; }
+  .anode-product .product__tax-note { margin: 7px 0 0; font-size: .6875rem; }
+  .anode-product .product__rating { display: inline-flex; align-items: center; gap: 7px; font-size: .75rem; }
+  .anode-product .product__rating-stars { color: var(--color-text, #1b1b20); letter-spacing: 1px; }
+  .anode-product .product__rating-value { font-weight: 700; }
+  .anode-product .product__options { display: flex; flex-direction: column; gap: 25px; }
+  .anode-product .product__option { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .anode-product .product__option-label { display: flex; justify-content: space-between; gap: 15px; margin: 0 0 11px; font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-muted, #71717a); }
+  .anode-product .product__option-label strong { color: var(--color-text, #1b1b20); font-weight: 700; letter-spacing: 0; text-transform: none; }
+  .anode-product .product__option-values { display: flex; flex-wrap: wrap; gap: 8px; }
+  .anode-product .product__option-value { min-width: 44px; min-height: 44px; padding: 8px 15px; border: 1px solid var(--anode-product-line); border-radius: 2px; background: transparent; color: var(--color-text, #1b1b20); font: inherit; font-size: .8125rem; cursor: pointer; transition: border-color .2s ease, background-color .2s ease, transform .15s ease; }
+  .anode-product .product__option-value:hover { border-color: var(--color-text, #1b1b20); transform: translateY(-1px); }
+  .anode-product .product__option-value.is-active { border-color: var(--color-primary, #4f46e5); background: color-mix(in srgb, var(--color-primary, #4f46e5) 7%, transparent); box-shadow: inset 0 0 0 1px var(--color-primary, #4f46e5); }
+  .anode-product .product__option-value--swatch { width: 38px; height: 38px; min-width: 38px; min-height: 38px; padding: 0; border-radius: 50%; }
+  .anode-product .product__option-value--swatch.is-active { box-shadow: 0 0 0 2px var(--color-background, #fff), 0 0 0 4px var(--color-primary, #4f46e5); }
+  .anode-product .product__selling-plans select,
+  .anode-product .product__gift-recipient input,
+  .anode-product .product__gift-recipient textarea,
+  .anode-product .product__gift-recipient select { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--anode-product-line); border-radius: 2px; background: var(--color-background, #fff); color: var(--color-text, #1b1b20); font: inherit; font-size: .8125rem; }
+  .anode-product .product__selling-plans select:focus,
+  .anode-product .product__gift-recipient input:focus,
+  .anode-product .product__gift-recipient textarea:focus { outline: 2px solid var(--color-primary, #4f46e5); outline-offset: 2px; }
+  .anode-product__quantity { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 13px 0; border-top: 1px solid var(--anode-product-line); border-bottom: 1px solid var(--anode-product-line); }
+  .anode-product .product__qty-label { font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-muted, #71717a); }
+  .anode-product .qty-stepper { display: inline-grid; grid-template-columns: 40px 48px 40px; align-items: center; border: 1px solid var(--anode-product-line); }
+  .anode-product .qty-stepper button { width: 40px; height: 42px; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 1rem; }
+  .anode-product .qty-stepper input { width: 48px; height: 42px; border: 0; border-inline: 1px solid var(--anode-product-line); background: transparent; color: inherit; text-align: center; font: inherit; }
+  .anode-product__purchase { padding-top: 8px; }
+  .anode-product .product__buy-buttons { display: flex; flex-direction: column; gap: 9px; }
+  .anode-product .product__buy-buttons .button--primary { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 58px; padding: 16px 20px; border: 0; border-radius: 2px; background: var(--color-text, #1b1b20); color: var(--color-background, #fff); font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; box-shadow: none; transition: background-color .2s ease, transform .15s ease; }
+  .anode-product .product__buy-buttons .button--primary:hover:not(:disabled) { background: var(--color-primary, #4f46e5); transform: translateY(-1px); }
+  .anode-product .product__buy-buttons .button--primary:focus-visible { outline: 2px solid var(--color-primary, #4f46e5); outline-offset: 3px; }
+  .anode-product .product__buy-buttons .button--primary:disabled { opacity: .45; cursor: not-allowed; }
+  .anode-product .shopify-payment-button__button--unbranded { min-height: 50px !important; border-radius: 2px !important; }
+  .anode-product__purchase-note { margin: 3px 0 0; text-align: center; color: var(--color-text-muted, #71717a); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase; }
+  .anode-product .product__description { padding: 21px 0; border-top: 1px solid var(--anode-product-line); border-bottom: 1px solid var(--anode-product-line); font-size: .875rem; line-height: 1.75; }
+  .anode-product .product__accordion-item { border: 0; border-top: 1px solid var(--anode-product-line); border-radius: 0; background: transparent; box-shadow: none; }
+  .anode-product .product__accordion-item:last-child { border-bottom: 1px solid var(--anode-product-line); }
+  .anode-product .product__accordion-summary { min-height: 56px; padding: 0; background: transparent; font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+  .anode-product .product__accordion-summary:hover { background: transparent; }
+  .anode-product .product__accordion-summary:focus-visible { outline: 2px solid var(--color-primary, #4f46e5); outline-offset: -2px; }
+  .anode-product .product__accordion-arrow { width: 25px; height: 25px; border-radius: 0; background: transparent; border: 1px solid var(--anode-product-line); color: inherit; }
+  .anode-product .product__accordion-item[open] .product__accordion-arrow { background: var(--color-text, #1b1b20); color: var(--color-background, #fff); }
+  .anode-product .product__accordion-content { padding: 0 0 20px; font-size: .875rem; line-height: 1.7; }
+  .anode-product .product__share { padding-top: 2px; font-size: .6875rem; text-transform: uppercase; letter-spacing: .12em; }
+  .anode-product .product__share a { color: inherit; text-decoration: none; }
+  .anode-product .product__share a:hover { color: var(--color-primary, #4f46e5); }
+  .anode-product .product__pickup { padding: 13px 0; border-block: 1px solid var(--anode-product-line); font-size: .75rem; }
+  .anode-product .product__pickup-status { display: flex; align-items: center; gap: 8px; margin: 0; }
+  .anode-product .product__pickup-time { margin: 5px 0 0 24px; font-size: .6875rem; }
+  .anode-product .product__gift-recipient { display: flex; flex-direction: column; gap: 11px; }
+  .anode-product .product__gift-recipient-label { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .anode-product .product__gift-recipient .field { display: flex; flex-direction: column; gap: 6px; }
+  .anode-product .product__gift-recipient .field__label { font-size: .6875rem; color: var(--color-text-muted, #71717a); }
+  .anode-product__signature { display: flex; justify-content: space-between; gap: 20px; margin-top: 34px; padding-top: 12px; border-top: 1px solid var(--anode-product-line); color: var(--color-text-muted, #71717a); font-size: .5625rem; letter-spacing: .13em; text-transform: uppercase; }
+  .anode-product .product__payment-terms:empty { display: none; }
+  .anode-product .product__payment-terms { padding: 0 0 10px; font-size: .6875rem; }
+  .anode-product .product__follow-shop { padding: 10px 0; }
+  .anode-product .product__custom-liquid { font-size: .8125rem; }
+  .anode-product .product__thumb-badge { position: absolute; z-index: 2; top: 50%; left: 50%; transform: translate(-50%, -50%); display: inline-flex; padding: 6px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; }
+  @media (max-width: 989px) {
+    .anode-product__layout { grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr); gap: 36px; }
+    .anode-product .product__title { font-size: clamp(2rem, 5vw, 3rem); }
   }
-  .product__rating { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; }
-  .product__rating-stars { color: #f5a623; letter-spacing: 1px; }
-  .product__tax-note { font-size: 0.8125rem; margin: 4px 0 0; }
-
-  .product__options { display: flex; flex-direction: column; gap: 18px; }
-  .product__option { border: 0; padding: 0; margin: 0; }
-  .product__option-label {
-    font-size: 0.8125rem; font-weight: 500; color: var(--color-text-muted, #71717A);
-    margin: 0 0 10px; display: block;
-  }
-  .product__option-values { display: flex; flex-wrap: wrap; gap: 8px; }
-  .product__option-value {
-    min-height: 44px; min-width: 44px; padding: 8px 18px;
-    border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
-    border-radius: 12px; background: transparent; color: var(--color-text, #1B1B20);
-    font-size: 0.875rem; font-weight: 500; cursor: pointer;
-    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .product__option-value:hover { border-color: color-mix(in srgb, var(--color-text, #1B1B20) 30%, transparent); }
-  .product__option-value.is-active {
-    border-color: var(--color-primary, #4F46E5);
-    background: color-mix(in srgb, var(--color-primary, #4F46E5) 6%, transparent);
-  }
-  .product__option-value--swatch {
-    width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; border-radius: 50%;
-    border: 2px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
-    background-size: cover; background-position: center;
-  }
-  .product__option-value--swatch.is-active {
-    border-color: var(--color-primary, #4F46E5);
-    box-shadow: 0 0 0 2px var(--color-background, #fff),
-                0 0 0 4px var(--color-primary, #4F46E5);
-    position: relative;
-  }
-  .product__option-value--swatch.is-active::after {
-    content: "";
-    position: absolute;
-    top: -5px; right: -5px;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--color-primary, #4F46E5) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 8.5 L6.5 12 L13 4.5'/></svg>") no-repeat center / 11px 11px;
-    border: 2px solid var(--color-background, #fff);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.22);
-  }
-
-  .product__selling-plans select,
-  .product__gift-recipient input,
-  .product__gift-recipient textarea,
-  .product__gift-recipient select {
-    width: 100%; padding: 12px 14px; font-size: 0.875rem;
-    border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 14%, transparent);
-    border-radius: 12px; background: transparent; color: var(--color-text, #1B1B20);
-    font-family: inherit; -webkit-appearance: none; appearance: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .product__selling-plans select:focus,
-  .product__gift-recipient input:focus,
-  .product__gift-recipient textarea:focus {
-    outline: none; border-color: var(--color-primary, #4F46E5);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary, #4F46E5) 12%, transparent);
-  }
-  .product__gift-recipient { display: flex; flex-direction: column; gap: 12px; }
-  .product__gift-recipient-label { font-size: 0.875rem; font-weight: 600; margin: 0; }
-  .product__gift-recipient .field { display: flex; flex-direction: column; gap: 6px; }
-  .product__gift-recipient .field__label { font-size: 0.75rem; color: var(--color-text-muted, #71717A); }
-
-  .product__pickup { font-size: 0.875rem; }
-  .product__pickup-status { display: flex; align-items: center; gap: 8px; margin: 0; }
-  .product__pickup-status--available { color: var(--color-text, #1B1B20); font-weight: 500; }
-  .product__pickup-time { margin: 4px 0 0; font-size: 0.8125rem; }
-
-  .product__follow-shop { padding: 14px 0 4px; }
-  .product__follow-shop-loggedin {
-    display: inline-flex; align-items: center; gap: 8px; margin: 0;
-    padding: 8px 14px; border-radius: 9999px;
-    background: color-mix(in srgb, var(--color-primary, #4F46E5) 8%, transparent);
-    color: var(--color-primary, #4F46E5); font-size: 0.8125rem; font-weight: 600;
-  }
-  .product__follow-shop-loggedin .icon-inline { flex: none; }
-  .product__follow-shop-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-  .product__follow-shop-links .button--small { padding: 9px 18px; min-height: 36px; font-size: 0.8125rem; border-radius: 9999px; }
-  .product__follow-shop-sep { font-size: 0.8125rem; color: var(--color-text-muted, #71717A); }
-  .product__follow-shop-register { font-size: 0.8125rem; font-weight: 600; color: var(--color-primary, #4F46E5); text-underline-offset: 3px; }
-  .product__follow-shop-register:hover { text-decoration: underline; }
-  .product__follow-shop-hint { margin: 10px 0 0; font-size: 0.75rem; color: var(--color-text-muted, #71717A); line-height: 1.5; }
-  .icon-inline { width: 1em; height: 1em; vertical-align: -0.125em; flex: none; display: inline-block; }
-  .product__custom-liquid { font-size: 0.875rem; }
-
-  {%- comment -%} Accordion — Minimalism & Swiss: independent rounded cards, strict 44px+ touch, dual-state arrow {%- endcomment -%}
-  .product__block--accordion {
-    margin-top: 0 !important;
-    margin-bottom: var(--accordion-block-gap, 14px);
-  }
-  .product__block--accordion:last-child { margin-bottom: 0; }
-  .product__accordion-item {
-    border: 1px solid color-mix(in srgb, var(--color-text, #1B1B20) 10%, transparent);
-    border-radius: 14px;
-    overflow: hidden;
-    background: var(--color-background, #fff);
-    transition: border-color 0.22s ease, box-shadow 0.28s ease, background-color 0.22s ease;
-  }
-  .product__accordion-item[open] {
-    border-color: color-mix(in srgb, var(--color-primary, #4F46E5) 35%, transparent);
-    background: color-mix(in srgb, var(--color-primary, #4F46E5) 2.5%, var(--color-background, #fff));
-    box-shadow: 0 2px 14px color-mix(in srgb, var(--color-primary, #4F46E5) 10%, transparent);
-  }
-  .product__accordion-summary {
-    list-style: none; cursor: pointer;
-    padding: 14px 18px; min-height: 48px;
-    display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-text, #1B1B20);
-    transition: background-color 0.2s ease, padding 0.2s ease;
-    user-select: none;
-  }
-  .product__accordion-summary::-webkit-details-marker { display: none; }
-  .product__accordion-summary:hover { background: color-mix(in srgb, var(--color-text, #1B1B20) 3%, transparent); }
-  .product__accordion-item[open] .product__accordion-summary { padding-bottom: 10px; background: transparent; }
-  .product__accordion-summary:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--color-primary, #4F46E5); }
-  .product__accordion-heading { flex: 1; line-height: 1.35; }
-  .product__accordion-arrow {
-    flex: none;
-    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--color-text, #1B1B20) 7%, transparent);
-    color: var(--color-text-muted, #71717A);
-    transition: transform 0.3s cubic-bezier(.2,.8,.2,1), background-color 0.25s ease, color 0.25s ease;
-  }
-  .product__accordion-item[open] .product__accordion-arrow {
-    transform: rotate(180deg);
-    background: var(--color-primary, #4F46E5);
-    color: #fff;
-  }
-  .product__accordion-content {
-    padding: 0 18px 16px;
-    font-size: 0.90625rem; line-height: 1.68; color: var(--color-text, #1B1B20);
-    animation: accordionFadeIn 0.3s cubic-bezier(.2,.8,.2,1) both;
-  }
-  .product__accordion-content a { color: var(--color-primary, #4F46E5); text-underline-offset: 3px; font-weight: 500; }
-  .product__accordion-content a:hover { text-decoration: underline; }
-  @keyframes accordionFadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+  @media (max-width: 749px) {
+    .anode-product__intro { margin-bottom: 14px; }
+    .anode-product__label { display: none; }
+    .anode-product__layout,
+    .anode-product__layout--sticky { display: block; }
+    .anode-product__layout--sticky .anode-product__info { position: static; }
+    .anode-product__media { margin-inline: calc(var(--page-width-padding, 20px) * -1); }
+    .anode-product__media-main { min-height: 0; }
+    .anode-product__media-count { right: 10px; top: 10px; }
+    .anode-product__thumbs { padding-inline: var(--page-width-padding, 20px); grid-template-columns: repeat(5, minmax(0, 1fr)); overflow-x: auto; scrollbar-width: none; }
+    .anode-product__thumbs::-webkit-scrollbar { display: none; }
+    .anode-product__info { max-width: none; padding-top: 28px; }
+    .anode-product__info-head { margin-bottom: 22px; }
+    .anode-product .product__title { font-size: clamp(2.1rem, 11vw, 3.2rem); }
+    .anode-product .product__block + .product__block { margin-top: 19px; }
+    .anode-product__purchase { position: sticky; bottom: 10px; z-index: 8; margin-inline: -8px; padding: 10px 8px; background: color-mix(in srgb, var(--color-background, #fff) 94%, transparent); backdrop-filter: blur(10px); }
+    .anode-product .product__buy-buttons .button--primary { min-height: 54px; }
+    .anode-product__signature { margin-top: 26px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .product__accordion-content,
-    .product__accordion-arrow,
-    .product__accordion-item,
-    .product__accordion-summary { transition: none !important; animation: none !important; }
-    .product__accordion-item[open] .product__accordion-arrow { transform: none; }
+    .anode-product__thumb,
+    .anode-product .product__option-value,
+    .anode-product .product__buy-buttons .button--primary { transition: none !important; }
   }
-
-  {%- comment -%} Buy buttons — Apple-style hierarchy: primary filled accent, secondary muted light fill {%- endcomment -%}
-  .product__buy-buttons { display: flex; flex-direction: column; gap: 10px; }
-  {%- comment -%} Primary: Add to cart — dominant solid Apple Blue, 18px radius, soft depth {%- endcomment -%}
-  .product__buy-buttons .button--primary {
-    background-color: var(--color-primary, #4F46E5);
-    color: #fff;
-    border-radius: 14px;
-    font-size: 1.0625rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    padding: 16px 28px;
-    min-height: 52px;
-    border: none;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary, #4F46E5) 18%, transparent);
-    transition: background-color 0.2s ease, transform 0.15s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .product__buy-buttons .button--primary:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--color-primary, #4F46E5) 90%, #000);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary, #4F46E5) 28%, transparent);
-  }
-  .product__buy-buttons .button--primary:active:not(:disabled) {
-    transform: translateY(0) scale(0.985);
-    box-shadow: 0 1px 4px color-mix(in srgb, var(--color-primary, #4F46E5) 16%, transparent);
-  }
-  .product__buy-buttons .button--primary:disabled {
-    opacity: 0.4;
-    box-shadow: none;
-    cursor: not-allowed;
-  }
-  {%- comment -%} Secondary: Buy it now — Apple pearl capsule, muted light-gray fill, subordinate {%- endcomment -%}
-  .product__buy-buttons .shopify-payment-button { margin-top: 0; }
-  .product__buy-buttons .shopify-payment-button__button--unbranded {
-    background: #F6F6F8 !important;
-    color: var(--color-text, #1B1B20) !important;
-    border: 1px solid transparent !important;
-    border-radius: 14px !important;
-    font-size: 1.0625rem !important;
-    font-weight: 400 !important;
-    letter-spacing: -0.01em !important;
-    padding: 16px 28px !important;
-    min-height: 52px !important;
-    box-shadow: none !important;
-    transition: background-color 0.2s ease, transform 0.15s cubic-bezier(.2,.8,.2,1) !important;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .product__buy-buttons .shopify-payment-button__button--unbranded:hover:not(:disabled) {
-    background: #ebebed !important;
-    transform: translateY(-1px);
-  }
-  .product__buy-buttons .shopify-payment-button__button--unbranded:active:not(:disabled) {
-    transform: translateY(0) scale(0.985);
-  }
-  {%- comment -%} Branded buttons (Shop Pay/PayPal/Apple Pay) keep their brand colors untouched {%- endcomment -%}
-
-  .product__share { font-size: 0.8125rem; }
-  .product__thumb-badge {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; padding: 6px;
-    display: inline-flex; align-items: center; justify-content: center;
-  }
-  .product__thumb { position: relative; }
 </style>
 
 {% schema %}
@@ -597,64 +455,31 @@
     {
       "type": "checkbox",
       "id": "enable_sticky",
-      "label": "Enable sticky media on desktop",
+      "label": "Enable sticky product details on desktop",
       "default": true
     }
   ],
   "blocks": [
-    {
-      "type": "vendor",
-      "name": "Vendor",
-      "limit": 1
-    },
-    {
-      "type": "title",
-      "name": "Title",
-      "limit": 1
-    },
-    {
-      "type": "price",
-      "name": "Price",
-      "limit": 1
-    },
-    {
-      "type": "rating",
-      "name": "Rating",
-      "limit": 1
-    },
+    { "type": "vendor", "name": "Vendor", "limit": 1 },
+    { "type": "title", "name": "Title", "limit": 1 },
+    { "type": "price", "name": "Price", "limit": 1 },
+    { "type": "rating", "name": "Rating", "limit": 1 },
     {
       "type": "variant_picker",
       "name": "Variant picker",
       "limit": 1,
       "settings": [
-        {
-          "type": "paragraph",
-          "content": "Color options automatically use Shopify swatches (swatch.color and swatch.image)."
-        }
+        { "type": "paragraph", "content": "Color options automatically use Shopify swatches (swatch.color and swatch.image)." }
       ]
     },
-    {
-      "type": "selling_plans",
-      "name": "Selling plans",
-      "limit": 1
-    },
-    {
-      "type": "quantity",
-      "name": "Quantity",
-      "limit": 1
-    },
+    { "type": "selling_plans", "name": "Selling plans", "limit": 1 },
+    { "type": "quantity", "name": "Quantity", "limit": 1 },
     {
       "type": "buy_buttons",
       "name": "Buy buttons",
       "limit": 1,
       "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_dynamic_checkout",
-          "label": "Show dynamic checkout button",
-          "default": true,
-          "info": "Accelerated checkout buttons (Shop Pay, Apple Pay, PayPal) are enabled by default and their brand colors cannot be modified."
-        }
+        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout button", "default": true, "info": "Accelerated checkout buttons are enabled by default and their brand colors cannot be modified." }
       ]
     },
     {
@@ -662,97 +487,39 @@
       "name": "Gift card recipient",
       "limit": 1,
       "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_recipient_form",
-          "label": "Show recipient form for gift card products",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "recipient_label",
-          "label": "Recipient form label",
-          "default": "Send as a gift"
-        }
+        { "type": "checkbox", "id": "show_recipient_form", "label": "Show recipient form for gift card products", "default": true },
+        { "type": "text", "id": "recipient_label", "label": "Recipient form label", "default": "Send as a gift" }
       ]
     },
-    {
-      "type": "pickup_availability",
-      "name": "Pickup availability",
-      "limit": 1
-    },
+    { "type": "pickup_availability", "name": "Pickup availability", "limit": 1 },
     {
       "type": "follow_on_shop",
       "name": "Follow on Shop",
       "limit": 1,
       "settings": [
-        {
-          "type": "checkbox",
-          "id": "enable_follow_on_shop",
-          "label": "Enable Follow on Shop button",
-          "default": true,
-          "info": "The branded Follow on Shop button colors cannot be modified."
-        }
+        { "type": "checkbox", "id": "enable_follow_on_shop", "label": "Enable Follow on Shop button", "default": true, "info": "The branded Follow on Shop button colors cannot be modified." }
       ]
     },
-    {
-      "type": "description",
-      "name": "Description",
-      "limit": 1
-    },
+    { "type": "description", "name": "Description", "limit": 1 },
     {
       "type": "accordion",
       "name": "Accordion",
       "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Shipping and returns"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text"
-        },
-        {
-          "type": "page",
-          "id": "page",
-          "label": "Page",
-          "info": "Displays the page content if no text is set."
-        },
-        {
-          "type": "range",
-          "id": "block_gap",
-          "label": "Bottom spacing",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 14
-        }
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping and returns" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "page", "id": "page", "label": "Page", "info": "Displays the page content if no text is set." },
+        { "type": "range", "id": "block_gap", "label": "Bottom spacing", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 14 }
       ]
     },
-    {
-      "type": "share",
-      "name": "Share",
-      "limit": 1
-    },
+    { "type": "share", "name": "Share", "limit": 1 },
     {
       "type": "custom_liquid",
       "name": "Custom Liquid",
       "settings": [
-        {
-          "type": "liquid",
-          "id": "custom_liquid",
-          "label": "Custom Liquid",
-          "info": "Add app snippets or custom Liquid code. Acts as an insertion point for certain apps."
-        }
+        { "type": "liquid", "id": "custom_liquid", "label": "Custom Liquid", "info": "Add app snippets or custom Liquid code. Acts as an insertion point for certain apps." }
       ]
     },
-    {
-      "type": "@app"
-    }
+    { "type": "@app" }
   ],
   "presets": [
     {
