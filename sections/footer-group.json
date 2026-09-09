@@ -47,7 +47,7 @@
         "company_col": {
           "type": "link_column",
           "settings": {
-            "heading": "Luminor Store",
+            "heading": "Anode Store",
             "label_1": "About our store",
             "link_1": "/pages/about",
             "label_2": "Financing & Trade-in",
@@ -62,7 +62,7 @@
           "type": "contact",
           "settings": {
             "heading": "Contact",
-            "email": "hello@luminorstore.com"
+            "email": "hello@anodestore.com"
           }
         }
       },

@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Luminors",
+    "theme_name": "Anode",
     "theme_version": "1.1.0",
-    "theme_author": "Luminor Studio",
-    "theme_documentation_url": "https://kiritocheng.github.io/luminor-help/docs/",
-    "theme_support_url": "https://kiritocheng.github.io/luminor-help/support/"
+    "theme_author": "Anode Studio",
+    "theme_documentation_url": "https://kiritocheng.github.io/anode-help/docs/",
+    "theme_support_url": "https://kiritocheng.github.io/anode-help/support/"
   },
   {
     "name": "Typography",

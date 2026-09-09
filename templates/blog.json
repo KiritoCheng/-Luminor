@@ -3,9 +3,9 @@
     "banner": {
       "type": "image-with-text",
       "settings": {
-        "eyebrow": "Luminor Journal",
+        "eyebrow": "Anode Journal",
         "title": "Stories, ideas, and inspiration.",
-        "text": "<p>Explore the Luminor journal for design insights, product stories, and the philosophy behind everything we make.</p>",
+        "text": "<p>Explore the Anode journal for design insights, product stories, and the philosophy behind everything we make.</p>",
         "layout": "text_first",
         "color_scheme": "alt"
       }
@@ -20,9 +20,9 @@
     "cta": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor Journal",
+        "eyebrow": "Anode Journal",
         "title": "Designed in detail.",
-        "text": "<p>Dig deeper into the craft behind Grade 5 titanium, MagSafe engineering, and the Apple ecosystem — stories from the people who make Luminor.</p>",
+        "text": "<p>Dig deeper into the craft behind Grade 5 titanium, MagSafe engineering, and the Apple ecosystem — stories from the people who make Anode.</p>",
         "button_label": "Shop the collection",
         "button_link": "/collections/all"
       }

@@ -15,7 +15,7 @@
                                   "settings":  {
                                                    "eyebrow":  "Our story",
                                                    "title":  "Designed with intention. Built to last.",
-                                                   "text":  "\u003cp\u003eLuminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.\u003c/p\u003e\u003cp\u003eOur mission is to elevate the everyday through thoughtful design.\u003c/p\u003e",
+                                                   "text":  "\u003cp\u003eAnode was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.\u003c/p\u003e\u003cp\u003eOur mission is to elevate the everyday through thoughtful design.\u003c/p\u003e",
                                                    "button_label":  "Shop the collection",
                                                    "button_link":  "/collections/all"
                                                }
@@ -25,7 +25,7 @@
                                          "settings":  {
                                                           "eyebrow":  "Philosophy",
                                                           "heading":  "Less, but better.",
-                                                          "text":  "\u003cp\u003eWe believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.\u003c/p\u003e\u003cp\u003eFrom premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?\u003c/p\u003e",
+                                                          "text":  "\u003cp\u003eWe believe great design is invisible. Every product in the Anode collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.\u003c/p\u003e\u003cp\u003eFrom premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?\u003c/p\u003e",
                                                           "button_label":  "",
                                                           "button_link":  ""
                                                       }
@@ -72,7 +72,7 @@
                                          "settings":  {
                                                           "eyebrow":  "Promise",
                                                           "heading":  "Built for life. Backed for years.",
-                                                          "text":  "\u003cp\u003eEvery Luminor product comes with our promise: if it doesn\u0027t meet your expectations, return it within 30 days for a full refund. No questions asked.\u003c/p\u003e",
+                                                          "text":  "\u003cp\u003eEvery Anode product comes with our promise: if it doesn\u0027t meet your expectations, return it within 30 days for a full refund. No questions asked.\u003c/p\u003e",
                                                           "button_label":  "Shop now",
                                                           "button_link":  "/collections/all"
                                                       }
@@ -80,10 +80,10 @@
                      "manifesto":  {
                                        "type":  "statement",
                                        "settings":  {
-                                                        "watermark":  "LUMINOR",
+                                                        "watermark":  "ANODE",
                                                         "eyebrow":  "Our promise",
                                                         "heading":  "Grade 5 titanium. Backed for life.",
-                                                        "text":  "\u003cp\u003eFrom MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.\u003c/p\u003e",
+                                                        "text":  "\u003cp\u003eFrom MagSafe mounts to AirPods shells, every Anode piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.\u003c/p\u003e",
                                                         "button_label":  "Shop the collection",
                                                         "button_link":  "/collections/all"
                                                     }

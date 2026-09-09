@@ -13,7 +13,7 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor orders",
+        "eyebrow": "Anode orders",
         "title": "Track your order.",
         "text": "<p>Enter your order number and email — we'll pull the latest status from our carriers instantly.</p>"
       }
@@ -53,7 +53,7 @@
           "type": "column",
           "settings": {
             "title": "4 · Delivered",
-            "text": "Enjoy your Luminor gear. 30-day returns and warranty start from this day."
+            "text": "Enjoy your Anode gear. 30-day returns and warranty start from this day."
           }
         }
       },
@@ -77,7 +77,7 @@
           "type": "question",
           "settings": {
             "question": "Where is my tracking number?",
-            "answer": "<p>It lives in your shipment confirmation email, titled \"Your Luminor order is on its way\". Search your inbox for that subject, or your spam/junk folder.</p>"
+            "answer": "<p>It lives in your shipment confirmation email, titled \"Your Anode order is on its way\". Search your inbox for that subject, or your spam/junk folder.</p>"
           }
         },
         "q2": {
@@ -122,7 +122,7 @@
         "watermark": "DELIVERY",
         "eyebrow": "Shipping promise",
         "heading": "Free on $50+. Fast worldwide.",
-        "text": "<p>Every Luminor order ships in 100% recyclable packaging. Carbon-neutral for all US domestic orders.</p>",
+        "text": "<p>Every Anode order ships in 100% recyclable packaging. Carbon-neutral for all US domestic orders.</p>",
         "button_label": "Shop now",
         "button_link": "/collections/all"
       }

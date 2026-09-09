@@ -23,14 +23,14 @@
         "eyebrow": "Our promise",
         "button_link": "/pages/warranty",
         "heading": "Lifetime craftsmanship guarantee.",
-        "text": "\u003cp\u003eStitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we\u0027ll repair or replace it at no cost to you — forever. That\u0027s the Luminor Everyday guarantee.\u003c/p\u003e"
+        "text": "\u003cp\u003eStitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we\u0027ll repair or replace it at no cost to you — forever. That\u0027s the Anode Everyday guarantee.\u003c/p\u003e"
       },
       "type": "statement"
     },
     "feature": {
       "settings": {
-        "button_label": "About Luminor",
-        "text": "\u003cp\u003eEvery Luminor leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.\u003c/p\u003e\u003cp\u003eMetals are Grade 5 titanium and 316 marine stainless. Nothing less.\u003c/p\u003e",
+        "button_label": "About Anode",
+        "text": "\u003cp\u003eEvery Anode leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.\u003c/p\u003e\u003cp\u003eMetals are Grade 5 titanium and 316 marine stainless. Nothing less.\u003c/p\u003e",
         "eyebrow": "Materials",
         "button_link": "/pages/about",
         "color_scheme": "alt",
@@ -97,7 +97,7 @@
         "eyebrow": "Everyday carry",
         "button_label": "Browse everyday",
         "heading": "Smaller items. Higher bar.",
-        "text": "\u003cp\u003eThe things you touch every day deserve the most attention. We prototype every Luminor Everyday piece for a minimum of 12 weeks — 80+ iterations on hinge feel, cap torque, and leather patina — because when a product is always with you, every detail matters.\u003c/p\u003e\u003cp\u003eThe result is a carry collection that gets better with age, not worse.\u003c/p\u003e",
+        "text": "\u003cp\u003eThe things you touch every day deserve the most attention. We prototype every Anode Everyday piece for a minimum of 12 weeks — 80+ iterations on hinge feel, cap torque, and leather patina — because when a product is always with you, every detail matters.\u003c/p\u003e\u003cp\u003eThe result is a carry collection that gets better with age, not worse.\u003c/p\u003e",
         "button_link": "/collections/all"
       },
       "type": "editorial"

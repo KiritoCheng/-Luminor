@@ -63,7 +63,7 @@
         "color_scheme": "scheme_1",
         "eyebrow": "Material & Craft",
         "title": "Aerospace-grade titanium, milled to micron precision.",
-        "text": "<p>Every Luminor titanium case is forged from Grade 5 aerospace alloy — the same spec used in Apple's iPhone 15 Pro chassis — then CNC-milled and bead-blasted to a soft, fingerprint-resistant finish. It's twice the strength of steel at less than half the weight, so your iPhone stays protected without the bulk.</p>",
+        "text": "<p>Every Anode titanium case is forged from Grade 5 aerospace alloy — the same spec used in Apple's iPhone 15 Pro chassis — then CNC-milled and bead-blasted to a soft, fingerprint-resistant finish. It's twice the strength of steel at less than half the weight, so your iPhone stays protected without the bulk.</p>",
         "button_label": "Explore the material",
         "button_link": ""
       }
@@ -95,7 +95,7 @@
         "feature_warranty": {
           "type": "column",
           "settings": {
-            "title": "Lifetime Luminor warranty.",
+            "title": "Lifetime Anode warranty.",
             "text": "We build accessories to outlast the device they protect. Every titanium case ships with a lifetime warranty against manufacturing defects — register within 30 days to activate."
           }
         }
@@ -108,7 +108,7 @@
       ],
       "settings": {
         "color_scheme": "scheme_1",
-        "eyebrow": "Why Luminor",
+        "eyebrow": "Why Anode",
         "title": "Engineered for the Apple ecosystem.",
         "subtitle": "Every detail considered. Every material chosen for a reason.",
         "columns": 4,
@@ -132,10 +132,10 @@
     "manifesto": {
       "type": "statement",
       "settings": {
-        "watermark": "LUMINOR",
+        "watermark": "ANODE",
         "eyebrow": "Our philosophy",
         "heading": "Designed in California. Built for the Apple ecosystem.",
-        "text": "<p>We don't make accessories for every phone. We make them for the one in your pocket — engineered to Apple's exacting tolerances, crafted from the same aerospace materials, and obsessively refined until the seam between device and accessory disappears. A Luminor isn't an add-on. It's the finishing detail the product was always meant to have.</p>",
+        "text": "<p>We don't make accessories for every phone. We make them for the one in your pocket — engineered to Apple's exacting tolerances, crafted from the same aerospace materials, and obsessively refined until the seam between device and accessory disappears. A Anode isn't an add-on. It's the finishing detail the product was always meant to have.</p>",
         "button_label": "Shop the collection",
         "button_link": ""
       }

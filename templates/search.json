@@ -3,9 +3,9 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor Search",
+        "eyebrow": "Anode Search",
         "title": "Find your perfect fit.",
-        "text": "<p>Searching for a titanium iPhone case, a MagSafe charger, or an Apple Watch band? Type a keyword and let Luminor surface the gear made for your setup.</p>"
+        "text": "<p>Searching for a titanium iPhone case, a MagSafe charger, or an Apple Watch band? Type a keyword and let Anode surface the gear made for your setup.</p>"
       }
     },
     "main": {
