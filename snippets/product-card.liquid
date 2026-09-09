@@ -1,7 +1,7 @@
 {%- comment -%}
-  Renders a product card — Sharge-inspired style with discount badges,
-  color swatches, and quick add-to-cart.
-  Accepts: product (product object), show_quick_view (bool), lazy (bool)
+  Product card — Theme Store v3
+  Focused hierarchy: image, status, quick actions, product identity and price.
+  Accepts: product, show_quick_view, lazy
 {%- endcomment -%}
 {%- liquid
   assign show_secondary = settings.show_secondary_image | default: false
@@ -20,45 +20,46 @@
   endif
 -%}
 
-<div class="product-card" data-product-card>
+<article class="product-card" data-product-card>
   <div class="product-card__media {% if show_secondary and product.images.size > 1 %}product-card__media--hover{% endif %}">
-    <a href="{{ product.url }}" class="product-card__media-link">
+    <a href="{{ product.url }}" class="product-card__media-link" aria-label="{{ product.title | escape }}">
       {%- if product.featured_image -%}
-        {{ product.featured_image | image_url: width: 800 | image_tag:
+        {{ product.featured_image | image_url: width: 1000 | image_tag:
           loading: card_lazy,
-          widths: '180, 360, 540, 720, 900, 1060',
+          widths: '240, 360, 540, 720, 900, 1000',
           sizes: '(max-width: 749px) 50vw, (max-width: 990px) 33vw, 25vw',
           alt: product.featured_image.alt | default: product.title | escape }}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
       {%- endif -%}
       {%- if show_secondary and product.images.size > 1 -%}
-        {{ product.images[1] | image_url: width: 800 | image_tag:
+        {{ product.images[1] | image_url: width: 1000 | image_tag:
           loading: 'lazy',
-          widths: '180, 360, 540, 720, 900, 1060',
+          widths: '240, 360, 540, 720, 900, 1000',
+          sizes: '(max-width: 749px) 50vw, (max-width: 990px) 33vw, 25vw',
           alt: product.images[1].alt | default: product.title | escape }}
       {%- endif -%}
     </a>
 
     <div class="product-card__badges">
       {%- if product.available == false -%}
-        <span class="badge badge--sold-out">Sold out</span>
+        <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
       {%- elsif on_sale -%}
-        <span class="badge badge--sale">Save {{ discount_pct }}%</span>
+        <span class="badge badge--sale">{{ 'products.product.on_sale' | t | default: 'Sale' }} · {{ discount_pct }}%</span>
       {%- endif -%}
     </div>
 
     {%- if product.available -%}
       <div class="product-card__actions">
         {%- if show_quick_view -%}
-          <button class="product-card__action-btn" data-quick-view data-product-url="{{ product.url }}" aria-label="Quick view">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+          <button type="button" class="product-card__action-btn" data-quick-view data-product-url="{{ product.url }}" aria-label="{{ 'products.product.quick_view' | t | default: 'Quick view' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         {%- endif -%}
         <form action="{{ routes.cart_add_url }}" method="post" class="product-card__add-form" data-quick-add>
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          <button type="submit" class="product-card__action-btn product-card__action-btn--primary" aria-label="Add to cart">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M3 5h2l2.5 12.5h11L21 8H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.5" fill="currentColor"/><circle cx="18" cy="21" r="1.5" fill="currentColor"/><path d="M9 11h6M9 14h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <button type="submit" class="product-card__action-btn product-card__action-btn--primary" aria-label="{{ 'products.product.add_to_cart' | t }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h2l2.5 12.5h11L21 8H6"/><circle cx="9" cy="21" r="1.5"/><circle cx="18" cy="21" r="1.5"/><path d="M9 11h6M9 14h4"/></svg>
           </button>
         </form>
       </div>
@@ -72,18 +73,14 @@
 
     <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
 
-    {%- if product.description != blank -%}
-      <p class="product-card__desc">{{ product.description | strip_html | truncatewords: 8 | escape }}</p>
-    {%- endif -%}
-
-    {%- if product.variants.size > 1 -%}
-      <div class="product-card__swatches">
+    {%- if product.variants.size > 1 and settings.show_color_swatches -%}
+      <div class="product-card__swatches" aria-label="{{ 'products.product.options' | t | default: 'Product options' }}">
         {%- for variant in product.variants limit: 5 -%}
-          <a href="{{ product.url }}?variant={{ variant.id }}" class="product-card__swatch {% if variant == product.selected_or_first_available_variant %}is-active{% endif %}" title="{{ variant.title | escape }}">
+          <a href="{{ product.url }}?variant={{ variant.id }}" class="product-card__swatch {% if variant == product.selected_or_first_available_variant %}is-active{% endif %}" title="{{ variant.title | escape }}" aria-label="{{ variant.title | escape }}">
             {%- if variant.image -%}
-              <img src="{{ variant.image | image_url: width: 40 }}" alt="{{ variant.title | escape }}" width="20" height="20" loading="lazy">
+              {{ variant.image | image_url: width: 40 | image_tag: width: 20, height: 20, loading: 'lazy', alt: '' }}
             {%- else -%}
-              <span class="product-card__swatch-dot" style="background: {{ variant.title | handleize }}"></span>
+              <span class="product-card__swatch-dot" aria-hidden="true"></span>
             {%- endif -%}
           </a>
         {%- endfor -%}
@@ -102,4 +99,4 @@
       {%- endif -%}
     </div>
   </div>
-</div>
+</article>
