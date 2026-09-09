@@ -1,17 +1,18 @@
 {%- comment -%}
-  Theme Store v3 visual layer.
-  Loaded from the product card so it remains compatible with the existing
-  Shopify section architecture without changing merchant editor structure.
+  ANODE visual system v2.
+  Art direction: precision editorial — quiet surfaces, measured grid lines,
+  indexed product information, and strong typographic hierarchy.
 {%- endcomment -%}
 <style>
   :root {
-    --v3-content-width: min(1320px, calc(100vw - 48px));
-    --v3-section-space: clamp(64px, 8vw, 120px);
-    --v3-section-space-sm: clamp(48px, 10vw, 72px);
-    --v3-grid-gap: clamp(16px, 2vw, 28px);
-    --v3-radius: clamp(12px, 1.4vw, 20px);
-    --v3-border: color-mix(in srgb, var(--color-text) 10%, transparent);
-    --v3-muted: color-mix(in srgb, var(--color-text) 62%, transparent);
+    --anode-content-width: min(1320px, calc(100vw - 48px));
+    --anode-section-space: clamp(72px, 9vw, 132px);
+    --anode-section-space-sm: clamp(52px, 11vw, 76px);
+    --anode-grid-gap: clamp(16px, 2vw, 28px);
+    --anode-radius: clamp(12px, 1.2vw, 18px);
+    --anode-line: color-mix(in srgb, var(--color-text) 11%, transparent);
+    --anode-muted: color-mix(in srgb, var(--color-text) 60%, transparent);
+    --anode-accent: var(--color-primary, #4f46e5);
   }
 
   body {
@@ -19,26 +20,38 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* ANODE signature: a restrained technical grid used as a structural cue. */
+  #MainContent {
+    background-image: linear-gradient(to right, var(--anode-line) 1px, transparent 1px);
+    background-size: max(100vw / 12, 120px) 100%;
+    background-position: center top;
+  }
+
   #MainContent > .shopify-section:not(:first-child) {
-    border-top: 1px solid var(--v3-border);
+    border-top: 1px solid var(--anode-line);
+  }
+
+  #MainContent .page-width {
+    max-width: var(--anode-content-width);
   }
 
   #MainContent .section-header,
   #MainContent .section-heading,
   #MainContent .section-title {
-    max-width: var(--v3-content-width);
+    max-width: var(--anode-content-width);
     margin-inline: auto;
   }
 
   #MainContent .section-header {
-    margin-bottom: clamp(28px, 4vw, 52px);
+    margin-bottom: clamp(32px, 4vw, 56px);
   }
 
   #MainContent .section-header h2,
   #MainContent .section-heading h2,
-  #MainContent .section-title {
-    letter-spacing: -0.035em;
-    line-height: 1.05;
+  #MainContent .section-title,
+  #MainContent .featured-collection__title {
+    letter-spacing: -0.045em;
+    line-height: 0.98;
   }
 
   #MainContent .section:not(.section--flush),
@@ -51,55 +64,57 @@
   #MainContent .press,
   #MainContent .image-with-text,
   #MainContent .home-popular-collections {
-    padding-block: var(--v3-section-space);
+    padding-block: var(--anode-section-space);
   }
 
-  /* Homepage: make the hero the visual anchor instead of another generic block. */
-  .template-index .hero-section {
-    min-height: min(760px, calc(100svh - 60px));
+  #MainContent .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--anode-muted);
   }
 
-  .template-index .hero-section .hero__content {
-    max-width: min(760px, 78vw);
+  #MainContent .eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: currentColor;
   }
 
-  .template-index .hero-section .hero__heading,
-  .template-index .hero-section h1 {
-    letter-spacing: -0.055em;
-    text-wrap: balance;
-  }
-
-  .template-index .hero-section .hero__cta {
-    gap: 12px;
-  }
-
-  .template-index .hero-section .hero__cta a {
-    min-height: 48px;
-    padding-inline: 22px;
-  }
-
-  /* Keep social proof quiet so it supports the product story rather than competing with it. */
-  .template-index .stats {
-    background: var(--color-bg-alt);
-  }
-
-  .template-index .press {
-    background: var(--color-bg-alt);
-  }
-
-  /* Product grids: calmer, more premium rhythm. */
   #MainContent .featured-collection__grid,
   #MainContent .collection-product-grid,
   #MainContent .product-grid {
-    column-gap: var(--v3-grid-gap);
-    row-gap: clamp(36px, 4vw, 64px);
+    column-gap: var(--anode-grid-gap);
+    row-gap: clamp(40px, 5vw, 72px);
   }
 
-  /* Product cards: visual hierarchy instead of UI chrome. */
+  #MainContent .product-card {
+    position: relative;
+  }
+
   #MainContent .product-card__media {
-    border-radius: var(--v3-radius);
-    background: var(--color-bg-alt);
+    position: relative;
     overflow: hidden;
+    border-radius: var(--anode-radius);
+    background: var(--color-bg-alt, #f6f6f8);
+    isolation: isolate;
+  }
+
+  /* A quiet vertical mark becomes a repeatable Anode product signature. */
+  #MainContent .product-card__media::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    width: 1px;
+    height: 24px;
+    background: color-mix(in srgb, var(--color-text) 32%, transparent);
+    z-index: 2;
+    pointer-events: none;
   }
 
   #MainContent .product-card__actions {
@@ -110,25 +125,37 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-sm, 0 4px 18px rgba(0,0,0,.12));
   }
 
   #MainContent .product-card__info {
-    padding-inline: 0;
+    position: relative;
+    padding: 14px 0 0 28px;
+  }
+
+  #MainContent .product-card__info::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 17px;
+    bottom: 0;
+    width: 1px;
+    background: var(--anode-line);
   }
 
   #MainContent .product-card__vendor {
+    margin-bottom: 7px;
     font-size: 0.6875rem;
     line-height: 1.2;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 7px;
+    color: var(--anode-muted);
   }
 
   #MainContent .product-card__title {
+    margin-bottom: 8px;
     font-size: clamp(0.9375rem, 1vw, 1.0625rem);
     line-height: 1.3;
-    margin-bottom: 7px;
   }
 
   #MainContent .product-card__price {
@@ -154,7 +181,7 @@
   #MainContent input:not([type='checkbox']):not([type='radio']),
   #MainContent select,
   #MainContent textarea {
-    border-radius: max(8px, var(--button-radius));
+    border-radius: max(8px, var(--button-radius, 8px));
   }
 
   #MainContent a:focus-visible,
@@ -162,7 +189,7 @@
   #MainContent input:focus-visible,
   #MainContent select:focus-visible,
   #MainContent textarea:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--anode-accent);
     outline-offset: 3px;
   }
 
@@ -179,7 +206,11 @@
 
   @media (max-width: 749px) {
     :root {
-      --v3-content-width: calc(100vw - 32px);
+      --anode-content-width: calc(100vw - 32px);
+    }
+
+    #MainContent {
+      background-size: 50% 100%;
     }
 
     #MainContent .section:not(.section--flush),
@@ -192,7 +223,7 @@
     #MainContent .press,
     #MainContent .image-with-text,
     #MainContent .home-popular-collections {
-      padding-block: var(--v3-section-space-sm);
+      padding-block: var(--anode-section-space-sm);
     }
 
     #MainContent .product-card__actions {
@@ -205,16 +236,12 @@
       height: 40px;
     }
 
-    .template-index .hero-section {
-      min-height: min(680px, calc(100svh - 52px));
+    #MainContent .product-card__info {
+      padding-left: 22px;
     }
 
-    .template-index .hero-section .hero__content {
-      max-width: calc(100vw - 32px);
-    }
-
-    .template-index .hero-section .hero__cta {
-      flex-wrap: wrap;
+    #MainContent .product-card__info::before {
+      left: 7px;
     }
   }
 </style>
