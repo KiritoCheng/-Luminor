@@ -71,6 +71,7 @@
       {{ settings.body_font | font_face: font_display: 'swap' }}
 
       :root {
+        /* ---- Color: brand ---- */
         --color-primary: {{ settings.color_primary }};
         --color-primary-hover: {{ settings.color_primary_hover }};
         --color-bg: {{ settings.color_background }};
@@ -81,6 +82,7 @@
         --color-text-invert: {{ settings.color_text_invert }};
         --color-border: {{ settings.color_border }};
         --color-input-border: {{ settings.color_input_border }};
+        /* ---- Color: semantic ---- */
         --color-success: #30d158;
         --color-success-bg: color-mix(in srgb, #30d158 12%, transparent);
         --color-success-text: #1a7d3a;
@@ -89,15 +91,18 @@
         --color-error-text: #c5300a;
         --color-warning: #ff9f0a;
         --color-info: var(--color-primary);
+        /* ---- Layout ---- */
         --page-width: {{ settings.page_width }}px;
         --section-spacing: {{ settings.spacing_sections }}px;
-        --header-height: 60px;
-        --grid-gap: 22px;
+        --header-height: 60px; /* synced with header min-height 52 + padding-block 10*2; scrolled → 56 */
+        --grid-gap: 22px; /* default grid gap; sections may override locally */
+        /* ---- Typography ---- */
         --heading-font: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
         --body-font: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
         --heading-base-size: {{ settings.heading_base_size }}px;
         --body-base-size: {{ settings.body_base_size }}px;
         --line-height: {{ settings.line_height }};
+        /* Font scale (fluid clamp values) */
         --fs-display: clamp(3rem, 8vw, 7rem);
         --fs-h1: clamp(2.75rem, 6vw + 1rem, 5.5rem);
         --fs-h2: clamp(2.25rem, 4vw + 0.5rem, 4rem);
@@ -109,6 +114,7 @@
         --fs-body: 1rem;
         --fs-small: 0.875rem;
         --fs-xs: 0.75rem;
+        /* ---- Spacing scale ---- */
         --space-1: 4px;
         --space-2: 8px;
         --space-3: 12px;
@@ -121,6 +127,7 @@
         --space-16: 64px;
         --space-20: 80px;
         --space-24: 96px;
+        /* ---- Radius ---- */
         --button-radius: {{ settings.button_radius }}px;
         --image-radius: {{ settings.image_corner_radius }}px;
         --radius-sm: 8px;
@@ -128,6 +135,7 @@
         --radius-lg: 16px;
         --radius-xl: 24px;
         --radius-pill: 9999px;
+        /* ---- Shadow system ---- */
         --shadow-xs: 0 1px 2px color-mix(in srgb, var(--color-text) 5%, transparent);
         --shadow-sm: 0 2px 8px color-mix(in srgb, var(--color-text) 8%, transparent);
         --shadow-md: 0 8px 24px color-mix(in srgb, var(--color-text) 10%, transparent);
@@ -135,6 +143,7 @@
         --shadow-xl: 0 28px 64px -20px color-mix(in srgb, var(--color-text) 24%, transparent);
         --shadow-focus: 0 0 0 4px color-mix(in srgb, var(--color-primary) 12%, transparent);
         --shadow-focus-error: 0 0 0 4px color-mix(in srgb, var(--color-error) 10%, transparent);
+        /* ---- Motion ---- */
         --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
         --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -144,6 +153,7 @@
         --duration-md: 0.4s;
         --duration-slow: 0.6s;
         --duration-reveal: 0.9s;
+        /* ---- Z-index scale ---- */
         --z-header: 100;
         --z-drawer: 140;
         --z-overlay: 138;
@@ -169,20 +179,31 @@
   </head>
 
   <body class="template-{{ request.page_type | handle }}">
+
     <div class="scroll-progress" aria-hidden="true"></div>
-    <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+    <a class="skip-to-content" href="#MainContent">
+      {{ 'accessibility.skip_to_content' | t }}
+    </a>
+
     {% sections 'header-group' %}
+
     <main id="MainContent" role="main">
       {{ content_for_layout }}
     </main>
+
     {% sections 'footer-group' %}
+
     {%- if settings.cart_type == 'drawer' -%}
       {% render 'cart-drawer' %}
     {%- endif -%}
+
     {%- if settings.search_type == 'modal' -%}
       {% render 'search-modal' %}
     {%- endif -%}
+
     <div class="drawer-overlay" data-drawer-overlay hidden></div>
+
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
       <li id="a11y-selection-message">{{ 'accessibility.selection_help' | t }}</li>
@@ -198,20 +219,10 @@
         predictive_search_url: '{{ routes.predictive_search_url }}'
       };
       window.cartStrings = {
-        error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
+        error: {{ 'cart.cart_error' | t | json }},
+        quantityError: {{ 'cart.cart_quantity_error' | t: quantity: '[quantity]' | json }}
       };
-      window.variantStrings = {
-        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-        soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`
-      };
-      window.accessibilityStrings = {
-        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
-        shareSuccess: `{{ 'general.share.success_message' | t }}`,
-        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
-        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`
-      };
+      window.shopCurrency = {{ cart.currency.iso_code | json }};
     </script>
   </body>
 </html>
