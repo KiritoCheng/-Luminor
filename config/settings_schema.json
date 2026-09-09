@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Anode",
-    "theme_version": "1.1.0",
+    "theme_version": "2.0.0",
     "theme_author": "Anode Studio",
     "theme_documentation_url": "https://kiritocheng.github.io/anode-help/docs/",
     "theme_support_url": "https://kiritocheng.github.io/anode-help/support/"
@@ -103,10 +103,6 @@
         "default": "#000000"
       },
       {
-        "type": "header",
-        "content": "Text"
-      },
-      {
         "type": "color",
         "id": "color_text",
         "label": "Primary text",
@@ -160,14 +156,8 @@
         "id": "button_style",
         "label": "Default button style",
         "options": [
-          {
-            "value": "filled",
-            "label": "Filled"
-          },
-          {
-            "value": "outline",
-            "label": "Outline"
-          }
+          { "value": "filled", "label": "Filled" },
+          { "value": "outline", "label": "Outline" }
         ],
         "default": "filled"
       }
@@ -201,16 +191,10 @@
         "id": "header_layout",
         "label": "Header layout",
         "options": [
-          {
-          "value": "centered",
-          "label": "Centered"
-        },
-        {
-          "value": "left",
-          "label": "Left aligned"
-        }
-      ],
-      "default": "left"
+          { "value": "centered", "label": "Centered" },
+          { "value": "left", "label": "Left aligned" }
+        ],
+        "default": "left"
       }
     ]
   },
@@ -222,14 +206,8 @@
         "id": "product_card_style",
         "label": "Card style",
         "options": [
-          {
-            "value": "minimal",
-            "label": "Minimal (text under image)"
-          },
-          {
-            "value": "overlay",
-            "label": "Overlay (text on image)"
-          }
+          { "value": "minimal", "label": "Minimal (text under image)" },
+          { "value": "overlay", "label": "Overlay (text on image)" }
         ],
         "default": "minimal"
       },
@@ -288,18 +266,9 @@
         "id": "animation_style",
         "label": "Animation style",
         "options": [
-          {
-            "value": "fade-up",
-            "label": "Fade up"
-          },
-          {
-            "value": "fade",
-            "label": "Fade"
-          },
-          {
-            "value": "zoom",
-            "label": "Zoom in"
-          }
+          { "value": "fade-up", "label": "Fade up" },
+          { "value": "fade", "label": "Fade" },
+          { "value": "zoom", "label": "Zoom in" }
         ],
         "default": "fade-up"
       }
@@ -308,41 +277,17 @@
   {
     "name": "Social media",
     "settings": [
-      {
-        "type": "text",
-        "id": "social_twitter_link",
-        "label": "Twitter / X"
-      },
-      {
-        "type": "text",
-        "id": "social_facebook_link",
-        "label": "Facebook"
-      },
-      {
-        "type": "text",
-        "id": "social_instagram_link",
-        "label": "Instagram"
-      },
-      {
-        "type": "text",
-        "id": "social_youtube_link",
-        "label": "YouTube"
-      },
-      {
-        "type": "text",
-        "id": "social_tiktok_link",
-        "label": "TikTok"
-      }
+      { "type": "text", "id": "social_twitter_link", "label": "Twitter / X" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram" },
+      { "type": "text", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" }
     ]
   },
   {
     "name": "Favicon",
     "settings": [
-      {
-        "type": "image_picker",
-        "id": "favicon",
-        "label": "Favicon"
-      }
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
     ]
   },
   {
@@ -353,23 +298,12 @@
         "id": "cart_type",
         "label": "Cart type",
         "options": [
-          {
-            "value": "drawer",
-            "label": "Drawer"
-          },
-          {
-            "value": "page",
-            "label": "Page"
-          }
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
         ],
         "default": "drawer"
       },
-      {
-        "type": "checkbox",
-        "id": "show_cart_note",
-        "label": "Show cart note",
-        "default": true
-      }
+      { "type": "checkbox", "id": "show_cart_note", "label": "Show cart note", "default": true }
     ]
   },
   {
@@ -380,23 +314,12 @@
         "id": "search_type",
         "label": "Search experience",
         "options": [
-          {
-            "value": "modal",
-            "label": "Modal"
-          },
-          {
-            "value": "page",
-            "label": "Page"
-          }
+          { "value": "modal", "label": "Modal" },
+          { "value": "page", "label": "Page" }
         ],
         "default": "modal"
       },
-      {
-        "type": "checkbox",
-        "id": "show_search_collections",
-        "label": "Show collections in search",
-        "default": true
-      }
+      { "type": "checkbox", "id": "show_search_collections", "label": "Show collections in search", "default": true }
     ]
   }
 ]
