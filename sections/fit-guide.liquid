@@ -1,0 +1,154 @@
+{%- comment -%}
+  ============================================================================
+  Fit & install guide  —  Anode Theme
+  ----------------------------------------------------------------------------
+  Accessory returns are mostly caused by one of two things: the customer
+  fitted it wrong, or they never found the instructions. This section puts a
+  numbered, illustrated procedure on the product page, and lets the merchant
+  reuse one guide across a whole collection instead of retyping it per product.
+
+  Data source, in priority order:
+    1. product.metafields.anode.fit_steps   (type: json)
+       [{ "title": "Clean the back", "text": "...", "image": "https://..." }, ...]
+       Images in the JSON are plain URLs, so the merchant can point at any
+       Shopify CDN file without a second metafield.
+    2. Section blocks (image + text per step)
+
+  A "tools needed" line and a warranty-registration call to action close the
+  loop, because the registration step is where Anode Care gets attached.
+  ============================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign steps = product.metafields.anode.fit_steps.value
+  assign use_steps = false
+  assign use_blocks = false
+  if steps and steps.size > 0
+    assign use_steps = true
+  elsif section.blocks.size > 0
+    assign use_blocks = true
+  endif
+-%}
+
+{%- if use_steps or use_blocks -%}
+<section class="section fit-guide reveal{% if section.settings.color_scheme == 'alt' %} bg-alt{% endif %}">
+  <div class="page-width">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <header class="fit-guide__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="lead color-muted">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.show_duration -%}
+          <p class="fit-guide__duration">{{ 'sections.fit_guide.takes' | t }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <ol class="fit-guide__steps" role="list">
+      {%- if use_steps -%}
+        {%- for step in steps -%}
+          <li class="fit-guide__step">
+            <span class="fit-guide__index" aria-hidden="true">{{ forloop.index }}</span>
+            <div class="fit-guide__media media media--square">
+              {%- if step.image != blank -%}
+                <img src="{{ step.image }}" alt="{{ step.title | escape }}" loading="lazy" width="640" height="640">
+              {%- else -%}
+                {{ forloop.index0 | modulo: 6 | plus: 1 | prepend: 'product-' | placeholder_svg_tag: 'fit-guide__placeholder' }}
+              {%- endif -%}
+            </div>
+            <div class="fit-guide__body">
+              {%- if step.title != blank -%}<h3 class="fit-guide__title">{{ step.title | escape }}</h3>{%- endif -%}
+              {%- if step.text != blank -%}<p class="fit-guide__text">{{ step.text | escape }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <li class="fit-guide__step" {{ block.shopify_attributes }}>
+            <span class="fit-guide__index" aria-hidden="true">{{ forloop.index }}</span>
+            <div class="fit-guide__media media media--square">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.image.alt | default: block.settings.title | escape }}
+              {%- else -%}
+                {{ forloop.index0 | modulo: 6 | plus: 1 | prepend: 'product-' | placeholder_svg_tag: 'fit-guide__placeholder' }}
+              {%- endif -%}
+            </div>
+            <div class="fit-guide__body">
+              {%- if block.settings.title != blank -%}<h3 class="fit-guide__title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+              {%- if block.settings.text != blank -%}<p class="fit-guide__text">{{ block.settings.text | escape }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ol>
+
+    {%- if section.settings.tools != blank -%}
+      <p class="fit-guide__tools">
+        <strong>{{ 'sections.fit_guide.tools' | t }}</strong> {{ section.settings.tools | escape }}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <p class="fit-guide__cta">
+        <a href="{{ section.settings.button_link | default: '/pages/warranty' }}" class="btn btn--secondary">
+          {{ section.settings.button_label | escape }}
+        </a>
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}{
+  "name": "Fit & install guide",
+  "tag": "section",
+  "class": "section-fit-guide",
+  "settings": [
+    { "type": "paragraph", "content": "Reads product.metafields.anode.fit_steps (JSON array of {title, text, image}) when present, otherwise the steps added below." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Install" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fitting it takes a minute" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Follow the order. Skipping step one is what causes most returns." },
+    { "type": "checkbox", "id": "show_duration", "label": "Show time estimate", "default": true },
+    { "type": "text", "id": "tools", "label": "Tools needed", "default": "Nothing — the alignment jig is built into the shell." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Register for warranty" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [
+        { "value": "scheme_1", "label": "Default" },
+        { "value": "alt", "label": "Alternate" }
+      ],
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Step title", "default": "Wipe the back" },
+        { "type": "textarea", "id": "text", "label": "Step text", "default": "Remove the old case and wipe the back of the device with the cloth provided. Dust is the only thing that stops a magnetic ring seating flat." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Fit & install guide",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Wipe the back", "text": "Remove the old case and wipe the back of the device with the cloth provided. Dust is the only thing that stops a magnetic ring seating flat." } },
+        { "type": "step", "settings": { "title": "Seat the top edge first", "text": "Hook the top edge over the device, then press the bottom two corners in until you hear both clicks." } },
+        { "type": "step", "settings": { "title": "Check the ring", "text": "Hold a charger against the back. It should pull itself into place with no rotation — if it spins freely, lift the case and reseat it." } }
+      ]
+    }
+  ]
+}{% endschema %}

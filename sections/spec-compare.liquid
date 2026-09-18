@@ -1,0 +1,163 @@
+{%- comment -%}
+  ============================================================================
+  Spec comparison  —  Anode Theme
+  ----------------------------------------------------------------------------
+  Compares products inside a collection row by row, with the row schema
+  defined once in the theme editor and the values read per product from
+  metafields in the `anode` namespace.
+
+  The point: a merchant fills in a product's spec sheet once, in the product
+  admin, and every comparison table on the storefront stays correct forever.
+  There is no settings-only way to reproduce that — Dawn has no notion of a
+  shared spec schema across products.
+
+  Row block settings:
+    label           the row header shown to the customer
+    metafield_key   key inside the `anode` namespace, e.g. "weight"
+    fallback        text used when a product has no value for that key
+    highlight       render the row in the emphasis style
+
+  Example product metafields:
+    anode.weight        "38 g"
+    anode.capacity      "10 000 mAh"
+    anode.max_output    "65 W"
+  ============================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign compare = section.settings.collection
+  if section.settings.use_current_collection and collection != blank
+    assign compare = collection
+  endif
+  assign limit = section.settings.products_to_show | default: 3
+  assign rows = section.blocks
+-%}
+
+{%- if compare != blank and compare.products.size > 0 and rows.size > 0 -%}
+<section class="section spec-compare reveal{% if section.settings.color_scheme == 'alt' %} bg-alt{% endif %}">
+  <div class="page-width">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <header class="spec-compare__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="lead color-muted">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="spec-compare__scroll">
+      <table class="spec-compare__table">
+        <caption class="visually-hidden">{{ 'sections.spec_compare.table_caption' | t }}</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="spec-compare__corner">
+              <span class="visually-hidden">{{ 'sections.spec_compare.spec_column' | t }}</span>
+            </th>
+            {%- for item in compare.products limit: limit -%}
+              <th scope="col" class="spec-compare__product">
+                {%- if item.featured_image -%}
+                  <a href="{{ item.url }}" class="spec-compare__thumb" tabindex="-1" aria-hidden="true">
+                    {{ item.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.featured_image.alt | default: item.title | escape }}
+                  </a>
+                {%- endif -%}
+                <a href="{{ item.url }}" class="spec-compare__name">{{ item.title | escape }}</a>
+                <span class="spec-compare__price">{{ item.price | money }}</span>
+              </th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in rows -%}
+            {%- assign key = block.settings.metafield_key | strip -%}
+            <tr{% if block.settings.highlight %} class="spec-compare__row--hl"{% endif %} {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.label | escape }}</th>
+              {%- for item in compare.products limit: limit -%}
+                {%- assign mf = item.metafields.anode[key] -%}
+                {%- assign val = mf.value -%}
+                <td>
+                  {%- if val != blank -%}
+                    {{ val | escape }}
+                  {%- elsif block.settings.fallback != blank -%}
+                    <span class="color-muted">{{ block.settings.fallback | escape }}</span>
+                  {%- else -%}
+                    <span class="color-muted" aria-label="{{ 'sections.spec_compare.not_published' | t }}">—</span>
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="spec-compare__note">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.show_links -%}
+      <p class="spec-compare__links">
+        {%- for item in compare.products limit: limit -%}
+          <a href="{{ item.url }}" class="link-arrow">{{ 'sections.spec_compare.view_product' | t: title: item.title }}</a>
+        {%- endfor -%}
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}{
+  "name": "Spec comparison",
+  "tag": "section",
+  "class": "section-spec-compare",
+  "settings": [
+    { "type": "paragraph", "content": "Each row reads product.metafields.anode.<key>. Create the metafields in Settings → Custom data, fill them per product, then add a row here." },
+    { "type": "collection", "id": "collection", "label": "Collection to compare" },
+    { "type": "checkbox", "id": "use_current_collection", "label": "Use the collection being viewed", "default": false,
+      "info": "On a collection page this ignores the setting above and compares what the customer is already looking at." },
+    { "type": "range", "id": "products_to_show", "label": "Products compared", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Side by side" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare the line" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Same table for every product in the range, pulled from each spec sheet." },
+    { "type": "text", "id": "footnote", "label": "Footnote", "default": "All figures are manufacturer measurements. Charge times measured at 25 °C." },
+    { "type": "checkbox", "id": "show_links", "label": "Show product links", "default": false },
+    { "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [
+        { "value": "scheme_1", "label": "Default" },
+        { "value": "alt", "label": "Alternate" }
+      ],
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Row label", "default": "Weight" },
+        { "type": "text", "id": "metafield_key", "label": "Metafield key (anode namespace)", "default": "weight" },
+        { "type": "text", "id": "fallback", "label": "Fallback when empty", "default": "Not published" },
+        { "type": "checkbox", "id": "highlight", "label": "Emphasise this row", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Spec comparison",
+      "blocks": [
+        { "type": "spec", "settings": { "label": "Weight", "metafield_key": "weight", "highlight": true } },
+        { "type": "spec", "settings": { "label": "Material", "metafield_key": "material" } },
+        { "type": "spec", "settings": { "label": "Capacity / output", "metafield_key": "capacity" } },
+        { "type": "spec", "settings": { "label": "Charging standard", "metafield_key": "standard" } },
+        { "type": "spec", "settings": { "label": "Warranty", "metafield_key": "warranty" } }
+      ]
+    }
+  ]
+}{% endschema %}

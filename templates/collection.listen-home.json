@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "intro",
+    "editorial",
+    "collection_types",
+    "feature",
+    "manifesto"
+  ],
+  "sections": {
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "eyebrow": "Our promise",
+        "heading": "1-year warranty. Free returns within 30 days.",
+        "text": "<p>If any Anode Listen &amp; Home product doesn't meet your expectations — whether it's the fit, the sound, or the packaging — return it within 30 days for a full refund. No questions, no forms, no hoops.</p>",
+        "button_label": "See return policy",
+        "button_link": "/pages/shipping-returns"
+      }
+    },
+    "feature": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "The Anode difference",
+        "title": "Materials you can hear.",
+        "text": "<p>The grille is a tuned part, not a cosmetic one. Our perforation pattern and open-area ratio are chosen to break up the standing waves a solid or loosely perforated cover would let through — measurable as a flatter response between 2 kHz and 8 kHz.</p><p>Every pair is swept against the reference curve before it leaves the factory.</p>",
+        "button_label": "Our warranty",
+        "button_link": "/pages/warranty"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Shop / Listen &amp; Home",
+        "title": "Sound, and the things around it.",
+        "text": "<p>Earbuds tuned for the commute, a portable speaker for the garden, and the small home pieces that live on a shelf next to them — all built to the same standard.</p>"
+      }
+    },
+    "collection_types": {
+      "type": "multicolumn",
+      "blocks": {
+        "t1": {
+          "type": "column",
+          "settings": {
+            "title": "Earbuds",
+            "text": "Pulse Buds and Pulse Buds Pro — up to 42 dB ANC, 8 hours per charge, 32 with the case."
+          }
+        },
+        "t2": {
+          "type": "column",
+          "settings": {
+            "title": "Speakers",
+            "text": "The IPX7 Drift speaker. 360-degree sound, sized for a bag or a windowsill."
+          }
+        },
+        "t3": {
+          "type": "column",
+          "settings": {
+            "title": "Home",
+            "text": "Vacuum-insulated drinkware and the small pieces that round out a room."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "eyebrow": "Shop the collection",
+        "title": "Three parts of a room.",
+        "subtitle": "Audio and the objects that share the shelf with it.",
+        "columns": 3
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Crafted for listening",
+        "heading": "Studio-grade sound, daily-ready build.",
+        "text": "<p>We publish the driver spec, the impedance and the frequency response for every model, then tune each one against the same reference curve. The goal is simple: a product that measures the same on day 1,000 as it did on day one. Anodized finishes, braided cables, and housings machined from a single block of 6063 aluminum.</p><p>Each Anode Listen &amp; Home piece is tuned for neutral response with a slight lift in the low mids — so speech, music and calls all sound natural, wherever you are.</p>",
+        "button_label": "Shop Listen &amp; Home",
+        "button_link": "/collections/listen-home"
+      }
+    }
+  }
+}

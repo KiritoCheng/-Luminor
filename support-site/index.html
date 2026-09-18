@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anode Theme — Documentation &amp; Support</title>
+<style>
+  :root {
+    --brand: #4F46E5;
+    --brand-hover: #4338CA;
+    --bg: #F6F6F8;
+    --surface: #FFFFFF;
+    --ink: #1B1B20;
+    --ink-muted: #71717A;
+    --line: #D4D4D8;
+    --code-bg: #EFEFF3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .shell { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line);
+  }
+  .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
+  .brand span { color: var(--brand); }
+  .topbar nav { display: flex; gap: 18px; font-size: 13px; }
+  .topbar nav a { color: var(--ink-muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--brand); }
+
+  main { flex: 1; display: flex; align-items: center; padding: 72px 0; }
+  .hero { max-width: 46ch; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--brand); margin-bottom: 14px;
+  }
+  h1 { font-size: 46px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; }
+  .lede { margin-top: 18px; font-size: 18px; color: var(--ink-muted); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
+  .card {
+    display: block; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px; text-decoration: none; color: inherit;
+    transition: border-color .16s ease, transform .16s ease;
+  }
+  .card:hover { border-color: var(--brand); transform: translateY(-2px); }
+  .card h2 { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; }
+  .card p { margin-top: 6px; font-size: 14px; color: var(--ink-muted); }
+  .card .go { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--brand); }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0; font-size: 13px; color: var(--ink-muted); }
+  @media (max-width: 640px) {
+    h1 { font-size: 34px; }
+    main { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">Anode<span>.</span></div>
+    <nav>
+      <a href="docs/">Documentation</a>
+      <a href="support/">Support</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="shell">
+    <div class="hero">
+      <p class="eyebrow">Anode Theme</p>
+      <h1>One system for the gear you carry.</h1>
+      <p class="lede">
+        Anode is a Shopify theme built around published specifications: fit data, a comparison
+        matrix, a guided install, and a bundle builder that all read from the same product
+        metafields. This site holds the documentation and the support desk.
+      </p>
+    </div>
+
+    <div class="cards">
+      <a class="card" href="docs/">
+        <h2>Documentation</h2>
+        <p>Theme settings, the metafield data model, all sections, and the four fit mechanisms.</p>
+        <div class="go">Read the docs →</div>
+      </a>
+      <a class="card" href="support/">
+        <h2>Support</h2>
+        <p>Answers to the questions that come up most, and how to reach us when they do not.</p>
+        <div class="go">Open support →</div>
+      </a>
+    </div>
+  </div>
+</main>
+
+<div class="shell">
+  <footer>Anode Theme · built for merchants who publish the details.</footer>
+</div>
+</body>
+</html>

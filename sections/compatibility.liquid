@@ -1,0 +1,231 @@
+{%- comment -%}
+  ============================================================================
+  Compatibility & fit  —  Anode Theme
+  ----------------------------------------------------------------------------
+  The mechanism this theme is built around: an accessory only sells if the
+  customer can answer "will this fit my thing?" before they add it to cart.
+  Dawn can be reconfigured forever and never produce this, because it is a
+  data-model feature, not a settings feature.
+
+  Data sources, in priority order (first one that yields content wins):
+
+    1. product.metafields.anode.fit_matrix     (type: json)
+       {
+         "axis":    "Body size",
+         "columns": ["6.1\"", "6.3\"", "6.7\"", "6.9\""],
+         "rows": [
+           { "label": "Shell Aero",  "values": ["yes","yes","yes","yes"] },
+           { "label": "Guard Glass", "values": ["yes","yes","yes","no"]  }
+         ],
+         "note": "Diagonal measurement of the display, rounded to 0.1 in."
+       }
+
+    2. product.metafields.anode.compatibility  (type: list.single_line_text_field)
+       One entry per dimension, written as  Label|Value
+       e.g.  Body size|6.1–6.9"      Standard|Qi2 15W      Port|USB-C ×2
+
+    3. Section blocks  —  the merchant types rows by hand in the customizer.
+
+  Values inside "rows" accept yes / no / partial (or y/n/–) so a single row
+  can express "fits with a caveat" without a second table.
+  ============================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign mf_matrix = product.metafields.anode.fit_matrix.value
+  assign mf_dims   = product.metafields.anode.compatibility.value
+  assign has_matrix = false
+  assign has_dims   = false
+  if mf_matrix and mf_matrix.columns.size > 0
+    assign has_matrix = true
+  endif
+  if mf_dims and mf_dims.size > 0
+    assign has_dims = true
+  endif
+  assign use_blocks = false
+  if has_matrix == false and has_dims == false and section.blocks.size > 0
+    assign use_blocks = true
+  endif
+-%}
+
+{%- if has_matrix or has_dims or use_blocks -%}
+<section class="section compat reveal{% if section.settings.color_scheme == 'alt' %} bg-alt{% endif %}"
+  data-compat>
+  <div class="page-width">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <header class="compat__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="lead color-muted">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- comment -%} ---------- Dimension chips ---------- {%- endcomment -%}
+    {%- if has_dims -%}
+      <ul class="compat__dims" role="list">
+        {%- for dim in mf_dims -%}
+          {%- assign parts = dim | split: '|' -%}
+          <li class="compat__dim">
+            <span class="compat__dim-label">{{ parts[0] | strip | escape }}</span>
+            <span class="compat__dim-value">{{ parts[1] | default: '—' | strip | escape }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- comment -%}
+      ---------- Matrix ----------
+      Rendered as a real <table> so it stays readable with JS off and is
+      announced correctly by screen readers.
+    {%- endcomment -%}
+    {%- if has_matrix -%}
+      {%- assign axis = mf_matrix.axis | default: 'Model' -%}
+      <div class="compat__table-wrap">
+        <table class="compat__table">
+          <caption class="visually-hidden">
+            {{ 'sections.compatibility.table_caption' | t: axis: axis }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" class="compat__th-corner">{{ axis | escape }}</th>
+              {%- for col in mf_matrix.columns -%}
+                <th scope="col">{{ col | escape }}</th>
+              {%- endfor -%}
+            </tr>
+          </thead>
+          <tbody>
+            {%- for row in mf_matrix.rows -%}
+              <tr>
+                <th scope="row">{{ row.label | escape }}</th>
+                {%- for val in row.values -%}
+                  {%- assign v = val | downcase | strip -%}
+                  {%- if v == 'yes' or v == 'y' or v == 'true' -%}
+                    <td class="compat__cell compat__cell--yes">
+                      <span aria-hidden="true">✓</span>
+                      <span class="visually-hidden">{{ 'sections.compatibility.fits' | t }}</span>
+                    </td>
+                  {%- elsif v == 'partial' or v == 'p' -%}
+                    <td class="compat__cell compat__cell--partial">
+                      <span aria-hidden="true">~</span>
+                      <span class="visually-hidden">{{ 'sections.compatibility.partial' | t }}</span>
+                    </td>
+                  {%- else -%}
+                    <td class="compat__cell compat__cell--no">
+                      <span aria-hidden="true">–</span>
+                      <span class="visually-hidden">{{ 'sections.compatibility.no_fit' | t }}</span>
+                    </td>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+
+      {%- if mf_matrix.note != blank -%}
+        <p class="compat__note">{{ mf_matrix.note | escape }}</p>
+      {%- endif -%}
+
+      {%- comment -%}
+        ---------- Fit checker ----------
+        A plain select + button. No fake data: it reads the same matrix above,
+        so whatever the merchant published is what the customer is told.
+      {%- endcomment -%}
+      {%- if section.settings.show_checker and mf_matrix.columns.size > 0 -%}
+        <form class="compat__checker" data-compat-checker
+          data-yes="{{ 'sections.compatibility.checker_yes' | t }}"
+          data-no="{{ 'sections.compatibility.checker_no' | t }}"
+          data-partial="{{ 'sections.compatibility.checker_partial' | t }}"
+          data-empty="{{ 'sections.compatibility.checker_empty' | t }}">
+          <label class="compat__checker-label" for="CompatAxis-{{ section.id }}">
+            {{ 'sections.compatibility.checker_label' | t: axis: axis }}
+          </label>
+          <div class="compat__checker-row">
+            <select id="CompatAxis-{{ section.id }}" class="compat__select" data-compat-axis>
+              {%- for col in mf_matrix.columns -%}
+                <option value="{{ forloop.index0 }}">{{ col | escape }}</option>
+              {%- endfor -%}
+            </select>
+            <button type="submit" class="btn btn--secondary">{{ 'sections.compatibility.checker_button' | t }}</button>
+          </div>
+          <p class="compat__checker-result" data-compat-result role="status" aria-live="polite"></p>
+        </form>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      ---------- Merchant-typed rows ----------
+      Used two ways: as a per-product fallback when the metafields are empty,
+      and as a store-level statement about the whole range on a page with no
+      product (homepage, landing page). The metafield hint only makes sense in
+      the first case, so it is gated on `product`.
+    {%- endcomment -%}
+    {%- if use_blocks -%}
+      <ul class="compat__dims" role="list">
+        {%- for block in section.blocks -%}
+          <li class="compat__dim" {{ block.shopify_attributes }}>
+            <span class="compat__dim-label">{{ block.settings.label | escape }}</span>
+            <span class="compat__dim-value">{{ block.settings.value | default: '—' | escape }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if product -%}
+        <p class="compat__note">{{ 'sections.compatibility.metafield_hint' | t }}</p>
+      {%- endif -%}
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}{
+  "name": "Compatibility & fit",
+  "tag": "section",
+  "class": "section-compatibility",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads product.metafields.anode.fit_matrix (JSON) or anode.compatibility (list of Label|Value). Falls back to the rows below if neither exists."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Will it fit?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compatibility" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Every dimension we can measure, published. No guessing at checkout." },
+    { "type": "checkbox", "id": "show_checker", "label": "Show fit checker", "default": true },
+    { "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [
+        { "value": "scheme_1", "label": "Default" },
+        { "value": "alt", "label": "Alternate" }
+      ],
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "dimension",
+      "name": "Dimension (fallback)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Body size" },
+        { "type": "text", "id": "value", "label": "Value", "default": "6.1–6.9\"" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Compatibility & fit",
+      "blocks": [
+        { "type": "dimension", "settings": { "label": "Body size", "value": "6.1–6.9\"" } },
+        { "type": "dimension", "settings": { "label": "Charging standard", "value": "Qi2 15W" } },
+        { "type": "dimension", "settings": { "label": "Ports", "value": "USB-C ×2" } },
+        { "type": "dimension", "settings": { "label": "Magnet grade", "value": "N52" } }
+      ]
+    }
+  ]
+}{% endschema %}

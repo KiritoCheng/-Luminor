@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "intro",
+    "editorial",
+    "collection_types",
+    "feature",
+    "manifesto"
+  ],
+  "sections": {
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "eyebrow": "Our promise",
+        "heading": "1-year warranty. Free returns within 30 days.",
+        "text": "<p>If a band, buckle or charging stand doesn't meet your expectations — for any reason — send it back within 30 days for a full refund. Every Anode Watch piece carries the same 1-year limited warranty as the rest of the line, extendable with Anode Care.</p>",
+        "button_label": "Read the warranty",
+        "button_link": "/pages/warranty"
+      }
+    },
+    "feature": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "Materials",
+        "title": "Woven, not stitched.",
+        "text": "<p>Our woven bands start as recycled nylon filament, woven to a density that resists fraying at the lug without feeling stiff on the wrist. The hardware is 316 marine-grade stainless — the same alloy we use on the cases — so it doesn't pit against sweat or sunscreen.</p><p>Fluoroelastomer bands are moulded in one piece, with no glued seams to peel.</p>",
+        "button_label": "About Anode",
+        "button_link": "/pages/about"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Shop / Watch",
+        "title": "Bands and stands.",
+        "text": "<p>Woven, fluoroelastomer and full-grain leather bands, plus magnetic charging stands machined from 6063 aluminum — the pieces that make the watch on your wrist yours.</p>"
+      }
+    },
+    "collection_types": {
+      "type": "multicolumn",
+      "blocks": {
+        "t1": {
+          "type": "column",
+          "settings": {
+            "title": "Bands",
+            "text": "Recycled nylon weave, fluoroelastomer and full-grain leather, with 316 stainless hardware."
+          }
+        },
+        "t2": {
+          "type": "column",
+          "settings": {
+            "title": "Charging stands",
+            "text": "Magnetic charging pucks seated in 6063 aluminum, angled for a bedside table."
+          }
+        },
+        "t3": {
+          "type": "column",
+          "settings": {
+            "title": "Protection",
+            "text": "Slim guards that keep the case and crown clear of doorframes and gym equipment."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "eyebrow": "Shop the collection",
+        "title": "Three things, done properly.",
+        "subtitle": "One standard across the line: would we wear this every day for a year?",
+        "columns": 3
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Everyday wear",
+        "heading": "Tested on a wrist, not a bench.",
+        "text": "<p>A band fails where you'd expect: the lug, the buckle, the point where it meets sweat and sunscreen. We cycle every prototype through salt-spray and abrasion testing before it goes near a product page, and we publish the material and hardware spec so you can judge the rest yourself.</p><p>If it doesn't survive a year of daily wear, we don't ship it.</p>",
+        "button_label": "Shop Watch",
+        "button_link": "/collections/watch"
+      }
+    }
+  }
+}
