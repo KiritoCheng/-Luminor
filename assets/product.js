@@ -1,5 +1,5 @@
 /* ============================================================
-   Anode Theme — product.js
+   Aurora Theme — product.js
    Product page interactions: gallery, variants, quantity
    ============================================================ */
 (function () {
@@ -156,7 +156,7 @@
         const idInput = this.form.querySelector('input[name="id"]');
         if (!idInput || !idInput.value) {
           e.preventDefault();
-          window.AnodeTheme && AnodeTheme.toast('Please select options');
+          window.AuroraTheme && AuroraTheme.toast('Please select options');
         }
       });
     }
@@ -168,5 +168,5 @@
     Product.init();
   }
 
-  window.AnodeProduct = Product;
+  window.AuroraProduct = Product;
 })();

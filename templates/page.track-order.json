@@ -12,16 +12,20 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Anode orders",
+        "eyebrow": "Luminor orders",
         "title": "Track your order.",
-        "text": "<p>Enter your order number and email — we'll pull the latest status from our carriers instantly.</p>"
+        "text": "<p>Enter your order number and email — we'll pull the latest status from our carriers instantly.</p>",
+        "button_label": "",
+        "button_link": ""
       }
     },
     "tracker": {
       "type": "newsletter",
       "settings": {
         "eyebrow": "Look up",
-        "title": "Find your shipment"
+        "title": "Find your shipment",
+        "text": "Get the latest news, product launches, and exclusive offers.",
+        "color_scheme": "default"
       }
     },
     "timeline": {
@@ -30,29 +34,41 @@
         "p1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/matte-gold-delivery-pin-badge.png",
             "title": "1 · Confirmed",
-            "text": "You'll receive an email receipt within 5 minutes of placing your order."
+            "text": "You'll receive an email receipt within 5 minutes of placing your order.",
+            "link_label": "",
+            "link": ""
           }
         },
         "p2": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/kraft-box-flatlay.png",
             "title": "2 · Packed",
-            "text": "Orders before 2pm EST are packed the same day; you'll get a packed notification."
+            "text": "Orders before 2pm EST are packed the same day; you'll get a packed notification.",
+            "link_label": "",
+            "link": ""
           }
         },
         "p3": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/eucalyptus-sprig-still-life_9c9864da-19c1-4bd2-aeff-b7ec0d8562a6.png",
             "title": "3 · Shipped",
-            "text": "A tracking link is emailed the moment the carrier scans your package."
+            "text": "A tracking link is emailed the moment the carrier scans your package.",
+            "link_label": "",
+            "link": ""
           }
         },
         "p4": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/frosted-glass-security-badge-emblem.png",
             "title": "4 · Delivered",
-            "text": "Enjoy your Anode gear. 30-day returns and warranty start from this day."
+            "text": "Enjoy your Luminor gear. 30-day returns and warranty start from this day.",
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -63,10 +79,13 @@
         "p4"
       ],
       "settings": {
+        "color_scheme": "alt",
         "eyebrow": "Order lifecycle",
         "title": "What happens after you order.",
         "subtitle": "Transparent updates at every stage.",
-        "columns": 4
+        "columns": 4,
+        "button_label": "",
+        "button_link": ""
       }
     },
     "faq": {
@@ -76,7 +95,7 @@
           "type": "question",
           "settings": {
             "question": "Where is my tracking number?",
-            "answer": "<p>It lives in your shipment confirmation email, titled \"Your Anode order is on its way\". Search your inbox for that subject, or your spam/junk folder.</p>"
+            "answer": "<p>It lives in your shipment confirmation email, titled \"Your Luminor order is on its way\". Search your inbox for that subject, or your spam/junk folder.</p>"
           }
         },
         "q2": {
@@ -118,12 +137,26 @@
     "manifesto": {
       "type": "statement",
       "settings": {
-        "watermark": "DELIVERY",
         "eyebrow": "Shipping promise",
         "heading": "Free on $50+. Fast worldwide.",
-        "text": "<p>Every Anode order ships in 100% recyclable packaging. Carbon-neutral for all US domestic orders.</p>",
+        "text": "<p>Every Luminor order ships in 100% recyclable packaging. Carbon-neutral for all US domestic orders.</p>",
+        "heading_mobile": 40,
+        "heading_desktop": 80,
+        "heading_weight": "700",
+        "heading_tracking": "-0.03em",
+        "heading_leading": "1.05",
+        "text_mobile": 16,
+        "text_desktop": 20,
+        "text_weight": "400",
+        "eyebrow_weight": "600",
+        "bg_color": "#111114",
+        "eyebrow_color": "#a78bfa",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
         "button_label": "Shop now",
-        "button_link": "/collections/all"
+        "button_link": "/collections/all",
+        "cta_bg": "#ffffff",
+        "cta_text": "#0a0a0c"
       }
     }
   },

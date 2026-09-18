@@ -17,65 +17,65 @@
   ],
   "sections": {
     "manifesto": {
+      "type": "statement",
       "settings": {
-        "button_label": "Read the warranty",
-        "watermark": "EVERYDAY",
         "eyebrow": "Our promise",
-        "button_link": "/pages/warranty",
         "heading": "Lifetime craftsmanship guarantee.",
-        "text": "\u003cp\u003eStitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we\u0027ll repair or replace it at no cost to you — forever. That\u0027s the Anode Everyday guarantee.\u003c/p\u003e"
-      },
-      "type": "statement"
+        "text": "<p>Stitches come loose? Springs go soft? A hinge wears out ten years from now? Send it back, and we'll repair or replace it at no cost to you — forever. That's the Luminor Everyday guarantee.</p>",
+        "button_label": "Read the warranty",
+        "button_link": "/pages/warranty"
+      }
     },
     "feature": {
+      "type": "image-with-text",
       "settings": {
-        "button_label": "About Anode",
-        "text": "\u003cp\u003eEvery Anode leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.\u003c/p\u003e\u003cp\u003eMetals are Grade 5 titanium and 316 marine stainless. Nothing less.\u003c/p\u003e",
-        "eyebrow": "Materials",
-        "button_link": "/pages/about",
+        "layout": "text_first",
         "color_scheme": "alt",
+        "eyebrow": "Materials",
         "title": "Full-grain, not corrected.",
-        "layout": "text_first"
-      },
-      "type": "image-with-text"
+        "text": "<p>Every Luminor leather piece uses vegetable-tanned, full-grain Italian leather — the strongest, most beautiful cut of the hide. Unlike cheaper corrected-grain alternatives, full-grain develops a unique patina that tells your story, not ours.</p><p>Metals are Grade 5 titanium and 316 marine stainless. Nothing less.</p>",
+        "button_label": "About Luminor",
+        "button_link": "/pages/about"
+      }
     },
     "intro": {
+      "type": "rich-text",
       "settings": {
         "eyebrow": "Shop / Everyday",
         "title": "The carry line.",
-        "text": "\u003cp\u003eObjects for the things you do every day — wallets, watches, tumblers, and the small accessories that tie a life together. Built to go with you.\u003c/p\u003e"
-      },
-      "type": "rich-text"
+        "text": "<p>Objects for the things you do every day — wallets, watches, tumblers, and the small accessories that tie a life together. Built to go with you.</p>"
+      }
     },
     "collection_types": {
+      "type": "multicolumn",
       "blocks": {
         "t4": {
+          "type": "column",
           "settings": {
-            "text": "Key organizers, AirTag holders, cable clips. The small pieces that complete a carry.",
-            "title": "Accessories"
-          },
-          "type": "column"
+            "title": "Accessories",
+            "text": "Key organizers, AirTag holders, cable clips. The small pieces that complete a carry."
+          }
         },
         "t1": {
+          "type": "column",
           "settings": {
-            "text": "Italian full-grain leather billfolds with RFID lining. Patina-ready, slim-cut.",
-            "title": "Wallets"
-          },
-          "type": "column"
+            "title": "Wallets",
+            "text": "Italian full-grain leather billfolds with RFID lining. Patina-ready, slim-cut."
+          }
         },
         "t3": {
+          "type": "column",
           "settings": {
-            "text": "Vacuum-insulated 316 stainless. 24h cold / 12h hot. Fits every cup holder.",
-            "title": "Tumblers"
-          },
-          "type": "column"
+            "title": "Tumblers",
+            "text": "Vacuum-insulated 316 stainless. 24h cold / 12h hot. Fits every cup holder."
+          }
         },
         "t2": {
+          "type": "column",
           "settings": {
-            "text": "Automatic dress watches with sapphire crystals and 100m water resistance.",
-            "title": "Watches"
-          },
-          "type": "column"
+            "title": "Watches",
+            "text": "Automatic dress watches with sapphire crystals and 100m water resistance."
+          }
         }
       },
       "block_order": [
@@ -84,23 +84,22 @@
         "t3",
         "t4"
       ],
-      "type": "multicolumn",
       "settings": {
         "eyebrow": "Shop the collection",
         "title": "Four carry categories.",
-        "columns": 4,
-        "subtitle": "One uncompromising standard: would we carry this ourselves, every single day?"
+        "subtitle": "One uncompromising standard: would we carry this ourselves, every single day?",
+        "columns": 4
       }
     },
     "editorial": {
+      "type": "editorial",
       "settings": {
         "eyebrow": "Everyday carry",
-        "button_label": "Browse everyday",
         "heading": "Smaller items. Higher bar.",
-        "text": "\u003cp\u003eThe things you touch every day deserve the most attention. We prototype every Anode Everyday piece for a minimum of 12 weeks — 80+ iterations on hinge feel, cap torque, and leather patina — because when a product is always with you, every detail matters.\u003c/p\u003e\u003cp\u003eThe result is a carry collection that gets better with age, not worse.\u003c/p\u003e",
+        "text": "<p>The things you touch every day deserve the most attention. We prototype every Luminor Everyday piece for a minimum of 12 weeks — 80+ iterations on hinge feel, cap torque, and leather patina — because when a product is always with you, every detail matters.</p><p>The result is a carry collection that gets better with age, not worse.</p>",
+        "button_label": "Browse everyday",
         "button_link": "/collections/all"
-      },
-      "type": "editorial"
+      }
     }
   }
 }

@@ -8,91 +8,125 @@
  * ------------------------------------------------------------
  */
 {
-    "sections":  {
-                     "hero":  {
-                                  "type":  "image-with-text",
-                                  "settings":  {
-                                                   "eyebrow":  "Our story",
-                                                   "title":  "Designed with intention. Built to last.",
-                                                   "text":  "\u003cp\u003eAnode was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.\u003c/p\u003e\u003cp\u003eOur mission is to elevate the everyday through thoughtful design.\u003c/p\u003e",
-                                                   "button_label":  "Shop the collection",
-                                                   "button_link":  "/collections/all"
-                                               }
-                              },
-                     "editorial_1":  {
-                                         "type":  "editorial",
-                                         "settings":  {
-                                                          "eyebrow":  "Philosophy",
-                                                          "heading":  "Less, but better.",
-                                                          "text":  "\u003cp\u003eWe believe great design is invisible. Every product in the Anode collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.\u003c/p\u003e\u003cp\u003eFrom premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?\u003c/p\u003e",
-                                                          "button_label":  "",
-                                                          "button_link":  ""
-                                                      }
-                                     },
-                     "values":  {
-                                    "type":  "multicolumn",
-                                    "settings":  {
-                                                     "eyebrow":  "What we stand for",
-                                                     "title":  "Our values",
-                                                     "subtitle":  "Three principles that guide every decision we make.",
-                                                     "columns":  3
-                                                 },
-                                    "blocks":  {
-                                                   "v1":  {
-                                                              "type":  "column",
-                                                              "settings":  {
-                                                                               "title":  "Quality first",
-                                                                               "text":  "We never compromise on materials or craftsmanship. Every product is built to last."
-                                                                           }
-                                                          },
-                                                   "v2":  {
-                                                              "type":  "column",
-                                                              "settings":  {
-                                                                               "title":  "Sustainable by design",
-                                                                               "text":  "Minimal packaging, recyclable materials, and products designed to replace disposables."
-                                                                           }
-                                                          },
-                                                   "v3":  {
-                                                              "type":  "column",
-                                                              "settings":  {
-                                                                               "title":  "Customer obsessed",
-                                                                               "text":  "From unboxing to everyday use, every touchpoint should feel effortless and delightful."
-                                                                           }
-                                                          }
-                                               },
-                                    "block_order":  [
-                                                        "v1",
-                                                        "v2",
-                                                        "v3"
-                                                    ]
-                                },
-                     "editorial_2":  {
-                                         "type":  "editorial",
-                                         "settings":  {
-                                                          "eyebrow":  "Promise",
-                                                          "heading":  "Built for life. Backed for years.",
-                                                          "text":  "\u003cp\u003eEvery Anode product comes with our promise: if it doesn\u0027t meet your expectations, return it within 30 days for a full refund. No questions asked.\u003c/p\u003e",
-                                                          "button_label":  "Shop now",
-                                                          "button_link":  "/collections/all"
-                                                      }
-                                     },
-                     "manifesto":  {
-                                       "type":  "statement",
-                                       "settings":  {
-                                                        "watermark":  "ANODE",
-                                                        "eyebrow":  "Our promise",
-                                                        "heading":  "Grade 5 titanium. Backed for life.",
-                                                        "text":  "\u003cp\u003eFrom MagSafe mounts to AirPods shells, every Anode piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.\u003c/p\u003e",
-                                                        "button_label":  "Shop the collection",
-                                                        "button_link":  "/collections/all"
-                                                    }
-                                   }
-                 },
-    "order":  [
-                  "hero",
-                  "editorial_1",
-                  "values",
-                  "editorial_2",
-                  "manifesto"
-              ]
+  "sections": {
+    "hero": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/editorial-blog-cover_376b5246-d8b5-435d-b515-29bbc6440c0e.png",
+        "height": "medium",
+        "layout": "text_first",
+        "color_scheme": "default",
+        "eyebrow": "Our story",
+        "title": "Designed with intention. Built to last.",
+        "text": "<p>Luminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.</p><p>Our mission is to elevate the everyday through thoughtful design.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "editorial_1": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Philosophy",
+        "heading": "Less, but better.",
+        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
+        "image_1": "shopify://shop_images/mac-collection.png",
+        "image_2": "shopify://shop_images/precision-titanium-tech-accessory-macro.png",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "values": {
+      "type": "multicolumn",
+      "blocks": {
+        "v1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/scandinavian-home-workspace-editorial.png",
+            "title": "Quality first",
+            "text": "We never compromise on materials or craftsmanship. Every product is built to last.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "v2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/editorial-notebook-product-photo.png",
+            "title": "Sustainable by design",
+            "text": "Minimal packaging, recyclable materials, and products designed to replace disposables.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "v3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/apple-phone-lifestyle.png",
+            "title": "Customer obsessed",
+            "text": "From unboxing to everyday use, every touchpoint should feel effortless and delightful.",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "color_scheme": "alt",
+        "eyebrow": "What we stand for",
+        "title": "Our values",
+        "subtitle": "Three principles that guide every decision we make.",
+        "columns": 3,
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "editorial_2": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Promise",
+        "heading": "Built for life. Backed for years.",
+        "text": "<p>Every Luminor product comes with our promise: if it doesn't meet your expectations, return it within 30 days for a full refund. No questions asked.</p>",
+        "image_1": "shopify://shop_images/premium-matte-black-aluminum-edge-detail.png",
+        "image_2": "shopify://shop_images/premium-material-macro-detail.png",
+        "button_label": "Shop now",
+        "button_link": "/collections/all"
+      }
+    },
+    "manifesto": {
+      "type": "statement",
+      "settings": {
+        "eyebrow": "Our promise",
+        "heading": "Grade 5 titanium. Backed for life.",
+        "text": "<p>From MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.</p>",
+        "heading_mobile": 40,
+        "heading_desktop": 80,
+        "heading_weight": "700",
+        "heading_tracking": "-0.03em",
+        "heading_leading": "1.05",
+        "text_mobile": 16,
+        "text_desktop": 20,
+        "text_weight": "400",
+        "eyebrow_weight": "600",
+        "bg_color": "#111114",
+        "eyebrow_color": "#a78bfa",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all",
+        "cta_bg": "#ffffff",
+        "cta_text": "#0a0a0c"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "editorial_1",
+    "values",
+    "editorial_2",
+    "manifesto"
+  ]
 }

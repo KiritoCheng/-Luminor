@@ -1,5 +1,5 @@
 /* ============================================================
-   Anode Theme — cart.js
+   Aurora Theme — cart.js
    Cart drawer / page AJAX interactions
    ============================================================ */
 (function () {
@@ -38,7 +38,7 @@
           .then((r) => r.json())
           .then((data) => {
             if (data.status) {
-              window.AnodeTheme && AnodeTheme.toast(data.description || data.message);
+              window.AuroraTheme && AuroraTheme.toast(data.description || data.message);
               return;
             }
             this.refresh();
@@ -49,7 +49,7 @@
             }
           })
           .catch(() => {
-            window.AnodeTheme && AnodeTheme.toast(window.cartStrings && window.cartStrings.error);
+            window.AuroraTheme && AuroraTheme.toast(window.cartStrings && window.cartStrings.error);
           })
           .finally(() => {
             if (btn) {
@@ -175,5 +175,5 @@
     Cart.init();
   }
 
-  window.AnodeCart = Cart;
+  window.AuroraCart = Cart;
 })();

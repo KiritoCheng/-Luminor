@@ -8,62 +8,78 @@
  * ------------------------------------------------------------
  */
 {
-    "sections":  {
-                     "main":  {
-                                  "type":  "collection",
-                                  "settings":  {
-                                                   "show_collection_title":  true,
-                                                   "columns_desktop":  4
-                                               }
-                              },
-                     "perks":  {
-                                   "type":  "multicolumn",
-                                   "settings":  {
-                                                    "eyebrow":  "Anode promise",
-                                                    "title":  "Why shop with us",
-                                                    "subtitle":  "Every order is backed by our commitment to quality.",
-                                                    "columns":  4
-                                                },
-                                   "blocks":  {
-                                                  "perk_1":  {
-                                                                 "type":  "column",
-                                                                 "settings":  {
-                                                                                  "title":  "Free shipping",
-                                                                                  "text":  "On all orders over $50, delivered fast."
-                                                                              }
-                                                             },
-                                                  "perk_2":  {
-                                                                 "type":  "column",
-                                                                 "settings":  {
-                                                                                  "title":  "30-day returns",
-                                                                                  "text":  "Not in love? Return within 30 days for a full refund."
-                                                                              }
-                                                             },
-                                                  "perk_3":  {
-                                                                 "type":  "column",
-                                                                 "settings":  {
-                                                                                  "title":  "Lifetime warranty",
-                                                                                  "text":  "Titanium-grade build, backed for life."
-                                                                              }
-                                                             },
-                                                  "perk_4":  {
-                                                                 "type":  "column",
-                                                                 "settings":  {
-                                                                                  "title":  "Secure checkout",
-                                                                                  "text":  "Encrypted payments. All major methods accepted."
-                                                                              }
-                                                             }
-                                              },
-                                   "block_order":  [
-                                                       "perk_1",
-                                                       "perk_2",
-                                                       "perk_3",
-                                                       "perk_4"
-                                                   ]
-                               }
-                 },
-    "order":  [
-                  "main",
-                  "perks"
-              ]
+  "sections": {
+    "main": {
+      "type": "collection",
+      "settings": {
+        "show_collection_title": true,
+        "columns_desktop": 4,
+        "products_per_page": 24
+      }
+    },
+    "perks": {
+      "type": "multicolumn",
+      "blocks": {
+        "perk_1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/matte-gold-delivery-pin-badge.png",
+            "title": "Free shipping",
+            "text": "On all orders over $50, delivered fast.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "perk_2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/matte-gold-refresh-pin-badge.png",
+            "title": "30-day returns",
+            "text": "Not in love? Return within 30 days for a full refund.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "perk_3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/titanium-silver-shield-emblem.png",
+            "title": "Lifetime warranty",
+            "text": "Titanium-grade build, backed for life.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "perk_4": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/metallic-gold-shield-emblem-flatlay.png",
+            "title": "Secure checkout",
+            "text": "Encrypted payments. All major methods accepted.",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "color_scheme": "alt",
+        "eyebrow": "Luminor promise",
+        "title": "Why shop with us",
+        "subtitle": "Every order is backed by our commitment to quality.",
+        "columns": 4,
+        "button_label": "",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "perks"
+  ]
 }

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -7,9 +16,9 @@
     "cta": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Anode",
+        "eyebrow": "Luminor",
         "title": "More to explore.",
-        "text": "<p>Discover the titanium craft and MagSafe engineering behind every Anode accessory — built for the Apple ecosystem, made to outlast it.</p>",
+        "text": "<p>Discover the titanium craft and MagSafe engineering behind every Luminor accessory — built for the Apple ecosystem, made to outlast it.</p>",
         "button_label": "Shop the collection",
         "button_link": "/collections/all"
       }

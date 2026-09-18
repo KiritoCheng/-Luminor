@@ -1,26 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-details",
-      "settings": {
-        "enable_sticky": true
-      },
       "blocks": {
-        "vendor": { "type": "vendor" },
-        "title": { "type": "title" },
-        "price": { "type": "price" },
-        "rating": { "type": "rating" },
-        "variant_picker": { "type": "variant_picker" },
-        "selling_plans": { "type": "selling_plans" },
-        "quantity": { "type": "quantity" },
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "selling_plans": {
+          "type": "selling_plans",
+          "settings": {}
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": { "show_dynamic_checkout": true }
+          "settings": {
+            "show_dynamic_checkout": true
+          }
         },
-        "gift_card_recipient": { "type": "gift_card_recipient" },
-        "pickup_availability": { "type": "pickup_availability" },
-        "follow_on_shop": { "type": "follow_on_shop" },
-        "description": { "type": "description" },
+        "gift_card_recipient": {
+          "type": "gift_card_recipient",
+          "settings": {}
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "follow_on_shop": {
+          "type": "follow_on_shop",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
         "shipping_returns": {
           "type": "accordion",
           "settings": {
@@ -35,7 +76,10 @@
             "text": "<p>Precision-milled from aerospace-grade materials. Built to last and designed to match.</p>"
           }
         },
-        "share": { "type": "share" }
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
       },
       "block_order": [
         "vendor",
@@ -53,7 +97,10 @@
         "shipping_returns",
         "materials",
         "share"
-      ]
+      ],
+      "settings": {
+        "enable_sticky": true
+      }
     },
     "material_story": {
       "type": "image-with-text",
@@ -63,7 +110,7 @@
         "color_scheme": "scheme_1",
         "eyebrow": "Material & Craft",
         "title": "Aerospace-grade titanium, milled to micron precision.",
-        "text": "<p>Every Anode titanium case is forged from Grade 5 aerospace alloy — the same spec used in Apple's iPhone 15 Pro chassis — then CNC-milled and bead-blasted to a soft, fingerprint-resistant finish. It's twice the strength of steel at less than half the weight, so your iPhone stays protected without the bulk.</p>",
+        "text": "<p>Every Luminor titanium case is forged from Grade 5 aerospace alloy — the same spec used in Apple's iPhone 15 Pro chassis — then CNC-milled and bead-blasted to a soft, fingerprint-resistant finish. It's twice the strength of steel at less than half the weight, so your iPhone stays protected without the bulk.</p>",
         "button_label": "Explore the material",
         "button_link": ""
       }
@@ -95,7 +142,7 @@
         "feature_warranty": {
           "type": "column",
           "settings": {
-            "title": "Lifetime Anode warranty.",
+            "title": "Lifetime Luminor warranty.",
             "text": "We build accessories to outlast the device they protect. Every titanium case ships with a lifetime warranty against manufacturing defects — register within 30 days to activate."
           }
         }
@@ -108,7 +155,7 @@
       ],
       "settings": {
         "color_scheme": "scheme_1",
-        "eyebrow": "Why Anode",
+        "eyebrow": "Why Luminor",
         "title": "Engineered for the Apple ecosystem.",
         "subtitle": "Every detail considered. Every material chosen for a reason.",
         "columns": 4,
@@ -132,10 +179,9 @@
     "manifesto": {
       "type": "statement",
       "settings": {
-        "watermark": "ANODE",
         "eyebrow": "Our philosophy",
         "heading": "Designed in California. Built for the Apple ecosystem.",
-        "text": "<p>We don't make accessories for every phone. We make them for the one in your pocket — engineered to Apple's exacting tolerances, crafted from the same aerospace materials, and obsessively refined until the seam between device and accessory disappears. A Anode isn't an add-on. It's the finishing detail the product was always meant to have.</p>",
+        "text": "<p>We don't make accessories for every phone. We make them for the one in your pocket — engineered to Apple's exacting tolerances, crafted from the same aerospace materials, and obsessively refined until the seam between device and accessory disappears. A Luminor isn't an add-on. It's the finishing detail the product was always meant to have.</p>",
         "button_label": "Shop the collection",
         "button_link": ""
       }

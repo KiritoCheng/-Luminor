@@ -1,10 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {},
       "blocks": {
         "shop_col": {
           "type": "link_column",
@@ -19,13 +27,7 @@
             "label_4": "Mac",
             "link_4": "/collections/mac",
             "label_5": "Apple Watch",
-            "link_5": "/collections/apple-watch",
-            "label_6": "AirPods",
-            "link_6": "/collections/airpods-home",
-            "label_7": "HomePod & TV",
-            "link_7": "/collections/airpods-home",
-            "label_8": "Accessories",
-            "link_8": "/collections/accessories"
+            "link_5": "/collections/apple-watch"
           }
         },
         "support_col": {
@@ -47,7 +49,7 @@
         "company_col": {
           "type": "link_column",
           "settings": {
-            "heading": "Anode Store",
+            "heading": "Luminor Store",
             "label_1": "About our store",
             "link_1": "/pages/about",
             "label_2": "Financing & Trade-in",
@@ -62,7 +64,7 @@
           "type": "contact",
           "settings": {
             "heading": "Contact",
-            "email": "hello@anodestore.com"
+            "email": "hello@luminorstore.com"
           }
         }
       },
@@ -71,7 +73,8 @@
         "support_col",
         "company_col",
         "contact_col"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [

@@ -1,5 +1,5 @@
 /* ============================================================
-   Anode Theme — theme.css
+   Aurora Theme — theme.css
    Component styles (header, footer, sections, cards, drawers)
    ============================================================ */
 
@@ -3933,7 +3933,7 @@
   min-width: 64px;
 }
 
-/* Quantity stepper — Anode indigo capsule (full-fill, container-focus ring) */
+/* Quantity stepper — Luminor indigo capsule (full-fill, container-focus ring) */
 .qty-stepper {
   display: inline-flex;
   flex-direction: row;

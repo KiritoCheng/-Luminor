@@ -1,11 +1,11 @@
 /* ============================================================
-   Anode Theme — theme.js
+   Aurora Theme — theme.js
    Global UI behaviors: menus, drawers, reveals, slideshows, etc.
    ============================================================ */
 (function () {
   'use strict';
 
-  const AnodeTheme = {
+  const AuroraTheme = {
     init() {
       this.cacheElements();
       this.bindHeader();
@@ -770,7 +770,7 @@
             if (!res.ok || data.status) {
               // Shopify returns { status, description, message } on error
               const msg = (data && (data.description || data.message)) || 'Unable to add item.';
-              if (window.AnodeTheme) AnodeTheme.toast(msg); else alert(msg);
+              if (window.AuroraTheme) AuroraTheme.toast(msg); else alert(msg);
               return;
             }
             // Success → refresh cart drawer count + open drawer
@@ -794,7 +794,7 @@
             // Close quick view immediately (don't wait for cart drawer to open)
             this.closeQuickView(true);
           } catch (err) {
-            if (window.AnodeTheme) AnodeTheme.toast('Unable to add item.');
+            if (window.AuroraTheme) AuroraTheme.toast('Unable to add item.');
           } finally {
             addBtn.classList.remove('is-loading');
             addBtn.disabled = false;
@@ -1041,10 +1041,10 @@
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => AnodeTheme.init());
+    document.addEventListener('DOMContentLoaded', () => AuroraTheme.init());
   } else {
-    AnodeTheme.init();
+    AuroraTheme.init();
   }
 
-  window.AnodeTheme = AnodeTheme;
+  window.AuroraTheme = AuroraTheme;
 })();

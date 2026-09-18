@@ -15,12 +15,26 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/apple-ecosystem-hero-flat-lay.png",
+            "bg_color": "#f6f6f8",
+            "show_overlay": false,
+            "override_overlay": false,
+            "slide_overlay_color": "#000000",
+            "slide_overlay_strength": 0,
+            "show_art": false,
+            "show_grain": false,
             "eyebrow": "MagSafe ready",
             "heading": "Your iPhone, elevated.",
             "subheading": "Titanium-grade finishes. MagSnap precision. Built for iPhone, AirPods, and Mac.",
+            "heading_color": "#ffffff",
+            "subheading_color": "#000000",
+            "eyebrow_color": "#a78bfa",
+            "meta_index_color": "#4c47cb",
+            "meta_line_color": "#ffffff73",
+            "link_color": "#4c47cb",
             "button_label": "Shop now",
             "button_link": "/collections/all",
-            "button_label_2": "Discover Anode",
+            "button_label_2": "Discover Luminor",
             "button_link_2": "/pages/about"
           }
         }
@@ -28,56 +42,78 @@
       "block_order": [
         "slide_1"
       ],
-      "settings": {}
+      "settings": {
+        "layout": "split",
+        "content_max_width": 1200,
+        "content_max_width_mobile": 400,
+        "height": "medium",
+        "heading_mobile": 40,
+        "heading_desktop": 72,
+        "heading_weight": "700",
+        "heading_tracking": "-0.03em",
+        "heading_leading": "1.02",
+        "sub_mobile": 16,
+        "sub_desktop": 20,
+        "sub_weight": "400",
+        "eyebrow_mobile": 11,
+        "eyebrow_desktop": 13,
+        "eyebrow_weight": "600",
+        "overlay_color": "#000000",
+        "overlay_strength": 55,
+        "autoplay": true,
+        "autorotate_speed": 6,
+        "show_arrows": true
+      }
     },
-    "stats": {
-      "type": "stats",
+    "home_popular": {
+      "type": "home-popular-collections",
       "blocks": {
-        "stat_1": {
-          "type": "stat",
+        "hp_card_1": {
+          "type": "card",
           "settings": {
-            "number": "120",
-            "suffix": "K+",
-            "label": "Creators equipped"
+            "glyph_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"></path><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"></path></svg>",
+            "gradient": "linear-gradient(135deg, #1F1F23 0%, #4F46E5 60%, #818CF8 100%)",
+            "eyebrow": "Category 01 / Audio",
+            "title": "Sound, tuned for life.",
+            "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",
+            "cta_label": "Shop Audio",
+            "link": "/collections/airpods-home"
           }
         },
-        "stat_2": {
-          "type": "stat",
+        "hp_card_2": {
+          "type": "card",
           "settings": {
-            "number": "48",
-            "label": "Countries shipped"
+            "glyph_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"></rect><path d=\"M6 18v2M18 18v2\"></path></svg>",
+            "gradient": "linear-gradient(135deg, #0b8e70 0%, #35d69f 60%, #bf5af2 100%)",
+            "eyebrow": "Category 02 / Desk",
+            "title": "The workspace, rethought.",
+            "text": "Lamps, keyboards, chargers and hubs — built to be seen without stealing focus.",
+            "cta_label": "Shop Desk",
+            "link": "/collections/mac"
           }
         },
-        "stat_3": {
-          "type": "stat",
+        "hp_card_3": {
+          "type": "card",
           "settings": {
-            "number": "4.9",
-            "suffix": "★",
-            "label": "Average rating"
+            "glyph_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"></circle><circle cx=\"12\" cy=\"12\" r=\"3\"></circle><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3\"></path></svg>",
+            "gradient": "linear-gradient(135deg, #ff375f 0%, #ff9f0a 60%, #ffd60a 100%)",
+            "eyebrow": "Category 03 / Everyday",
+            "title": "Carry that ages well.",
+            "text": "Full-grain leather, titanium, and 316 stainless steel — objects for the every day.",
+            "cta_label": "Shop Everyday",
+            "link": "/collections/accessories"
           }
         }
       },
       "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
+        "hp_card_1",
+        "hp_card_2",
+        "hp_card_3"
       ],
       "settings": {
-        "watermark": "ANODE",
-        "eyebrow": "By the numbers",
-        "heading": "Trusted worldwide"
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Top picks",
-        "title": "Best sellers",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "view_all_label": "View all products",
-        "view_all_link": "/collections/all"
+        "eyebrow": "Shop by category",
+        "heading": "Popular collections",
+        "subheading": "Three curated lines, each one obsessively engineered. A good place to start if you're new to Luminor."
       }
     },
     "category_pills": {
@@ -88,7 +124,8 @@
           "settings": {
             "title": "Audio",
             "link": "/collections/airpods-home",
-            "count": "4"
+            "count": "4",
+            "featured": false
           }
         },
         "cat_2": {
@@ -96,7 +133,8 @@
           "settings": {
             "title": "Desk",
             "link": "/collections/mac",
-            "count": "8"
+            "count": "8",
+            "featured": false
           }
         },
         "cat_3": {
@@ -113,7 +151,8 @@
           "settings": {
             "title": "New arrivals",
             "link": "/collections/all",
-            "count": "3"
+            "count": "3",
+            "featured": false
           }
         }
       },
@@ -133,22 +172,25 @@
         "hot_1": {
           "type": "product",
           "settings": {
-            "position_x": 25,
-            "position_y": 40
+            "product": "airpods-pro-2-usb-c",
+            "position_x": 34,
+            "position_y": 62
           }
         },
         "hot_2": {
           "type": "product",
           "settings": {
-            "position_x": 65,
-            "position_y": 55
+            "product": "macbook-pro-14-m3-space-black",
+            "position_x": 54,
+            "position_y": 46
           }
         },
         "hot_3": {
           "type": "product",
           "settings": {
-            "position_x": 80,
-            "position_y": 30
+            "product": "airtag-4-pack",
+            "position_x": 76,
+            "position_y": 52
           }
         }
       },
@@ -160,7 +202,268 @@
       "settings": {
         "eyebrow": "Shop the look",
         "title": "Curated for modern living",
-        "subtitle": "Tap the dots to explore products from this scene."
+        "subtitle": "Tap the dots to explore products from this scene.",
+        "image": "shopify://shop_images/modern-minimalist-lookbook_738c16a7-5f86-4f9c-a82b-5d811063ed31.png"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Top picks",
+        "title": "Best sellers",
+        "collection": "best-sell",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "bento": true,
+        "view_all_label": "View all products",
+        "view_all_link": "/collections/all"
+      }
+    },
+    "press": {
+      "type": "press",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "TechCrunch"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "The Verge"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Wired"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Engadget"
+          }
+        },
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Luminor's approach to everyday essentials is refreshingly thoughtful — every detail feels intentional.",
+            "source": "TechCrunch"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "The closest thing to Apple-grade design I've seen from an independent brand.",
+            "source": "The Verge"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Minimalism done right — Luminor proves that less really is more.",
+            "source": "Wired"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ],
+      "settings": {
+        "title": "Featured on",
+        "marquee_speed": 50
+      }
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "120",
+            "prefix": "",
+            "suffix": "K+",
+            "label": "Creators equipped"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "48",
+            "prefix": "",
+            "suffix": "",
+            "label": "Countries shipped"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "4.9",
+            "prefix": "",
+            "suffix": "★",
+            "label": "Average rating"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "watermark": "LUMINOR",
+        "eyebrow": "By the numbers",
+        "heading": "Trusted worldwide"
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/matte-gold-delivery-pin-badge.png",
+            "title": "Free shipping",
+            "text": "On all orders over $50, delivered fast to your door.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/matte-gold-refresh-pin-badge.png",
+            "title": "30-day returns",
+            "text": "Not in love? Return it within 30 days for a full refund.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minimal-gold-padlock-on-ivory.png",
+            "title": "Secure payments",
+            "text": "Encrypted checkout you can trust. All major payment methods accepted.",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
+      "settings": {
+        "color_scheme": "alt",
+        "eyebrow": "",
+        "title": "Why you'll love it",
+        "subtitle": "Designed to make every interaction effortless.",
+        "columns": 3,
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/ultra-minimalist-tech-accessory.png",
+        "height": "medium",
+        "layout": "text_first",
+        "color_scheme": "alt",
+        "eyebrow": "Craftsmanship",
+        "title": "Crafted to the last detail.",
+        "text": "<p>Every Luminor product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
+        "button_label": "Read our story",
+        "button_link": "/pages/about"
+      }
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "eyebrow": "Our philosophy",
+        "heading": "Designed in California. Assembled with intent.",
+        "text": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>",
+        "heading_mobile": 40,
+        "heading_desktop": 80,
+        "heading_weight": "700",
+        "heading_tracking": "-0.03em",
+        "heading_leading": "1.05",
+        "text_mobile": 16,
+        "text_desktop": 20,
+        "text_weight": "400",
+        "eyebrow_weight": "600",
+        "bg_color": "#111114",
+        "eyebrow_color": "#a78bfa",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all",
+        "cta_bg": "#ffffff",
+        "cta_text": "#0a0a0c"
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Designed with intention. Built to last.",
+        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
+        "image_1": "shopify://shop_images/minimalist-design-studio-editorial.png",
+        "image_2": "shopify://shop_images/premium-workspace-accessories-editorial.png",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_aQVL8J": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "coll_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "iphone"
+          }
+        },
+        "coll_3": {
+          "type": "collection",
+          "settings": {
+            "collection": "airpods-home"
+          }
+        },
+        "coll_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        }
+      },
+      "block_order": [
+        "collection_aQVL8J",
+        "coll_2",
+        "coll_3",
+        "coll_1"
+      ],
+      "settings": {
+        "color_scheme": "default",
+        "eyebrow": "Browse collections",
+        "title": "Shop by category",
+        "layout": "bento",
+        "columns": 3
       }
     },
     "home_search": {
@@ -205,7 +508,7 @@
         "eyebrow": "Find it fast",
         "heading": "Search the entire store.",
         "subheading": "Products, help articles, and our brand story — everything, one search box.",
-        "placeholder": "Search Anode for products, articles, or help…",
+        "placeholder": "Search Luminor for products, articles, or help…",
         "hint_prefix": "Try:"
       }
     },
@@ -301,222 +604,6 @@
         "subheading": "Shop the catalog, read about our materials, or find an answer in the help center — it's all a tap away."
       }
     },
-    "statement": {
-      "type": "statement",
-      "settings": {
-        "watermark": "ANODE",
-        "eyebrow": "Our philosophy",
-        "heading": "Designed in California. Assembled with intent.",
-        "text": "<p>Every detail considered. Every material chosen for a reason. Built for the Apple ecosystem, obsessed over for a lifetime.</p>",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all"
-      }
-    },
-    "press": {
-      "type": "press",
-      "blocks": {
-        "logo_1": {
-          "type": "logo",
-          "settings": {
-            "name": "TechCrunch"
-          }
-        },
-        "logo_2": {
-          "type": "logo",
-          "settings": {
-            "name": "The Verge"
-          }
-        },
-        "logo_3": {
-          "type": "logo",
-          "settings": {
-            "name": "Wired"
-          }
-        },
-        "logo_4": {
-          "type": "logo",
-          "settings": {
-            "name": "Engadget"
-          }
-        },
-        "quote_1": {
-          "type": "quote",
-          "settings": {
-            "quote": "Anode's approach to everyday essentials is refreshingly thoughtful — every detail feels intentional.",
-            "source": "TechCrunch"
-          }
-        },
-        "quote_2": {
-          "type": "quote",
-          "settings": {
-            "quote": "The closest thing to Apple-grade design I've seen from an independent brand.",
-            "source": "The Verge"
-          }
-        },
-        "quote_3": {
-          "type": "quote",
-          "settings": {
-            "quote": "Minimalism done right — Anode proves that less really is more.",
-            "source": "Wired"
-          }
-        }
-      },
-      "block_order": [
-        "logo_1",
-        "logo_2",
-        "logo_3",
-        "logo_4",
-        "quote_1",
-        "quote_2",
-        "quote_3"
-      ],
-      "settings": {
-        "title": "Featured on"
-      }
-    },
-    "image_with_text": {
-      "type": "image-with-text",
-      "settings": {
-        "layout": "text_first",
-        "color_scheme": "alt",
-        "eyebrow": "Craftsmanship",
-        "title": "Crafted to the last detail.",
-        "text": "<p>Every Anode product is crafted with obsessive attention to detail — from premium materials to precision engineering. No compromises, no shortcuts.</p><p>We obsess over the details that no one should ever notice, but would miss immediately if they weren't there.</p>",
-        "button_label": "Read our story",
-        "button_link": "/pages/about"
-      }
-    },
-    "home_popular": {
-      "type": "home-popular-collections",
-      "blocks": {
-        "hp_card_1": {
-          "type": "card",
-          "settings": {
-            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18V7a4 4 0 014-4h2v14H7a4 4 0 01-4-4z\"/><path d=\"M21 18V7a4 4 0 00-4-4h-2v14h2a4 4 0 004-4z\"/></svg>",
-            "gradient": "linear-gradient(135deg, #1F1F23 0%, #4F46E5 60%, #818CF8 100%)",
-            "eyebrow": "Category 01 / Audio",
-            "title": "Sound, tuned for life.",
-            "text": "Everyday carry audio for commute, work, and home. Titanium housings and studio-grade tuning.",
-            "cta_label": "Shop Audio",
-            "link": "/collections/airpods-home"
-          }
-        },
-        "hp_card_2": {
-          "type": "card",
-          "settings": {
-            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M6 18v2M18 18v2\"/></svg>",
-            "gradient": "linear-gradient(135deg, #0b8e70 0%, #35d69f 60%, #bf5af2 100%)",
-            "eyebrow": "Category 02 / Desk",
-            "title": "The workspace, rethought.",
-            "text": "Lamps, keyboards, chargers and hubs — built to be seen without stealing focus.",
-            "cta_label": "Shop Desk",
-            "link": "/collections/mac"
-          }
-        },
-        "hp_card_3": {
-          "type": "card",
-          "settings": {
-            "glyph_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3\"/></svg>",
-            "gradient": "linear-gradient(135deg, #ff375f 0%, #ff9f0a 60%, #ffd60a 100%)",
-            "eyebrow": "Category 03 / Everyday",
-            "title": "Carry that ages well.",
-            "text": "Full-grain leather, titanium, and 316 stainless steel — objects for the every day.",
-            "cta_label": "Shop Everyday",
-            "link": "/collections/accessories"
-          }
-        }
-      },
-      "block_order": [
-        "hp_card_1",
-        "hp_card_2",
-        "hp_card_3"
-      ],
-      "settings": {
-        "eyebrow": "Shop by category",
-        "heading": "Popular collections",
-        "subheading": "Three curated lines, each one obsessively engineered. A good place to start if you're new to Anode."
-      }
-    },
-    "editorial": {
-      "type": "editorial",
-      "settings": {
-        "eyebrow": "Our story",
-        "heading": "Designed with intention. Built to last.",
-        "text": "<p>We believe great design is invisible. Every product in the Anode collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all"
-      }
-    },
-    "collection_list": {
-      "type": "collection-list",
-      "blocks": {
-        "coll_1": {
-          "type": "collection",
-          "settings": {
-            "collection": "accessories"
-          }
-        },
-        "coll_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "accessories-featured"
-          }
-        },
-        "coll_3": {
-          "type": "collection",
-          "settings": {
-            "collection": "automated-collection"
-          }
-        }
-      },
-      "block_order": [
-        "coll_1",
-        "coll_2",
-        "coll_3"
-      ],
-      "settings": {
-        "eyebrow": "Browse collections",
-        "title": "Shop by category",
-        "layout": "bento",
-        "columns": 3
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "col_1": {
-          "type": "column",
-          "settings": {
-            "title": "Free shipping",
-            "text": "On all orders over $50, delivered fast to your door."
-          }
-        },
-        "col_2": {
-          "type": "column",
-          "settings": {
-            "title": "30-day returns",
-            "text": "Not in love? Return it within 30 days for a full refund."
-          }
-        },
-        "col_3": {
-          "type": "column",
-          "settings": {
-            "title": "Secure payments",
-            "text": "Encrypted checkout you can trust. All major payment methods accepted."
-          }
-        }
-      },
-      "block_order": [
-        "col_1",
-        "col_2",
-        "col_3"
-      ],
-      "settings": {
-        "title": "Why you'll love it",
-        "subtitle": "Designed to make every interaction effortless.",
-        "columns": 3
-      }
-    },
     "home_faq": {
       "type": "home-mini-faq",
       "blocks": {
@@ -530,15 +617,15 @@
         "hf_q2": {
           "type": "question",
           "settings": {
-            "question": "What is Anode's return policy?",
-            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Anode product doesn't meet your expectations — for any reason — send it back in any condition and we'll refund 100% of your purchase. Start on the <a href=\"/pages/shipping-returns\">returns page</a>.</p>"
+            "question": "What is Luminor's return policy?",
+            "answer": "<p><strong>30-day no-questions-asked returns.</strong> If any Luminor product doesn't meet your expectations — for any reason — send it back in any condition and we'll refund 100% of your purchase. Start on the <a href=\"/pages/shipping-returns\">returns page</a>.</p>"
           }
         },
         "hf_q3": {
           "type": "question",
           "settings": {
-            "question": "Are Anode products covered by warranty?",
-            "answer": "<p>Yes. Every Anode product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/pages/warranty\">warranty page</a> for full terms.</p>"
+            "question": "Are Luminor products covered by warranty?",
+            "answer": "<p>Yes. Every Luminor product is backed by a <strong>2-year limited warranty</strong> (lifetime craftsmanship guarantee on the Everyday line) covering any manufacturing defect. See the <a href=\"/pages/warranty\">warranty page</a> for full terms.</p>"
           }
         }
       },
@@ -557,29 +644,41 @@
     "home_help": {
       "type": "home-help-banner",
       "settings": {
+        "bg_color_from": "#111114",
+        "bg_color_to": "#4f46e5",
+        "accent_aura_1": "#6366f1",
+        "accent_aura_2": "#a78bfa",
         "eyebrow": "We're here",
+        "eyebrow_color": "#a78bfa",
         "heading": "One message away from a real person.",
-        "text": "A Anode specialist — not a bot — will reply within 24 hours on weekdays. We help with orders, product questions, warranty claims, or a recommendation if you're not sure what to buy.",
+        "heading_color": "#ffffff",
+        "text": "A Luminor specialist — not a bot — will reply within 24 hours on weekdays. We help with orders, product questions, warranty claims, or a recommendation if you're not sure what to buy.",
+        "text_color": "#ffffff",
         "primary_label": "Contact support",
         "primary_link": "/pages/contact",
+        "primary_bg": "#ffffff",
+        "primary_text": "#0a0a0c",
         "secondary_label": "Browse the store",
-        "secondary_link": "/collections/all"
+        "secondary_link": "/collections/all",
+        "secondary_text": "#ffffff"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "title": "Join the Anode circle.",
-        "text": "Be the first to know about new arrivals, exclusive offers, and stories from the Anode studio."
+        "eyebrow": "",
+        "title": "Join the Luminor circle.",
+        "text": "Be the first to know about new arrivals, exclusive offers, and stories from the Luminor studio.",
+        "color_scheme": "default"
       }
     }
   },
   "order": [
     "hero",
-    "featured_collection",
     "home_popular",
     "category_pills",
     "lookbook",
+    "featured_collection",
     "press",
     "stats",
     "multicolumn",

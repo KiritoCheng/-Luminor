@@ -1,11 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Anode",
+        "eyebrow": "Luminor",
         "title": "Shop by category.",
-        "text": "<p>Titanium cases, MagSafe mounts, leather wallets, and Apple Watch bands — explore the collections that make up the Anode ecosystem.</p>",
+        "text": "<p>Titanium cases, MagSafe mounts, leather wallets, and Apple Watch bands — explore the collections that make up the Luminor ecosystem.</p>",
         "button_label": "Shop all",
         "button_link": "/collections/all"
       }

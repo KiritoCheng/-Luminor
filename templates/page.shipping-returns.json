@@ -8,131 +8,163 @@
  * ------------------------------------------------------------
  */
 {
-    "sections":  {
-                     "intro":  {
-                                   "type":  "rich-text",
-                                   "settings":  {
-                                                    "eyebrow":  "Anode policy",
-                                                    "title":  "Shipping \u0026 returns.",
-                                                    "text":  "\u003cp\u003eWe deliver premium gear worldwide, fast. And if it\u0027s not perfect, we make it right — zero hassle.\u003c/p\u003e"
-                                                }
-                               },
-                     "shipping_grid":  {
-                                           "type":  "multicolumn",
-                                           "settings":  {
-                                                            "eyebrow":  "Shipping",
-                                                            "title":  "Fast, tracked, carbon-neutral.",
-                                                            "subtitle":  "Every Anode order ships in recyclable packaging — on us, when you spend $50+.",
-                                                            "columns":  3
-                                                        },
-                                           "blocks":  {
-                                                          "s1":  {
-                                                                     "type":  "column",
-                                                                     "settings":  {
-                                                                                      "title":  "Free standard shipping",
-                                                                                      "text":  "On all orders over $50. US delivery 3–5 business days."
-                                                                                  }
-                                                                 },
-                                                          "s2":  {
-                                                                     "type":  "column",
-                                                                     "settings":  {
-                                                                                      "title":  "Express (2-day)",
-                                                                                      "text":  "Available at checkout for domestic orders under 10lbs. Ships same-day if ordered before 2pm EST."
-                                                                                  }
-                                                                 },
-                                                          "s3":  {
-                                                                     "type":  "column",
-                                                                     "settings":  {
-                                                                                      "title":  "Worldwide delivery",
-                                                                                      "text":  "We ship to 40+ countries. International 7–14 business days. Duties \u0026 taxes calculated at checkout."
-                                                                                  }
-                                                                 }
-                                                      },
-                                           "block_order":  [
-                                                               "s1",
-                                                               "s2",
-                                                               "s3"
-                                                           ]
-                                       },
-                     "returns_ed":  {
-                                        "type":  "editorial",
-                                        "settings":  {
-                                                         "eyebrow":  "30-day promise",
-                                                         "heading":  "Not in love? Send it back.",
-                                                         "text":  "\u003cp\u003eWe obsess over craftsmanship. If a Anode product doesn\u0027t meet your expectations within the first 30 days, return it in original condition for a full refund. No restocking fees, no attitude.\u003c/p\u003e\u003cp\u003eInitiate a return from your account dashboard or email us at \u003ca href=\"mailto:support@anode-theme.com\"\u003esupport@anode-theme.com\u003c/a\u003e with your order number.\u003c/p\u003e",
-                                                         "button_label":  "Start a return",
-                                                         "button_link":  "/pages/contact"
-                                                     }
-                                    },
-                     "faq":  {
-                                 "type":  "faq",
-                                 "settings":  {
-                                                  "eyebrow":  "Common questions",
-                                                  "title":  "Shipping \u0026 returns FAQs",
-                                                  "subtitle":  "Can\u0027t find your answer? Our team is one message away."
-                                              },
-                                 "blocks":  {
-                                                "q1":  {
-                                                           "type":  "question",
-                                                           "settings":  {
-                                                                            "question":  "When will my order ship?",
-                                                                            "answer":  "\u003cp\u003eOrders placed before 2pm EST ship the same business day. Weekend and holiday orders ship next business day.\u003c/p\u003e"
-                                                                        }
-                                                       },
-                                                "q2":  {
-                                                           "type":  "question",
-                                                           "settings":  {
-                                                                            "question":  "Do I need to pay return shipping?",
-                                                                            "answer":  "\u003cp\u003eFor US customers, we cover return shipping on all eligible returns. International customers are responsible for return postage.\u003c/p\u003e"
-                                                                        }
-                                                       },
-                                                "q3":  {
-                                                           "type":  "question",
-                                                           "settings":  {
-                                                                            "question":  "How long until I get my refund?",
-                                                                            "answer":  "\u003cp\u003eRefunds are processed within 3 business days of us receiving and inspecting your return. It may take an extra 2–5 days to show on your statement depending on your bank.\u003c/p\u003e"
-                                                                        }
-                                                       },
-                                                "q4":  {
-                                                           "type":  "question",
-                                                           "settings":  {
-                                                                            "question":  "My package shows as delivered but I haven\u0027t received it.",
-                                                                            "answer":  "\u003cp\u003ePlease check with neighbors, your building\u0027s front desk, or alternate locations. If still missing after 48 hours, reach out and we\u0027ll open a carrier investigation and send a replacement.\u003c/p\u003e"
-                                                                        }
-                                                       },
-                                                "q5":  {
-                                                           "type":  "question",
-                                                           "settings":  {
-                                                                            "question":  "Do you ship to PO boxes or APO/FPO?",
-                                                                            "answer":  "\u003cp\u003eYes, standard shipping to PO boxes and military addresses is available via USPS Priority Mail.\u003c/p\u003e"
-                                                                        }
-                                                       }
-                                            },
-                                 "block_order":  [
-                                                     "q1",
-                                                     "q2",
-                                                     "q3",
-                                                     "q4",
-                                                     "q5"
-                                                 ]
-                             },
-                     "cta":  {
-                                 "type":  "statement",
-                                 "settings":  {
-                                                  "watermark":  "ANODE",
-                                                  "eyebrow":  "Need help?",
-                                                  "heading":  "Questions? We\u0027re standing by.",
-                                                  "text":  "\u003cp\u003eA real human from the Anode team will reply to your message — usually within a few hours, always within 24.\u003c/p\u003e",
-                                                  "button_label":  "Contact support",
-                                                  "button_link":  "/pages/contact"
-                                              }
-                             }
-                 },
-    "order":  [
-                  "intro",
-                  "shipping_grid",
-                  "returns_ed",
-                  "faq",
-                  "cta"
-              ]
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Luminor policy",
+        "title": "Shipping & returns.",
+        "text": "<p>We deliver premium gear worldwide, fast. And if it's not perfect, we make it right — zero hassle.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "shipping_grid": {
+      "type": "multicolumn",
+      "blocks": {
+        "s1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minimalist-shipping-box-icon.png",
+            "title": "Free standard shipping",
+            "text": "On all orders over $50. US delivery 3–5 business days.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "s2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minimalist-return-box-icon.png",
+            "title": "Express (2-day)",
+            "text": "Available at checkout for domestic orders under 10lbs. Ships same-day if ordered before 2pm EST.",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "s3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/30-day-returns-icon.png",
+            "title": "Worldwide delivery",
+            "text": "We ship to 40+ countries. International 7–14 business days. Duties & taxes calculated at checkout.",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "color_scheme": "alt",
+        "eyebrow": "Shipping",
+        "title": "Fast, tracked, carbon-neutral.",
+        "subtitle": "Every Luminor order ships in recyclable packaging — on us, when you spend $50+.",
+        "columns": 3,
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "returns_ed": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "30-day promise",
+        "heading": "Not in love? Send it back.",
+        "text": "<p>We obsess over craftsmanship. If a Luminor product doesn't meet your expectations within the first 30 days, return it in original condition for a full refund. No restocking fees, no attitude.</p><p>Initiate a return from your account dashboard or email us at <a href=\"mailto:support@luminor-theme.com\">support@luminor-theme.com</a> with your order number.</p>",
+        "image_1": "shopify://shop_images/editorial-blog-cover.png",
+        "image_2": "shopify://shop_images/anodized-dark-titanium-alloy-texture.png",
+        "button_label": "Start a return",
+        "button_link": "/pages/contact"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before 2pm EST ship the same business day. Weekend and holiday orders ship next business day.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to pay return shipping?",
+            "answer": "<p>For US customers, we cover return shipping on all eligible returns. International customers are responsible for return postage.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How long until I get my refund?",
+            "answer": "<p>Refunds are processed within 3 business days of us receiving and inspecting your return. It may take an extra 2–5 days to show on your statement depending on your bank.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "My package shows as delivered but I haven't received it.",
+            "answer": "<p>Please check with neighbors, your building's front desk, or alternate locations. If still missing after 48 hours, reach out and we'll open a carrier investigation and send a replacement.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship to PO boxes or APO/FPO?",
+            "answer": "<p>Yes, standard shipping to PO boxes and military addresses is available via USPS Priority Mail.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "eyebrow": "Common questions",
+        "title": "Shipping & returns FAQs",
+        "subtitle": "Can't find your answer? Our team is one message away.",
+        "button_label": "Contact support",
+        "button_link": ""
+      }
+    },
+    "cta": {
+      "type": "statement",
+      "settings": {
+        "eyebrow": "Need help?",
+        "heading": "Questions? We're standing by.",
+        "text": "<p>A real human from the Luminor team will reply to your message — usually within a few hours, always within 24.</p>",
+        "heading_mobile": 40,
+        "heading_desktop": 80,
+        "heading_weight": "700",
+        "heading_tracking": "-0.03em",
+        "heading_leading": "1.05",
+        "text_mobile": 16,
+        "text_desktop": 20,
+        "text_weight": "400",
+        "eyebrow_weight": "600",
+        "bg_color": "#111114",
+        "eyebrow_color": "#a78bfa",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_label": "Contact support",
+        "button_link": "/pages/contact",
+        "cta_bg": "#ffffff",
+        "cta_text": "#0a0a0c"
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "shipping_grid",
+    "returns_ed",
+    "faq",
+    "cta"
+  ]
 }
