@@ -117,7 +117,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Power Banks"
+          "default": "Phone"
         },
         {
           "type": "url",
@@ -133,7 +133,7 @@
           "type": "text",
           "id": "count",
           "label": "Product count",
-          "default": "12"
+          "info": "Optional. Leave blank to hide the count — a hard-coded number goes stale the moment the catalog changes."
         },
         {
           "type": "checkbox",
@@ -145,60 +145,73 @@
     }
   ],
   "presets": [
-    {
-      "name": "Category pills",
-      "blocks": [
-        {
-          "type": "category",
-          "settings": {
-            "title": "iPhone",
-            "count": "9"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "iPad",
-            "count": "5"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Mac",
-            "count": "7"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Apple Watch",
-            "count": "3",
-            "featured": true
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "AirPods",
-            "count": "3"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "HomePod",
-            "count": "2"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Accessories",
-            "count": "6"
-          }
-        }
-      ]
-    }
-  ]
+               {
+                 "name": "Category pills",
+                 "blocks": [
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Phone",
+                       "link": "/collections/phone",
+                       "featured": true
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Best Sell",
+                       "link": "/collections/best-sell",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Watch",
+                       "link": "/collections/watch",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Accessories",
+                       "link": "/collections/accessories",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Listen & Home",
+                       "link": "/collections/listen-home",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Desk",
+                       "link": "/collections/desk",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "Pad",
+                       "link": "/collections/pad",
+                       "featured": false
+                     }
+                   },
+                   {
+                     "type": "category",
+                     "settings": {
+                       "title": "All products",
+                       "link": "/collections/all"
+                     }
+                   }
+                 ]
+               }
+             ]
 }{% endschema %}

@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Luminors",
-    "theme_version": "1.1.0",
-    "theme_author": "Luminor Studio",
-    "theme_documentation_url": "https://kiritocheng.github.io/luminor-help/docs/",
-    "theme_support_url": "https://kiritocheng.github.io/luminor-help/support/"
+    "theme_name": "Anode",
+    "theme_version": "2.0.0",
+    "theme_author": "Anode Studio",
+    "theme_documentation_url": "https://kiritocheng.github.io/anode-help/docs/",
+    "theme_support_url": "https://kiritocheng.github.io/anode-help/support/"
   },
   {
     "name": "Typography",
@@ -100,7 +100,7 @@
         "type": "color",
         "id": "color_background_dark",
         "label": "Dark background",
-        "default": "#000000"
+        "default": "#12131A"
       },
       {
         "type": "header",

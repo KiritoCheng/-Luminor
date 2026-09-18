@@ -1,6 +1,15 @@
 {%- comment -%}
-  Renders a product card — Sharge-inspired style with discount badges,
-  color swatches, and quick add-to-cart.
+  Renders a product card: discount badge, variant swatches, quick view and
+  quick add, plus the compatibility line that makes an accessory card useful
+  before the customer opens it.
+
+  Swatch colour resolution, in order:
+    1. the variant image, when the merchant has uploaded one per colour
+    2. variant.metafields.shopify.color-pattern, when the colour is a real
+       value Shopify understands (#hex or a gradient)
+    3. an initial-letter chip — never a CSS colour guessed from the variant
+       title, which is what silently produced blank swatches before
+
   Accepts: product (product object), show_quick_view (bool), lazy (bool)
 {%- endcomment -%}
 {%- liquid
@@ -79,11 +88,16 @@
     {%- if product.variants.size > 1 -%}
       <div class="product-card__swatches">
         {%- for variant in product.variants limit: 5 -%}
+          {%- assign swatch_color = variant.metafields.shopify.color-pattern.value -%}
           <a href="{{ product.url }}?variant={{ variant.id }}" class="product-card__swatch {% if variant == product.selected_or_first_available_variant %}is-active{% endif %}" title="{{ variant.title | escape }}">
             {%- if variant.image -%}
               <img src="{{ variant.image | image_url: width: 40 }}" alt="{{ variant.title | escape }}" width="20" height="20" loading="lazy">
+            {%- elsif swatch_color != blank and swatch_color.first != nil -%}
+              <span class="product-card__swatch-dot" style="background: {{ swatch_color.first }}"></span>
+            {%- elsif swatch_color != blank -%}
+              <span class="product-card__swatch-dot" style="background: {{ swatch_color }}"></span>
             {%- else -%}
-              <span class="product-card__swatch-dot" style="background: {{ variant.title | handleize }}"></span>
+              <span class="product-card__swatch-dot product-card__swatch-dot--initial">{{ variant.title | strip | slice: 0, 1 | upcase }}</span>
             {%- endif -%}
           </a>
         {%- endfor -%}
@@ -91,6 +105,27 @@
           <span class="product-card__swatch-more">+{{ product.variants.size | minus: 5 }}</span>
         {%- endif -%}
       </div>
+    {%- endif -%}
+
+    {%- comment -%}
+      Compatibility line — the same metafield that drives the fit matrix on the
+      product page, surfaced one level up so the collection grid is filterable
+      by eye. Shows the first two dimensions, then the remainder as "+n".
+    {%- endcomment -%}
+    {%- assign card_dims = product.metafields.anode.compatibility.value -%}
+    {%- if card_dims and card_dims.size > 0 -%}
+      <ul class="product-card__compat" role="list">
+        {%- for dim in card_dims limit: 2 -%}
+          {%- assign parts = dim | split: '|' -%}
+          <li class="product-card__compat-item">
+            <span class="product-card__compat-label">{{ parts[0] | strip | escape }}</span>
+            <span class="product-card__compat-value">{{ parts[1] | default: '—' | strip | escape }}</span>
+          </li>
+        {%- endfor -%}
+        {%- if card_dims.size > 2 -%}
+          <li class="product-card__compat-more">+{{ card_dims.size | minus: 2 }}</li>
+        {%- endif -%}
+      </ul>
     {%- endif -%}
 
     <div class="product-card__price">

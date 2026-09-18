@@ -21,7 +21,7 @@
             </div>
           {%- else -%}
             <div class="multicolumn__media media--square">
-              {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'multicolumn__placeholder' }}
+              {{ forloop.index0 | modulo: 6 | plus: 1 | prepend: 'collection-' | placeholder_svg_tag: 'multicolumn__placeholder' }}
             </div>
           {%- endif -%}
           {%- if block.settings.title != blank -%}

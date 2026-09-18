@@ -44,8 +44,8 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/titanium-silver-shield-emblem.png",
-            "title": "Lifetime warranty",
-            "text": "Titanium-grade build, backed for life.",
+            "title": "1-year warranty",
+            "text": "Anodized aluminum build, backed for 1 year.",
             "link_label": "",
             "link": ""
           }
@@ -69,17 +69,75 @@
       ],
       "settings": {
         "color_scheme": "alt",
-        "eyebrow": "Luminor promise",
+        "eyebrow": "Anode promise",
         "title": "Why shop with us",
         "subtitle": "Every order is backed by our commitment to quality.",
         "columns": 4,
         "button_label": "",
         "button_link": ""
       }
+    },
+    "spec_compare": {
+      "type": "spec-compare",
+      "blocks": {
+        "sc1": {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "metafield_key": "weight",
+            "fallback": "Not published",
+            "highlight": true
+          }
+        },
+        "sc2": {
+          "type": "spec",
+          "settings": {
+            "label": "Material",
+            "metafield_key": "material",
+            "fallback": "Not published",
+            "highlight": false
+          }
+        },
+        "sc3": {
+          "type": "spec",
+          "settings": {
+            "label": "Standard",
+            "metafield_key": "standard",
+            "fallback": "Not published",
+            "highlight": false
+          }
+        },
+        "sc4": {
+          "type": "spec",
+          "settings": {
+            "label": "Ports",
+            "metafield_key": "ports",
+            "fallback": "Not published",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "sc1",
+        "sc2",
+        "sc3",
+        "sc4"
+      ],
+      "settings": {
+        "use_current_collection": true,
+        "products_to_show": 3,
+        "eyebrow": "Side by side",
+        "heading": "Compare this range",
+        "subtitle": "Same rows for every product in the collection, pulled from each spec sheet.",
+        "footnote": "All figures are manufacturer measurements.",
+        "show_links": false,
+        "color_scheme": "scheme_1"
+      }
     }
   },
   "order": [
     "main",
+    "spec_compare",
     "perks"
   ]
 }

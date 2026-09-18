@@ -83,13 +83,13 @@
         --color-border: {{ settings.color_border }};
         --color-input-border: {{ settings.color_input_border }};
         /* ---- Color: semantic ---- */
-        --color-success: #30d158;
-        --color-success-bg: color-mix(in srgb, #30d158 12%, transparent);
-        --color-success-text: #1a7d3a;
-        --color-error: #ff3b30;
-        --color-error-bg: color-mix(in srgb, #ff3b30 12%, transparent);
-        --color-error-text: #c5300a;
-        --color-warning: #ff9f0a;
+        --color-success: #16A34A;
+        --color-success-bg: color-mix(in srgb, #16A34A 12%, transparent);
+        --color-success-text: #15803D;
+        --color-error: #DC2626;
+        --color-error-bg: color-mix(in srgb, #DC2626 12%, transparent);
+        --color-error-text: #B91C1C;
+        --color-warning: #D97706;
         --color-info: var(--color-primary);
         /* ---- Layout ---- */
         --page-width: {{ settings.page_width }}px;
@@ -171,6 +171,7 @@
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'cart.js' | asset_url }}" defer></script>
+    <script src="{{ 'anode-mechanisms.js' | asset_url }}" defer></script>
 
     {%- if request.page_type == 'product' -%}
       <script src="{{ 'product.js' | asset_url }}" defer></script>

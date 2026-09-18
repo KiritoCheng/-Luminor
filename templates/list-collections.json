@@ -12,9 +12,9 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor",
+        "eyebrow": "Anode",
         "title": "Shop by category.",
-        "text": "<p>Titanium cases, MagSafe mounts, leather wallets, and Apple Watch bands — explore the collections that make up the Luminor ecosystem.</p>",
+        "text": "<p>Phones, tablets, notebooks, wearables and the desk gear around them — the seven categories that make up the Anode system.</p>",
         "button_label": "Shop all",
         "button_link": "/collections/all"
       }
@@ -26,5 +26,8 @@
       }
     }
   },
-  "order": ["intro", "main"]
+  "order": [
+    "intro",
+    "main"
+  ]
 }

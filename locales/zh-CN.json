@@ -45,6 +45,38 @@
     "close": "关闭"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "按{{ axis }}的适配矩阵",
+      "fits": "适配",
+      "partial": "有条件适配",
+      "no_fit": "不适配",
+      "checker_label": "你的{{ axis }}是哪一种？",
+      "checker_button": "检查适配",
+      "checker_yes": "适配 — {{ items }}。",
+      "checker_partial": "有条件适配 — {{ items }}。",
+      "checker_no": "这个规格我们目前还没有对应产品。",
+      "checker_empty": "请先选择规格。",
+      "metafield_hint": "在「设置 → 自定义数据」中为该商品添加适配矩阵（anode.fit_matrix），即可替换这些手工填写的行。"
+    },
+    "spec_compare": {
+      "table_caption": "规格对比",
+      "spec_column": "规格项",
+      "not_published": "未公布",
+      "view_product": "查看 {{ title }}"
+    },
+    "bundle": {
+      "total": "合计",
+      "selected_count": "已选 {{ count }} 件",
+      "error": "加入购物车失败，请重试。",
+      "pick_one": "请至少选择一件商品。"
+    },
+    "fit_guide": {
+      "takes": "约需 1 分钟",
+      "tools": "你需要准备"
+    },
+    "press": {
+      "logo_placeholder": "媒体标志"
+    },
     "header": {
       "menu": "菜单",
       "cart_count": "购物车中有 {{ count }} 件商品"

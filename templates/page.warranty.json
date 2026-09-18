@@ -13,8 +13,8 @@
       "type": "rich-text",
       "settings": {
         "eyebrow": "Built for life",
-        "title": "The Luminor warranty.",
-        "text": "<p>Titanium-grade craftsmanship, backed for the long haul. Every Luminor product is covered by our warranty — because quality should mean something.</p>",
+        "title": "The Anode warranty.",
+        "text": "<p>Anodized aluminum, woven nylon, full-grain leather. Every Anode product carries a 1-year limited warranty against manufacturing defects — because a spec sheet means nothing if we will not stand behind it.</p>",
         "button_label": "",
         "button_link": ""
       }
@@ -36,8 +36,8 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/matte-stone-gray-laptop-sleeve.png",
-            "title": "Luminor+ · Lifetime · $19",
-            "text": "Everything in Standard, plus lifetime coverage for accidental damage, lost items (one time per product), free expedited replacements, and a dedicated +support priority line.",
+            "title": "Anode Care · 3 years · $19",
+            "text": "Everything in Standard, extended to 3 years, plus accidental damage, one lost-item replacement per product, expedited replacements and priority support.",
             "link_label": "",
             "link": ""
           }
@@ -51,7 +51,7 @@
         "color_scheme": "alt",
         "eyebrow": "Coverage tiers",
         "title": "Choose your level of certainty.",
-        "subtitle": "Standard coverage is always free. Upgrade to Luminor+ for white-glove treatment.",
+        "subtitle": "Standard coverage is included at no cost. Add Anode Care for the things a manufacturing warranty cannot reach.",
         "columns": 2,
         "button_label": "",
         "button_link": ""
@@ -66,7 +66,7 @@
         "color_scheme": "alt",
         "eyebrow": "What's covered",
         "title": "Craftsmanship. Materials. Function.",
-        "text": "<p>We cover manufacturing defects in every Luminor product — from the first titanium billet to the last stitched seam.</p><ul><li>Hinges, clasps and magnetic circuits</li><li>Adhesion on leather & fabric products</li><li>Finish (non-abusive wear only)</li></ul><p>Does not cover accidental drops, third-party modifications, cosmetic-only wear, or damage from misuse.</p>",
+        "text": "<p>We cover manufacturing defects in every Anode product — from the first aluminum billet to the last stitched seam.</p><ul><li>Hinges, clasps and magnetic circuits</li><li>Adhesion on leather &amp; fabric products</li><li>Finish (non-abusive wear only)</li></ul><p>Does not cover accidental drops, third-party modifications, cosmetic-only wear, or damage from misuse. Anode Care extends coverage to 3 years and adds accidental damage.</p>",
         "button_label": "See full terms",
         "button_link": "/pages/contact"
       }
@@ -76,7 +76,7 @@
       "settings": {
         "eyebrow": "File a claim",
         "heading": "Three simple steps.",
-        "text": "<p><strong>1. Photo it.</strong> Take a clear photo of the defect next to a written note with your order number.</p><p><strong>2. Send it.</strong> Email to <a href=\"mailto:warranty@luminor-theme.com\">warranty@luminor-theme.com</a> or submit via the form below — 60-second process.</p><p><strong>3. We fix it.</strong> Most claims approved within 24 hours. Replacement ships free the next business day.</p>",
+        "text": "<p><strong>1. Photo it.</strong> Take a clear photo of the defect next to a written note with your order number.</p><p><strong>2. Send it.</strong> Email to <a href=\"mailto:warranty@anode.store\">warranty@anode.store</a> or submit via the form below — 60-second process.</p><p><strong>3. We fix it.</strong> Most claims approved within 24 hours. Replacement ships free the next business day.</p>",
         "image_1": "shopify://shop_images/precision-titanium-tech-accessory-macro.png",
         "image_2": "shopify://shop_images/premium-material-macro-detail.png",
         "button_label": "File a warranty claim",
@@ -87,8 +87,8 @@
       "type": "statement",
       "settings": {
         "eyebrow": "Our promise",
-        "heading": "Grade 5 titanium. Backed for life.",
-        "text": "<p>We stand behind every stitch, magnet, and milled titanium edge. If something fails on us, we'll make it right — fast.</p>",
+        "heading": "6063 anodized aluminum. Backed for 1 year.",
+        "text": "<p>We stand behind every stitch, magnet and milled aluminum edge. If something fails on us, we will make it right — within 5 business days.</p>",
         "heading_mobile": 40,
         "heading_desktop": 80,
         "heading_weight": "700",
@@ -102,7 +102,7 @@
         "eyebrow_color": "#a78bfa",
         "heading_color": "#ffffff",
         "text_color": "#ffffff",
-        "button_label": "Browse Luminor+",
+        "button_label": "Browse Anode Care",
         "button_link": "/collections/all",
         "cta_bg": "#ffffff",
         "cta_text": "#0a0a0c"

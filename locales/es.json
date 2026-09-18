@@ -45,6 +45,38 @@
     "close": "Cerrar"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "Matriz de compatibilidad por {{ axis }}",
+      "fits": "Compatible",
+      "partial": "Compatible con matices",
+      "no_fit": "No compatible",
+      "checker_label": "\u00bfQu\u00e9 {{ axis }} tienes?",
+      "checker_button": "Comprobar",
+      "checker_yes": "Compatible \u2014 {{ items }}.",
+      "checker_partial": "Compatible con matices \u2014 {{ items }}.",
+      "checker_no": "Todav\u00eda no fabricamos una opci\u00f3n para esa medida.",
+      "checker_empty": "Elige primero una medida.",
+      "metafield_hint": "A\u00f1ade una matriz de compatibilidad al producto en Ajustes \u2192 Datos personalizados (anode.fit_matrix) para sustituir estas filas manuales."
+    },
+    "spec_compare": {
+      "table_caption": "Comparativa de especificaciones",
+      "spec_column": "Especificaci\u00f3n",
+      "not_published": "Sin publicar",
+      "view_product": "Ver {{ title }}"
+    },
+    "bundle": {
+      "total": "Total",
+      "selected_count": "{{ count }} seleccionados",
+      "error": "No se han podido a\u00f1adir esos art\u00edculos. Int\u00e9ntalo de nuevo.",
+      "pick_one": "Selecciona al menos un art\u00edculo."
+    },
+    "fit_guide": {
+      "takes": "Tarda alrededor de un minuto",
+      "tools": "Necesitas"
+    },
+    "press": {
+      "logo_placeholder": "Logotipo de medio"
+    },
     "header": {
       "menu": "Menú",
       "cart_count": "{{ count }} artículo(s) en tu carrito"

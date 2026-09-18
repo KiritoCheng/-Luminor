@@ -14,7 +14,7 @@
       "settings": {
         "eyebrow": "Our story",
         "title": "Designed with intention. Built to last.",
-        "text": "<p>Luminor was born from a simple idea: everyday essentials should be extraordinary. We obsess over every detail, from the materials we source to the packaging you open.</p><p>Our mission is to elevate the everyday through thoughtful design.</p>",
+        "text": "<p>Anode was born from a simple idea: everyday essentials should be extraordinary. We sweat the details nobody photographs, from the materials we source to the packaging you open.</p><p>Our mission is to elevate the everyday through thoughtful design.</p>",
         "button_label": "Shop the collection",
         "button_link": "/collections/all"
       }
@@ -23,8 +23,8 @@
       "type": "editorial",
       "settings": {
         "eyebrow": "Philosophy",
-        "heading": "Less, but better.",
-        "text": "<p>We believe great design is invisible. Every product in the Luminor collection is the result of obsessive refinement — stripping away the unnecessary until only the essential remains.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
+        "heading": "Only what earns its place.",
+        "text": "<p>We believe good gear disappears. Every product in the Anode collection is the result of patient refinement — removing every part that doesn't earn its place.</p><p>From premium materials to precision engineering, we hold ourselves to a single standard: would we use it every day?</p>",
         "button_label": "",
         "button_link": ""
       }
@@ -49,8 +49,8 @@
         "v3": {
           "type": "column",
           "settings": {
-            "title": "Customer obsessed",
-            "text": "From unboxing to everyday use, every touchpoint should feel effortless and delightful."
+            "title": "Built around the bench",
+            "text": "From unboxing to the tenth month of daily use, nothing should need a second thought."
           }
         }
       },
@@ -71,7 +71,7 @@
       "settings": {
         "eyebrow": "Promise",
         "heading": "Built for life. Backed for years.",
-        "text": "<p>Every Luminor product comes with our promise: if it doesn't meet your expectations, return it within 30 days for a full refund. No questions asked.</p>",
+        "text": "<p>Every Anode product comes with our promise: if it doesn't meet your expectations, return it within 30 days for a full refund. No questions asked.</p>",
         "button_label": "Shop now",
         "button_link": "/collections/all"
       }
@@ -80,8 +80,8 @@
       "type": "statement",
       "settings": {
         "eyebrow": "Our promise",
-        "heading": "Grade 5 titanium. Backed for life.",
-        "text": "<p>From MagSafe mounts to AirPods shells, every Luminor piece is engineered to outlast the Apple device it protects — and to feel better in your hand the longer you live with it.</p>",
+        "heading": "6063 anodized aluminum. Backed for 1 year.",
+        "text": "<p>From magnetic mounts to earbud shells, every Anode piece is engineered to outlast the device it protects — and to feel better in your hand the longer you live with it.</p>",
         "button_label": "Shop the collection",
         "button_link": "/collections/all"
       }

@@ -12,7 +12,7 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor policy",
+        "eyebrow": "Anode policy",
         "title": "Shipping & returns.",
         "text": "<p>We deliver premium gear worldwide, fast. And if it's not perfect, we make it right — zero hassle.</p>"
       }
@@ -50,7 +50,7 @@
       "settings": {
         "eyebrow": "Shipping",
         "title": "Fast, tracked, carbon-neutral.",
-        "subtitle": "Every Luminor order ships in recyclable packaging — on us, when you spend $50+.",
+        "subtitle": "Every Anode order ships in recyclable packaging — on us, when you spend $50+.",
         "columns": 3
       }
     },
@@ -59,7 +59,7 @@
       "settings": {
         "eyebrow": "30-day promise",
         "heading": "Not in love? Send it back.",
-        "text": "<p>We obsess over craftsmanship. If a Luminor product doesn't meet your expectations within the first 30 days, return it in original condition for a full refund. No restocking fees, no attitude.</p><p>Initiate a return from your account dashboard or email us at <a href=\"mailto:support@luminor-theme.com\">support@luminor-theme.com</a> with your order number.</p>",
+        "text": "<p>We're particular about how things are made. If an Anode product doesn't meet your expectations within the first 30 days, return it in original condition for a full refund. No restocking fees, no attitude.</p><p>Initiate a return from your account dashboard or email us at <a href=\"mailto:support@anode.store\">support@anode.store</a> with your order number.</p>",
         "button_label": "Start a return",
         "button_link": "/pages/contact"
       }
@@ -121,7 +121,7 @@
       "settings": {
         "eyebrow": "Need help?",
         "heading": "Questions? We're standing by.",
-        "text": "<p>A real human from the Luminor team will reply to your message — usually within a few hours, always within 24.</p>",
+        "text": "<p>A real human from the Anode team will reply to your message — usually within a few hours, always within 24.</p>",
         "button_label": "Contact support",
         "button_link": "/pages/contact"
       }

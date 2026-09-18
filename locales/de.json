@@ -45,6 +45,38 @@
     "close": "Schließen"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "Passmatrix nach {{ axis }}",
+      "fits": "Passt",
+      "partial": "Passt mit Einschr\u00e4nkung",
+      "no_fit": "Passt nicht",
+      "checker_label": "Welche {{ axis }} hast du?",
+      "checker_button": "Pr\u00fcfen",
+      "checker_yes": "Passt \u2014 {{ items }}.",
+      "checker_partial": "Passt mit Einschr\u00e4nkung \u2014 {{ items }}.",
+      "checker_no": "F\u00fcr diese Variante haben wir noch keine passende L\u00f6sung.",
+      "checker_empty": "Bitte zuerst eine Gr\u00f6\u00dfe w\u00e4hlen.",
+      "metafield_hint": "Hinterlege unter Einstellungen \u2192 Benutzerdefinierte Daten eine Passmatrix (anode.fit_matrix), um diese manuellen Zeilen zu ersetzen."
+    },
+    "spec_compare": {
+      "table_caption": "Technischer Vergleich",
+      "spec_column": "Eigenschaft",
+      "not_published": "Nicht angegeben",
+      "view_product": "{{ title }} ansehen"
+    },
+    "bundle": {
+      "total": "Summe",
+      "selected_count": "{{ count }} ausgew\u00e4hlt",
+      "error": "Artikel konnten nicht hinzugef\u00fcgt werden. Bitte erneut versuchen.",
+      "pick_one": "Bitte mindestens einen Artikel ausw\u00e4hlen."
+    },
+    "fit_guide": {
+      "takes": "Dauert etwa eine Minute",
+      "tools": "Du brauchst"
+    },
+    "press": {
+      "logo_placeholder": "Medienlogo"
+    },
     "header": {
       "menu": "Menü",
       "cart_count": "{{ count }} Artikel in Ihrem Warenkorb"

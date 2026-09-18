@@ -45,6 +45,38 @@
     "close": "Fermer"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "Matrice de compatibilit\u00e9 par {{ axis }}",
+      "fits": "Compatible",
+      "partial": "Compatible sous r\u00e9serve",
+      "no_fit": "Non compatible",
+      "checker_label": "Quel {{ axis }} avez-vous ?",
+      "checker_button": "V\u00e9rifier",
+      "checker_yes": "Compatible \u2014 {{ items }}.",
+      "checker_partial": "Compatible sous r\u00e9serve \u2014 {{ items }}.",
+      "checker_no": "Nous ne proposons pas encore de mod\u00e8le pour cette taille.",
+      "checker_empty": "Choisissez d'abord une taille.",
+      "metafield_hint": "Ajoutez une matrice de compatibilit\u00e9 au produit dans Param\u00e8tres \u2192 Donn\u00e9es personnalis\u00e9es (anode.fit_matrix) pour remplacer ces lignes manuelles."
+    },
+    "spec_compare": {
+      "table_caption": "Comparatif technique",
+      "spec_column": "Caract\u00e9ristique",
+      "not_published": "Non communiqu\u00e9",
+      "view_product": "Voir {{ title }}"
+    },
+    "bundle": {
+      "total": "Total",
+      "selected_count": "{{ count }} s\u00e9lectionn\u00e9s",
+      "error": "Impossible d'ajouter ces articles. R\u00e9essayez.",
+      "pick_one": "S\u00e9lectionnez au moins un article."
+    },
+    "fit_guide": {
+      "takes": "Prend environ une minute",
+      "tools": "Il vous faut"
+    },
+    "press": {
+      "logo_placeholder": "Logo de presse"
+    },
     "header": {
       "menu": "Menu",
       "cart_count": "{{ count }} article(s) dans votre panier"

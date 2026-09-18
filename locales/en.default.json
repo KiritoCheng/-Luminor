@@ -54,6 +54,38 @@
     "close": "Close"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "Fit matrix by {{ axis }}",
+      "fits": "Fits",
+      "partial": "Fits with a caveat",
+      "no_fit": "Does not fit",
+      "checker_label": "Which {{ axis }} do you have?",
+      "checker_button": "Check",
+      "checker_yes": "Fits \u2014 {{ items }}.",
+      "checker_partial": "Fits with a caveat \u2014 {{ items }}.",
+      "checker_no": "We do not make a fit for that one yet.",
+      "checker_empty": "Pick a size first.",
+      "metafield_hint": "Add a fit matrix to this product in Settings \u2192 Custom data (anode.fit_matrix) to replace these hand-typed rows."
+    },
+    "spec_compare": {
+      "table_caption": "Specification comparison",
+      "spec_column": "Specification",
+      "not_published": "Not published",
+      "view_product": "View {{ title }}"
+    },
+    "bundle": {
+      "total": "Total",
+      "selected_count": "{{ count }} selected",
+      "error": "Could not add those items. Try again.",
+      "pick_one": "Pick at least one item."
+    },
+    "fit_guide": {
+      "takes": "Takes about a minute",
+      "tools": "You will need"
+    },
+    "press": {
+      "logo_placeholder": "Media logo"
+    },
     "header": {
       "menu": "Menu",
       "cart_count": "{{ count }} items in your cart"

@@ -12,9 +12,9 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor Support",
+        "eyebrow": "Anode Support",
         "title": "Questions, answered.",
-        "text": "<p>From MagSafe compatibility to titanium grades and Apple Watch band sizing — everything you need to know about your Luminor gear, in one place.</p>",
+        "text": "<p>From Qi2 compatibility to anodizing specs and band sizing — everything you need to know about your Anode gear, in one place.</p>",
         "button_label": "",
         "button_link": ""
       }
@@ -40,7 +40,7 @@
           "type": "question",
           "settings": {
             "question": "Are your products covered by warranty?",
-            "answer": "<p>Yes, all Luminor products come with a 1-year limited warranty covering manufacturing defects.</p>"
+            "answer": "<p>Yes, all Anode products come with a 1-year limited warranty covering manufacturing defects.</p>"
           }
         },
         "q4": {

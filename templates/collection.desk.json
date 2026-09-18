@@ -21,7 +21,7 @@
       "settings": {
         "eyebrow": "Our promise",
         "heading": "Free shipping. Free returns. Zero risk.",
-        "text": "<p>Not in love with your Luminor Desk setup? Send it back within 30 days, in any condition, and we'll refund 100% of the purchase price. Standard shipping on all orders over $49 is always free.</p>",
+        "text": "<p>Not in love with your Anode Desk setup? Send it back within 30 days, in any condition, and we'll refund 100% of the purchase price. Standard shipping on all orders over $50 is always free.</p>",
         "button_label": "See our policy",
         "button_link": "/pages/shipping-returns"
       }
@@ -33,7 +33,7 @@
         "color_scheme": "alt",
         "eyebrow": "Design notes",
         "title": "Weighted, not bulky.",
-        "text": "<p>Our desk lamps and docks ship with precision-ground weighted bases — heavy enough to never tip over, light enough to pick up with one hand. A 4-degree lip at the base edge hides cables without hiding the design.</p><p>Everything is powered by USB-C. Everything pairs with your Apple devices instantly. Everything just works.</p>",
+        "text": "<p>Our desk lamps and docks ship with precision-ground weighted bases — heavy enough to never tip over, light enough to pick up with one hand. A 4-degree lip at the base edge hides cables without hiding the design.</p><p>Everything is powered by USB-C. Everything pairs instantly. Nothing needs a manual.</p>",
         "button_label": "Shipping info",
         "button_link": "/pages/shipping-returns"
       }
@@ -49,32 +49,32 @@
     "collection_types": {
       "type": "multicolumn",
       "blocks": {
-        "t4": {
-          "type": "column",
-          "settings": {
-            "title": "USB Hubs",
-            "text": "Thunderbolt 4 docks with 8K display support. One cable to rule them all."
-          }
-        },
         "t1": {
           "type": "column",
           "settings": {
-            "title": "Lamps",
-            "text": "Warm-to-cool tunable LED desk lamps with touch dimming. No flicker, no fatigue."
-          }
-        },
-        "t3": {
-          "type": "column",
-          "settings": {
-            "title": "Chargers",
-            "text": "MagSafe-ready 3-in-1 charging docks. Anodized aluminum, minimal footprint."
+            "title": "Desk lighting",
+            "text": "Tunable LED light bars with touch dimming. No flicker, no screen glare."
           }
         },
         "t2": {
           "type": "column",
           "settings": {
-            "title": "Keyboards",
-            "text": "Low-profile mechanical keyboards. Hot-swappable. Wireless. Quieter than a library."
+            "title": "Risers &amp; stands",
+            "text": "Solid-wood risers that lift the screen to eye level and give the keyboard back its space."
+          }
+        },
+        "t3": {
+          "type": "column",
+          "settings": {
+            "title": "Charging docks",
+            "text": "Qi2 dual charging docks in 6063 aluminum. One cable for two devices."
+          }
+        },
+        "t4": {
+          "type": "column",
+          "settings": {
+            "title": "Cable organization",
+            "text": "Magnetic cable boards that keep the desk flat and the cables where you left them."
           }
         }
       },
@@ -96,7 +96,7 @@
       "settings": {
         "eyebrow": "Desk essentials",
         "heading": "Less clutter. More intention.",
-        "text": "<p>We designed every Luminor Desk piece to be seen without drawing attention. Low-profile bodies, matte anodized finishes, and cable management you can actually use — all engineered to make 8 hours behind a screen feel effortless.</p><p>From the weight of the base to the click of a key, nothing is accidental.</p>",
+        "text": "<p>We designed every Anode Desk piece to be seen without drawing attention. Low-profile bodies, matte anodized finishes, and cable management you can actually reach — so eight hours behind a screen stops being a negotiation with your own equipment.</p><p>From the weight of the base to the click of a key, every value is specified on the product page.</p>",
         "button_label": "Browse the desk line",
         "button_link": "/collections/all"
       }

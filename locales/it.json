@@ -45,6 +45,38 @@
     "close": "Chiudi"
   },
   "sections": {
+    "compatibility": {
+      "table_caption": "Matrice di compatibilit\u00e0 per {{ axis }}",
+      "fits": "Compatibile",
+      "partial": "Compatibile con riserva",
+      "no_fit": "Non compatibile",
+      "checker_label": "Quale {{ axis }} hai?",
+      "checker_button": "Verifica",
+      "checker_yes": "Compatibile \u2014 {{ items }}.",
+      "checker_partial": "Compatibile con riserva \u2014 {{ items }}.",
+      "checker_no": "Per questa misura non abbiamo ancora una soluzione.",
+      "checker_empty": "Scegli prima una misura.",
+      "metafield_hint": "Aggiungi una matrice di compatibilit\u00e0 al prodotto in Impostazioni \u2192 Dati personalizzati (anode.fit_matrix) per sostituire queste righe manuali."
+    },
+    "spec_compare": {
+      "table_caption": "Confronto specifiche",
+      "spec_column": "Specifica",
+      "not_published": "Non pubblicato",
+      "view_product": "Vedi {{ title }}"
+    },
+    "bundle": {
+      "total": "Totale",
+      "selected_count": "{{ count }} selezionati",
+      "error": "Impossibile aggiungere gli articoli. Riprova.",
+      "pick_one": "Seleziona almeno un articolo."
+    },
+    "fit_guide": {
+      "takes": "Richiede circa un minuto",
+      "tools": "Ti serve"
+    },
+    "press": {
+      "logo_placeholder": "Logo del media"
+    },
     "header": {
       "menu": "Menu",
       "cart_count": "{{ count }} articolo/i nel carrello"

@@ -1,5 +1,5 @@
 /* ============================================================
-   Aurora Theme — theme.css
+   Anode Theme — theme.css
    Component styles (header, footer, sections, cards, drawers)
    ============================================================ */
 
@@ -820,7 +820,7 @@
   opacity: 0.45;
 }
 
-/* Awwwards-grade artistic placeholder: layered orbs + device */
+/* Artistic placeholder: layered orbs + device silhouette */
 .hero__placeholder-art {
   position: relative;
   width: 100%;
@@ -928,7 +928,7 @@
   }
 }
 
-/* Grain texture overlay — Awwwards signature film texture */
+/* Grain texture overlay — fine film grain, animated */
 .hero__grain {
   position: absolute;
   inset: 0;
@@ -976,7 +976,7 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Editorial meta strip — Awwwards signature indexed header */
+/* Editorial meta strip — indexed header */
 .hero__meta {
   display: inline-flex;
   align-items: center;
@@ -1093,7 +1093,7 @@
   transition-delay: 0.65s;
 }
 
-/* Apple-style text link with arrow */
+/* Anode-style text link with arrow */
 .hero__cta .link-arrow {
   display: inline-flex;
   align-items: center;
@@ -1113,7 +1113,7 @@
   height: 14px;
 }
 
-/* Scroll indicator — Awwwards cue */
+/* Scroll indicator */
 .hero__scroll {
   position: absolute;
   bottom: 32px;
@@ -1422,7 +1422,7 @@
   }
 }
 
-/* ===== Product Card Redesigned (Sharge style) ===== */
+/* ===== Product Card — Anode layout ===== */
 .product-card {
   position: relative;
   display: block;
@@ -2218,7 +2218,7 @@
   }
 }
 
-/* -------------------- Collection list — Apple-style compact Bento -------------------- */
+/* -------------------- Collection list — Anode-style compact Bento -------------------- */
 .collection-list {
   padding-top: clamp(40px, 6vw, 72px);
   padding-bottom: clamp(40px, 6vw, 72px);
@@ -2589,7 +2589,7 @@
   }
 }
 
-/* filters sidebar — Apple/Awwwards redesign with hover motion & smooth accordion */
+/* Filters sidebar — hover motion and smooth accordion */
 .collection-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -2601,7 +2601,7 @@
   position: sticky;
   top: 80px;
   padding: 6px 4px;
-  /* subtle background panel — matches apple-sidebar aesthetic */
+  /* subtle background panel — low-contrast surface */
   background-color: color-mix(in srgb, var(--color-bg) 55%, transparent);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -3032,7 +3032,7 @@
   text-align: center;
 }
 
-/* -------------------- Cart page (Apple-style minimalism) -------------------- */
+/* -------------------- Cart page (Anode-style minimalism) -------------------- */
 .cart-page {
   display: grid;
   grid-template-columns: 1fr 360px;
@@ -3045,7 +3045,7 @@
   border-collapse: collapse;
 }
 
-/* Softer row separators — Apple uses hairline dividers, not heavy borders */
+/* Softer row separators — Anode uses hairline dividers, not heavy borders */
 .cart-items th,
 .cart-items td {
   text-align: left;
@@ -3623,7 +3623,7 @@
   padding: 22px;
 }
 
-/* -------------------- Quick view modal (Apple/Awwwards minimalist) -------------------- */
+/* -------------------- Quick view modal — compact 2-column -------------------- */
 .modal {
   position: fixed;
   inset: 0;
@@ -3674,7 +3674,7 @@
     0 0 0 1px color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
-/* Exit animation: faster than enter (Apple rule — exit 30-40% faster) */
+/* Exit animation: faster than enter (Anode rule — exit 30-40% faster) */
 .modal:not(.is-open) .modal__dialog {
   transition-duration: 0.24s;
 }
@@ -3687,7 +3687,7 @@
   display: none;
 }
 
-/* ===== modal__content — APPLE STORE-STYLE 2-column card ===== */
+/* ===== modal__content — compact 2-column card ===== */
 .modal__content {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -3939,7 +3939,7 @@
   min-width: 64px;
 }
 
-/* Quantity stepper — Luminor indigo capsule (full-fill, container-focus ring) */
+/* Quantity stepper — Anode indigo capsule (full-fill, container-focus ring) */
 .qty-stepper {
   display: inline-flex;
   flex-direction: row;
@@ -4036,7 +4036,7 @@
   background-color: color-mix(in srgb, var(--color-primary, #4F46E5) 4%, transparent);
 }
 
-/* Add to cart — Apple-style filled pill button */
+/* Add to cart — Anode-style filled pill button */
 .modal__add {
   width: 100%;
   border: none;
@@ -4158,7 +4158,7 @@
   transform: translateX(2px);
 }
 
-/* Close button — Apple-style capsule × inside header-right corner */
+/* Close button — Anode-style capsule × inside header-right corner */
 .modal__close {
   position: absolute;
   top: 16px;
@@ -4904,6 +4904,19 @@
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
+/* Placeholder mark shown when a logo block has neither an image nor a name.
+   Presets ship in this state on purpose (Theme Store: logo lists in presets
+   must render as Logo icons, and third-party brand names need written permission). */
+.press__logo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 36px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
 @media (prefers-reduced-motion: reduce) {
   .press__marquee-track {
     animation: none !important;
@@ -5048,11 +5061,14 @@
   opacity: 1;
 }
 
-/* Column grid */
+/* Column grid — 3 link columns + 1 featured card.
+   auto-fit so a mega menu with fewer columns still fills the row instead of
+   leaving an empty track; at 990px and below the panel is hidden anyway. */
 .header__dropdown-cols {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: var(--space-12);
+  align-items: start;
   position: relative;
   z-index: 1;
   box-sizing: border-box;
@@ -5475,7 +5491,7 @@ body.is-mega-open::after {
   }
 }
 
-/* ===== Localization (Apple-style disclosure) ===== */
+/* ===== Localization (Anode-style disclosure) ===== */
 .localization-form {
   display: inline-block;
   margin: 0;
@@ -5605,4 +5621,587 @@ body.is-mega-open::after {
   .localization.is-open .localization__panel {
     transform: translateX(-50%) translateY(0);
   }
+}
+
+/* ============================================================================
+   Anode — accessory-commerce mechanisms
+   compatibility · spec-compare · bundle-picks · fit-guide
+   These four sections are the reason this theme exists as its own thing:
+   each one reads a shared product data model instead of a pile of settings.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- shared */
+.compat__head,
+.spec-compare__head,
+.bundle__head,
+.fit-guide__head {
+  margin-bottom: var(--space-10);
+  max-width: 62ch;
+}
+.compat__head h2,
+.spec-compare__head h2,
+.bundle__head h2,
+.fit-guide__head h2 {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
+  margin-top: var(--space-2);
+}
+.compat__head .lead,
+.spec-compare__head .lead,
+.bundle__head .lead,
+.fit-guide__head .lead {
+  margin-top: var(--space-3);
+}
+
+/* ------------------------------------------------- Compatibility & fit */
+.compat__dims {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-10);
+}
+.compat__dim {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+}
+.bg-alt .compat__dim {
+  background-color: var(--color-bg);
+}
+.compat__dim-label {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+.compat__dim-value {
+  font-size: var(--fs-h6);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.compat__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+}
+.compat__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  font-size: var(--fs-small);
+}
+.compat__table th,
+.compat__table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+.compat__table thead th {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.compat__table tbody th {
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.compat__table tbody tr:last-child th,
+.compat__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.compat__th-corner {
+  text-align: left !important;
+}
+.compat__cell {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.compat__cell--yes {
+  color: var(--color-success-text);
+  font-weight: 700;
+}
+.compat__cell--partial {
+  color: var(--color-warning);
+  font-weight: 700;
+}
+.compat__cell--no {
+  color: var(--color-text-muted);
+}
+.compat__note {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  max-width: 70ch;
+}
+
+.compat__checker {
+  margin-top: var(--space-8);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+}
+.bg-alt .compat__checker {
+  background-color: var(--color-bg);
+}
+.compat__checker-label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+.compat__checker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.compat__select {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 11px var(--space-4);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--fs-small);
+}
+.compat__checker-result {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  min-height: 1.4em;
+}
+.compat__checker-result[data-state='yes'] {
+  color: var(--color-success-text);
+}
+.compat__checker-result[data-state='partial'] {
+  color: var(--color-warning);
+}
+.compat__checker-result[data-state='no'] {
+  color: var(--color-error-text);
+}
+
+/* ------------------------------------------------------ Spec comparison */
+.spec-compare__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+}
+.spec-compare__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-size: var(--fs-small);
+}
+.spec-compare__table th,
+.spec-compare__table td {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+.spec-compare__table thead th {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-5);
+}
+.spec-compare__corner {
+  width: 22%;
+}
+.spec-compare__product {
+  display: table-cell;
+}
+.spec-compare__thumb {
+  display: block;
+  width: 76px;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+.spec-compare__name {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  text-decoration: none;
+  line-height: 1.3;
+}
+.spec-compare__name:hover {
+  color: var(--color-primary);
+}
+.spec-compare__price {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.spec-compare__table tbody th {
+  font-weight: 500;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.spec-compare__table tbody tr:last-child th,
+.spec-compare__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.spec-compare__row--hl th,
+.spec-compare__row--hl td {
+  background-color: var(--color-bg-alt);
+  font-weight: 600;
+}
+.spec-compare__row--hl td {
+  font-variant-numeric: tabular-nums;
+}
+.spec-compare__note {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+.spec-compare__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+/* --------------------------------------------------- Complete the setup */
+.bundle__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.bundle__item {
+  position: relative;
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+  cursor: pointer;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.bundle__item:hover {
+  border-color: var(--color-primary);
+}
+.bundle__item:has(.bundle__check:checked) {
+  border-color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+.bundle__item:has(.bundle__check:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.bundle__check {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+.bundle__media {
+  flex: 0 0 72px;
+  width: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+.bundle__placeholder {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-border);
+}
+.bundle__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-right: var(--space-6);
+}
+.bundle__title {
+  font-weight: 600;
+  font-size: var(--fs-small);
+  line-height: 1.35;
+}
+.bundle__note {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+.bundle__price {
+  margin-top: 4px;
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+.bundle__was {
+  margin-left: 6px;
+  color: var(--color-text-muted);
+}
+.bundle__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+}
+.bundle__summary {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+.bundle__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding-inline: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.bundle__total {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+.bundle__total strong {
+  margin-left: 6px;
+  font-size: var(--fs-h6);
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+.bundle__status {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  min-height: 1.4em;
+}
+.bundle__status[data-state='error'] {
+  color: var(--color-error-text);
+}
+.bundle__status[data-state='ok'] {
+  color: var(--color-success-text);
+}
+
+/* --------------------------------------------------------- Fit & install */
+.fit-guide__duration {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.fit-guide__steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-8);
+  counter-reset: none;
+}
+.fit-guide__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.fit-guide__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.fit-guide__media {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+.fit-guide__placeholder {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-border);
+}
+.fit-guide__title {
+  font-size: var(--fs-h6);
+  letter-spacing: -0.01em;
+}
+.fit-guide__text {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  max-width: 46ch;
+}
+.fit-guide__tools {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+.fit-guide__tools strong {
+  color: var(--color-text);
+  margin-right: 6px;
+}
+.fit-guide__cta {
+  margin-top: var(--space-6);
+}
+
+/* -------------------------------------------------------------- mobile */
+@media screen and (max-width: 749px) {
+  .compat__head,
+  .spec-compare__head,
+  .bundle__head,
+  .fit-guide__head {
+    margin-bottom: var(--space-6);
+  }
+  .compat__dims {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    margin-bottom: var(--space-6);
+  }
+  .bundle__grid {
+    grid-template-columns: 1fr;
+  }
+  .bundle__bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bundle__bar .btn {
+    width: 100%;
+  }
+  .fit-guide__steps {
+    gap: var(--space-6);
+  }
+}
+
+/* ---------------------------------------------- product card: swatch chip
+   Fallback when a colour has no variant image and no Shopify colour pattern.
+   An initial beats a broken CSS colour, which is what "background: {{ handle }}"
+   used to produce. */
+.product-card__swatch-dot--initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ------------------------------------------- product card: compatibility
+   The fit matrix, compressed to two dimensions so the grid stays scannable. */
+.product-card__compat {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin-top: var(--space-2);
+}
+.product-card__compat-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 2px 7px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  max-width: 100%;
+}
+.product-card__compat-label {
+  color: var(--color-text-muted);
+}
+.product-card__compat-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.product-card__compat-more {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+/* ------------------------------------------------- collection facets: swatch
+   Search & Discovery lets a merchant mark a filter as swatches; the theme
+   honours that instead of flattening every option into a checkbox row. */
+.facets__options--swatch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+}
+.checkbox--swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.checkbox--swatch input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.checkbox--swatch .facets__swatch {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+.checkbox--swatch .facets__swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.checkbox--swatch .facets__swatch--initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.checkbox--swatch input:checked + .facets__swatch {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}
+.checkbox--swatch input:focus-visible + .facets__swatch {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.checkbox--swatch input:disabled + .facets__swatch {
+  opacity: 0.35;
+}
+.checkbox--swatch input:checked ~ span:not(.facets__swatch) {
+  font-weight: 600;
 }

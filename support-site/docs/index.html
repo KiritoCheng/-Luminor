@@ -5,156 +5,296 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Documentation — Anode Theme</title>
 <style>
+  :root {
+    --brand: #4F46E5;
+    --brand-hover: #4338CA;
+    --bg: #F6F6F8;
+    --surface: #FFFFFF;
+    --ink: #1B1B20;
+    --ink-muted: #71717A;
+    --line: #D4D4D8;
+    --code-bg: #EFEFF3;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    line-height: 1.6;
+    font-family: Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-  }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 80px 24px;
-  }
-  .logo {
-    font-size: 21px;
-    font-weight: 600;
-    color: #1d1d1f;
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-  }
-  h1 {
-    font-size: 56px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-    line-height: 1.05;
-  }
-  p.subtitle {
-    font-size: 19px;
-    color: #6e6e73;
-    margin-bottom: 56px;
-  }
-  h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    margin-top: 48px;
-    letter-spacing: -0.01em;
-  }
-  h3 {
-    font-size: 19px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    margin-top: 24px;
-  }
-  p {
     font-size: 16px;
-    color: #424245;
-    margin-bottom: 12px;
   }
-  ul {
-    margin-bottom: 16px;
-    padding-left: 20px;
+  .shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 96px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 14px 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  li {
-    font-size: 16px;
-    color: #424245;
-    margin-bottom: 6px;
+  .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
+  .brand span { color: var(--brand); }
+  .topbar nav { display: flex; gap: 18px; font-size: 13px; }
+  .topbar nav a { color: var(--ink-muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--brand); }
+
+  header.hero { padding: 72px 0 40px; max-width: 46ch; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--brand); margin-bottom: 14px;
   }
+  h1 { font-size: 46px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; }
+  .lede { margin-top: 18px; font-size: 18px; color: var(--ink-muted); }
+
+  .cols { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; }
+  .toc { position: sticky; top: 72px; font-size: 13.5px; }
+  .toc p { font-weight: 700; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
+  .toc a { display: block; padding: 4px 0; color: var(--ink-muted); text-decoration: none; }
+  .toc a:hover { color: var(--brand); }
+
+  main { min-width: 0; }
+  section { padding-top: 44px; scroll-margin-top: 72px; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+  h3 { font-size: 16px; font-weight: 650; margin: 26px 0 6px; }
+  p { color: #3F3F46; margin-bottom: 12px; max-width: 68ch; }
+  ul, ol { margin: 0 0 16px 20px; max-width: 68ch; }
+  li { margin-bottom: 6px; color: #3F3F46; }
   code {
-    background: #f5f5f7;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 14px;
-    color: #424245;
+    background: var(--code-bg); padding: 2px 6px; border-radius: 5px;
+    font-family: 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 13px; color: #2A2A32;
   }
-  .divider {
-    height: 1px;
-    background: #e5e5ea;
-    margin: 48px 0;
+  pre {
+    background: #17171C; color: #E7E7EC; padding: 16px 18px; border-radius: 12px;
+    overflow-x: auto; font-size: 12.5px; line-height: 1.6; margin: 0 0 18px;
   }
-  .preset-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    margin-right: 6px;
+  pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+  a { color: var(--brand); }
+  a:hover { color: var(--brand-hover); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 18px 0 8px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px;
   }
-  .tag-light { background: #e8e8ed; color: #1d1d1f; }
-  .tag-dark { background: #1d1d1f; color: #f5f5f7; }
-  a { color: #0071e3; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  footer {
-    margin-top: 80px;
-    padding-top: 40px;
-    border-top: 1px solid #e5e5ea;
-    text-align: center;
-    font-size: 12px;
-    color: #86868b;
+  .card h3 { margin: 0 0 4px; font-size: 14.5px; }
+  .card p { font-size: 13.5px; margin: 0; color: var(--ink-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 0 0 18px; background: var(--surface); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th { background: #EFEFF3; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  tbody th { font-weight: 600; white-space: nowrap; }
+
+  .note {
+    border-left: 3px solid var(--brand); background: var(--surface);
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 0 0 18px;
   }
-  @media (max-width: 640px) {
-    h1 { font-size: 40px; }
-    .container { padding: 48px 20px; }
+  .note p { margin: 0; font-size: 14px; }
+  .warn { border-left-color: #D97706; }
+
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: 1fr; gap: 0; }
+    .toc { position: static; margin-top: 32px; }
+    header.hero { padding-top: 44px; }
+    h1 { font-size: 34px; }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="logo">Anode</div>
-  <h1>Documentation</h1>
-  <p class="subtitle">Everything you need to set up and customize the Anode theme.</p>
+<div class="shell">
 
-  <h2>Getting Started</h2>
-  <p>After installing the Anode theme, go to <code>Online Store → Themes → Customize</code> to begin editing. All theme settings are organized into sections you can toggle and configure.</p>
+  <div class="topbar">
+    <div class="brand">Anode<span>.</span></div>
+    <nav>
+      <a href="#start">Getting started</a>
+      <a href="#metafields">Product data</a>
+      <a href="#sections">Sections</a>
+      <a href="#settings">Settings</a>
+      <a href="./../support/">Support</a>
+    </nav>
+  </div>
 
-  <div class="divider"></div>
+  <header class="hero">
+    <p class="eyebrow">Theme documentation</p>
+    <h1>Anode</h1>
+    <p class="lede">A Shopify theme built for accessory retail: it publishes the fit data customers need before they buy, and turns that data into a filter, a comparison and a bundle.</p>
+  </header>
 
-  <h2>Presets</h2>
-  <p>Anode comes with two built-in presets:</p>
-  <ul>
-    <li><span class="preset-tag tag-light">Anode</span> Clean, light-mode default preset.</li>
-    <li><span class="preset-tag tag-dark">Midnight</span> Elegant dark-mode preset with matching dark backgrounds.</li>
-  </ul>
-  <p>Switch between presets in the theme customizer by selecting from the preset dropdown at the top.</p>
+  <div class="cols">
+    <aside class="toc">
+      <p>Contents</p>
+      <a href="#start">Getting started</a>
+      <a href="#metafields">Product data model</a>
+      <a href="#sections">Sections</a>
+      <a href="#mechanisms">Fit, compare, bundle</a>
+      <a href="#filters">Collection filters</a>
+      <a href="#settings">Theme settings</a>
+      <a href="#presets">Presets</a>
+      <a href="#translations">Translations</a>
+      <a href="#support">Getting help</a>
+    </aside>
 
-  <div class="divider"></div>
+    <main>
 
-  <h2>Sections</h2>
+      <section id="start">
+        <h2>Getting started</h2>
+        <p>Install Anode, then open <strong>Online Store → Themes → Customize</strong>. Everything is edited there; no code changes are required to launch a working store.</p>
+        <div class="cards">
+          <div class="card"><h3>1 · Set your colours and fonts</h3><p>Theme settings → Colors and Typography.</p></div>
+          <div class="card"><h3>2 · Build the navigation</h3><p>Header section → menu blocks. Add up to three link columns plus a featured card.</p></div>
+          <div class="card"><h3>3 · Fill in product data</h3><p>Create the four <code>anode</code> metafields so fit, comparison and bundle sections light up.</p></div>
+          <div class="card"><h3>4 · Choose homepage sections</h3><p>Add, remove and reorder in the left rail of the customizer.</p></div>
+        </div>
+        <div class="note">
+          <p>Anode ships with <strong>one preset</strong>, also called Anode, which matches the theme's default installation state. There is no second style preset to keep in sync.</p>
+        </div>
+      </section>
 
-  <h3>Hero / Slideshow</h3>
-  <p>Add a hero banner or carousel to your homepage. Choose between a solid color background or upload a custom image.</p>
+      <section id="metafields">
+        <h2>Product data model</h2>
+        <p>This is the part worth setting up first. Four metafields in the <code>anode</code> namespace drive the fit matrix, the spec comparison, the bundle and the compatibility line on every product card. Create them once under <strong>Settings → Custom data → Products</strong>, then fill them in per product.</p>
 
-  <h3>Featured Products</h3>
-  <p>Showcase selected products from any collection. Configure grid columns for desktop and mobile independently.</p>
+        <table>
+          <thead>
+            <tr><th>Namespace and key</th><th>Type</th><th>Used by</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>anode.compatibility</th><td>List of single-line text</td><td>Fit matrix chips, product card compatibility line</td></tr>
+            <tr><th>anode.fit_matrix</th><td>JSON</td><td>Fit matrix table and the fit checker</td></tr>
+            <tr><th>anode.fit_steps</th><td>JSON</td><td>Fit &amp; install guide</td></tr>
+            <tr><th>anode.bundle_products</th><td>List of product references</td><td>Complete the setup</td></tr>
+            <tr><th>anode.weight, .material, .standard, .ports, .warranty, .capacity</th><td>Single-line text</td><td>Spec comparison rows</td></tr>
+          </tbody>
+        </table>
 
-  <h3>Collection List</h3>
-  <p>Display all your collections in a clean, minimal grid layout.</p>
+        <h3>anode.compatibility</h3>
+        <p>One line per dimension, written as <code>Label|Value</code>. The first two lines appear on the product card; all of them appear on the product page.</p>
+        <pre><code>Body size|6.1–6.9"
+Charging standard|Qi2 15W
+Magnets|N52 neodymium
+Finish|6063 anodized aluminum</code></pre>
 
-  <h3>Featured Collection</h3>
-  <p>Highlight a specific collection with a curated product grid.</p>
+        <h3>anode.fit_matrix</h3>
+        <p>A JSON object. <code>values</code> accepts <code>yes</code>, <code>partial</code> or <code>no</code>, so one row can express "fits with a caveat" without a second table.</p>
+        <pre><code>{
+  "axis": "Body size",
+  "columns": ["6.1\"", "6.3\"", "6.7\"", "6.9\""],
+  "rows": [
+    { "label": "Shell Aero",  "values": ["yes", "yes", "yes", "yes"] },
+    { "label": "Shell Clear", "values": ["yes", "yes", "partial", "no"] },
+    { "label": "Guard Glass", "values": ["yes", "yes", "yes", "partial"] }
+  ],
+  "note": "Diagonal measurement of the display, rounded to 0.1 in."
+}</code></pre>
 
-  <div class="divider"></div>
+        <h3>anode.fit_steps</h3>
+        <p>A JSON array of steps. <code>image</code> is a plain URL, so you can point at any file already in <strong>Content → Files</strong>.</p>
+        <pre><code>[
+  { "title": "Wipe the back", "text": "Dust is the only thing that stops a magnetic ring seating flat.", "image": "https://cdn.shopify.com/s/files/.../step-1.jpg" },
+  { "title": "Seat the top edge first", "text": "Hook the top edge over the device, then press the bottom two corners in." }
+]</code></pre>
 
-  <h2>Color Customization</h2>
-  <p>All theme colors are controlled via CSS variables in the theme settings. In the customizer, go to <strong>Theme styles</strong> to adjust:</p>
-  <ul>
-    <li>Background color</li>
-    <li>Text color</li>
-    <li>Accent color (buttons, links)</li>
-    <li>Border and divider colors</li>
-  </ul>
+        <div class="note">
+          <p>Every one of these sections also works from the theme editor alone, using its own blocks. The metafields exist so you type a spec once instead of once per section.</p>
+        </div>
+      </section>
 
-  <div class="divider"></div>
+      <section id="sections">
+        <h2>Sections</h2>
+        <p>48 sections ship with Anode. The ones below are specific to accessory retail; the rest are the standard editorial, collection and account blocks you would expect.</p>
 
-  <h2>Need Help?</h2>
-  <p>If you have any questions, feel free to <a href="https://kiritocheng.github.io/anode-help/support/">reach out to our support team</a> or email us at <a href="mailto:z1345036885@gmail.com">z1345036885@gmail.com</a>.</p>
+        <h3>Homepage</h3>
+        <ul>
+          <li><strong>Hero / Slideshow</strong> — split editorial hero with a slide deck, per-slide overlay controls and a magnetic call to action.</li>
+          <li><strong>Popular collections</strong> — gradient cards linking into a line.</li>
+          <li><strong>Compatibility &amp; fit</strong> — on the homepage this states the four dimensions every product page publishes; on a product page it renders the live matrix.</li>
+          <li><strong>Category pills</strong> — a compact index of the range.</li>
+          <li><strong>Spec comparison</strong> — a table filled from metafields across a collection.</li>
+          <li><strong>Complete the setup</strong> — tick-and-add bundle with a live total.</li>
+          <li><strong>Press &amp; reviews</strong> — logo strip. Ships with placeholder tiles, not real mastheads.</li>
+          <li><strong>Stats, Multicolumn, Image with text, Statement, Collection list, Search, Quick links, Mini FAQ, Help banner, Newsletter</strong>.</li>
+        </ul>
 
-  <footer>© 2026 Anode Studio. All rights reserved.</footer>
+        <h3>Product page</h3>
+        <p>Product details (with sticky buy column), then Compatibility &amp; fit → Material &amp; craft → Why Anode → Fit &amp; install guide → Complete the setup → Spec comparison → Statement → Recommendations.</p>
+
+        <h3>Collection page</h3>
+        <p>Collection grid with facets, sort, a filter drawer on mobile, and a spec comparison table scoped to the collection being viewed.</p>
+
+        <h3>Everything else</h3>
+        <p>Cart drawer and cart page, search and predictive search, blog and article, 404, password, gift card, and the full customer account set (login, register, activate, reset, addresses, order).</p>
+      </section>
+
+      <section id="mechanisms">
+        <h2>Fit, compare, bundle</h2>
+
+        <h3>Compatibility &amp; fit</h3>
+        <p>Renders dimension chips, the matrix table, and an optional fit checker. The checker reads the table that is already on the page, so a customer can never be told something you did not publish.</p>
+
+        <h3>Spec comparison</h3>
+        <p>Rows are defined once as section blocks, each pointing at a metafield key. Columns are the products of a collection. Change a metafield and every comparison table updates. Tick <em>Use the collection being viewed</em> to reuse one block set across all collection pages.</p>
+
+        <h3>Complete the setup</h3>
+        <p>Reads <code>anode.bundle_products</code>, then section blocks, then a fallback collection. Selected items are added in a single request and the drawer opens. The total is summed from live variant prices — no discount figure is ever invented.</p>
+
+        <h3>Fit &amp; install guide</h3>
+        <p>Numbered steps from <code>anode.fit_steps</code> or from blocks, with an optional tools line and a warranty-registration call to action.</p>
+      </section>
+
+      <section id="filters">
+        <h2>Collection filters</h2>
+        <p>Filters come from Shopify's own <strong>Search &amp; Discovery</strong> app, so any metafield you enable there becomes filterable — including the compatibility fields above. Turn on <em>Body size</em> or <em>Finish</em> as a filter and customers can narrow a collection by fit.</p>
+        <p>If you mark a filter as swatches in Search &amp; Discovery, Anode renders it as swatches. Colour values fall back to an initial chip when no colour or image is set, so a swatch never renders blank.</p>
+      </section>
+
+      <section id="settings">
+        <h2>Theme settings</h2>
+        <table>
+          <thead><tr><th>Group</th><th>What it controls</th></tr></thead>
+          <tbody>
+            <tr><th>Colors</th><td>Accent, backgrounds (page, alternate, dark), text, borders and input borders. All colours are exposed as CSS custom properties.</td></tr>
+            <tr><th>Typography</th><td>Heading and body fonts, base sizes, line height.</td></tr>
+            <tr><th>Layout</th><td>Page width, section spacing, button shape, image corner radius.</td></tr>
+            <tr><th>Product cards</th><td>Secondary image on hover, quick view, hover zoom, vendor display.</td></tr>
+            <tr><th>Cart</th><td>Drawer or page, order note.</td></tr>
+            <tr><th>Search</th><td>Modal or page, collection suggestions in predictive results.</td></tr>
+            <tr><th>Motion</th><td>Reveal animations and their style.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="presets">
+        <h2>Presets</h2>
+        <p>Anode ships a single preset, <strong>Anode</strong>, which mirrors the theme's default installation state. Pick it from the preset dropdown at the top of the customizer to restore the shipped configuration.</p>
+      </section>
+
+      <section id="translations">
+        <h2>Translations</h2>
+        <p>The theme ships with English, German, Spanish, French, Italian and Simplified Chinese. Storefront strings live in <code>locales/</code>; add or edit them under <strong>Settings → Languages</strong> so your changes survive theme updates.</p>
+      </section>
+
+      <section id="support">
+        <h2>Getting help</h2>
+        <p>Documentation issues, setup questions and bug reports all go to the same place.</p>
+        <div class="cards">
+          <div class="card"><h3>Support desk</h3><p><a href="./../support/">Open a support request</a> — replies within one business day.</p></div>
+          <div class="card"><h3>Email</h3><p><a href="mailto:support@anode.studio">support@anode.studio</a></p></div>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2026 Anode Studio. All rights reserved.</span>
+        <span>Anode Theme 2.0.0</span>
+      </footer>
+
+    </main>
+  </div>
 </div>
 </body>
 </html>

@@ -12,9 +12,9 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Luminor Cart",
+        "eyebrow": "Anode Cart",
         "title": "Your selection.",
-        "text": "<p>Titanium cases, MagSafe-ready gear, and Apple-grade essentials — review your picks below, then check out in seconds.</p>",
+        "text": "<p>Anodized cases, Qi2-ready chargers, and the small gear that holds a setup together — review your picks below, then check out.</p>",
         "button_label": "Continue shopping",
         "button_link": "/collections/all"
       }

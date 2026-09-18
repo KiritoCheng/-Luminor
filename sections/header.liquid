@@ -1,5 +1,5 @@
 {%- comment -%}
-  Header — Apple-style navigation with self-contained mega menu blocks.
+  Header — Anode-style navigation with self-contained mega menu blocks.
   Each "mega_menu" block holds its own columns + featured card in settings,
   so there is no fragile parent/child block ID matching.
 {%- endcomment -%}
@@ -36,7 +36,7 @@
           {%- elsif block.type == 'mega_menu' -%}
             {%- liquid
               assign has_content = false
-              if block.settings.column_1_title != blank or block.settings.column_2_title != blank or block.settings.column_3_title != blank or block.settings.column_4_title != blank
+              if block.settings.column_1_title != blank or block.settings.column_2_title != blank or block.settings.column_3_title != blank
                 assign has_content = true
               endif
               if block.settings.feature_title != blank or block.settings.feature_image != blank
@@ -62,17 +62,15 @@
                 <div class="header__dropdown header__dropdown--mega" data-header-dropdown>
                   <div class="header__dropdown-inner">
                     <div class="header__dropdown-cols">
-                      {%- for i in (1..4) -%}
+                      {%- for i in (1..3) -%}
                         {%- liquid
                           assign col_title = 'column_' | append: i | append: '_title'
                           assign col_link_1 = 'column_' | append: i | append: '_link_1'
                           assign col_link_2 = 'column_' | append: i | append: '_link_2'
                           assign col_link_3 = 'column_' | append: i | append: '_link_3'
-                          assign col_link_4 = 'column_' | append: i | append: '_link_4'
                           assign col_label_1 = 'column_' | append: i | append: '_label_1'
                           assign col_label_2 = 'column_' | append: i | append: '_label_2'
                           assign col_label_3 = 'column_' | append: i | append: '_label_3'
-                          assign col_label_4 = 'column_' | append: i | append: '_label_4'
                         -%}
                         {%- if block.settings[col_title] != blank -%}
                           <div class="header__dropdown-col">
@@ -96,13 +94,6 @@
                                 <li>
                                   <a href="{{ block.settings[col_link_3] | default: '#' }}">
                                     {{- block.settings[col_label_3] | escape -}}
-                                  </a>
-                                </li>
-                              {%- endif -%}
-                              {%- if block.settings[col_label_4] != blank -%}
-                                <li>
-                                  <a href="{{ block.settings[col_link_4] | default: '#' }}">
-                                    {{- block.settings[col_label_4] | escape -}}
                                   </a>
                                 </li>
                               {%- endif -%}
@@ -229,7 +220,7 @@
       {%- elsif block.type == 'mega_menu' -%}
         {%- liquid
           assign mob_has_children = false
-          for i in (1..4)
+          for i in (1..3)
             assign col_title = 'column_' | append: i | append: '_title'
             if block.settings[col_title] != blank
               assign mob_has_children = true
@@ -247,17 +238,15 @@
               <span class="mobile-menu__chevron" aria-hidden="true"></span>
             </summary>
             <div class="mobile-menu__subnav">
-              {%- for i in (1..4) -%}
+              {%- for i in (1..3) -%}
                 {%- liquid
                   assign col_title = 'column_' | append: i | append: '_title'
                   assign col_link_1 = 'column_' | append: i | append: '_link_1'
                   assign col_link_2 = 'column_' | append: i | append: '_link_2'
                   assign col_link_3 = 'column_' | append: i | append: '_link_3'
-                  assign col_link_4 = 'column_' | append: i | append: '_link_4'
                   assign col_label_1 = 'column_' | append: i | append: '_label_1'
                   assign col_label_2 = 'column_' | append: i | append: '_label_2'
                   assign col_label_3 = 'column_' | append: i | append: '_label_3'
-                  assign col_label_4 = 'column_' | append: i | append: '_label_4'
                 -%}
                 {%- if block.settings[col_title] != blank -%}
                   <div class="mobile-menu__sub-group">
@@ -275,11 +264,6 @@
                     {%- if block.settings[col_label_3] != blank -%}
                       <a href="{{ block.settings[col_link_3] | default: '#' }}">
                         {{- block.settings[col_label_3] | escape -}}
-                      </a>
-                    {%- endif -%}
-                    {%- if block.settings[col_label_4] != blank -%}
-                      <a href="{{ block.settings[col_link_4] | default: '#' }}">
-                        {{- block.settings[col_label_4] | escape -}}
                       </a>
                     {%- endif -%}
                   </div>
@@ -368,48 +352,34 @@
         { "type": "text", "id": "title", "label": "Menu title", "default": "Shop" },
         { "type": "url", "id": "url", "label": "Menu link" },
         { "type": "header", "content": "Column 1" },
-        { "type": "text", "id": "column_1_title", "label": "Title", "default": "Audio" },
-        { "type": "text", "id": "column_1_label_1", "label": "Link 1 label", "default": "Headphones" },
+        { "type": "text", "id": "column_1_title", "label": "Title", "default": "Phone" },
+        { "type": "text", "id": "column_1_label_1", "label": "Link 1 label", "default": "Phones" },
         { "type": "url", "id": "column_1_link_1", "label": "Link 1 URL" },
-        { "type": "text", "id": "column_1_label_2", "label": "Link 2 label", "default": "Speakers" },
+        { "type": "text", "id": "column_1_label_2", "label": "Link 2 label", "default": "Cases & stands" },
         { "type": "url", "id": "column_1_link_2", "label": "Link 2 URL" },
-        { "type": "text", "id": "column_1_label_3", "label": "Link 3 label", "default": "Earbuds" },
+        { "type": "text", "id": "column_1_label_3", "label": "Link 3 label", "default": "Shop all Phone" },
         { "type": "url", "id": "column_1_link_3", "label": "Link 3 URL" },
-        { "type": "text", "id": "column_1_label_4", "label": "Link 4 label" },
-        { "type": "url", "id": "column_1_link_4", "label": "Link 4 URL" },
         { "type": "header", "content": "Column 2" },
-        { "type": "text", "id": "column_2_title", "label": "Title", "default": "Desk" },
-        { "type": "text", "id": "column_2_label_1", "label": "Link 1 label", "default": "Lamps" },
+        { "type": "text", "id": "column_2_title", "label": "Title", "default": "Pad" },
+        { "type": "text", "id": "column_2_label_1", "label": "Link 1 label", "default": "Tablets" },
         { "type": "url", "id": "column_2_link_1", "label": "Link 1 URL" },
-        { "type": "text", "id": "column_2_label_2", "label": "Link 2 label", "default": "Keyboards" },
+        { "type": "text", "id": "column_2_label_2", "label": "Link 2 label", "default": "Sleeves" },
         { "type": "url", "id": "column_2_link_2", "label": "Link 2 URL" },
-        { "type": "text", "id": "column_2_label_3", "label": "Link 3 label", "default": "Chargers" },
+        { "type": "text", "id": "column_2_label_3", "label": "Link 3 label", "default": "Shop all Pad" },
         { "type": "url", "id": "column_2_link_3", "label": "Link 3 URL" },
-        { "type": "text", "id": "column_2_label_4", "label": "Link 4 label" },
-        { "type": "url", "id": "column_2_link_4", "label": "Link 4 URL" },
         { "type": "header", "content": "Column 3" },
-        { "type": "text", "id": "column_3_title", "label": "Title", "default": "Everyday" },
-        { "type": "text", "id": "column_3_label_1", "label": "Link 1 label", "default": "Wallets" },
+        { "type": "text", "id": "column_3_title", "label": "Title", "default": "Watch" },
+        { "type": "text", "id": "column_3_label_1", "label": "Link 1 label", "default": "Watches" },
         { "type": "url", "id": "column_3_link_1", "label": "Link 1 URL" },
-        { "type": "text", "id": "column_3_label_2", "label": "Link 2 label", "default": "Watches" },
+        { "type": "text", "id": "column_3_label_2", "label": "Link 2 label", "default": "Fitness trackers" },
         { "type": "url", "id": "column_3_link_2", "label": "Link 2 URL" },
-        { "type": "text", "id": "column_3_label_3", "label": "Link 3 label", "default": "Tumblers" },
+        { "type": "text", "id": "column_3_label_3", "label": "Link 3 label", "default": "Shop all Watch" },
         { "type": "url", "id": "column_3_link_3", "label": "Link 3 URL" },
-        { "type": "text", "id": "column_3_label_4", "label": "Link 4 label" },
-        { "type": "url", "id": "column_3_link_4", "label": "Link 4 URL" },
-        { "type": "header", "content": "Column 4" },
-        { "type": "text", "id": "column_4_title", "label": "Title" },
-        { "type": "text", "id": "column_4_label_1", "label": "Link 1 label" },
-        { "type": "url", "id": "column_4_link_1", "label": "Link 1 URL" },
-        { "type": "text", "id": "column_4_label_2", "label": "Link 2 label" },
-        { "type": "url", "id": "column_4_link_2", "label": "Link 2 URL" },
-        { "type": "text", "id": "column_4_label_3", "label": "Link 3 label" },
-        { "type": "url", "id": "column_4_link_3", "label": "Link 3 URL" },
         { "type": "header", "content": "Featured card" },
         { "type": "image_picker", "id": "feature_image", "label": "Feature image" },
-        { "type": "text", "id": "feature_title", "label": "Feature title", "default": "New arrivals" },
-        { "type": "text", "id": "feature_text", "label": "Feature text", "default": "Discover our latest collection" },
-        { "type": "text", "id": "feature_link_label", "label": "Feature link label", "default": "Shop now" },
+        { "type": "text", "id": "feature_title", "label": "Feature title", "default": "Anode Phone 18" },
+        { "type": "text", "id": "feature_text", "label": "Feature text", "default": "A 6.7-inch 120Hz display, periscope telephoto and a 5 000 mAh battery." },
+        { "type": "text", "id": "feature_link_label", "label": "Feature link label", "default": "Shop Phone" },
         { "type": "url", "id": "feature_link", "label": "Feature link" }
       ]
     }
@@ -423,21 +393,31 @@
           "settings": {
             "title": "Shop",
             "url": "/collections/all",
-            "column_1_title": "Audio",
-            "column_1_label_1": "Headphones",
-            "column_1_label_2": "Speakers",
-            "column_1_label_3": "Earbuds",
-            "column_2_title": "Desk",
-            "column_2_label_1": "Lamps",
-            "column_2_label_2": "Keyboards",
-            "column_2_label_3": "Chargers",
-            "column_3_title": "Everyday",
-            "column_3_label_1": "Wallets",
-            "column_3_label_2": "Watches",
-            "column_3_label_3": "Tumblers",
-            "feature_title": "New arrivals",
-            "feature_text": "Discover our latest collection",
-            "feature_link_label": "Shop now"
+            "column_1_title": "Phone",
+            "column_1_label_1": "Phones",
+            "column_1_link_1": "/collections/phone",
+            "column_1_label_2": "Cases & stands",
+            "column_1_link_2": "/collections/phone",
+            "column_1_label_3": "Shop all Phone",
+            "column_1_link_3": "/collections/phone",
+            "column_2_title": "Pad",
+            "column_2_label_1": "Tablets",
+            "column_2_link_1": "/collections/pad",
+            "column_2_label_2": "Sleeves",
+            "column_2_link_2": "/collections/pad",
+            "column_2_label_3": "Shop all Pad",
+            "column_2_link_3": "/collections/pad",
+            "column_3_title": "Watch",
+            "column_3_label_1": "Watches",
+            "column_3_link_1": "/collections/watch",
+            "column_3_label_2": "Fitness trackers",
+            "column_3_link_2": "/collections/watch",
+            "column_3_label_3": "Shop all Watch",
+            "column_3_link_3": "/collections/watch",
+            "feature_title": "Anode Phone 18",
+            "feature_text": "A 6.7-inch 120Hz display, periscope telephoto and a 5 000 mAh battery.",
+            "feature_link_label": "Shop Phone",
+            "feature_link": "/collections/phone"
           }
         },
         {

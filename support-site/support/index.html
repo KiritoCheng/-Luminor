@@ -5,126 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Support — Anode Theme</title>
 <style>
+  :root {
+    --brand: #4F46E5;
+    --brand-hover: #4338CA;
+    --bg: #F6F6F8;
+    --surface: #FFFFFF;
+    --ink: #1B1B20;
+    --ink-muted: #71717A;
+    --line: #D4D4D8;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    line-height: 1.6;
+    font-family: Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.65; font-size: 16px;
     -webkit-font-smoothing: antialiased;
   }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 80px 24px;
+  .shell { max-width: 720px; margin: 0 auto; padding: 0 24px 96px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
   }
-  .logo {
-    font-size: 21px;
-    font-weight: 600;
-    color: #1d1d1f;
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
+  .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
+  .brand span { color: var(--brand); }
+  .topbar a { font-size: 13px; color: var(--ink-muted); text-decoration: none; }
+  .topbar a:hover { color: var(--brand); }
+
+  header { padding: 64px 0 32px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; }
+  h1 { font-size: 42px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+  .lede { margin-top: 16px; font-size: 17px; color: var(--ink-muted); max-width: 52ch; }
+
+  h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; margin: 40px 0 10px; }
+  p { color: #3F3F46; margin-bottom: 12px; }
+  ul, ol { margin: 0 0 16px 20px; }
+  li { margin-bottom: 6px; color: #3F3F46; }
+  a { color: var(--brand); }
+  a:hover { color: var(--brand-hover); }
+  code {
+    background: #EFEFF3; padding: 2px 6px; border-radius: 5px;
+    font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px;
   }
-  h1 {
-    font-size: 56px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-    line-height: 1.05;
-  }
-  p.subtitle {
-    font-size: 19px;
-    color: #6e6e73;
-    margin-bottom: 48px;
-  }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0 8px; }
   .card {
-    background: #fff;
-    border-radius: 18px;
-    padding: 40px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
   }
-  h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    letter-spacing: -0.01em;
-  }
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e5e5ea;
-  }
-  .contact-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .icon {
-    width: 40px;
-    height: 40px;
-    background: #f5f5f7;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .label {
-    font-size: 14px;
-    color: #6e6e73;
-    margin-bottom: 2px;
-  }
-  .value {
-    font-size: 17px;
-    font-weight: 500;
-  }
-  a { color: #0071e3; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .response-time {
-    font-size: 14px;
-    color: #6e6e73;
-    margin-top: 16px;
-  }
-  footer {
-    margin-top: 60px;
-    text-align: center;
-    font-size: 12px;
-    color: #86868b;
-  }
-  @media (max-width: 640px) {
-    h1 { font-size: 40px; }
-    .card { padding: 28px 24px; }
-    .container { padding: 48px 20px; }
+  .card h3 { font-size: 14.5px; font-weight: 650; margin-bottom: 4px; }
+  .card p { font-size: 13.5px; color: var(--ink-muted); margin: 0; }
+
+  .note { border-left: 3px solid var(--brand); background: var(--surface); padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 0 0 18px; }
+  .note p { margin: 0; font-size: 14.5px; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-muted); }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 32px; }
+    header { padding-top: 44px; }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="logo">Anode</div>
-  <h1>Support</h1>
-  <p class="subtitle">We're here to help you get the most out of the Anode theme.</p>
+<div class="shell">
 
-  <div class="card">
-    <h2>Get in touch</h2>
-
-    <div class="contact-item">
-      <div class="icon">✉️</div>
-      <div>
-        <div class="label">Email</div>
-        <div class="value"><a href="mailto:z1345036885@gmail.com">z1345036885@gmail.com</a></div>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="icon">📚</div>
-      <div>
-        <div class="label">Documentation</div>
-        <div class="value"><a href="https://kiritocheng.github.io/anode-help/docs/">Read the docs →</a></div>
-      </div>
-    </div>
-
-    <p class="response-time">We typically respond within 24–48 hours.</p>
+  <div class="topbar">
+    <div class="brand">Anode<span>.</span></div>
+    <a href="./../docs/">Documentation →</a>
   </div>
+
+  <header>
+    <p class="eyebrow">Support</p>
+    <h1>Talk to the people who built it</h1>
+    <p class="lede">Setup questions, a section that is not behaving, or a bug you can reproduce — send it over and you will get a straight answer.</p>
+  </header>
+
+  <div class="cards">
+    <div class="card"><h3>Email</h3><p><a href="mailto:support@anode.studio">support@anode.studio</a></p></div>
+    <div class="card"><h3>Response time</h3><p>Within one business day, Monday to Friday.</p></div>
+    <div class="card"><h3>Documentation</h3><p><a href="./../docs/">Read the setup guide first</a> — it covers metafields and every section.</p></div>
+  </div>
+
+  <h2>Before you write</h2>
+  <p>Two things make a support request much faster to resolve:</p>
+  <ol>
+    <li>The <strong>theme version</strong> — bottom right of the theme card in Online Store → Themes.</li>
+    <li>The <strong>section name</strong> and, if you can, a preview link to the page where it is misbehaving.</li>
+  </ol>
+
+  <h2>Frequently asked</h2>
+
+  <p><strong>My comparison table is empty.</strong><br>
+  The section needs a collection with at least two products, and each product needs the metafield the row points at. Check <code>Settings → Custom data → Products</code> and confirm the keys match the row settings exactly.</p>
+
+  <p><strong>The fit checker says nothing fits.</strong><br>
+  Every value in that column of <code>anode.fit_matrix</code> is <code>no</code>. The checker reads the table on the page, so the table is the source of truth — fix the JSON and the checker follows.</p>
+
+  <p><strong>The bundle button does nothing.</strong><br>
+  At least one item has to be ticked. If an item's variant is sold out it is skipped when the section renders, so a bundle can end up with nothing selectable.</p>
+
+  <p><strong>A colour swatch is blank.</strong><br>
+  Set a variant image, or give the variant a colour in Shopify's colour metafield. Without either, the theme shows the first letter of the variant name instead of guessing a colour.</p>
+
+  <p><strong>Can I add a second style preset?</strong><br>
+  The theme ships one preset so the demo and the default install stay identical. Use theme settings and colour schemes to vary a store instead.</p>
 
   <footer>© 2026 Anode Studio. All rights reserved.</footer>
 </div>

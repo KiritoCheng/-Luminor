@@ -32,12 +32,29 @@
                       <input type="number" name="{{ filter.max_value_param }}" value="{{ filter.max_value.value }}" placeholder="Max">
                     </div>
                   {%- else -%}
-                    {%- for value in filter.values -%}
-                      <label class="checkbox">
-                        <input type="checkbox" name="{{ value.param }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
-                        <span>{{ value.label | escape }} ({{ value.count }})</span>
-                      </label>
-                    {%- endfor -%}
+                    {%- comment -%}
+                      A filter the merchant marked as swatches in Search & Discovery
+                      renders as swatches. Colour values fall back to an initial chip
+                      rather than a guessed CSS colour.
+                    {%- endcomment -%}
+                    <div class="facets__options{% if filter.presentation == 'swatch' or filter.presentation == 'image' %} facets__options--swatch{% endif %}">
+                      {%- for value in filter.values -%}
+                        <label class="checkbox{% if filter.presentation == 'swatch' %} checkbox--swatch{% endif %}">
+                          <input type="checkbox" name="{{ value.param }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                          {%- if filter.presentation == 'swatch' -%}
+                            {%- assign sw = value.swatch -%}
+                            {%- if sw.color -%}
+                              <span class="facets__swatch" style="background: {{ sw.color }}"></span>
+                            {%- elsif sw.image -%}
+                              <span class="facets__swatch">{{ sw.image | image_url: width: 60 | image_tag: loading: 'lazy', alt: value.label | escape }}</span>
+                            {%- else -%}
+                              <span class="facets__swatch facets__swatch--initial">{{ value.label | strip | slice: 0, 1 | upcase }}</span>
+                            {%- endif -%}
+                          {%- endif -%}
+                          <span>{{ value.label | escape }} ({{ value.count }})</span>
+                        </label>
+                      {%- endfor -%}
+                    </div>
                 {%- endcase -%}
               </div>
             </details>
