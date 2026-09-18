@@ -53,11 +53,16 @@
   .hero--split .hero__cta {
     justify-content: flex-start;
   }
-  .hero--split .hero__content {
+  /* Reading-width cap lives on the heading, not on the .page-width box,
+     so the block keeps lining up with the page grid on ultra-wide screens
+     while the setting still controls how wide the headline may run.
+     (Target .hero__title explicitly — a `> *` selector would outrank
+     .hero__subtitle's own 56ch measure and blow the paragraph out.) */
+  .hero--split .hero__content > .hero__title {
     max-width: {{ section.settings.content_max_width_mobile }}px;
   }
   @media screen and (min-width: 750px) {
-    .hero--split .hero__content {
+    .hero--split .hero__content > .hero__title {
       max-width: {{ section.settings.content_max_width }}px;
     }
   }

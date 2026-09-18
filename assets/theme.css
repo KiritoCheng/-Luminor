@@ -1186,13 +1186,19 @@
   }
 }
 
-/* Hero split layout - asymmetric */
+/* Hero split layout - asymmetric, left aligned on the page-width grid.
+   IMPORTANT: never derive the left inset from 100vw here. The element already
+   carries .page-width (centred at --page-width), so a viewport-based
+   padding-left double-counts the gutter: inner width = 1220 - padding-left,
+   which hits 0px at ~3680px viewport and destroyed the text column on
+   ultra-wide / 4K displays. Keep the outer box at --page-width and cap the
+   headline width on .hero__title instead (see sections/hero.liquid). */
 .hero--split .hero__content {
   text-align: left;
-  margin-left: 0;
-  padding-left: max(22px, calc((100vw - var(--page-width)) / 2 + 22px));
-  max-width: 620px;
-  margin-right: auto;
+  margin-inline: auto;
+  padding-inline: 22px;
+  width: 100%;
+  max-width: var(--page-width);
 }
 
 .hero--split .hero__cta {
@@ -4952,11 +4958,9 @@
 .hero--split .hero__cta {
   justify-content: flex-start;
 }
-@media screen and (min-width: 750px) {
-  .hero--split .hero__content {
-    max-width: 620px;
-  }
-}
+/* NOTE: the split content width is owned by sections/hero.liquid
+   (content_max_width / content_max_width_mobile → cap on .hero__title).
+   A hard-coded 620px here used to fight that setting; removed. */
 
 /* ============================================================
    Header styles (migrated from inline <style> block)
